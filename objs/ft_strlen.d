@@ -1,4 +1,5 @@
-objs/ft_strlen.o: ft_strlen.c parsing/includes/minishell.h \
-  parsing/includes/../../execution/includes/exec.h \
-  parsing/includes/../../execution/includes/structs.h \
-  parsing/includes/../../execution/includes/builtins.h
+objs/ft_strlen.o: helpers/ft_strlen.c \
+  helpers/../parsing/includes/minishell.h \
+  helpers/../parsing/includes/../../execution/includes/exec.h \
+  helpers/../parsing/includes/../../execution/includes/structs.h \
+  helpers/../parsing/includes/../../execution/includes/builtins.h
