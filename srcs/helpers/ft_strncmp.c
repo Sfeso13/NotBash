@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:32:55 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:28:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:04:53 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/helpers.h"
+#include "../../includes/global/minishell.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

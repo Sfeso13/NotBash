@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:31 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:15:50 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 void	expantions(t_shell *cmd)
 {
@@ -30,7 +30,7 @@ char	*expand_it(char *token)
 {
 	char	*name_var;
 	char	*value_var;
-	// char	*home_dir;
+	char	*home_dir;
 	// char	*exit_stat;
 
 	// if (ft_strncmp(token, "$?", 2) == 0)
@@ -38,6 +38,7 @@ char	*expand_it(char *token)
 	// 	exit_stat = ft_itoa wla perror(exit stats);
 	// 	return (exit stat);
 	// }
+	// if 
 	if (token[0] == '$')
 	{
 		name_var = token + 1;
@@ -47,16 +48,16 @@ char	*expand_it(char *token)
 		else
 			return (ft_strdup(""));
 	}
-	// if (token[0] == '~')
-	// {
-	// 	home_dir = getenv("HOME");
-	// 	if (home_dir)
-	// 	{
-	// 		if (token[1])
-	// 			return (ft_strdup(home_dir));
-	// 		else
-	// 			return (ft_strjoin(home_dir, token + 1));
-	// 	}
-	// }
+	if (token[0] == '~')
+	{
+		home_dir = getenv("HOME");
+		if (home_dir)
+		{
+			if (token[1])
+				return (ft_strdup(home_dir));
+			else
+				return (ft_strjoin(home_dir, token + 1));
+		}
+	}
 	return (ft_strdup(token));
 }

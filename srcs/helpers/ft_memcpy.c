@@ -6,11 +6,11 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:10:57 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 18:03:53 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 19:04:18 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/helpers.h"
+#include "../../includes/global/minishell.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t num)
 {

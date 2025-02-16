@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splithelpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:51:19 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:28:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:04:40 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/helpers.h"
+#include "../../includes/global/minishell.h"
 
 int	iswhitespace(int c)
 {

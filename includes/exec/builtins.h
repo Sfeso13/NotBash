@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 13:19:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:14:10 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "exec.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 void	envadd_back(t_env **lst, t_env *new);
 t_env	*newenv(char *key, char *value);

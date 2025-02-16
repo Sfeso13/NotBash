@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
+#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/16 16:50:26 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/16 18:51:08 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ENVSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c env.c
 EXECSRCS := improved_cmp.c exec.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
-			ft_memcpy.c ft_strncmp.c
+			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c
 
 MAIN = main.c 
 

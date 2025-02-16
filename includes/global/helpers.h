@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:32:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:14:19 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HELPERS_H
 # define HELPERS_H
 
+# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "structs.h"
 
 void	ft_bzero(void *s, size_t n);
@@ -31,5 +33,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 17:07:03 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:07:25 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 int	is_redirection(char *token)
 {

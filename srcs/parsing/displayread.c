@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   displayread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:50:06 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:07:05 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 char	*displayread(t_shell *cmd)
 {

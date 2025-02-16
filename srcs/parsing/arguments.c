@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 18:14:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:06:55 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 int	arg_isgood(int *i, char **tokens, t_shell *cmd)
 {

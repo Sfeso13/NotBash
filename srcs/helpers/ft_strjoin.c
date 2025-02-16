@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:31:04 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:28:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:04:46 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/helpers.h"
+#include "../../includes/global/minishell.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

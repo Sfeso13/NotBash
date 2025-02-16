@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 18:07:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:07:22 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 int	is_pipe(char *token)
 {

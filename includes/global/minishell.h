@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:55:03 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:04:10 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/16 18:57:16 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/16 19:12:46 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-t_shell	*ft_lstlast(t_shell *lst)
-{
-	t_shell	*tmp;
+# include "../exec/exec.h"
+# include "../exec/exec_utils.h"
+# include "../exec/builtins.h"
+# include "../parsing/parsing.h"
+# include "helpers.h"
+# include "structs.h"
 
-	if (!lst)
-		return (NULL);
-	tmp = lst;
-	while (tmp->next)
-	{
-		tmp = tmp->next;
-	}
-	return (tmp);
-}
+//dyalhom
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+#endif

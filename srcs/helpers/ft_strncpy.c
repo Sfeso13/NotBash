@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:30:05 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:28:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:04:56 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/helpers.h"
+#include "../../includes/global/minishell.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {

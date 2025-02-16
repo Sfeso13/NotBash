@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:50:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:14:34 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSING_H
+# define PARSING_H
 
+// # include "../global/minishell.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../global/structs.h"
-# include "../exec/exec.h"
-// typedef struct s_shell
-// {
-// 	char			**args;			// array of commands + args || (["ls", "-l", NULL])
-// 	char			*infile;		// file input redirection   (< file.txt)
-// 	char			*outfile;		// file output redirection   (< file.txt)
-// 	int				append_mode;	// flag append mode (>> file.txt)
-// 	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
-// 	struct s_shell	*next;			// ptr to the next command in the pipeline
-// 	struct s_shell	*prev;			// ptr to the previous command in the pipeline
-// }	t_shell;
-
 
 //parsing
 t_shell	*inparse(char *input);
@@ -47,28 +35,13 @@ int		quoting_check(char *input);
 char	**tokenizer(char *input);
 void	expantions(t_shell *cmd);
 char	*expand_it(char *token);
-
-//helpers
-char	**ft_split(char const *s);
-int		iswhitespace(int c);
 t_shell	*cmd_create(void);
 void	cmd_add(t_shell	**head, t_shell *newcmd);
-t_shell	*ft_lstlast(t_shell *lst);
-void	ft_lstadd_back(t_shell **lst, t_shell *new);
 void	free_cmd(t_shell *cmd);
 void	free_double(char **dbl);
-void	*ft_memcpy(void *dest, const void *src, size_t num);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 void	freewords(char **res, int i);
-char	*ft_strncpy(char *dest, const char *src, size_t n);
-int		isquote(char c);
-int		isspecial(char c);
-int		nonvalidtoken(char *token);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	ft_bzero(void *s, size_t n);
-char	*ft_itoa(int n);
 
 #endif

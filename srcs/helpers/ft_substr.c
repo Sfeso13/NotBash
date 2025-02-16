@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:55:03 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:04:10 by adechaji         ###   ########.fr       */
+/*   Created: 2024/10/25 22:55:59 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/16 19:06:50 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-t_shell	*ft_lstlast(t_shell *lst)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	t_shell	*tmp;
+	size_t	i;
+	size_t	slen;
+	char	*str;
 
-	if (!lst)
+	i = 0;
+	if (!s)
 		return (NULL);
-	tmp = lst;
-	while (tmp->next)
+	slen = ft_strlen(s);
+	if (start >= slen)
+		return (ft_strdup(""));
+	if (len > slen - start)
+		len = slen - start;
+	str = malloc(len + 1);
+	if (!str)
+		return (NULL);
+	while (i < len)
 	{
-		tmp = tmp->next;
+		str[i] = s[start + i];
+		i++;
 	}
-	return (tmp);
+	str[i] = '\0';
+	return (str);
 }

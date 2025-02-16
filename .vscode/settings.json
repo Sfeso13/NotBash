@@ -1,7 +1,12 @@
 {
   "files.associations": {
     "exec.h": "c",
-    "minishell.h": "c"
+    "minishell.h": "c",
+    "parsing.h": "c",
+    "helpers.h": "c",
+    "builtins.h": "c",
+    "exec_utils.h": "c",
+    "stdlib.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

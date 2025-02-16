@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 17:03:33 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 16:19:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:07:32 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//change
-#include "../../includes/parsing/minishell.h"
+#include "../../includes/global/minishell.h"
 
 char	**tokenizer(char *input)
 {
