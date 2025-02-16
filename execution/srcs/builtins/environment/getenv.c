@@ -6,11 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 11:24:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:31:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../../includes/exec.h"
 
 static size_t	len_w(char *s, char c)
 {

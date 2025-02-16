@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newenv.c                                           :+:      :+:    :+:   */
+/*   envadd_back.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 10:26:44 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 10:26:45 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/16 10:22:13 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/16 11:35:57 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../../../includes/exec.h"
 
-t_env	*newenv(char *key, char *value)
+void	envadd_back(t_env **lst, t_env *new)
 {
-	t_env	*node;
+	t_env	*tmp;
 
-	node = (t_env *)malloc(sizeof(t_env));
-	if (node == NULL)
-		return (NULL);
-	node->key = key;
-	node->val = value;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
+	if (lst && new)
+	{
+		tmp = findlast_env(*lst);
+		if (!tmp)
+		{
+			*lst = new;
+			return ;
+		}
+		tmp->next = new;
+		new->prev = tmp;
+	}
 }

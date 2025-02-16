@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envadd_back.c                                      :+:      :+:    :+:   */
+/*   improved_cmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 10:22:13 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 11:12:09 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/16 11:48:19 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/16 12:19:30 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/exec.h"
 
-void	envadd_back(t_env **lst, t_env *new)
+int	improved_cmp(const char *s1, const char *s2)
 {
-	t_env	*tmp;
+	size_t	i;
 
-	if (lst && new)
-	{
-		tmp = findlast_env(*lst);
-		if (!tmp)
-		{
-			*lst = new;
-			return ;
-		}
-		tmp->next = new;
-	}
+	i = 0;
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (1);
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

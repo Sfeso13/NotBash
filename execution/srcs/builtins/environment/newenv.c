@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   newenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 12:19:37 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/16 10:26:44 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/16 12:32:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "../../../includes/exec.h"
 
-#include "../../parsing/includes/minishell.h"
-#include "structs.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "builtins.h"
+t_env	*newenv(char *key, char *value)
+{
+	t_env	*node;
 
-// size_t	ft_strlen(const char *s);
-int	improved_cmp(const char *s1, const char *s2);
-
-#endif
+	node = (t_env *)malloc(sizeof(t_env));
+	if (node == NULL)
+		return (NULL);
+	node->key = ft_strdup(key);
+	node->val = ft_strdup(value);
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
