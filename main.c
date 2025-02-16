@@ -6,11 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 13:38:05 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 16:20:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing/includes/minishell.h"
+#include "includes/parsing/minishell.h"
 
 //====================================================TESTS=====================================================//
 void print_cmd(t_shell *cmd)
