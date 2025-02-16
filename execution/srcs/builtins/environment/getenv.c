@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 12:31:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:41:37 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	**alluc(char **arr, char *s)
 	size_t	i;
 	size_t	wlen1;
 	size_t	wlen2;
-	char 	*tmp;
+	char	*tmp;
 
 	i = 0;
 	tmp = s;
@@ -82,7 +82,7 @@ char	**kv_extract(char *var)
 
 void	free_tab(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
@@ -95,9 +95,9 @@ void	free_tab(char **arr)
 
 t_env	*create_env(char *env[])
 {
+	t_env	*env_list;
 	int		i;
 	char	**kv_pair; //key value pair
-	t_env	*env_list;
 
 	i = 0;
 	env_list = NULL;

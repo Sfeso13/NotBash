@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:16 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 12:33:55 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:38:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*  used by the 'env' command   */
 
-char	**builtins()
+char	**builtins(void)
 {
 	static char	*builtins[8];
 

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 10:04:16 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 11:09:47 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 13:26:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ typedef struct s_env
 	char			*val; //the value of the env var
 	struct s_env	*next;
 	struct s_env	*prev;
-} t_env;
+}	t_env;
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 11:24:39 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 13:38:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int main(int ac, char *av[], char *env[])
 	char	*input;
     t_env   *env_list;
 
-    (void)ac;
     (void)av;
+    if (ac != 1)
+        return (1);
     env_list = create_env(env);
 	while (1)
 	{
@@ -84,6 +85,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
+        execute(cmd, env_list);
 		free(input);
 		print_pipeline(cmd);
 		free_cmd(cmd);

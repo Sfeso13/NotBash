@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 11:05:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 13:31:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-#include "../../execution/includes/exec.h" //added it for the sake of testing
+# include "../../execution/includes/exec.h" //added it for the sake of testing
 
 typedef struct s_shell
 {
 	char			**args;			// array of commands + args || (["ls", "-l", NULL])
 	char			*infile;		// file input redirection   (< file.txt)
-	char			*outfile;		// file output redirection   (< file.txt)
+	char			*outfile;		// file output redirection   (> file.txt)
 	int				append_mode;	// flag append mode (>> file.txt)
 	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
 	struct s_shell	*next;			// ptr to the next command in the pipeline

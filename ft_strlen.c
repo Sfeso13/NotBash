@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 21:55:54 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/13 17:57:07 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 13:32:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "parsing/includes/minishell.h"
 
 size_t	ft_strlen(const char *s)
 {

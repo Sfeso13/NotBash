@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/16 12:19:47 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/16 13:33:29 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,15 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitiz
 
 PARSSRCS	:= cleaners.c crt_cmd.c ft_lstadd_back.c ft_lstlast.c \
 				ft_split.c ft_splithelpers.c helpers.c parse_input.c \
-				ft_memcpy.c ft_strncmp.c parse_cmd.c ft_strdup.c ft_strlen.c \
+				ft_memcpy.c ft_strncmp.c parse_cmd.c ft_strdup.c  \
 				redirections.c arguments.c pipes.c valid_quotes.c tokenizer.c ft_strncpy.c \
 				#displayread.c
 
 ENVSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c env.c
 
-EXECSRCS := improved_cmp.c
+EXECSRCS := improved_cmp.c exec.c
 
-MAIN = main.c
+MAIN = main.c ft_strlen.c
 
 OBJS		:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
 			   $(addprefix objs/, $(EXECSRCS:.c=.o)) $(addprefix objs/, $(ENVSRCS:.c=.o))
