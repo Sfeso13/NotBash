@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
+#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/16 18:51:08 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/16 19:19:52 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
 
 
 PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \

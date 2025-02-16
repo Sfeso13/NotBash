@@ -6,22 +6,22 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:37:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:26:01 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-static size_t	len_w(char *s, char c)
+static size_t	len_w(char *s, int equals)
 {
 	size_t	i;
 
 	i = 0;
-	while (*s && *s == c)
+	if (*s && *s == '=')
 		s++;
-	if (c == '=')
+	if (equals == 1)
 	{
-		while (*s && *s != c)
+		while (*s && *s != '=')
 		{
 			s++;
 			i++;
@@ -47,8 +47,8 @@ static char	**alluc(char **arr, char *s)
 
 	i = 0;
 	tmp = s;
-	wlen1 = len_w(s, '=');
-	wlen2 = len_w(s, 'x');
+	wlen1 = len_w(s, 1);
+	wlen2 = len_w(s + wlen1, 0);
 	arr[0] = (char *)malloc((wlen1 + 1) * sizeof(char));
 	if (!arr[0])
 		return (NULL); //malloc failure
@@ -58,7 +58,7 @@ static char	**alluc(char **arr, char *s)
 	while (i < wlen1)
 		arr[0][i++] = *(s++);
 	arr[0][i] = '\0';
-	while (*s == '=')
+	if (*s == '=')
 		s++;
 	i = 0;
 	while (i < wlen2)
