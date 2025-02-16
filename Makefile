@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/16 09:58:56 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/16 11:25:15 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,12 @@ PARSSRCS	:= cleaners.c crt_cmd.c ft_lstadd_back.c ft_lstlast.c \
 				ft_memcpy.c ft_strncmp.c parse_cmd.c ft_strdup.c ft_strlen.c \
 				redirections.c arguments.c pipes.c valid_quotes.c tokenizer.c ft_strncpy.c \
 				#displayread.c
+EXECSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c
 MAIN = main.c
-OBJS		:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o))
+OBJS		:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
+			   $(addprefix objs/, $(EXECSRCS:.c=.o))
 PARSSRCS := $(addprefix parsing/src/, $(PARSSRCS)) $(MAIN)
+EXECSRCS := $(addprefix execution/srcs/, $(EXECSRCS))
 LIBS		= -lreadline -lncurses
 
 all: $(NAME)
@@ -29,6 +32,10 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
 objs/%.o: parsing/src/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+
+objs/%.o: execution/srcs/%.c
 	mkdir -p objs
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 

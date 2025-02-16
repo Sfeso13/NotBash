@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 11:24:23 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/16 10:04:16 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/16 11:09:47 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-#include "../../parsing/includes/minishell.h"
-#include "structs.h"
-#include <stdio.h>
-#include <stdlib.h>
+typedef struct s_env
+{
+	char			*key; //the name of the env var
+	char			*val; //the value of the env var
+	struct s_env	*next;
+	struct s_env	*prev;
+} t_env;
 
-void	envadd_back(t_env **lst, t_env *new);
-t_env	*newenv(char *key, char *value);
-char	*ft_strchr(const char *s, int c);
-t_env	*create_env(char *env[]);
-t_env	*findlast_env(t_env *lst);
-
-#endif
+#endif 

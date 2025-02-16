@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splithelpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:51:19 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/15 16:02:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 10:15:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	isspecial(char c)
 int	nonvalidtoken(char *token)
 {
 	int i;
-	
+
 	i = 0;
 	while (token[i])
 	{

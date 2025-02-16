@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 09:57:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/16 11:24:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,15 @@ void print_pipeline(t_shell *head)
 //====================================================TESTS=====================================================//
 
 
-int main()
+int main(int ac, char *av[], char *env[])
 {
 	t_shell	*cmd;
 	char	*input;
+    t_env   *env_list;
 
+    (void)ac;
+    (void)av;
+    env_list = create_env(env);
 	while (1)
 	{
 		input = readline("minishell$ ");
