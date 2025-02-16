@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 21:59:42 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:54:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ char	*expand_it(char *token)
 		else
 			return (ft_strdup(""));
 	}
-	if (token[0] == '~')
+	if (token[0] == '~' && (token[1] == '\0' || token[1] == '/'))
 	{
 		home_dir = getenv("HOME");
 		if (home_dir)
 		{
-			if (token[1])
-				return (ft_strdup(home_dir));
-			else
+			if (token[1] == '/')
 				return (ft_strjoin(home_dir, token + 1));
+			else
+				return (ft_strdup(home_dir));
 		}
 	}
 	return (ft_strdup(token));

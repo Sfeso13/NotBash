@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 22:11:17 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:55:03 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ typedef struct s_shell
 // 	char	**value;
 // 	char	quote;
 // }	t_token;
-
 
 #endif
