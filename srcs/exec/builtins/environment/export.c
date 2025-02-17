@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 15:55:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/17 18:06:12 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	kv_len(t_env *env)
 	size_t	klen;
 	size_t	vlen;
 
+	klen = 0;
+	vlen = 0;
 	if (env->key)
 		klen = ft_strlen(env->key);
 	if (env->val)
@@ -38,7 +40,7 @@ t_env	*get_smallest_k(t_env *env)
 	return (min);
 }
 
-char	**env_to_arr(t_env env)
+char	**env_to_arr(t_env *env)
 {
 	int		size;
 	char	**copy;
@@ -49,16 +51,14 @@ char	**env_to_arr(t_env env)
 	t_env	*min;
 
 	i = 0;
-	tmp = &env;
+	tmp = env;
 	size = env_size(tmp);
 	copy = (char **)malloc((size + 1) * sizeof(char*));
 	if (!copy)
 		return (NULL); //FAILURE
 	while (tmp)
 	{
-		printf("deleting the min node\n");
 		min = get_smallest_k(tmp);
-		printf("found min\n");
 		klen = ft_strlen(min->key);
 		len = kv_len(min);
 		copy[i] = (char *)malloc(len + 1);
@@ -76,27 +76,23 @@ char	**env_to_arr(t_env env)
 	return (copy);
 }
 
-// void	print_full_env(t_env *env)
-// {
-// 	t_env	*tmp;
-
-// 	tmp = order_env(env);
-// }
-
-// void	export_env(t_shell *cmnds, t_env *env)
-// {
-// 	if (arr_len(cmnds->args) == 1)
-// 		print_full_env(env);
-// }
-
-int main(int ac, char *av[], char *env[])
+void	print_full_env(t_env *env)
 {
-	t_env *env_list = create_env(env);
-	char **arr = env_to_arr(*env_list);
-	int i = 0;
+	char	**arr;
+	int		i;
+
+	i = 0;
+	arr = env_to_arr(env);
 	while (arr[i])
 	{
-		printf("%s\n", arr[i]);
+		printf("declare -x %s\n", arr[i]);
 		i++;
 	}
+	//free all the tmps
+}
+
+void	export_env(t_shell *cmnds, t_env *env)
+{
+	if (arr_len(cmnds->args) == 1)
+		print_full_env(env);
 }

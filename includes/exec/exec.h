@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 10:52:46 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:35:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
 void	export_env(t_shell *cmnds, t_env *env);
+t_env	*get_smallest_k(t_env *env);
 
 #endif
