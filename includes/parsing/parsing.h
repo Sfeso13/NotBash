@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:23:57 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:09:42 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 void	freewords(char **res, int i);
+int     isbuiltincomm(char *com);
 
 #endif
