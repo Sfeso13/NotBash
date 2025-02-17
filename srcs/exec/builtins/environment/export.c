@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 12:18:49 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:55:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,62 +24,79 @@ size_t	kv_len(t_env *env)
 	return (klen + vlen);
 }
 
-char	**env_to_arr(t_env *env)
+t_env	*get_smallest_k(t_env *env)
+{
+	t_env	*min;
+
+	min = env;
+	while (env)
+	{
+		if (ft_strncmp(min->key, env->key, ft_strlen(env->key)) > 0)
+			min = env;
+		env = env->next;
+	}
+	return (min);
+}
+
+char	**env_to_arr(t_env env)
 {
 	int		size;
 	char	**copy;
 	int		i;
 	size_t	len;
 	size_t	klen;
+	t_env	*tmp;
+	t_env	*min;
 
 	i = 0;
-	size = env_size(env);
+	tmp = &env;
+	size = env_size(tmp);
 	copy = (char **)malloc((size + 1) * sizeof(char*));
 	if (!copy)
 		return (NULL); //FAILURE
-	while (env)
+	while (tmp)
 	{
-		klen = ft_strlen(env->key);
-		len = kv_len(env);
+		printf("deleting the min node\n");
+		min = get_smallest_k(tmp);
+		printf("found min\n");
+		klen = ft_strlen(min->key);
+		len = kv_len(min);
 		copy[i] = (char *)malloc(len + 1);
-		if (!copy[i])
-			return (NULL); //FAILURE (prob add safe free)
-		ft_strlcpy(copy[i], env->key, len + 1);
+		ft_strlcpy(copy[i], min->key, len);
 		if (len > klen)
 		{
 			ft_strlcat(copy[i] + klen, "=\"", len + 1);
-			ft_strlcat(copy[i] + klen + 2, env->val, len + 1);
+			ft_strlcat(copy[i] + klen + 2, min->val, len + 1);
 			ft_strlcat(copy[i] + len - 1, "\"", len + 1);
 		}
+		ft_lstdelone(&tmp, min, free);
 		i++;
-		env = env->next;
 	}
 	copy[i] = NULL;
 	return (copy);
 }
 
-t_env	*order_env(t_env *env)
-{
-	char	**arr;
-	int		i;
+// void	print_full_env(t_env *env)
+// {
+// 	t_env	*tmp;
 
-	i = 0;
-	arr = env_to_arr(env);
+// 	tmp = order_env(env);
+// }
+
+// void	export_env(t_shell *cmnds, t_env *env)
+// {
+// 	if (arr_len(cmnds->args) == 1)
+// 		print_full_env(env);
+// }
+
+int main(int ac, char *av[], char *env[])
+{
+	t_env *env_list = create_env(env);
+	char **arr = env_to_arr(*env_list);
+	int i = 0;
 	while (arr[i])
 	{
-		
+		printf("%s\n", arr[i]);
+		i++;
 	}
-}
-
-void	print_full_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = order_env(env);
-}
-
-void	export_env(t_shell *cmnds, t_env *env)
-{
-	if (arr_len(cmnds->args) == 1)
-		print_full_env(env);
 }
