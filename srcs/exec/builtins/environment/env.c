@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:16 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:36:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:57:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	print_env(t_env *env)
 {
 	while (env)
 	{
-		printf("%s=%s\n", env->key, env->val);
+		if (env->key && env->val)
+			printf("%s=%s\n", env->key, env->val);
 		env = env->next;
 	}
 }

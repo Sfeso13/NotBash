@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   env_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 10:52:46 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/17 11:40:22 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/17 11:42:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "../../includes/global/minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../global/structs.h"
-# include "../global/minishell.h"
+int	env_size(t_env *lst)
+{
+	int	count;
 
-// typedef struct s_shell t_shell;
-
-int		improved_cmp(const char *s1, const char *s2);
-void	execute(t_shell *cmnds, t_env *env);
-void	export_env(t_shell *cmnds, t_env *env);
-
-#endif
+	count = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
+}

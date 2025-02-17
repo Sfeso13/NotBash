@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/16 19:19:52 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/17 11:59:36 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,13 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize
 PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
 			   redirections.c arguments.c pipes.c valid_quotes.c tokenizer.c \
 
-ENVSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c env.c
+ENVSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c env.c export.c
 
 EXECSRCS := improved_cmp.c exec.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
-			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c
+			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c \
+			arr_len.c env_size.c ft_strlcpy.c ft_strlcat.c
 
 MAIN = main.c 
 

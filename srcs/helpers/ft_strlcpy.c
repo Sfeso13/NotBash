@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 10:52:46 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/17 11:59:17 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/17 11:59:22 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "../../includes/global/minishell.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../global/structs.h"
-# include "../global/minishell.h"
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	l;
+	size_t	i;
 
-// typedef struct s_shell t_shell;
-
-int		improved_cmp(const char *s1, const char *s2);
-void	execute(t_shell *cmnds, t_env *env);
-void	export_env(t_shell *cmnds, t_env *env);
-
-#endif
+	i = 0;
+	if (src == dst)
+		return (0);
+	l = ft_strlen(src);
+	if (dstsize == 0)
+		return (l);
+	while (src[i] && i < dstsize - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	*(dst + i) = '\0';
+	return (l);
+}
