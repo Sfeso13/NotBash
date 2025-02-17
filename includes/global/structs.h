@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 23:55:03 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:05:05 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_shell
 	char			*infile;		// file input redirection   (< file.txt)
 	char			*outfile;		// file output redirection   (< file.txt)
 	int				append_mode;	// flag append mode (>> file.txt)
+	int				is_buiultin;	// if u know u know
 	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
 	struct s_shell	*next;			// ptr to the next command in the pipeline
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline

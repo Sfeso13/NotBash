@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:50:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:07:01 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:43:32 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_shell	*cmd_create(void)
 	cmd->infile = NULL;
 	cmd->outfile = NULL;
 	cmd->append_mode = 0;
+	cmd->is_buiultin = 0;
 	cmd->heredoc_dlm = NULL;
 	cmd->next = NULL;
 	cmd->prev = NULL;

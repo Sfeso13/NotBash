@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:05:56 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 21:59:46 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:10:37 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_shell	*inparse(char *input)
 			free_double(tokens);
 			return (NULL);
 		}
+		if (newcmd->args && newcmd->args[0])
+			newcmd->is_buiultin = isbuiltincomm(newcmd->args[0]);
 		expantions(newcmd);
 		cmd_add(&cmd, newcmd);
 	}

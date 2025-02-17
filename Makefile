@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/17 12:58:41 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/17 16:25:17 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize
 
 PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
 			   redirections.c arguments.c pipes.c valid_quotes.c tokenizer.c \
+			   isbuiltin.c
 
 ENVSRCS	:= getenv.c newenv.c findlast_env.c envadd_back.c env.c export.c
 

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:16:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:46:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void print_cmd(t_shell *cmd)
     printf("  Input File: %s\n", cmd->infile ? cmd->infile : "NULL");
     printf("  Output File: %s\n", cmd->outfile ? cmd->outfile : "NULL");
     printf("  Append Mode: %s\n", cmd->append_mode ? "yes" : "no");
+    printf("  Is builtin: %s\n", cmd->is_buiultin ? "yes" : "no");
     printf("  Heredoc Delimiter: %s\n", cmd->heredoc_dlm ? cmd->heredoc_dlm : "NULL");
     printf("  Has Next Command: %s\n", cmd->next ? "yes" : "no");
     printf("  Has Previous Command: %s\n", cmd->prev ? "yes" : "no");
