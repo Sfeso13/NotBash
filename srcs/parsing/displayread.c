@@ -6,31 +6,33 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:50:06 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:07:05 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:16:45 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-char	*displayread(t_shell *cmd)
+int emptychecker(char *str)
 {
-	char	*input;
+	int	i;
 
-	while (1)
+	i = 0;
+	while (str[i])
 	{
-		input = readline("minishell$ ");
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-		cmd = inparse(input);
-		if (!cmd)
-		{
-			free(input);
-			continue;
-		}
-		printme(cmd);
-		free(input);
-		free_cmd(cmd);
+		if (!iswhitespace(*str))
+			return (0);
+		i++;
 	}
+	return (1);
+}
+
+int displaymeagn(char **input)
+{
+	if (!input || !*input || *input == '\0' || emptychecker(*input))
+	{
+		free(*input);
+		*input = NULL;
+		return (1);
+	}
+	return (0);
 }

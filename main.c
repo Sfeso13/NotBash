@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 15:46:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:17:06 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,11 @@ int main(int ac, char *av[], char *env[])
 {
 	t_shell	*cmd;
 	char	*input;
-    t_env   *env_list;
-
+	
     (void)av;
-    if (ac != 1)
-        return (1);
-    env_list = create_env(env);
+	if (ac != 1)
+		return (0);
+	//signals handle functions
 	while (1)
 	{
 		input = readline("minishell$ ");
@@ -74,22 +73,40 @@ int main(int ac, char *av[], char *env[])
 			break ;
 		if (*input)
 			add_history(input);
-		if (quoting_check(input))
-		{
-			printf("minishell: syntax error: unclosed quotes\n");
-			free(input);
+		if (displaymeagn(&input))
 			continue ;
-		}
-		cmd = inparse(input);
-		if (!cmd)
-		{
-			free(input);
-			continue;
-		}
-        execute(cmd, env_list);
-		free(input);
 		print_pipeline(cmd);
 		free_cmd(cmd);
 	}
+    // t_env   *env_list;
+
+    // (void)av;
+    // if (ac != 1)
+    //     return (1);
+    // env_list = create_env(env);
+	// while (1)
+	// {
+	// 	input = readline("minishell$ ");
+	// 	if (!input)
+	// 		break ;
+	// 	if (*input)
+	// 		add_history(input);
+	// 	if (quoting_check(input))
+	// 	{
+	// 		printf("minishell: syntax error: unclosed quotes\n");
+	// 		free(input);
+	// 		continue ;
+	// 	}
+	// 	cmd = inparse(input);
+	// 	if (!cmd)
+	// 	{
+	// 		free(input);
+	// 		continue;
+	// 	}
+    //    // execute(cmd, env_list);
+	// 	free(input);
+	// 	print_pipeline(cmd);
+	// 	free_cmd(cmd);
+	// }
 	return 0;
 }
