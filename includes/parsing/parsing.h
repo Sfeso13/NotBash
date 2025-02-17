@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:14:34 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 19:23:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		tokenpars(int *i, char **tokens, t_shell *cmd);
 int		is_redirection(char *token);
 int		redir_isgood(int *i, char **tokens, t_shell *cmd);
 int		is_pipe(char *token);
-int		pipe_isgood(t_shell *cmd);
 int		tokenpars(int *i, char **tokens, t_shell *cmd);
 int		arg_isgood(int *i, char **tokens, t_shell *cmd);
 int		checkpipes(char **tokens);

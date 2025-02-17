@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 19:14:31 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:55:03 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ typedef struct s_shell
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline
 }	t_shell;
 
-#endif 
+// typedef struct s_token
+// {
+// 	char	**value;
+// 	char	quote;
+// }	t_token;
+
+#endif
