@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:00:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:01:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:07:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,35 @@ t_env	*get_smallest_k(t_env *env)
 		env = env->next;
 	}
 	return (min);
+}
+
+void	copy_kv(char *str, t_env *min, size_t len)
+{
+	size_t	klen;
+
+	klen = ft_strlen(min->key);
+	ft_strlcpy(str, min->key, len + 1);
+	if (len > klen)
+	{
+		ft_strlcat(str + klen, "=\"", len + 1);
+		ft_strlcat(str + klen + 2, min->val, len + 1);
+		ft_strlcat(str + len - 1, "\"", len + 1);
+	}
+}
+
+t_env	*search_key(char *key, t_env *env)
+{
+	while (env)
+	{
+		if (improved_cmp(key, env->key) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+void	change_value_of_key(t_env **tochange, char *value)
+{
+	free((*tochange)->val);
+	(*tochange)->val = ft_strdup(value);
 }

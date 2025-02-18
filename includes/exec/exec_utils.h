@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:38:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:01:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:08:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ t_env	*dup_env(t_env *env);
 void	reset_env(t_env **env);
 size_t	kv_len(t_env *env);
 t_env	*get_smallest_k(t_env *env);
+char	**kv_extract(char *var);
+void	copy_kv(char *str, t_env *min, size_t len);
+t_env	*search_key(char *key, t_env *env);
+void	change_value_of_key(t_env **tochange, char *value);
 
 #endif

@@ -6,25 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:10:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:18:52 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
-
-void	copy_kv(char *str, t_env *min, size_t len)
-{
-	size_t	klen;
-
-	klen = ft_strlen(min->key);
-	ft_strlcpy(str, min->key, len + 1);
-	if (len > klen)
-	{
-		ft_strlcat(str + klen, "=\"", len + 1);
-		ft_strlcat(str + klen + 2, min->val, len + 1);
-		ft_strlcat(str + len - 1, "\"", len + 1);
-	}
-}
 
 char	**env_to_arr(t_env *env)
 {
@@ -66,8 +52,56 @@ void	print_full_env(t_env *env)
 	//free all the tmps
 }
 
+int	handle_keys(t_env **env, char **kv, char *equal)
+{
+	t_env	*key_found;
+	char	*key;
+	char	*value;
+
+	key_found = search_key(kv[0], *env);
+	if (key_found && equal)
+		change_value_of_key(&key_found, kv[1]);
+	else if (key_found)
+		return (1);
+	else
+	{
+		key = kv[0];
+		if (!kv[1] && equal)
+			value = "";
+		else
+			value = kv[1];
+		envadd_back(env, newenv(key, value));
+	}
+	return (0);
+}
+
+void	export_var(t_shell *cmnds, t_env **env, int args_size)
+{
+	int		i;
+	char	**kv;
+	char	*equal;
+	t_env	*key_found;
+
+	i = 1;
+	while (args_size - 1 > 0)
+	{
+		equal = ft_strchr(cmnds->args[i], '=');
+		kv = kv_extract(cmnds->args[i]);
+		key_found = search_key(kv[0], *env);
+		handle_keys(env, kv, equal);
+		free_tab(kv);
+		i++;
+		args_size--;
+	}
+}
+
 void	export_env(t_shell *cmnds, t_env *env)
 {
-	if (arr_len(cmnds->args) == 1)
+	int	len;
+
+	len = arr_len(cmnds->args);
+	if (len == 1)
 		print_full_env(dup_env(env));
+	else if (len > 1)
+		export_var(cmnds, &env, len);
 }
