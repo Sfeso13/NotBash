@@ -6,97 +6,102 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 16:44:39 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:40:18 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-// size_t	kv_len(t_env *env)
-// {
-// 	size_t	klen;
-// 	size_t	vlen;
+char	**env_to_arr(t_env *env)
+{
+	char	**copy;
+	int		i;
+	size_t	len;
+	t_env	*min;
 
-// 	if (env->key)
-// 		klen = ft_strlen(env->key);
-// 	if (env->val)
-// 		vlen = ft_strlen(env->val) + 3;
-// 	return (klen + vlen);
-// }
+	i = 0;
+	copy = (char **)malloc((env_size(env) + 1) * sizeof(char *));
+	if (!copy)
+		return (NULL); //FAILURE
+	while (env)
+	{
+		min = get_smallest_k(env);
+		len = kv_len(min);
+		copy[i] = (char *)malloc(len + 1);
+		copy_kv(copy[i], min, len);
+		ft_lstdelone(&env, min, free);
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
+}
 
-// t_env	*get_smallest_k(t_env *env)
-// {
-// 	t_env	*min;
+void	print_full_env(t_env *env)
+{
+	char	**arr;
+	int		i;
 
-// 	min = env;
-// 	while (env)
-// 	{
-// 		if (ft_strncmp(min->key, env->key, ft_strlen(env->key)) > 0)
-// 			min = env;
-// 		env = env->next;
-// 	}
-// 	return (min);
-// }
+	i = 0;
+	arr = env_to_arr(env);
+	while (arr[i])
+	{
+		printf("declare -x %s\n", arr[i]);
+		i++;
+	}
+	free_tab(arr);
+	//free all the tmps
+}
 
-// char	**env_to_arr(t_env env)
-// {
-// 	int		size;
-// 	char	**copy;
-// 	int		i;
-// 	size_t	len;
-// 	size_t	klen;
-// 	t_env	*tmp;
-// 	t_env	*min;
+int	handle_keys(t_env **env, char **kv, char *equal)
+{
+	t_env	*key_found;
+	char	*key;
+	char	*value;
 
-// 	i = 0;
-// 	tmp = &env;
-// 	size = env_size(tmp);
-// 	copy = (char **)malloc((size + 1) * sizeof(char*));
-// 	if (!copy)
-// 		return (NULL); //FAILURE
-// 	while (tmp)
-// 	{
-// 		printf("deleting the min node\n");
-// 		min = get_smallest_k(tmp);
-// 		printf("found min\n");
-// 		klen = ft_strlen(min->key);
-// 		len = kv_len(min);
-// 		copy[i] = (char *)malloc(len + 1);
-// 		ft_strlcpy(copy[i], min->key, len);
-// 		if (len > klen)
-// 		{
-// 			ft_strlcat(copy[i] + klen, "=\"", len + 1);
-// 			ft_strlcat(copy[i] + klen + 2, min->val, len + 1);
-// 			ft_strlcat(copy[i] + len - 1, "\"", len + 1);
-// 		}
-// 		ft_lstdelone(&tmp, min, free);
-// 		i++;
-// 	}
-// 	copy[i] = NULL;
-// 	return (copy);
-// }
+	key_found = search_key(kv[0], *env);
+	if (key_found && equal)
+		change_value_of_key(&key_found, kv[1]);
+	else if (key_found)
+		return (1);
+	else
+	{
+		key = kv[0];
+		if (!kv[1] && equal)
+			value = "";
+		else
+			value = kv[1];
+		envadd_back(env, newenv(key, value));
+	}
+	return (0);
+}
 
-// void	print_full_env(t_env *env)
-// {
-// 	t_env	*tmp;
+void	export_var(t_shell *cmnds, t_env **env, int args_size)
+{
+	int		i;
+	char	**kv;
+	char	*equal;
+	t_env	*key_found;
 
-// 	tmp = order_env(env);
-// }
+	i = 1;
+	while (args_size - 1 > 0)
+	{
+		equal = ft_strchr(cmnds->args[i], '=');
+		kv = kv_extract(cmnds->args[i]);
+		key_found = search_key(kv[0], *env);
+		handle_keys(env, kv, equal);
+		free_tab(kv);
+		i++;
+		args_size--;
+	}
+}
 
-// void	export_env(t_shell *cmnds, t_env *env)
-// {
-// 	if (arr_len(cmnds->args) == 1)
-// 		print_full_env(env);
-// }
+void	export_env(t_shell *cmnds, t_env *env)
+{
+	int	len;
 
-// int main(int ac, char *av[], char *env[])
-// {
-// 	t_env *env_list = create_env(env);
-// 	char **arr = env_to_arr(*env_list);
-// 	int i = 0;
-// 	while (arr[i])
-// 	{
-// 		printf("%s\n", arr[i]);
-// 		i++;
-// 	}
-// }
+	len = arr_len(cmnds->args);
+	if (len == 1)
+		print_full_env(dup_env(env));
+	else if (len > 1)
+		export_var(cmnds, &env, len);
+}

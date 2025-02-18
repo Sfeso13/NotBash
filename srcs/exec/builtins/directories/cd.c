@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newenv.c                                           :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 10:26:44 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:37:04 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 14:53:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/exec/exec.h"
+#include "../../includes/global/minishell.h"
 
-t_env	*newenv(char *key, char *value)
+void    changedir(t_shell *cmnds, t_env *env)
 {
-	t_env	*node;
-
-	node = (t_env *)malloc(sizeof(t_env));
-	if (node == NULL)
-		return (NULL);
-	node->key = ft_strdup(key);
-	node->val = ft_strdup(value);
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
+    chdir(cmnds.)
 }

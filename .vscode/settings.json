@@ -6,7 +6,8 @@
     "helpers.h": "c",
     "builtins.h": "c",
     "exec_utils.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "__node_handle": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

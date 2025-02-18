@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 23:17:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:38:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ int main(int ac, char *av[], char *env[])
 		input = readline("minishell$ ");
 		if (!input)
 			break ;
+        //if syntaxerrchecker(input)
+        // return 0
+        // 
+        
 		if (*input)
 			add_history(input);
 		if (displaymeagn(&input))

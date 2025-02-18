@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   findlast_env.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 11:11:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:36:58 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 14:36:29 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 14:41:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-t_env	*findlast_env(t_env *lst)
+void    print_current_dir()
 {
-	while (lst)
-	{
-		if (lst -> next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (NULL);
+    char	buff[PATH_MAX];
+
+	printf("%s\n", getcwd(buff, PATH_MAX));
 }
