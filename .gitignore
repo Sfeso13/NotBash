@@ -1,0 +1,32 @@
+# Ignore hidden system files
+.DS_Store
+.vscode/
+*.swp
+*.swo
+
+# Ignore compiled binaries
+*.o
+*.out
+*.a
+*.so
+*.exe
+
+# Ignore executables and debugging files
+a.out
+a.exe
+core
+*.dSYM/
+
+# Ignore library files
+*.gch
+*.gcda
+*.gcno
+*.gcov
+
+# Ignore project-specific files
+obj/
+bin/
+tmp/
+
+# Ignore 42 C projects' output
+a.out.dSYM/

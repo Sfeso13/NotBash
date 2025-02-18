@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   displayread.c                                      :+:      :+:    :+:   */
+/*   not_supported.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 17:50:06 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 17:10:15 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/18 01:46:25 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/18 01:56:29 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-int emptychecker(char *str)
+int	notsupported(const char *token)
 {
-	int	i;
+	int	scc;
+	int	dcc;
 
-	i = 0;
-	while (str[i])
+	scc = 0;
+	dcc = 0;
+	while (*token)
 	{
-		if (!iswhitespace(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int displaymeagn(char **input)
-{
-	if (!input || !*input || *input == (void *)0 || emptychecker(*input))
-	{
-		free(*input);
-		*input = NULL;
-		return (1);
+		if (*token == '\'')
+			scc++;
+		else if (*token == '"')
+			dcc++;
+		if (!(scc % 2) && !(dcc % 2))
+		{
+			if ((*token == '&' && *(token + 1) == '&') || (*token == '|' && *(token + 1) == '|'))
+				return (1);
+		}
+		token++;
 	}
 	return (0);
 }

@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_quotes.c                                     :+:      :+:    :+:   */
+/*   misplacing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 18:44:23 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:07:40 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/18 01:18:27 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/18 03:14:45 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-int	quoting_check(char *input)
+int	itsmisplaced(const char *token)
 {
-	int	onequ;
-	int	dblqu;
+	int	flag;
+	int	scc;
+	int	dcc;
 
-	onequ = 0;
-	dblqu = 0;
-	while (*input)
+	flag = 0;
+	scc = 0;
+	dcc = 0;
+	if (*token == '|')
+		return (1);
+	while (*token)
 	{
-		if (*input == '\'' && !dblqu)
-			onequ = !onequ;
-		else if (*input == '"' && !onequ)
-			dblqu = !dblqu;
-		input++;
+		if (*token == '\'')
+			scc++;
+		else if (*token == '"')
+			dcc++;
+		if ((*token == '|' || *token == '&') && (!(scc % 2) && !(dcc % 2)))
+		{
+			if (flag)
+				return (1);
+			flag = 1;
+		}
+		else if (!iswhitespace(*token))
+			flag = 0;
+		token++;
 	}
-	return (onequ || dblqu);
+	if (flag)
+		return (1);
+	return (0);
 }

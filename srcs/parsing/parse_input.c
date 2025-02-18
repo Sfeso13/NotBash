@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:05:56 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 16:10:37 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:29:00 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_shell	*inparse(char *input)
 	int		i;
 
 	if (!input || !*input)
+		return (NULL);
+	if (advsyncatcher(input) == 1)
 		return (NULL);
 	i = 0;
 	tokens = tokenizer(input);

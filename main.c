@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 18:20:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 18:29:22 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,20 @@ int main(int ac, char *av[], char *env[])
 		input = readline("minishell$ ");
 		if (!input)
 			break ;
-        //if syntaxerrchecker(input)
-        // return 0
-        // 
-        
 		if (*input)
 			add_history(input);
-		if (quoting_check(input))
-		{
-			printf("minishell: syntax error: unclosed quotes\n");
-			free(input);
-			continue ;
-		}
+        if (displaymeagn(&input))
+        {
+            free(input);
+            continue ;
+        }
 		cmd = inparse(input);
 		if (!cmd)
 		{
 			free(input);
 			continue;
 		}
-        execute(cmd, env_list);
+      	execute(cmd, env_list);
 		free(input);
 		// print_pipeline(cmd);
 		free_cmd(cmd);
