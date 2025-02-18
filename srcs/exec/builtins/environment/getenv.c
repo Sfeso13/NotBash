@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:32:27 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:36:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,8 @@ static size_t	len_w(char *s, int equals)
 	return (i);
 }
 
-static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
+char	**alloc_arr(char **arr, size_t wlen1, size_t wlen2)
 {
-	size_t	i;
-	char	*tmp;
-
-	i = 0;
-	tmp = s;
 	arr[0] = (char *)malloc((wlen1 + 1) * sizeof(char));
 	if (!arr[0])
 		return (NULL); //malloc failure
@@ -55,7 +50,19 @@ static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
 		arr[1] = (char *)malloc((wlen2 + 1) * sizeof(char));
 		if (!arr[1])
 			return (NULL); //malloc failure
-	}	
+	}
+	return (arr);
+}
+
+static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
+{
+	size_t	i;
+	char	*tmp;
+
+	i = 0;
+	tmp = s;
+	if (!alloc_arr(arr, wlen1, wlen2))
+		return (NULL); //malloc failure
 	while (i < wlen1)
 		arr[0][i++] = *(s++);
 	arr[0][i] = '\0';
