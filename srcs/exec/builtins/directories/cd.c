@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isbuiltin.c                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 16:05:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 14:45:17 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 14:53:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-int isbuiltincomm(char *com)
+void    changedir(t_shell *cmnds, t_env *env)
 {
-    const char *builtins[] = {"pwd", "echo", "cd", "export", "unset", "env", "exit", NULL};
-    int         i;
-
-    i = 0;
-    if (!com)
-        return (0);
-    while (builtins[i])
-    {
-        if (ft_strcmp(com, builtins[i]) == 0)
-            return (1);
-        i++;
-    }
-    return (0);
+    chdir(cmnds.)
 }
-

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 18:07:13 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 15:21:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int main(int ac, char *av[], char *env[])
 		input = readline("minishell$ ");
 		if (!input)
 			break ;
+        //if syntaxerrchecker(input)
+        // return 0
+        // 
+        
 		if (*input)
 			add_history(input);
 		if (quoting_check(input))

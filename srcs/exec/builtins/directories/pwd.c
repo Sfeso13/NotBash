@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isbuiltin.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 16:05:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 14:45:17 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 14:36:29 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 14:41:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/minishell.h"
+#include "../../../../includes/exec/exec.h"
 
-int isbuiltincomm(char *com)
+void    print_current_dir()
 {
-    const char *builtins[] = {"pwd", "echo", "cd", "export", "unset", "env", "exit", NULL};
-    int         i;
+    char	buff[PATH_MAX];
 
-    i = 0;
-    if (!com)
-        return (0);
-    while (builtins[i])
-    {
-        if (ft_strcmp(com, builtins[i]) == 0)
-            return (1);
-        i++;
-    }
-    return (0);
+	printf("%s\n", getcwd(buff, PATH_MAX));
 }
-
