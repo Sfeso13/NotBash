@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/18 14:43:19 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/18 18:17:47 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c
 
-DIRSRCS := pwd.c
+DIRSRCS := pwd.c cd.c echo.c
 
 EXECSRCS := improved_cmp.c exec.c
 

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 15:21:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 18:20:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int ac, char *av[], char *env[])
 		}
         execute(cmd, env_list);
 		free(input);
-		print_pipeline(cmd);
+		// print_pipeline(cmd);
 		free_cmd(cmd);
 	}
 	return 0;

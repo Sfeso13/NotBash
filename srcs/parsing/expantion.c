@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 23:54:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:23:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*expand_it(char *token)
 	// 	exit_stat = ft_itoa wla perror(exit stats);
 	// 	return (exit stat);
 	// }
-	printf("%s\n", token);
+	// printf("%s\n", token);
 	if (token[0] == '\'' && token[ft_strlen(token) - 1] == '\'')
 	{
 		res = ft_substr(token, 1, ft_strlen(token) - 2);
