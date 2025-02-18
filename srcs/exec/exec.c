@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:09:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 12:55:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	which_builtin(t_shell *cmnds, t_env *env)
 		print_env(env);
 	else if (improved_cmp(cmnds->args[0], "export") == 0)
 		export_env(cmnds, env);
+	else if (improved_cmp(cmnds->args[0], "unset") == 0)
+		unset_var(cmnds, env);
 	else
 		printf("other builtins\n");
 }
