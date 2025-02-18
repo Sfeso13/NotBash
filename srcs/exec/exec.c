@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 10:35:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:09:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	update_dash(t_shell *cmnds, t_env **env)
 
 void	which_builtin(t_shell *cmnds, t_env *env)
 {
+	update_dash(cmnds, &env);
 	if (improved_cmp(cmnds->args[0], "env") == 0)
-	{
-		update_dash(cmnds, &env);
 		print_env(env);
-	}
 	else if (improved_cmp(cmnds->args[0], "export") == 0)
 		export_env(cmnds, env);
 	else
@@ -49,6 +47,6 @@ void	which_builtin(t_shell *cmnds, t_env *env)
 
 void	execute(t_shell *cmnds, t_env *env)
 {
-    if (cmnds->is_buiultin)
+	if (cmnds->is_buiultin)
 		which_builtin(cmnds, env);
 }

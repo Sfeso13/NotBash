@@ -6,70 +6,44 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 10:40:52 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 11:10:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-size_t	kv_len(t_env *env)
+void	copy_kv(char *str, t_env *min, size_t len)
 {
 	size_t	klen;
-	size_t	vlen;
 
-	klen = 0;
-	vlen = 0;
-	if (env->key)
-		klen = ft_strlen(env->key);
-	if (env->val)
-		vlen = ft_strlen(env->val) + 3;
-	return (klen + vlen);
-}
-
-t_env	*get_smallest_k(t_env *env)
-{
-	t_env	*min;
-
-	min = env;
-	while (env)
+	klen = ft_strlen(min->key);
+	ft_strlcpy(str, min->key, len + 1);
+	if (len > klen)
 	{
-		if (ft_strncmp(min->key, env->key, ft_strlen(env->key)) > 0)
-			min = env;
-		env = env->next;
+		ft_strlcat(str + klen, "=\"", len + 1);
+		ft_strlcat(str + klen + 2, min->val, len + 1);
+		ft_strlcat(str + len - 1, "\"", len + 1);
 	}
-	return (min);
 }
 
 char	**env_to_arr(t_env *env)
 {
-	int		size;
 	char	**copy;
 	int		i;
 	size_t	len;
-	size_t	klen;
-	t_env	*tmp;
 	t_env	*min;
 
 	i = 0;
-	tmp = env;
-	size = env_size(tmp);
-	copy = (char **)malloc((size + 1) * sizeof(char*));
+	copy = (char **)malloc((env_size(env) + 1) * sizeof(char *));
 	if (!copy)
 		return (NULL); //FAILURE
-	while (tmp)
+	while (env)
 	{
-		min = get_smallest_k(tmp);
-		klen = ft_strlen(min->key);
+		min = get_smallest_k(env);
 		len = kv_len(min);
 		copy[i] = (char *)malloc(len + 1);
-		ft_strlcpy(copy[i], min->key, len + 1);
-		if (len > klen)
-		{
-			ft_strlcat(copy[i] + klen, "=\"", len + 1);
-			ft_strlcat(copy[i] + klen + 2, min->val, len + 1);
-			ft_strlcat(copy[i] + len - 1, "\"", len + 1);
-		}
-		ft_lstdelone(&tmp, min, free);
+		copy_kv(copy[i], min, len);
+		ft_lstdelone(&env, min, free);
 		i++;
 	}
 	copy[i] = NULL;
@@ -88,21 +62,8 @@ void	print_full_env(t_env *env)
 		printf("declare -x %s\n", arr[i]);
 		i++;
 	}
+	free_tab(arr);
 	//free all the tmps
-}
-
-t_env	*dup_env(t_env *env)
-{
-	t_env *dup;
-
-	dup = NULL;
-	while (env)
-	{
-		if (improved_cmp(env->key,"_") != 0)
-			envadd_back(&dup, newenv(env->key, env->val));
-		env = env->next;
-	}
-	return (dup);
 }
 
 void	export_env(t_shell *cmnds, t_env *env)

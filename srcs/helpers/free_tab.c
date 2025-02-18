@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   findlast_env.c                                     :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 11:11:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:36:58 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 10:55:50 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 10:56:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/exec/exec.h"
+#include "../../includes/global/minishell.h"
 
-t_env	*findlast_env(t_env *lst)
+void	free_tab(char **arr)
 {
-	while (lst)
+	int	i;
+
+	i = 0;
+	while (arr[i])
 	{
-		if (lst -> next == NULL)
-			return (lst);
-		lst = lst->next;
+		free(arr[i]);
+		i++;
 	}
-	return (NULL);
+	free(arr);
 }

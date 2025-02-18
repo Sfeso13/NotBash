@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 10:18:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 10:59:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,13 @@ static size_t	len_w(char *s, int equals)
 	return (i);
 }
 
-static char	**alluc(char **arr, char *s)
+static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
 {
 	size_t	i;
-	size_t	wlen1;
-	size_t	wlen2;
 	char	*tmp;
 
 	i = 0;
 	tmp = s;
-	wlen1 = len_w(s, 1);
-	wlen2 = len_w(s + wlen1, 0);
 	arr[0] = (char *)malloc((wlen1 + 1) * sizeof(char));
 	if (!arr[0])
 		return (NULL); //malloc failure
@@ -71,42 +67,17 @@ static char	**alluc(char **arr, char *s)
 char	**kv_extract(char *var)
 {
 	char	**arr;
+	size_t	wlen1;
+	size_t	wlen2;
 
 	if (var == NULL)
 		return (NULL);
 	arr = (char **)malloc((3) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
-	return (alluc(arr, var));
-}
-
-void	free_tab(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-void	reset_env(t_env **env)
-{
-	t_env	*tmp;
-
-	tmp = *env;
-	while (tmp)
-	{
-		if ((improved_cmp(tmp->key, "OLDPWD") == 0) && tmp->val)
-		{
-			free(tmp->val);
-			tmp->val = NULL;	
-		}
-		tmp = tmp->next;
-	}
+	wlen1 = len_w(var, 1);
+	wlen2 = len_w(var + wlen1, 0);
+	return (alluc(arr, var, wlen1, wlen2));
 }
 
 t_env	*create_env(char *env[])

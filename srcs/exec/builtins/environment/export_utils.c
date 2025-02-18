@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envadd_back.c                                      :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 10:22:13 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 16:36:55 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/18 11:00:19 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/18 11:01:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-void	envadd_back(t_env **lst, t_env *new)
+size_t	kv_len(t_env *env)
 {
-	t_env	*tmp;
+	size_t	klen;
+	size_t	vlen;
 
-	if (lst && new)
+	klen = 0;
+	vlen = 0;
+	if (env->key)
+		klen = ft_strlen(env->key);
+	if (env->val)
+		vlen = ft_strlen(env->val) + 3;
+	return (klen + vlen);
+}
+
+t_env	*get_smallest_k(t_env *env)
+{
+	t_env	*min;
+
+	min = env;
+	while (env)
 	{
-		tmp = findlast_env(*lst);
-		if (!tmp)
-		{
-			*lst = new;
-			return ;
-		}
-		tmp->next = new;
-		new->prev = tmp;
+		if (ft_strncmp(min->key, env->key, ft_strlen(env->key)) > 0)
+			min = env;
+		env = env->next;
 	}
+	return (min);
 }
