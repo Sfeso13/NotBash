@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:50:06 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 23:16:45 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:10:15 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int emptychecker(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!iswhitespace(*str))
+		if (!iswhitespace(str[i]))
 			return (0);
 		i++;
 	}
@@ -28,7 +28,7 @@ int emptychecker(char *str)
 
 int displaymeagn(char **input)
 {
-	if (!input || !*input || *input == '\0' || emptychecker(*input))
+	if (!input || !*input || *input == (void *)0 || emptychecker(*input))
 	{
 		free(*input);
 		*input = NULL;

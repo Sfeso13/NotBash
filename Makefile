@@ -6,7 +6,7 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/18 15:41:30 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/18 17:32:59 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitiz
 
 
 PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
-			   redirections.c arguments.c pipes.c valid_quotes.c tokenizer.c \
-			   isbuiltin.c
+			   redirections.c arguments.c pipes.c tokenizer.c isbuiltin.c\
+			   displayread.c syncatcher.c syncatchhelpers.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c
 
@@ -28,7 +28,7 @@ EXECSRCS := improved_cmp.c exec.c
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c \
 			arr_len.c env_size.c ft_strlcpy.c ft_strlcat.c ft_lstdelone.c ft_strcmp.c \
-			free_tab.c ft_strchr.c
+			free_tab.c ft_strchr.c ft_strtrim.c
 
 MAIN = main.c 
 

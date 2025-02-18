@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 19:42:40 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:32:06 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		tokenpars(int *i, char **tokens, t_shell *cmd);
 int		arg_isgood(int *i, char **tokens, t_shell *cmd);
 int		checkpipes(char **tokens);
 int		emptycomm(char **tokens);
-int		quoting_check(char *input);
+int		quoting_check(const char *input);
 char	**tokenizer(char *input);
 void	expantions(t_shell *cmd);
 char	*expand_it(char *token);
@@ -44,5 +44,9 @@ size_t	ft_strlen(const char *s);
 void	freewords(char **res, int i);
 int     isbuiltincomm(char *com);
 int     displaymeagn(char **input);
+int     advsyncatcher(char *input);
+int	    redir_check(const char *token);
+int     itsmisplaced(const char *token);
+int     notsupported(const char *token);
 
 #endif
