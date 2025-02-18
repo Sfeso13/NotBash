@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 18:06:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 10:40:52 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**env_to_arr(t_env *env)
 		klen = ft_strlen(min->key);
 		len = kv_len(min);
 		copy[i] = (char *)malloc(len + 1);
-		ft_strlcpy(copy[i], min->key, len);
+		ft_strlcpy(copy[i], min->key, len + 1);
 		if (len > klen)
 		{
 			ft_strlcat(copy[i] + klen, "=\"", len + 1);
@@ -91,8 +91,22 @@ void	print_full_env(t_env *env)
 	//free all the tmps
 }
 
+t_env	*dup_env(t_env *env)
+{
+	t_env *dup;
+
+	dup = NULL;
+	while (env)
+	{
+		if (improved_cmp(env->key,"_") != 0)
+			envadd_back(&dup, newenv(env->key, env->val));
+		env = env->next;
+	}
+	return (dup);
+}
+
 void	export_env(t_shell *cmnds, t_env *env)
 {
 	if (arr_len(cmnds->args) == 1)
-		print_full_env(env);
+		print_full_env(dup_env(env));
 }

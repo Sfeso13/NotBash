@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/16 19:26:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 10:18:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,22 @@ void	free_tab(char **arr)
 	free(arr);
 }
 
+void	reset_env(t_env **env)
+{
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if ((improved_cmp(tmp->key, "OLDPWD") == 0) && tmp->val)
+		{
+			free(tmp->val);
+			tmp->val = NULL;	
+		}
+		tmp = tmp->next;
+	}
+}
+
 t_env	*create_env(char *env[])
 {
 	t_env	*env_list;
@@ -108,5 +124,6 @@ t_env	*create_env(char *env[])
 		free_tab(kv_pair);
 		i++;
 	}
+	reset_env(&env_list);
 	return (env_list);
 }
