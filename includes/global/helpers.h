@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 17:33:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 01:02:05 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	free_tab(char **arr);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strndup(const char *s, int n);
 
 #endif

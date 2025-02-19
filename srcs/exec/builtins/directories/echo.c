@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 18:25:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 19:26:34 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_no_option(t_shell *cmnds, int size)
 {
 	int	i;
+	int j;
 
 	i = 1;
 	if (size == 1)
@@ -25,8 +26,15 @@ void	print_no_option(t_shell *cmnds, int size)
 	{
 		while (cmnds->args[i])
 		{
-			printf("%s", cmnds->args[i]);
-			if (i < size)
+			j = 0;
+			while (cmnds->args[i][j])
+			{
+				if (cmnds->args[i][j] == '"' || cmnds->args[i][j] == '\'')
+					j++;
+				printf("%c", cmnds->args[i][j]);
+				j++;
+			}
+			if (i < size - 1)
 				printf(" ");
 			i++;
 		}

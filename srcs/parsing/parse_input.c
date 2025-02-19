@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:05:56 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 17:29:00 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:54:47 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ t_shell	*inparse(char *input)
 	tokens = tokenizer(input);
 	if (!tokens || !*tokens[i])
 		return (NULL);
-	if (!checkpipes(tokens) || !emptycomm(tokens))
-	{
-		free_double(tokens);
-		return (NULL);
-	}
 	while (tokens[i])
 	{
 		while (tokens[i] && is_pipe(tokens[i]))

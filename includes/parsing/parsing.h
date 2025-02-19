@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 17:32:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 00:20:19 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 void	freewords(char **res, int i);
-int     isbuiltincomm(char *com);
-int     displaymeagn(char **input);
-int     advsyncatcher(char *input);
-int	    redir_check(const char *token);
-int     itsmisplaced(const char *token);
-int     notsupported(const char *token);
+int		isbuiltincomm(char *com);
+int		displaymeagn(char **input);
+int		advsyncatcher(char *input);
+int		redir_check(const char *token);
+int		itsmisplaced(const char *token);
+int		notsupported(const char *token);
+void	free_tokens(t_token *tokens);
+t_token	*tokenize(char *input);
 
 #endif

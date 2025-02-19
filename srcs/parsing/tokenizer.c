@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 17:03:33 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 21:59:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:08:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ char	**tokenizer(char *input)
 			st = i;
 			while (input[i] && input[i] != quote)
 				i++;
-			if (!input[i])
-			{
-				printf("minishell: syntax error unclosed quote\n");
-				return (free_double(tokens), NULL);
-			}
 			tokens[j] = malloc(i - st + 1);
 			if (!tokens[j])
 				return (free_double(tokens), NULL);
