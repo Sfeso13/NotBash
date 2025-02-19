@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 15:40:18 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:36:17 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ int	handle_keys(t_env **env, char **kv, char *equal)
 
 	key_found = search_key(kv[0], *env);
 	if (key_found && equal)
-		change_value_of_key(&key_found, kv[1]);
+	{
+		if (!kv[1] && equal)
+			key_found->val = ft_strdup("");
+		else
+			change_value_of_key(&key_found, kv[1]);
+	}
 	else if (key_found)
 		return (1);
 	else
@@ -75,21 +80,149 @@ int	handle_keys(t_env **env, char **kv, char *equal)
 	return (0);
 }
 
+int	handle_append(t_env **env, char **kv)
+{
+	t_env	*key_found;
+	char	*key;
+	char	*value;
+
+	key_found = search_key(kv[0], *env);
+	if (key_found)
+	{
+		//append
+	}
+	else
+	{
+		//do it as the normal assigning?
+		//or maybe just do a join that handles both the cases?
+	}
+	return (0);
+}
+
+int	allowed(char *c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+	{
+		if ((c[i] >= 'a' && c[i] <= 'z')|| (c[i] >= 'A' && c[i] <='Z') || c[i] == '_' || \
+			(c[i] >= '0' && c[i] <= '9') || c[i] == '+' || c[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_plus(char *s)
+{
+	int	i;
+	int	count;
+	char	*plus;
+
+	i = 0;
+	count = 0;
+	plus = NULL;
+	while (s[i])
+	{
+		if (s[i] == '+')
+			count++;
+		i++;
+	}
+	if (count > 0)
+		plus = ft_strchr(s, '+');
+	if (plus && count == 1)
+	{
+		if (*(plus + 1) != '=')
+			return (-1);
+	}
+	return (count);
+}
+
+char	*validate_key(char *key)
+{
+	int		i;
+	int		plus;
+	size_t	len;
+	char	*res;
+
+	i = 0;
+	if (!allowed(key))
+	{
+		free(key);
+		return (NULL);
+	}
+	len = ft_strlen(key);
+	plus = is_plus(key);
+	if (plus > 1 || plus == -1)
+	{
+		free(key);
+		return (NULL);
+	}
+	else if ((plus && (key[len - 2] != '+')) || \
+		(key[0] >= '0' && key[0] <= '9'))
+	{
+		free(key);
+		return (NULL);
+	}
+	res = ft_strtrim(key, "+=");
+	free(key);
+	return (res);
+}
+
+char	**export_kv_extract(char *var)
+{
+	char	*equal;
+	char	**arr;
+	size_t	len;
+	int		equal_id;
+
+	if (var == NULL)
+		return (NULL);
+	arr = (char **)malloc((3) * sizeof(char *));
+	equal = ft_strchr(var, '=');
+	if (!equal)
+	{
+		len = ft_strlen(var);
+		arr[0] = (char *)malloc(len + 1);
+		ft_strlcpy(arr[0], var, len + 1);
+		arr[1] = NULL;
+	}
+	else
+	{
+		equal_id =  equal - var;
+		arr[0] = ft_substr(var, 0, equal_id + 1);
+		arr[1] = ft_substr(var, equal_id + 1, ft_strlen(var) - equal_id);
+	}
+	arr[2] = NULL;
+	return (arr);
+}
+
 void	export_var(t_shell *cmnds, t_env **env, int args_size)
 {
 	int		i;
 	char	**kv;
 	char	*equal;
-	t_env	*key_found;
+	char	*plus;
 
 	i = 1;
+	printf("dummy shit %s\n", (*env)->key);
 	while (args_size - 1 > 0)
 	{
-		equal = ft_strchr(cmnds->args[i], '=');
-		kv = kv_extract(cmnds->args[i]);
-		key_found = search_key(kv[0], *env);
-		handle_keys(env, kv, equal);
-		free_tab(kv);
+		kv = export_kv_extract(cmnds->args[i]);
+		kv[0] = validate_key(kv[0]);
+		if (kv[0] == NULL || !kv[0][0])
+			printf("invalid id : %s\n", cmnds->args[i]); //INVALID ID
+		else
+		{
+			equal = ft_strchr(cmnds->args[i], '=');
+			plus = ft_strchr(cmnds->args[i], '+');
+			if (plus)
+				handle_append(env, kv);
+			else
+				handle_keys(env, kv, equal);
+			free_tab(kv);
+		}
 		i++;
 		args_size--;
 	}

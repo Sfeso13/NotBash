@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   improved_cmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:48:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 15:52:16 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:05:37 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	improved_cmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	if (ft_strlen(s1) != ft_strlen(s2))
+	if (ft_strlen(s1)!= ft_strlen(s2))
 		return (1);
 	while (s1[i] && s1[i] == s2[i])
 		i++;
