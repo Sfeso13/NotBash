@@ -1,0 +1,9 @@
+objs/cd.o: srcs/exec/builtins/directories/cd.c \
+  srcs/exec/builtins/directories/../../../../includes/exec/exec.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/structs.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/minishell.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/../exec/exec.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/../exec/exec_utils.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/../exec/builtins.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/../parsing/parsing.h \
+  srcs/exec/builtins/directories/../../../../includes/exec/../global/helpers.h

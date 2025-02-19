@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/19 13:36:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:03:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,24 @@ int	handle_append(t_env **env, char **kv)
 	t_env	*key_found;
 	char	*key;
 	char	*value;
+	char	*tmp;
 
 	key_found = search_key(kv[0], *env);
 	if (key_found)
 	{
-		//append
+		tmp = key_found->val;
+		value = ft_strjoin(key_found->val, kv[1]);
+		free(tmp);
+		key_found->val = value;
 	}
 	else
 	{
-		//do it as the normal assigning?
-		//or maybe just do a join that handles both the cases?
+		key = kv[0];
+		if (!kv[1])
+			value = "";
+		else
+			value = kv[1];
+		envadd_back(env, newenv(key, value));
 	}
 	return (0);
 }
