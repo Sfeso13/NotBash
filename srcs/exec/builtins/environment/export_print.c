@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/19 18:59:46 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:05:15 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ char	**env_to_arr(t_env *env)
 	while (env)
 	{
 		min = get_smallest_k(env);
-		len = kv_len(min);
-		copy[i] = (char *)malloc(len + 1);
-		copy_kv(copy[i], min, len);
+		if (min->key[0] != '.')
+		{
+			len = kv_len(min);
+			copy[i] = (char *)malloc(len + 1);
+			copy_kv(copy[i], min, len);	
+			i++;
+		}
 		ft_lstdelone(&env, min, free);
-		i++;
 	}
 	copy[i] = NULL;
 	return (copy);

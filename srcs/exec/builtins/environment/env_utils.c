@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:51:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 11:10:11 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:53:21 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	reset_env(t_env **env)
 			free(tmp->val);
 			tmp->val = NULL;
 		}
+		else if (improved_cmp(tmp->key, "PWD") == 0)
+			envadd_back(env, newenv(".pwd", tmp->val));
 		tmp = tmp->next;
 	}
 }

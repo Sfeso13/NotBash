@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 18:28:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:46:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	which_builtin(t_shell *cmnds, t_env *env)
 	else if (improved_cmp(cmnds->args[0], "unset") == 0)
 		unset_var(cmnds, env);
 	else if (improved_cmp(cmnds->args[0], "pwd") == 0)
-		print_current_dir();
+		print_current_dir(env);
 	else if (improved_cmp(cmnds->args[0], "cd") == 0)
 		changedir(cmnds, env);
 	else if (improved_cmp(cmnds->args[0], "echo") == 0)
