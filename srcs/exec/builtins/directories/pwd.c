@@ -6,15 +6,15 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:36:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 17:53:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 09:51:47 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-void    print_current_dir()
+void	print_current_dir()
 {
-    char	buff[PATH_MAX];
+	char	buff[PATH_MAX];
 
 	printf("%s\n", getcwd(buff, PATH_MAX));
 }
