@@ -6,13 +6,42 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 12:54:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:47:14 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-int	find_path_nodes(t_env *env, t_env **actual, t_env **hidden)
+int	find_oldpwd_nodes(t_env *env, t_env **actual, t_env **hidden)
+{
+	t_env	*tmp;
+	int		count;
+	int		found_key;
+
+	count = 0;
+	tmp = env;
+	found_key = 0;
+	while (tmp)
+	{
+		if (improved_cmp(tmp->key, "OLDPWD") == 0)
+		{
+			found_key = 1;
+			count++;
+			*actual = tmp;
+		}
+		else if (improved_cmp(tmp->key, ".oldpwd") == 0)
+		{
+			count++;
+			*hidden = tmp;
+		}
+		if (count == 2)
+			break ;
+		tmp = tmp->next;
+	}
+	return (found_key);
+}
+
+int	find_pwd_nodes(t_env *env, t_env **actual, t_env **hidden)
 {
 	t_env	*tmp;
 	int		count;
@@ -41,21 +70,29 @@ int	find_path_nodes(t_env *env, t_env **actual, t_env **hidden)
 	return (found_key);
 }
 
-void	update_oldpwd(t_env *env)
+void	update_oldpwd(t_env **env)
 {
-	t_env	*dummy;
+	t_env	*actual;
 	t_env	*hidden_pwd;
-
-	find_path_nodes(env, &dummy, &hidden_pwd);
-	while (env)
+	int		found;
+	t_env	*pwd;
+	
+	find_pwd_nodes(*env, &actual, &pwd);
+	found = find_oldpwd_nodes(*env, &actual, &hidden_pwd);
+	if (found)
 	{
-		if (improved_cmp(env->key, "OLDPWD") == 0)
-		{
-			if (env->val)
-				free(env->val);
-			env->val = ft_strdup(hidden_pwd->val);
-		}
-		env = env->next;
+		if (actual->val)
+			free(actual->val);
+		if (hidden_pwd->val)
+			free(hidden_pwd->val);
+		actual->val = ft_strdup(pwd->val);
+		hidden_pwd->val = ft_strdup(pwd->val);
+	}
+	else
+	{
+		if (hidden_pwd->val)
+			free(hidden_pwd);
+		hidden_pwd->val = pwd->val;
 	}
 }
 
@@ -65,8 +102,7 @@ void	update_pwd(t_env **env)
 	t_env	*hidden;
 	int		found_key;
 
-	update_oldpwd(*env);
-	found_key = find_path_nodes(*env, &hidden, &actual);
+	found_key = find_pwd_nodes(*env, &actual, &hidden);
 	if (found_key)
 	{
 		if (actual->val)
@@ -78,7 +114,6 @@ void	update_pwd(t_env **env)
 	}
 	else
 	{
-		envadd_back(env, newenv("PWD", getcwd(NULL, PATH_MAX)));
 		if (hidden->val)
 			free(hidden->val);
 		hidden->val = getcwd(NULL, PATH_MAX);
@@ -113,5 +148,6 @@ void	changedir(t_shell *cmnds, t_env *env)
 		printf("cd: %s: no such file or directory\n", cmnds->args[1]);
 		return ;//probably should still update pwd but still
 	}
+	update_oldpwd(&env);
 	update_pwd(&env);
 }
