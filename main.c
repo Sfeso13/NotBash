@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 01:54:50 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:39:55 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
+		expantions(tokens);
 		print_token_details(tokens);
 		// print_pipeline(cmd);
 		// execute(cmd, env_list);

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/19 00:15:25 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/20 00:55:16 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 
 //past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
 // fuck the old struct thats all we need :
+
+typedef struct	s_expand
+{
+	size_t	idx;
+	int		in_single;
+	int		in_double;
+} t_expand;
 
 typedef enum e_token_type
 {
@@ -34,9 +41,10 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char			*value;
-	//if we wanna add something in future
+	//if we wanna add something in futur
 	t_token_type	type;
 	struct s_token	*next;
+	// struct s_token	*prev;
 }	t_token;
 
 typedef struct s_env
@@ -55,7 +63,6 @@ typedef struct s_shell
 	char			*outfile;		// file output redirection   (< file.txt)
 	int				append_mode;	// flag append mode (>> file.txt)
 	int				is_buiultin;	// if u know u know
-	char			is_tosawi;
 	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
 	struct s_shell	*next;			// ptr to the next command in the pipeline
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 00:20:19 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:39:06 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		checkpipes(char **tokens);
 int		emptycomm(char **tokens);
 int		quoting_check(const char *input);
 char	**tokenizer(char *input);
-void	expantions(t_shell *cmd);
+void	expantions(t_token *cmd);
 char	*expand_it(char *token);
 t_shell	*cmd_create(void);
 void	cmd_add(t_shell	**head, t_shell *newcmd);

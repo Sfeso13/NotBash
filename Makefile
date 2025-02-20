@@ -6,7 +6,7 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/19 01:10:30 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/20 01:18:40 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ EXECSRCS := improved_cmp.c exec.c
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c \
 			arr_len.c env_size.c ft_strlcpy.c ft_strlcat.c ft_lstdelone.c ft_strcmp.c \
-			free_tab.c ft_strchr.c ft_strtrim.c ft_split.c ft_strndup.c
+			free_tab.c ft_strchr.c ft_strtrim.c ft_split.c ft_strndup.c ft_isalnum.c \
+			ft_strcpy.c
 
 MAIN = main.c
 
