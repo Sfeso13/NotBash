@@ -6,7 +6,7 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/21 18:55:12 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/21 20:04:01 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c
 
-# ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c validate_id.c \
-# 		   export_var.c export_print.c validate_id_unset.c
+ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c validate_id.c \
+		   export_var.c export_print.c validate_id_unset.c
 
-# DIRSRCS := pwd.c cd.c echo.c
+DIRSRCS := pwd.c cd.c echo.c
 
-# EXECSRCS := improved_cmp.c exec.c
+EXECSRCS := improved_cmp.c exec.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c \
@@ -41,10 +41,10 @@ PARSSRCS := $(addprefix srcs/parsing/, $(PARSSRCS))
 
 HELPERS := $(addprefix srcs/helpers/, $(HELPERS))
 
-# EXECSRCS := $(addprefix srcs/exec/, $(EXECSRCS)) \
-# 			$(addprefix srcs/exec/builtins/environment/, $(ENVSRCS))
+EXECSRCS := $(addprefix srcs/exec/, $(EXECSRCS)) \
+			$(addprefix srcs/exec/builtins/environment/, $(ENVSRCS))
 
-# DIRSRCS := $(addprefix srcs/exec/builtins/directories/, $(DIRSRCS))
+DIRSRCS := $(addprefix srcs/exec/builtins/directories/, $(DIRSRCS))
 
 LIBS		= -lreadline -lncurses
 
@@ -61,17 +61,17 @@ objs/%.o: srcs/parsing/%.c
 	mkdir -p objs
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
-# objs/%.o: srcs/exec/%.c
-# 	mkdir -p objs
-# 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+objs/%.o: srcs/exec/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
-# objs/%.o: srcs/exec/builtins/environment/%.c
-# 	mkdir -p objs
-# 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+objs/%.o: srcs/exec/builtins/environment/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
-# objs/%.o: srcs/exec/builtins/directories/%.c
-# 	mkdir -p objs
-# 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+objs/%.o: srcs/exec/builtins/directories/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
 objs/%.o: %.c
 	mkdir -p objs
