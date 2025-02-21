@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 19:46:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:18:49 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_token	*copy_token(t_token *src)
 	}
 	new->type = src->type;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 

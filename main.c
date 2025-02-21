@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 20:01:30 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:23:41 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,34 @@ void	print_shell(t_shell *shell)
 {
 	int		i;
 	t_token	*token;
+	char	prev_info[64];
 
 	i = 1;
+	if (!shell)
+		printf("No commands in pipeline\n");
 	while (shell)
 	{
-		printf("\n===== Command %d =====\n\n", i);
+		printf("\n=== Command %d ===\n", i++);
 		token = shell->tokens;
 		while (token)
 		{
-			printf("  Token: %-10s | Type: %s\n\n",
-				token->value, get_token_name(token->type));
+			if (token->prev)
+				snprintf(prev_info, sizeof(prev_info),
+					"%-10s (%s)", token->prev->value,
+					get_token_name(token->prev->type));
+			else
+				snprintf(prev_info, sizeof(prev_info), "%-10s", "(None)");
+
+			printf("  %-15s %-12s ← Prev: %s\n",
+				token->value,
+				get_token_name(token->type),
+				prev_info);
 			token = token->next;
 		}
-		printf("\n==================end=======================\n\n");
-		if (shell->next)
-			printf("  -> Next Command Exists\n");
+		printf("=====================\n");
+		printf("Prev cmd: %-14p Next cmd: %p\n",
+			(void *)shell->prev, (void *)shell->next);
 		shell = shell->next;
-		i++;
 	}
 }
 
