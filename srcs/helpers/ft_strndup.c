@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaners.c                                         :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:24:37 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:19:15 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/19 00:59:38 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/19 01:19:05 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	free_tokens(t_token *tokens)
+char	*ft_strndup(const char *s, int n)
 {
-	t_token	*tmp;
+	char	*dup;
+	int		i;
 
-	while (tokens)
+	i = 0;
+	if (!s || n <= 0)
+		return (NULL);
+	dup = malloc(n + 1);
+	while (i < n && s[i])
 	{
-		tmp = tokens;
-		tokens = tokens->next;
-		free(tmp->value);
-		free(tmp);
+		dup[i] = s[i];
+		i++;
 	}
-}
-
-void	freewords(char **res, int i)
-{
-	while (i--)
-	{
-		write(1, "7\n", 2);
-		free(res[i]);
-	}
-	free(res);
+	dup[i] = '\0';
+	return (dup);
 }

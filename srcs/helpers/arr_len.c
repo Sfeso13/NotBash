@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arr_len.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:46:05 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 10:47:53 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/18 19:26:23 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/global/minishell.h"
 
 int	arr_len(char **arr)
 {

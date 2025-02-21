@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaners.c                                         :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:24:37 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:19:15 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/20 01:17:38 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/20 01:18:01 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/minishell.h"
-
-void	free_tokens(t_token *tokens)
+char	*ft_strcpy(char *dest, char *src)
 {
-	t_token	*tmp;
+	int	i;
 
-	while (tokens)
+	i = 0;
+	while (src[i])
 	{
-		tmp = tokens;
-		tokens = tokens->next;
-		free(tmp->value);
-		free(tmp);
+		dest[i] = src[i];
+		i++;
 	}
-}
-
-void	freewords(char **res, int i)
-{
-	while (i--)
-	{
-		write(1, "7\n", 2);
-		free(res[i]);
-	}
-	free(res);
+	dest[i] = '\0';
+	return (dest);
 }

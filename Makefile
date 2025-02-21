@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/20 14:48:21 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/21 15:28:01 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,8 @@ CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
 
 
-PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
-			   redirections.c arguments.c pipes.c tokenizer.c isbuiltin.c\
-			   displayread.c syncatcher.c syncatchhelpers.c
+PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
+				expantion_helpers.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c validate_id.c \
 		   export_var.c export_print.c validate_id_unset.c
@@ -29,9 +28,10 @@ EXECSRCS := improved_cmp.c exec.c
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c ft_substr.c \
 			arr_len.c env_size.c ft_strlcpy.c ft_strlcat.c ft_lstdelone.c ft_strcmp.c \
-			free_tab.c ft_strchr.c ft_strtrim.c
+			free_tab.c ft_strchr.c ft_strtrim.c ft_split.c ft_strndup.c ft_isalnum.c \
+			ft_strcpy.c
 
-MAIN = main.c 
+MAIN = main.c
 
 OBJS	:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
 		   $(addprefix objs/, $(HELPERS:.c=.o)) $(addprefix objs/, $(EXECSRCS:.c=.o)) \
