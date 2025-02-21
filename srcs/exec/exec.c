@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 11:46:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:55:12 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	which_builtin(t_shell *cmnds, t_env *env)
 		changedir(cmnds, env);
 	else if (improved_cmp(cmnds->args[0], "echo") == 0)
 		print_args(cmnds);
+	else if (improved_cmp(cmnds->args[0], "exit") == 0)
+		exit_shell(&cmnds, &env);
 	else
 		printf("other builtins\n");
 }

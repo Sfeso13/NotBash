@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   delone_shell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 12:55:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 18:06:04 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/21 18:49:08 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/21 18:52:01 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	ft_lstdelone(t_env **head, t_env *lst, void (*del)(void*))
+void	delone_shell(t_shell **head, t_shell *lst, void (*del)(void*))
 {
-	t_env	*prev;
-	t_env	*next;
+	t_shell *prev;
+	t_shell	*next;
 
 	if (lst && del)
 	{
-		if (lst->key)
-			del(lst->key);
-		if (lst->val)
-			del(lst->val);
+		if (lst->args)
+			free_tab(lst->args);
+		if (lst->heredoc_dlm)
+			free(lst->heredoc_dlm);
+		if (lst->infile)
+			free(lst->infile);
+		if (lst->outfile)
+			free(lst->outfile);
 		if (lst->next && lst->prev)
 		{
 			prev = lst->prev;

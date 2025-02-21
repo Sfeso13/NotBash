@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 17:33:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:22:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ int		arr_len(char **arr);
 int		env_size(t_env *lst);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-void	ft_lstdelone(t_env **head, t_env *lst, void (*del)(void*));
+void	delone_env(t_env **head, t_env *lst, void (*del)(void*));
 int		ft_strcmp(const char *s1, const char *s2);
 void	free_tab(char **arr);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
+void	clear_env(t_env **lst, void (*del)(void*));
+void	delone_shell(t_shell **head, t_shell *lst, void (*del)(void*));
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 #endif

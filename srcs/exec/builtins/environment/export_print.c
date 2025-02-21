@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 11:05:15 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:48:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**env_to_arr(t_env *env)
 			copy_kv(copy[i], min, len);	
 			i++;
 		}
-		ft_lstdelone(&env, min, free);
+		delone_env(&env, min, free);
 	}
 	copy[i] = NULL;
 	return (copy);

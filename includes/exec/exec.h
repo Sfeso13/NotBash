@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 11:46:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:55:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	unset_var(t_shell *cmnds, t_env *env);
 void	print_current_dir(t_env *env);
 void    changedir(t_shell *cmnds, t_env *env);
 void	print_args(t_shell	*cmnds);
+void    exit_shell(t_shell **cmnds, t_env **env);
 
 #endif

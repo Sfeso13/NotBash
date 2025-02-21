@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   clear_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
+/*   Created: 2025/02/21 18:42:51 by yhossni           #+#    #+#             */
 /*   Updated: 2025/02/21 18:48:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/exec/exec.h"
+#include "../../includes/global/minishell.h"
 
-void	unset_var(t_shell *cmnds, t_env *env)
+void	clear_env(t_env **lst, void (*del)(void*))
 {
-	int		i;
-	t_env	*to_remove;
+	t_env	*tmp;
 
-	i = 1;
-	if (arr_len(cmnds->args) == 1)
-		return ;
-	while (cmnds->args[i])
+	if (lst && del)
 	{
-		if (!unset_validate_key(ft_strdup(cmnds->args[i])))
+		while (*lst)
 		{
-			printf("invalid id : %s\n", cmnds->args[i]);
-			i++;
-			continue ;
+			tmp = (*lst)->next;
+			delone_env(lst, *lst, del);
+			*lst = tmp;
 		}
-		to_remove = search_key(cmnds->args[i], env);
-		if (to_remove)
-		{
-			delone_env(&env, to_remove, free);
-		}
-		i++;
+		*lst = NULL;
 	}
 }
