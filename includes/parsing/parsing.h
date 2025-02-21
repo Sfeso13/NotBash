@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:46:55 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:33:48 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ void	handle_quotes(char c, t_expand *ex);
 size_t	get_var_length(const char **str);
 void	skip_quotes(const char **p, t_expand *ex);
 size_t	calculate_buf_size(const char *token);
+t_shell	*fill_cmd(t_token *token);
+t_shell	*crt_node(void);
+t_token	*copy_token(t_token *src);
+void	free_shell(t_shell *head);
 
 #endif
