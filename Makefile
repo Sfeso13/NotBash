@@ -6,19 +6,20 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/21 15:33:57 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/21 17:28:58 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
 
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c
 
-ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c
+ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c validate_id.c \
+		   export_var.c export_print.c validate_id_unset.c
 
 DIRSRCS := pwd.c cd.c echo.c
 

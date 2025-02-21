@@ -3,93 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 15:40:18 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/20 09:51:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
-
-char	**env_to_arr(t_env *env)
-{
-	char	**copy;
-	int		i;
-	size_t	len;
-	t_env	*min;
-
-	i = 0;
-	copy = (char **)malloc((env_size(env) + 1) * sizeof(char *));
-	if (!copy)
-		return (NULL); //FAILURE
-	while (env)
-	{
-		min = get_smallest_k(env);
-		len = kv_len(min);
-		copy[i] = (char *)malloc(len + 1);
-		copy_kv(copy[i], min, len);
-		ft_lstdelone(&env, min, free);
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
-void	print_full_env(t_env *env)
-{
-	char	**arr;
-	int		i;
-
-	i = 0;
-	arr = env_to_arr(env);
-	while (arr[i])
-	{
-		printf("declare -x %s\n", arr[i]);
-		i++;
-	}
-	free_tab(arr);
-	//free all the tmps
-}
-
-int	handle_keys(t_env **env, char **kv, char *equal)
-{
-	t_env	*key_found;
-	char	*key;
-	char	*value;
-
-	key_found = search_key(kv[0], *env);
-	if (key_found && equal)
-		change_value_of_key(&key_found, kv[1]);
-	else if (key_found)
-		return (1);
-	else
-	{
-		key = kv[0];
-		if (!kv[1] && equal)
-			value = "";
-		else
-			value = kv[1];
-		envadd_back(env, newenv(key, value));
-	}
-	return (0);
-}
 
 void	export_var(t_shell *cmnds, t_env **env, int args_size)
 {
 	int		i;
 	char	**kv;
 	char	*equal;
-	t_env	*key_found;
+	char	*plus;
 
 	i = 1;
 	while (args_size - 1 > 0)
 	{
-		equal = ft_strchr(cmnds->args[i], '=');
-		kv = kv_extract(cmnds->args[i]);
-		key_found = search_key(kv[0], *env);
-		handle_keys(env, kv, equal);
-		free_tab(kv);
+		kv = export_kv_extract(cmnds->args[i]);
+		kv[0] = validate_key(kv[0]);
+		if (kv[0] == NULL || !kv[0][0])
+			printf("invalid id : %s\n", cmnds->args[i]); //INVALID ID
+		else
+		{
+			equal = ft_strchr(cmnds->args[i], '=');
+			plus = ft_strchr(cmnds->args[i], '+');
+			if (plus)
+				handle_append(env, kv);
+			else
+				handle_keys(env, kv, equal);
+			free_tab(kv);
+		}
 		i++;
 		args_size--;
 	}

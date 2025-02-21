@@ -1,23 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   validate_id_unset.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 14:36:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 11:47:59 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/19 18:36:31 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/20 13:19:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-void	print_current_dir(t_env *env)
+int	unset_allowed(char *c)
 {
-	while (env)
+	int	i;
+
+	i = 0;
+	while (c[i])
 	{
-		if (improved_cmp(env->key, ".pwd") == 0)
-			printf("%s\n", env->val);
-		env = env->next;
-	}	
+		if (!((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z') || \
+			c[i] == '_' || (c[i] >= '0' && c[i] <= '9')))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+char	*unset_validate_key(char *key)
+{
+	int		i;
+	size_t	len;
+
+	i = 0;
+	if (!unset_allowed(key))
+		return (NULL);
+	len = ft_strlen(key);
+	if ((key[0] >= '0' && key[0] <= '9'))
+		return (NULL);
+	return (key);
 }

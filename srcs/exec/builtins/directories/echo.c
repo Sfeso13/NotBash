@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 19:26:34 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/20 09:51:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	print_no_option(t_shell *cmnds, int size)
 {
 	int	i;
-	int j;
 
 	i = 1;
 	if (size == 1)
@@ -26,15 +25,8 @@ void	print_no_option(t_shell *cmnds, int size)
 	{
 		while (cmnds->args[i])
 		{
-			j = 0;
-			while (cmnds->args[i][j])
-			{
-				if (cmnds->args[i][j] == '"' || cmnds->args[i][j] == '\'')
-					j++;
-				printf("%c", cmnds->args[i][j]);
-				j++;
-			}
-			if (i < size - 1)
+			printf("%s", cmnds->args[i]);
+			if (i < size)
 				printf(" ");
 			i++;
 		}
@@ -44,14 +36,14 @@ void	print_no_option(t_shell *cmnds, int size)
 
 void	print_with_option(t_shell *cmnds, int size)
 {
-		int	i;
+	int	i;
 
 	i = 2;
-	if (size == 1)
+	if (size == 2)
 		printf("");
-	else if (size == 2)
-		printf("%s", cmnds->args[1]);
-	else if (size > 2)
+	else if (size == 3)
+		printf("%s", cmnds->args[2]);
+	else if (size > 3)
 	{
 		while (cmnds->args[i])
 		{
@@ -68,7 +60,7 @@ void	print_args(t_shell	*cmnds)
 	int	size;
 
 	size = arr_len(cmnds->args);
-	if (improved_cmp(cmnds->args[1], "-n") == 0)
+	if (size > 1 && improved_cmp(cmnds->args[1], "-n") == 0)
 		print_with_option(cmnds, size);
 	else
 		print_no_option(cmnds, size);

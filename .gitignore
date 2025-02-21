@@ -16,6 +16,7 @@ a.out
 a.exe
 core
 *.dSYM/
+minishell
 
 # Ignore library files
 *.gch
