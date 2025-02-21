@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:20:00 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:36:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void print_token_details(t_token *tokens)
 
 int main(int ac, char *av[], char *env[])
 {
-    t_token *tokens;
+	t_token	*tokens;
+	t_shell	*cmd;
 	char	*input;
 	t_env	*env_list;
 
@@ -94,6 +95,8 @@ int main(int ac, char *av[], char *env[])
 			continue;
 		}
 		expantions(tokens);
+		cmd	= fill_cmd(tokens);
+		//quotes_remove(tokens);
 		print_token_details(tokens);
 		// execute(cmd, env_list);
 		free(input);

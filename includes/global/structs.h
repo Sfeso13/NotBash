@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 00:55:16 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:04:20 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,7 @@ typedef struct s_env
 typedef struct s_shell
 {
 	t_token			token;
-	char			**args;			// array of commands + args || (["ls", "-l", NULL])
-	char			*infile;		// file input redirection   (< file.txt)
-	char			*outfile;		// file output redirection   (< file.txt)
-	int				append_mode;	// flag append mode (>> file.txt)
-	int				is_buiultin;	// if u know u know
-	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
+	// char			**args;			// array of commands + args || (["ls", "-l", NULL])
 	struct s_shell	*next;			// ptr to the next command in the pipeline
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline
 }	t_shell;
