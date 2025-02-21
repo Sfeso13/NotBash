@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/17 17:05:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:14:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,36 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+//past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
+// fuck the old struct thats all we need :
+
+typedef struct	s_expand
+{
+	size_t	idx;
+	int		in_single;
+	int		in_double;
+} t_expand;
+
+typedef enum e_token_type
+{
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIRECT_IN,
+	TOKEN_REDIRECT_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC,
+	TOKEN_EOF
+}	t_token_type;
+
+typedef struct s_token
+{
+	char			*value;
+	//if we wanna add something in futur
+	t_token_type	type;
+	struct s_token	*next;
+	// struct s_token	*prev;
+}	t_token;
 
 typedef struct s_env
 {
@@ -27,20 +57,10 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	char			**args;			// array of commands + args || (["ls", "-l", NULL])
-	char			*infile;		// file input redirection   (< file.txt)
-	char			*outfile;		// file output redirection   (< file.txt)
-	int				append_mode;	// flag append mode (>> file.txt)
-	int				is_buiultin;	// if u know u know
-	char			*heredoc_dlm;	// heredoc delimiter (<< delim)
+	t_token			*tokens;
+	// char			**args;			// array of commands + args || (["ls", "-l", NULL])
 	struct s_shell	*next;			// ptr to the next command in the pipeline
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline
 }	t_shell;
-
-// typedef struct s_token
-// {
-// 	char	**value;
-// 	char	quote;
-// }	t_token;
 
 #endif

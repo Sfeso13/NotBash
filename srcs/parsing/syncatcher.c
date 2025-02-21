@@ -6,13 +6,13 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:18:29 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 17:33:33 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:39:54 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-int		checkmy_syn(const char *input)
+int	checkmy_syn(const char *input)
 {
 	if (quoting_check(input))
 	{
@@ -41,7 +41,7 @@ int		checkmy_syn(const char *input)
 	return (0);
 }
 
-int advsyncatcher(char *input)
+int	advsyncatcher(char *input)
 {
 	char	*trimmed;
 

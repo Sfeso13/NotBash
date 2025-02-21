@@ -1,49 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaners.c                                         :+:      :+:    :+:   */
+/*   cmd_fillhelp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:24:37 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 19:33:43 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/21 19:46:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	free_tokens(t_token *tokens)
+t_shell	*crt_node(void)
 {
-	t_token	*tmp;
+	t_shell	*node;
 
-	while (tokens)
-	{
-		tmp = tokens;
-		tokens = tokens->next;
-		free(tmp->value);
-		free(tmp);
-	}
+	node = malloc(sizeof(t_shell));
+	if (!node)
+		return (NULL);
+	node->tokens = NULL;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }
 
-void	freewords(char **res, int i)
+t_token	*copy_token(t_token *src)
 {
-	while (i--)
+	t_token	*new;
+
+	if (!src)
+		return (NULL);
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->value = ft_strdup(src->value);
+	if (!new->value)
 	{
-		write(1, "7\n", 2);
-		free(res[i]);
+		free(new);
+		return (NULL);
 	}
-	free(res);
+	new->type = src->type;
+	new->next = NULL;
+	return (new);
 }
 
-void	free_shell(t_shell *head)
-{
-	t_shell	*tmp;
-
-	while (head)
-	{
-		tmp = head->next;
-		free_tokens(head->tokens);
-		free(head);
-		head = tmp;
-	}
-}

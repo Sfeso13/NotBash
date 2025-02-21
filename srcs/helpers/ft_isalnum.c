@@ -1,47 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   crt_cmd.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 21:50:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 15:43:32 by adechaji         ###   ########.fr       */
+/*   Created: 2024/10/22 20:27:08 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/20 00:58:17 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-t_shell	*cmd_create(void)
+int	ft_isalnum(int c)
 {
-	t_shell	*cmd;
-
-	cmd = malloc(sizeof(t_shell));
-	if (!cmd)
-		return (NULL);
-	cmd->args = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->append_mode = 0;
-	cmd->is_buiultin = 0;
-	cmd->heredoc_dlm = NULL;
-	cmd->next = NULL;
-	cmd->prev = NULL;
-	return (cmd);
+	if ((ft_isalpha(c)) || (ft_isdigit(c)))
+	{
+		return (1);
+	}
+	return (0);
 }
 
-void	cmd_add(t_shell	**head, t_shell *newcmd)
+int	ft_isalpha(int c)
 {
-	t_shell	*last;
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (1);
+	}
+	return (0);
+}
 
-	if (!*head)
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
 	{
-		*head = newcmd;
+		return (1);
 	}
-	else
-	{
-		last = ft_lstlast(*head);
-		last->next = newcmd;
-		newcmd->prev = last;
-	}
+	return (0);
 }

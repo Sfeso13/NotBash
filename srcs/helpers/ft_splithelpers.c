@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:51:19 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:04:40 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:59:17 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	isquote(char c)
 	return (c == '"' || c == '\'');
 }
 
-int	isspecial(char c)
+int	iss_pecial(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }

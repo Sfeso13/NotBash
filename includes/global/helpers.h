@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 19:22:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 21:21:51 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_shell	*ft_lstlast(t_shell *lst);
 void	*ft_memcpy(void *dest, const void *src, size_t num);
 char	**ft_split(char const *s);
 int		nonvalidtoken(char *token);
-int		isspecial(char c);
+int		iss_pecial(char c);
 int		isquote(char c);
 int		iswhitespace(int c);
 char	*ft_strdup(const char *s1);
@@ -46,6 +46,10 @@ char	*ft_strtrim(char const *s1, char const *set);
 void	clear_env(t_env **lst, void (*del)(void*));
 void	delone_shell(t_shell **head, t_shell *lst, void (*del)(void*));
 int		ft_atoi(const char *str);
+char	*ft_strndup(const char *s, int n);
+int		ft_isalnum(int c);
 int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+char	*ft_strcpy(char *dest, char *src);
 
 #endif

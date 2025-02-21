@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   displayread.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 17:50:06 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:23:12 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/20 01:17:38 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/20 01:18:01 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/global/minishell.h"
-
-int	emptychecker(char *str)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (src[i])
 	{
-		if (!iswhitespace(str[i]))
-			return (0);
+		dest[i] = src[i];
 		i++;
 	}
-	return (1);
-}
-
-int	displaymeagn(char **input)
-{
-	if (!input || !*input || *input == (void *)0 || emptychecker(*input))
-	{
-		free(*input);
-		*input = NULL;
-		return (1);
-	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

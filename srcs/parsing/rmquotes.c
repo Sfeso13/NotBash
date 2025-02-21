@@ -1,49 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaners.c                                         :+:      :+:    :+:   */
+/*   rmquotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 22:24:37 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 19:33:43 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/20 23:44:01 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/21 15:41:48 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	free_tokens(t_token *tokens)
+void	quotes_remove(t_token *token)
 {
-	t_token	*tmp;
+	char	*res;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
-	while (tokens)
+	if (!token->value)
+		return ;
+	len = ft_strlen(token->value);
+	res = malloc(len + 1);
+	i = 0;
+	j = 0;
+	while (token->value[i])
 	{
-		tmp = tokens;
-		tokens = tokens->next;
-		free(tmp->value);
-		free(tmp);
+		if (token->value[i] != '\"')
+			res[j++] = token->value[i];
+		i++;
 	}
-}
-
-void	freewords(char **res, int i)
-{
-	while (i--)
-	{
-		write(1, "7\n", 2);
-		free(res[i]);
-	}
-	free(res);
-}
-
-void	free_shell(t_shell *head)
-{
-	t_shell	*tmp;
-
-	while (head)
-	{
-		tmp = head->next;
-		free_tokens(head->tokens);
-		free(head);
-		head = tmp;
-	}
+	res[j] = '\0';
+	free(token->value);
+	token->value = res;
 }
