@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/21 21:58:17 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/21 22:35:00 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ENVSRCS	:= getenv.c env_utils.c env.c #export.c export_utils.c unset.c validate_
 
 # DIRSRCS := pwd.c cd.c echo.c
 
-EXECSRCS := improved_cmp.c exec.c
+# EXECSRCS := improved_cmp.c exec.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c \
@@ -34,8 +34,8 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 MAIN = main.c
 
 OBJS	:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
-		   $(addprefix objs/, $(HELPERS:.c=.o)) $(addprefix objs/, $(EXECSRCS:.c=.o)) \
-		   $(addprefix objs/, $(ENVSRCS:.c=.o)) $(addprefix objs/, $(DIRSRCS:.c=.o))
+			$(addprefix objs/, $(HELPERS:.c=.o)) $(addprefix objs/, $(EXECSRCS:.c=.o)) \
+			$(addprefix objs/, $(ENVSRCS:.c=.o)) $(addprefix objs/, $(DIRSRCS:.c=.o))
 
 PARSSRCS := $(addprefix srcs/parsing/, $(PARSSRCS))
 

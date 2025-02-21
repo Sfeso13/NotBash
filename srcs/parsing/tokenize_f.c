@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 00:23:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 01:45:04 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:10:13 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,14 @@ t_token	*tokenize(char *input)
 		new->value = val;
 		new->type = get_token_type(val);
 		new->next = NULL;
+		new->prev = tail;
 		if (!head)
 			head = tail = new;
 		else
-			tail = tail->next = new;
+		{
+			tail->next = new;
+			tail = new;
+		}
 	}
 	return (head);
 }

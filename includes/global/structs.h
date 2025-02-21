@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 19:14:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:07:39 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_token
 	//if we wanna add something in futur
 	t_token_type	type;
 	struct s_token	*next;
-	// struct s_token	*prev;
+	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_env
