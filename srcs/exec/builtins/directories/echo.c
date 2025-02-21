@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 15:27:27 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/20 09:51:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	print_no_option(t_shell *cmnds, int size)
 {
 	int	i;
-	int j;
 
 	i = 1;
 	if (size == 1)
@@ -26,15 +25,8 @@ void	print_no_option(t_shell *cmnds, int size)
 	{
 		while (cmnds->args[i])
 		{
-			j = 0;
-			while (cmnds->args[i][j])
-			{
-				if (cmnds->args[i][j] == '"' || cmnds->args[i][j] == '\'')
-					j++;
-				printf("%c", cmnds->args[i][j]);
-				j++;
-			}
-			if (i < size - 1)
+			printf("%s", cmnds->args[i]);
+			if (i < size)
 				printf(" ");
 			i++;
 		}
