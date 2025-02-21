@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 01:46:25 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 01:56:29 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 01:41:27 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	notsupported(const char *token)
 			dcc++;
 		if (!(scc % 2) && !(dcc % 2))
 		{
-			if ((*token == '&' && *(token + 1) == '&') || (*token == '|' && *(token + 1) == '|'))
+			if ((*token == '&' && *(token + 1) == '&')
+				|| (*token == '|' && *(token + 1) == '|'))
 				return (1);
 		}
 		token++;

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 18:39:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 01:46:55 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,13 @@
 # include <readline/history.h>
 
 //parsing
-t_shell	*inparse(char *input);
-int		tokenpars(int *i, char **tokens, t_shell *cmd);
-int		is_redirection(char *token);
-int		redir_isgood(int *i, char **tokens, t_shell *cmd);
-int		is_pipe(char *token);
-int		tokenpars(int *i, char **tokens, t_shell *cmd);
-int		arg_isgood(int *i, char **tokens, t_shell *cmd);
-int		checkpipes(char **tokens);
-int		emptycomm(char **tokens);
+size_t	ft_strlen(const char *s);
+t_token	*tokenize(char *input);
 int		quoting_check(const char *input);
-char	**tokenizer(char *input);
 void	expantions(t_token *cmd);
 char	*expand_it(char *token);
-t_shell	*cmd_create(void);
-void	cmd_add(t_shell	**head, t_shell *newcmd);
-void	free_cmd(t_shell *cmd);
-void	free_double(char **dbl);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
 void	freewords(char **res, int i);
 int		isbuiltincomm(char *com);
 int		displaymeagn(char **input);
@@ -49,6 +36,10 @@ int		redir_check(const char *token);
 int		itsmisplaced(const char *token);
 int		notsupported(const char *token);
 void	free_tokens(t_token *tokens);
-t_token	*tokenize(char *input);
+void	quotes_remove(t_token *token);
+void	handle_quotes(char c, t_expand *ex);
+size_t	get_var_length(const char **str);
+void	skip_quotes(const char **p, t_expand *ex);
+size_t	calculate_buf_size(const char *token);
 
 #endif

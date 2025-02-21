@@ -6,7 +6,7 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/20 01:18:40 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/21 01:47:32 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,8 @@ CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitize=address
 
 
-PARSSRCS	:= cleaners.c crt_cmd.c parse_input.c parse_cmd.c  expantion.c \
-			   redirections.c arguments.c pipes.c tokenizer.c isbuiltin.c\
-			   displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c
+PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
+				expantion_helpers.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c unset.c
 

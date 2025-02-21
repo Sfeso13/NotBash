@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 00:23:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 17:48:09 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/21 01:45:04 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ char	*extract_token(char **input, int *scc, int *dcc)
 		(*input)++;
 	if (!**input)
 		return (NULL);
-	if ((**input == '|' || **input == '<' || **input == '>' || **input == '&') && !(*scc % 2) && !(*dcc % 2))
+	if ((**input == '|' || **input == '<' || **input == '>'
+			|| **input == '&') && !(*scc % 2) && !(*dcc % 2))
 	{
 		st = *input;
-		if ((**input == '>' && (*input)[1] == '>') || (**input == '<' && (*input)[1] == '<'))
+		if ((**input == '>' && (*input)[1] == '>')
+			|| (**input == '<' && (*input)[1] == '<'))
 		{
 			if (!(*input)[1])
 				return (NULL);
@@ -47,7 +49,8 @@ char	*extract_token(char **input, int *scc, int *dcc)
 	{
 		if (!in_quotes)
 		{
-			if ((iswhitespace(**input) || ft_strchr("|<>", **input)) && !(*scc % 2) && !(*dcc % 2))
+			if ((iswhitespace(**input) || ft_strchr("|<>", **input))
+				&& !(*scc % 2) && !(*dcc % 2))
 				break ;
 			if (**input == '\'' || **input == '"')
 			{
@@ -75,10 +78,12 @@ char	*extract_token(char **input, int *scc, int *dcc)
 	}
 	return (ft_strndup(st, len));
 }
+
 t_token_type	get_token_type(const char *str)
 {
 	const char			*ops[] = {"|", "<", ">", ">>", "<<", NULL};
-	const t_token_type	types[] = {TOKEN_PIPE, TOKEN_REDIRECT_IN, TOKEN_REDIRECT_OUT, TOKEN_APPEND, TOKEN_HEREDOC};
+	const t_token_type	types[] = {TOKEN_PIPE, TOKEN_REDIRECT_IN,
+		TOKEN_REDIRECT_OUT, TOKEN_APPEND, TOKEN_HEREDOC};
 	int					i;
 
 	i = 0;
@@ -88,7 +93,7 @@ t_token_type	get_token_type(const char *str)
 			return (types[i]);
 		i++;
 	}
-	return TOKEN_WORD;
+	return (TOKEN_WORD);
 }
 
 t_token	*tokenize(char *input)

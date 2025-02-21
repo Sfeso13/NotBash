@@ -1,47 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   crt_cmd.c                                          :+:      :+:    :+:   */
+/*   rmquotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 21:50:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/17 15:43:32 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/20 23:44:01 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/21 00:37:19 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-t_shell	*cmd_create(void)
+void	quotes_remove(t_token *token)
 {
-	t_shell	*cmd;
+	char	*res;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
-	cmd = malloc(sizeof(t_shell));
-	if (!cmd)
+	if (!token->value)
 		return (NULL);
-	cmd->args = NULL;
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->append_mode = 0;
-	cmd->is_buiultin = 0;
-	cmd->heredoc_dlm = NULL;
-	cmd->next = NULL;
-	cmd->prev = NULL;
-	return (cmd);
-}
-
-void	cmd_add(t_shell	**head, t_shell *newcmd)
-{
-	t_shell	*last;
-
-	if (!*head)
+	len = ft_strlen(token->value);
+	res = malloc(len + 1);
+	i = 0;
+	j = 0;
+	while (token->value[i])
 	{
-		*head = newcmd;
+		if (token->value[i] != '\"')
+			res[j++] = token->value[i];
+		i++;
 	}
-	else
-	{
-		last = ft_lstlast(*head);
-		last->next = newcmd;
-		newcmd->prev = last;
-	}
+	res[j] = '\0';
+	free(token->value);
+	token->value = res;
 }
