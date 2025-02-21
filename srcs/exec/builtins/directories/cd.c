@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 15:47:14 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:01:23 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,13 @@ void	update_pwd(t_env **env)
 	t_env	*actual;
 	t_env	*hidden;
 	int		found_key;
+	char	*cwd;
 
 	found_key = find_pwd_nodes(*env, &actual, &hidden);
+	cwd = getcwd(NULL, PATH_MAX);
+	if (!cwd)
+		return ;
+	free(cwd);
 	if (found_key)
 	{
 		if (actual->val)
