@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:28:05 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:45:57 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 char	*ft_strcpy(char *dest, char *src);
+
+char	*get_env_value(char *key, t_env *env);
 
 //list clearing
 void	clear_env(t_env **lst, void (*del)(void*));
