@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:38:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 13:17:56 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 22:52:45 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	unset_allowed(char *c);
 int		handle_keys(t_env **env, char **kv, char *equal);
 int		handle_append(t_env **env, char **kv);
 char	**export_kv_extract(char *var);
+int		how_many_args(t_token *cmnd);
 
 //print export
 char	**env_to_arr(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 18:01:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:06:12 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	update_oldpwd(t_env **env)
 	t_env	*hidden_pwd;
 	int		found;
 	t_env	*pwd;
-	
+
 	find_pwd_nodes(*env, &actual, &pwd);
 	found = find_oldpwd_nodes(*env, &actual, &hidden_pwd);
 	if (found)
@@ -136,11 +136,11 @@ char	*get_home_dir(t_env *env)
 	return (NULL);
 }
 
-void	changedir(t_shell *cmnds, t_env *env)
+void	changedir(t_token *cmnd, t_env *env)
 {
 	char	*homedir;
 
-	if (arr_len(cmnds->args) == 1)
+	if (how_many_args(cmnd) == 1)
 	{
 		homedir = get_home_dir(env);
 		if (!homedir)
@@ -148,9 +148,9 @@ void	changedir(t_shell *cmnds, t_env *env)
 		else
 			chdir(homedir);
 	}
-	else if (chdir(cmnds->args[1]) == -1)
+	else if (chdir(cmnd->next->value) == -1)
 	{
-		printf("cd: %s: no such file or directory\n", cmnds->args[1]);
+		printf("cd: %s: no such file or directory\n", cmnd->next->value);
 		return ;//probably should still update pwd but still
 	}
 	update_oldpwd(&env);

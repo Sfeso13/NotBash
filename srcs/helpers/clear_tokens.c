@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delone_shell.c                                     :+:      :+:    :+:   */
+/*   clear_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 23:23:57 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:26:47 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/21 23:19:56 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/21 23:20:57 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	delone_shell(t_shell **head, t_shell *lst, void (*del)(void*))
+void	clear_tokens(t_token **lst, void (*del)(void*))
 {
-	t_shell *prev;
-	t_shell	*next;
+	t_token	*tmp;
 
 	if (lst && del)
 	{
-		if (lst->tokens)
-			clear_tokens(&lst->tokens, del);
-		if (lst->next && lst->prev)
+		while (*lst)
 		{
-			prev = lst->prev;
-			next = lst->next;
-			prev->next = next;
-			next->prev = prev;
+			tmp = (*lst)->next;
+			delone_token(lst, *lst, del);
+			*lst = tmp;
 		}
-		else if (!lst->prev)
-		{
-			next = lst->next;
-			if (next)
-				next->prev = NULL;
-			*head = next;
-		}
-		else if (!lst->next)
-		{
-			prev = lst->prev;
-			if (prev)
-				prev->next = NULL;
-		}
-		free(lst);
+		*lst = NULL;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 09:51:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:16:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-void	print_no_option(t_shell *cmnds, int size)
+void	print_no_option(t_token *cmnd, int size)
 {
 	int	i;
 
@@ -20,21 +20,23 @@ void	print_no_option(t_shell *cmnds, int size)
 	if (size == 1)
 		printf("\n");
 	else if (size == 2)
-		printf("%s\n", cmnds->args[1]);
+		printf("%s\n", cmnd->next->value);
 	else if (size > 2)
 	{
-		while (cmnds->args[i])
+		cmnd = cmnd->next;
+		while (cmnd && cmnd->type == TOKEN_WORD)
 		{
-			printf("%s", cmnds->args[i]);
+			printf("%s", cmnd->value);
 			if (i < size)
 				printf(" ");
 			i++;
+			cmnd = cmnd->next;
 		}
 		printf("\n");
 	}
 }
 
-void	print_with_option(t_shell *cmnds, int size)
+void	print_with_option(t_token *cmnd, int size)
 {
 	int	i;
 
@@ -42,26 +44,28 @@ void	print_with_option(t_shell *cmnds, int size)
 	if (size == 2)
 		printf("");
 	else if (size == 3)
-		printf("%s", cmnds->args[2]);
+		printf("%s", cmnd->next->value);
 	else if (size > 3)
 	{
-		while (cmnds->args[i])
+		cmnd = cmnd->next;
+		while (cmnd && cmnd->type == TOKEN_WORD)
 		{
-			printf("%s", cmnds->args[i]);
+			printf("%s", cmnd->value);
 			if (i < size - 1)
 				printf(" ");
 			i++;
+			cmnd = cmnd->next;
 		}
 	}
 }
 
-void	print_args(t_shell	*cmnds)
+void	print_args(t_token	*cmnd)
 {
 	int	size;
 
-	size = arr_len(cmnds->args);
-	if (size > 1 && improved_cmp(cmnds->args[1], "-n") == 0)
-		print_with_option(cmnds, size);
+	size = how_many_args(cmnd);
+	if (size > 1 && improved_cmp(cmnd->next->value, "-n") == 0)
+		print_with_option(cmnd->next, size);
 	else
-		print_no_option(cmnds, size);
+		print_no_option(cmnd, size);
 }

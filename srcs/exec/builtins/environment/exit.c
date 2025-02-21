@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 19:37:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:33:47 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,33 @@ int	validate_status(char *status)
 	return (1);
 }
 
-void    exit_shell(t_shell **cmnds, t_env **env)
+void    exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 {
-	if (arr_len((*cmnds)->args) > 2)
+	if (how_many_args(*cmnd) > 2)
 	{
 		printf("exit\n");
 		printf("exit : too many arguments\n");
 	}
-    else if (arr_len((*cmnds)->args) == 1)
+    else if (how_many_args(*cmnd) == 1)
     {
 		printf("exit\n");
 		if (*env)
 			clear_env(env, free);
-		if (*cmnds)
-			clear_env(env, free);
+		if (*cmnd)
+			clear_shell(shell, free);
 		exit(0);
 	}
 	else
 	{
-		if (!validate_status((*cmnds)->args[1]))
+		if (!validate_status((*cmnd)->next->value))
 		{
-			printf("exit: %s: numeric argument required\n", (*cmnds)->args[1]);
+			printf("exit: %s: numeric argument required\n", (*cmnd)->next->value);
 			if (*env)
 				clear_env(env, free);
-			if (*cmnds)
-				clear_env(env, free);
+			if (*cmnd)
+				clear_shell(shell, free);
 			exit(255);
 		}
-		exit(ft_atoi((*cmnds)->args[1]));
+		exit(ft_atoi((*cmnd)->next->value));
 	}
 }

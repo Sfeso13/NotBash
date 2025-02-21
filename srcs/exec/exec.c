@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 22:09:36 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:33:16 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ void	set_env_value(t_env **env, char *value)
 // 	}
 // }
 
-void	which_builtin(t_token *cmnd, t_env *env)
+void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env)
 {
 	// update_dash(cmnd, &env);
 	if (improved_cmp(cmnd->value, "env") == 0)
 		print_env(env);
 	else if (improved_cmp(cmnd->value, "export") == 0)
 		export_env(cmnd, env);
-	// else if (improved_cmp(cmnd->value, "unset") == 0)
-	// 	unset_var(cmnds, env);
-	// else if (improved_cmp(cmnd->value, "pwd") == 0)
-	// 	print_current_dir(env);
-	// else if (improved_cmp(cmnd->value, "cd") == 0)
-	// 	changedir(cmnds, env);
-	// else if (improved_cmp(cmnd->value, "echo") == 0)
-	// 	print_args(cmnds);
-	// else if (improved_cmp(cmnd->value, "exit") == 0)
-	// 	exit_shell(&cmnds, &env);
+	else if (improved_cmp(cmnd->value, "unset") == 0)
+		unset_var(cmnd, env);
+	else if (improved_cmp(cmnd->value, "pwd") == 0)
+		print_current_dir(env);
+	else if (improved_cmp(cmnd->value, "cd") == 0)
+		changedir(cmnd, env);
+	else if (improved_cmp(cmnd->value, "echo") == 0)
+		print_args(cmnd);
+	else if (improved_cmp(cmnd->value, "exit") == 0)
+		exit_shell(&shell, &cmnd, &env);
 	else
 		printf("other builtins\n");
 }
@@ -77,7 +77,7 @@ t_token	*extract_cmd(t_token *process)
 {
 	while (process)
 	{
-		if (process->type == TOKEN_WORD)
+		if (process->type == TOKEN_WORD && (!process->prev || process->prev->type == TOKEN_WORD))
 			return (process);
 		process = process->next;
 	}
@@ -90,5 +90,5 @@ void	execute(t_shell *cmnds, t_env *env)
 
 	cmnd = extract_cmd(cmnds->tokens);
 	if (isbuiltin(cmnd->value))
-		which_builtin(cmnd, env);
+		which_builtin(cmnds, cmnd, env);
 }

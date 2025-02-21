@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delone_shell.c                                     :+:      :+:    :+:   */
+/*   delone_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 23:23:57 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:26:47 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/21 18:49:08 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/21 23:23:35 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	delone_shell(t_shell **head, t_shell *lst, void (*del)(void*))
+void	delone_token(t_token **head, t_token *lst, void (*del)(void*))
 {
-	t_shell *prev;
-	t_shell	*next;
+	t_token *prev;
+	t_token	*next;
 
 	if (lst && del)
 	{
-		if (lst->tokens)
-			clear_tokens(&lst->tokens, del);
+		if (lst->value)
+			free(lst->value);
 		if (lst->next && lst->prev)
 		{
 			prev = lst->prev;
