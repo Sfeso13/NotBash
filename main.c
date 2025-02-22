@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 01:19:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:09:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int main(int ac, char *av[], char *env[])
 		execute(cmd, env_list);
 		free(input);
 		free_tokens(tokens);
+		free_shell(cmd);
 	}
 	return 0;
 }
