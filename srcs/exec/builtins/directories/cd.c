@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:45:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:56:33 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	update_oldpwd(t_env **env)
 	else
 	{
 		if (hidden_pwd->val)
-			free(hidden_pwd);
-		hidden_pwd->val = pwd->val;
+			free(hidden_pwd->val);
+		hidden_pwd->val = ft_strdup(pwd->val);
 	}
 }
 
