@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
+#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/22 01:50:36 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/22 10:33:15 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c expo
 
 DIRSRCS := pwd.c cd.c echo.c
 
-EXECSRCS := improved_cmp.c exec.c
+EXECSRCS := improved_cmp.c exec.c builtins.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c \

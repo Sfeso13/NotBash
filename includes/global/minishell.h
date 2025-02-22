@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:57:16 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/16 19:12:46 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:48:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../exec/exec.h"
 # include "../exec/exec_utils.h"
-# include "../exec/builtins.h"
 # include "../parsing/parsing.h"
 # include "helpers.h"
 # include "structs.h"

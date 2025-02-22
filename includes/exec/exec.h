@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:34:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 10:57:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../global/structs.h"
+# include "../exec/builtins.h"
 # include "../global/minishell.h"
 # include <limits.h>
 
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
-void	export_env(t_token *cmnd, t_env *env);
-t_env	*get_smallest_k(t_env *env);
-void	unset_var(t_token *cmnd, t_env *env);
-void	print_current_dir(t_env *env);
-void	changedir(t_token *cmnd, t_env *env);
-void	print_args(t_token	*cmnd);
-void    exit_shell(t_shell **shell, t_token **cmnd, t_env **env);
+// void	export_env(t_token *cmnd, t_env *env);
+// t_env	*get_smallest_k(t_env *env);
+// void	unset_var(t_token *cmnd, t_env *env);
+// void	print_current_dir(t_env *env);
+// void	changedir(t_token *cmnd, t_env *env);
+// void	print_args(t_token	*cmnd);
+// void    exit_shell(t_shell **shell, t_token **cmnd, t_env **env);
 
 #endif
