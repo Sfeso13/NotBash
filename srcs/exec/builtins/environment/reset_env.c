@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:29:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 11:35:31 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:17:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	create_clean_env(t_env **env)
 		envadd_back(env, newenv("SHLVL", "1"));
 	if (!search_key("_", *env))
 		envadd_back(env, newenv("_", "minishell"));
+	if (!search_key("?", *env))
+		envadd_back(env, newenv("?", NULL));
 }
 
 void	reset_env(t_env **env)

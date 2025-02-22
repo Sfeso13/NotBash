@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:06:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:45:17 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,15 +144,19 @@ void	changedir(t_token *cmnd, t_env *env)
 	{
 		homedir = get_home_dir(env);
 		if (!homedir)
+		{
 			printf("cd: HOME not set\n");
+			return (update_status(&env, "1"));
+		}
 		else
 			chdir(homedir);
 	}
 	else if (chdir(cmnd->next->value) == -1)
 	{
 		printf("cd: %s: no such file or directory\n", cmnd->next->value);
-		return ;//probably should still update pwd but still
+		return (update_status(&env, "1"));//probably should still update pwd but still
 	}
+	update_status(&env, "0");
 	update_oldpwd(&env);
 	update_pwd(&env);
 }

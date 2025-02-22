@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 10:33:37 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:00:35 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	update_dash(t_token *cmnd, t_env **env)
 			set_env_value(&tmp, ft_strdup(cmnd->value));
 		tmp = tmp->next;
 	}
+	if (!search_key("_", *env))
+		set_env_value(env, ft_strdup(cmnd->value));
 }
 
 t_token	*extract_cmd(t_token *process)

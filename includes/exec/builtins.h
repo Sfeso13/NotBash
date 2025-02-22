@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 11:02:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:46:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		validate_status(char *status);
 void	changedir(t_token *cmnd, t_env *env);
 
 //echo
-void	print_args(t_token	*cmnd);
+void	print_args(t_token	*cmnd, t_env *env);
 void	print_with_option(t_token *cmnd, int size);
 void	print_no_option(t_token *cmnd, int size);
 

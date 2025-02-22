@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 18:48:08 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:20:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	**env_to_arr(t_env *env)
 		if (min->key[0] != '.')
 		{
 			len = kv_len(min);
-			copy[i] = (char *)malloc(len + 1);
-			copy_kv(copy[i], min, len);	
+			copy[i] = (char *)malloc(len + 1); //add safe free
+			copy_kv(copy[i], min, len);
 			i++;
 		}
 		delone_env(&env, min, free);
@@ -46,11 +46,13 @@ void	print_full_env(t_env *env)
 
 	i = 0;
 	arr = env_to_arr(env);
+	if (!arr)
+		return (update_status(&env, "1"));
 	while (arr[i])
 	{
 		printf("declare -x %s\n", arr[i]);
 		i++;
 	}
 	free_tab(arr);
-	//free all the tmps
+	update_status(&env, "0");
 }

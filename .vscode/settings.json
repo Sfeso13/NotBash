@@ -19,7 +19,8 @@
     "bitset": "c",
     "chrono": "c",
     "unordered_map": "c",
-    "structs.h": "c"
+    "structs.h": "c",
+    "functional": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

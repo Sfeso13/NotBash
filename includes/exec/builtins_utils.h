@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 11:38:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:08:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int		how_many_args(t_token *cmnd);
 int		isbuiltin(char *com);
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env);
+void	update_status(t_env **env, char *status);
 
 //cd utils
 char	*get_home_dir(t_env *env);
@@ -35,6 +36,7 @@ void	reset_env(t_env **env);
 t_env	*create_env(char *env[]);
 t_env	*findlast_env(t_env *lst);
 void	create_clean_env(t_env **env);
+void	set_env_value(t_env **env, char *value);
 
 //export utils
 void	change_value_of_key(t_env **tochange, char *value);

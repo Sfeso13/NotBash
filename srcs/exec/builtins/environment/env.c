@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:16 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 10:56:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 12:16:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	print_env(t_env *env)
 {
-	while (env)
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
 	{
-		if (env->key && env->val && env->key[0] != '.')
-			printf("%s=%s\n", env->key, env->val);
-		env = env->next;
+		if (tmp->key && tmp->val && tmp->key[0] != '.' ) // add && env->key[0] != '?'
+			printf("%s=%s\n", tmp->key, tmp->val);
+		tmp = tmp->next;
 	}
+	update_status(&env, "0");
 }
