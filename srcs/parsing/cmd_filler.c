@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:36:59 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 22:23:19 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 01:53:20 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static t_token	*cpy_till_pipe(t_token **curr)
 	}
 	return (head);
 }
+
 t_shell	*fill_cmd(t_token *tokens)
 {
 	t_shell	*head;
@@ -45,7 +46,6 @@ t_shell	*fill_cmd(t_token *tokens)
 	t_shell	*new_shell;
 	t_token	*curr;
 	t_token	*cpy_token;
-	// t_token	*prev_cpy;
 
 	head = NULL;
 	prev_shell = NULL;

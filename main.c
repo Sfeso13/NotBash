@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 22:34:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:19:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
-		expantions(tokens);
+		analyze_in_expand(tokens, env_list); // expantions and removing quotes
 		cmd	= fill_cmd(tokens);
 		if (!cmd)
 		{

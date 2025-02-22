@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
+#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/21 23:30:25 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/22 01:50:36 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize
 
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
-			   expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c
+			   expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c export_var.c \
 		   export_print.c unset.c validate_id_unset.c exit.c
@@ -30,7 +30,8 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_substr.c arr_len.c env_size.c ft_strlcpy.c ft_strlcat.c \
 			ft_strcmp.c free_tab.c ft_strtrim.c ft_atoi.c ft_strchr.c ft_split.c \
 			ft_strndup.c ft_isalnum.c ft_strcpy.c delone_env.c delone_shell.c \
-			clear_env.c clear_shell.c delone_token.c clear_tokens.c
+			clear_env.c clear_shell.c delone_token.c clear_tokens.c get_env_value.c \
+			ft_realloc.c
 
 MAIN = main.c
 

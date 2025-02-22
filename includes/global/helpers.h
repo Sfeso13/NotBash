@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:45:57 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 01:48:10 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 char	*ft_strcpy(char *dest, char *src);
-
 char	*get_env_value(char *key, t_env *env);
+void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
 
 //list clearing
 void	clear_env(t_env **lst, void (*del)(void*));

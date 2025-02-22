@@ -1,47 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_fillhelp.c                                     :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 01:53:56 by adechaji         ###   ########.fr       */
+/*   Created: 2025/02/22 01:42:47 by adechaji          #+#    #+#             */
+/*   Updated: 2025/02/22 01:43:04 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-t_shell	*crt_node(void)
+void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size)
 {
-	t_shell	*node;
+	void	*new_ptr;
 
-	node = malloc(sizeof(t_shell));
-	if (!node)
-		return (NULL);
-	node->tokens = NULL;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-t_token	*copy_token(t_token *src)
-{
-	t_token	*new;
-
-	if (!src)
-		return (NULL);
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return (NULL);
-	new->value = ft_strdup(src->value);
-	if (!new->value)
+	if (!old_ptr)
+		return (malloc(new_size));
+	if (new_size == 0)
 	{
-		free(new);
+		free(old_ptr);
 		return (NULL);
 	}
-	new->type = src->type;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
+	new_ptr = malloc(new_size);
+	if (new_ptr && old_ptr)
+	{
+		ft_memcpy(new_ptr, old_ptr, old_size);
+		free(old_ptr);
+	}
+	return (new_ptr);
 }

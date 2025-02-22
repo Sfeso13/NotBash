@@ -6,103 +6,80 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 15:50:36 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 01:45:30 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	expantions(t_token *cmd)
+static int	can_tilde(t_expander *exp)
 {
-	char	*expaded;
+	const char	next_char = exp->value[exp->i + 1];
 
-	while (cmd)
-	{
-		expaded = expand_it(cmd->value);
-		free(cmd->value);
-		cmd->value = expaded;
-		cmd = cmd->next;
-	}
+	return (!exp->in_single && !exp->in_double
+		&& (exp->buf_pos == 0 || exp->buffer[exp->buf_pos - 1] == ':')
+		&& (next_char == '/' || next_char == '\0'));
 }
 
-static void	insert_var(const char **str, char *buf, size_t *idx)
-{
-	const char	*start;
-	char		var_name[256];
-	size_t		len;
-	char		*value;
-
-	start = ++(*str);
-	len = 0;
-	while (ft_isalnum(**str) || **str == '_')
-	{
-		(*str)++;
-		len++;
-	}
-	if (len == 0)
-		buf[(*idx)++] = '$';
-	else
-	{
-		ft_strncpy(var_name, start, len);
-		var_name[len] = '\0';
-		value = getenv(var_name);
-		if (value)
-		{
-			ft_strcpy(buf + *idx, value);
-			*idx += ft_strlen(value);
-		}
-	}
-}
-
-void	insert_home(const char **p, char *buf, size_t *idx)
+static void	expand_tilde(t_expander *exp)
 {
 	char	*home;
 
-	home = getenv("HOME");
-	if (home && (*(*p + 1) == '/' || *(*p + 1) == '\0'))
-	{
-		while (*home)
-			buf[(*idx)++] = *home++;
-		(*p)++;
-	}
+	home = get_env_value("HOME", exp->env);
+	if (home)
+		append_str(exp, home);
 	else
-	{
-		buf[(*idx)++] = *(*p)++;
-	}
+		append_char(exp, '~');
+	exp->i++;
 }
 
-void	fill_buffer(const char *token, char *buf)
+static void	process_char(t_expander *exp)
 {
-	t_expand	ex;
-	const char	*p;
+	char	c;
 
-	ex = (t_expand){0};
-	p = token;
-	while (*p)
+	c = exp->value[exp->i];
+	if (exp->escape_next)
 	{
-		handle_quotes(*p, &ex);
-		skip_quotes(&p, &ex);
-		if (*p == '$' && !ex.in_single)
-			insert_var(&p, buf, &ex.idx);
-		else if (*p == '~' && (p == token || *(p - 1) == ' '))
-			insert_home(&p, buf, &ex.idx);
-		else if (*p)
-			buf[ex.idx++] = *p++;
+		append_char(exp, c);
+		exp->escape_next = 0;
+		exp->i++;
 	}
-	buf[ex.idx] = '\0';
+	else if (c == '\\')
+		handle_backslash(exp);
+	else if (c == '\'' || c == '"')
+		handle_quote(exp, c);
+	else if (c == '$' && !exp->in_single)
+		expand_var(exp);
+	else if (c == '~' && can_tilde(exp))
+		expand_tilde(exp);
+	else
+		append_char(exp, exp->value[exp->i++]);
 }
 
-char	*expand_it(char *token)
+char	*expand_token(char *value, t_env *env)
 {
-	char	*buf;
-	size_t	size;
+	t_expander	exp;
 
-	if (!token)
-		return (NULL);
-	size = calculate_buf_size(token);
-	buf = malloc(size);
-	if (!buf)
-		return (NULL);
-	fill_buffer(token, buf);
-	return (buf);
+	init_expander(&exp, value, env);
+	while (exp.value[exp.i])
+		process_char(&exp);
+	return (exp.buffer);
+}
+
+void	analyze_in_expand(t_token *tokens, t_env *env)
+{
+	t_token	*current;
+	char	*or_val;
+
+	current = tokens;
+	while (current)
+	{
+		if (current->type == TOKEN_WORD)
+		{
+			or_val = current->value;
+			current->value = expand_token(or_val, env);
+			free(or_val);
+		}
+		current = current->next;
+	}
 }

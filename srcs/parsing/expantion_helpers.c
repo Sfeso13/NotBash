@@ -6,68 +6,79 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 22:00:16 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 01:47:29 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	handle_quotes(char c, t_expand *ex)
+void	append_char(t_expander *exp, char c)
 {
-	if (c == '\'' && !ex->in_double)
-		ex->in_single = !ex->in_single;
-	else if (c == '\"' && !ex->in_single)
-		ex->in_double = !ex->in_double;
-}
-
-size_t	get_var_length(const char **str)
-{
-	const char	*start;
-	char		var_name[256];
-	size_t		len;
-	char		*value;
-
-	start = *str + 1;
-	len = 0;
-	while (ft_isalnum(**str) || **str == '_')
+	if (exp->buf_pos + 1 >= exp->buf_size)
 	{
-		(*str)++;
-		len++;
+		exp->buf_size *= 2;
+		exp->buffer = ft_realloc(exp->buffer, exp->buf_size / 2, exp->buf_size);
 	}
-	if (len == 0)
-		return (1);
-	ft_strncpy(var_name, start, len);
-	var_name[len] = '\0';
-	value = getenv(var_name);
-	if (value)
-		return (ft_strlen(value));
-	return (0);
+	exp->buffer[exp->buf_pos++] = c;
+	exp->buffer[exp->buf_pos] = '\0';
 }
 
-void	skip_quotes(const char **p, t_expand *ex)
+void	append_str(t_expander *exp, char *str)
 {
-	if ((**p == '\'' && !ex->in_double) || (**p == '\"' && !ex->in_single))
-		(*p)++;
+	while (str && *str)
+		append_char(exp, *str++);
 }
 
-size_t	calculate_buf_size(const char *token)
+void	handle_backslash(t_expander *exp)
 {
-	t_expand	ex;
-	const char	*p;
-
-	ex = (t_expand){0};
-	p = token;
-	while (*p)
+	exp->i++;
+	if (exp->in_single)
+		append_char(exp, '\\');
+	else if (exp->in_double)
 	{
-		handle_quotes(*p, &ex);
-		skip_quotes(&p, &ex);
-		if (*p == '$' && !ex.in_single)
+		if (ft_strchr("$\"`\\\n", exp->value[exp->i]))
 		{
-			p++;
-			ex.idx += get_var_length(&p);
+			if (exp->value[exp->i])
+				append_char(exp, exp->value[exp->i++]);
 		}
-		else if (*p)
-			ex.idx += !!(*p++);
+		else
+			append_char(exp, '\\');
 	}
-	return (ex.idx + 1);
+	else
+	{
+		if (exp->value[exp->i])
+			append_char(exp, exp->value[exp->i++]);
+		else
+			append_char(exp, '\\');
+	}
+}
+
+void	handle_quote(t_expander *exp, char quote)
+{
+	if (quote == '\'' && !exp->in_double)
+		exp->in_single = !exp->in_single;
+	else if (quote == '"' && !exp->in_single)
+		exp->in_double = !exp->in_double;
+	else
+		append_char(exp, quote);
+	exp->i++;
+}
+
+void	expand_var(t_expander *exp)
+{
+	size_t	start;
+	char	*var_name;
+	char	*var_val;
+
+	exp->i++;
+	start = exp->i;
+	while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_')
+		exp->i++;
+	if (start == exp->i)
+		return (append_char(exp, '$'));
+	var_name = ft_substr(exp->value, start, exp->i - start);
+	var_val = get_env_value(var_name, exp->env);
+	if (var_val)
+		append_str(exp, var_val);
+	free(var_name);
 }

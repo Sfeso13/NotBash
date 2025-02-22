@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 22:07:39 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/22 01:14:56 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 //past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
 // fuck the old struct thats all we need :
 
-typedef struct	s_expand
-{
-	size_t	idx;
-	int		in_single;
-	int		in_double;
-} t_expand;
 
 typedef enum e_token_type
 {
@@ -62,5 +56,18 @@ typedef struct s_shell
 	struct s_shell	*next;			// ptr to the next command in the pipeline
 	struct s_shell	*prev;			// ptr to the previous command in the pipeline
 }	t_shell;
+
+typedef struct s_expander
+{
+	const char	*value;
+	size_t		i;
+	char		*buffer;
+	size_t		buf_size;
+	size_t		buf_pos;
+	t_env		*env;
+	int			in_single;
+	int			in_double;
+	int			escape_next;
+}	t_expander;
 
 #endif
