@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 23:33:47 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:33:48 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,34 @@ int	validate_status(char *status)
 	return (1);
 }
 
-void    exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
+void	clear_structs(t_shell **shell, t_env **env)
+{
+	if (*env)
+		clear_env(env, free);
+	if (*shell)
+		clear_shell(shell, free);
+}
+
+void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 {
 	if (how_many_args(*cmnd) > 2)
 	{
 		printf("exit\n");
 		printf("exit : too many arguments\n");
 	}
-    else if (how_many_args(*cmnd) == 1)
-    {
+	else if (how_many_args(*cmnd) == 1)
+	{
 		printf("exit\n");
-		if (*env)
-			clear_env(env, free);
-		if (*cmnd)
-			clear_shell(shell, free);
+		clear_structs(shell, env);
 		exit(0);
 	}
 	else
 	{
 		if (!validate_status((*cmnd)->next->value))
 		{
-			printf("exit: %s: numeric argument required\n", (*cmnd)->next->value);
-			if (*env)
-				clear_env(env, free);
-			if (*cmnd)
-				clear_shell(shell, free);
+			printf("exit: %s: numeric argument required\n", \
+			(*cmnd)->next->value);
+			clear_structs(shell, env);
 			exit(255);
 		}
 		exit(ft_atoi((*cmnd)->next->value));

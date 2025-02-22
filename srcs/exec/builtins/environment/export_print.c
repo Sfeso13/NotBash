@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:20:09 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:26:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**env_to_arr(t_env *env)
 	while (env)
 	{
 		min = get_smallest_k(env);
-		if (min->key[0] != '.')
+		if (min->key[0] != '.' && env->key[0] != '?')
 		{
 			len = kv_len(min);
 			copy[i] = (char *)malloc(len + 1); //add safe free

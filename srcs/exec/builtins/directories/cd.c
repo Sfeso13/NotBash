@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 18:39:16 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:22:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	update_oldpwd(t_env **env)
 	}
 	else
 		set_env_value(&hidden_olpwd, ft_strdup(pwd->val));
-
 }
 
 void	update_pwd(t_env **env)
@@ -70,7 +69,7 @@ void	changedir(t_token *cmnd, t_env *env)
 	else if (chdir(cmnd->next->value) == -1)
 	{
 		printf("cd: %s: no such file or directory\n", cmnd->next->value);
-		return (update_status(&env, "1"));//probably should still update pwd but still
+		return (update_status(&env, "1"));
 	}
 	update_status(&env, "0");
 	update_oldpwd(&env);
