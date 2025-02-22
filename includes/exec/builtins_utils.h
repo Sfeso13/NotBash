@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 11:03:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 11:38:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_env	*dup_env(t_env *env);
 void	reset_env(t_env **env);
 t_env	*create_env(char *env[]);
 t_env	*findlast_env(t_env *lst);
+void	create_clean_env(t_env **env);
 
 //export utils
 void	change_value_of_key(t_env **tochange, char *value);

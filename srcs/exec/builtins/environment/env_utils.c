@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:51:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 15:28:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 11:29:40 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,37 @@ t_env	*dup_env(t_env *env)
 	return (dup);
 }
 
-void	reset_env(t_env **env)
-{
-	t_env	*tmp;
+// void	create_clean_env(t_env **env)
+// {
+// 	char	buff[PATH_MAX];
 
-	tmp = *env;
-	while (tmp)
-	{
-		if ((improved_cmp(tmp->key, "OLDPWD") == 0) && tmp->val)
-		{
-			free(tmp->val);
-			tmp->val = NULL;
-			envadd_back(env, newenv(".oldpwd", NULL));
-		}
-		else if (improved_cmp(tmp->key, "PWD") == 0)
-			envadd_back(env, newenv(".pwd", tmp->val));
-		tmp = tmp->next;
-	}
-}
+// 	envadd_back(env, newenv("PWD", getcwd(buff, PATH_MAX)));
+// 	envadd_back(env, newenv(".pwd", buff));
+// 	envadd_back(env, newenv("OLDPWD", NULL));
+// 	envadd_back(env, newenv(".oldpwd", NULL));
+// 	envadd_back(env, newenv("SHLVL", "1"));
+// 	envadd_back(env, newenv("_", "minishell"));
+// }
+
+// void	reset_env(t_env **env)
+// {
+// 	t_env	*tmp;
+// 	int		foundpwd;
+// 	int		foundoldpwd;
+
+// 	tmp = *env;
+// 	if (!tmp)
+// 		create_clean_env(env);
+// 	while (tmp)
+// 	{
+// 		if ((improved_cmp(tmp->key, "OLDPWD") == 0) && tmp->val)
+// 		{
+// 			free(tmp->val);
+// 			tmp->val = NULL;
+// 			envadd_back(env, newenv(".oldpwd", NULL));
+// 		}
+// 		else if (improved_cmp(tmp->key, "PWD") == 0)
+// 			envadd_back(env, newenv(".pwd", tmp->val));
+// 		tmp = tmp->next;
+// 	}
+// }
