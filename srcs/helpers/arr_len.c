@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:46:05 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/18 19:26:23 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:05:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	arr_len(char **arr)
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 		i++;
-	return(i);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 00:23:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 22:10:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:56:55 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,127 +14,77 @@
 
 char	*extract_token(char **input, int *scc, int *dcc)
 {
-	char	*st;
-	char	quchar;
-	int		len;
-	int		in_quotes;
+	char				*st;
+	t_quote_context		ctx;
+	int					len;
 
 	len = 0;
-	in_quotes = 0;
-	quchar = 0;
+	ctx.state = (t_quote_state){0, 0};
+	ctx.scc = scc;
+	ctx.dcc = dcc;
 	while (**input && iswhitespace(**input))
 		(*input)++;
 	if (!**input)
 		return (NULL);
-	if ((**input == '|' || **input == '<' || **input == '>'
-			|| **input == '&') && !(*scc % 2) && !(*dcc % 2))
-	{
-		st = *input;
-		if ((**input == '>' && (*input)[1] == '>')
-			|| (**input == '<' && (*input)[1] == '<'))
-		{
-			if (!(*input)[1])
-				return (NULL);
-			*input += 2;
-			return (ft_strndup(st, 2));
-		}
-		else
-		{
-			(*input)++;
-			return (ft_strndup(st, 1));
-		}
-	}
+	if (ft_strchr("|<>", **input) && !(*scc % 2) && !(*dcc % 2))
+		return (handle_operator(input));
 	st = *input;
 	while (**input)
 	{
-		if (!in_quotes)
-		{
-			if ((iswhitespace(**input) || ft_strchr("|<>", **input))
-				&& !(*scc % 2) && !(*dcc % 2))
-				break ;
-			if (**input == '\'' || **input == '"')
-			{
-				in_quotes = 1;
-				quchar = **input;
-				if (quchar == '\'')
-					(*scc)++;
-				else
-					(*dcc)++;
-			}
-		}
-		else
-		{
-			if (**input == quchar)
-			{
-				in_quotes = 0;
-				if (quchar == '\'')
-					(*scc)++;
-				else
-					(*dcc)++;
-			}
-		}
-		(*input)++;
-		len++;
+		process_char(input, &len, &ctx);
+		if (!ctx.state.in_quotes
+			&& (iswhitespace(**input) || ft_strchr("|<>", **input)))
+			break ;
 	}
 	return (ft_strndup(st, len));
 }
 
-t_token_type	get_token_type(const char *str)
+static void	add_token_to_list(t_token **head, t_token **tail, char *val)
 {
-	const char			*ops[] = {"|", "<", ">", ">>", "<<", NULL};
-	const t_token_type	types[] = {TOKEN_PIPE, TOKEN_REDIRECT_IN,
-		TOKEN_REDIRECT_OUT, TOKEN_APPEND, TOKEN_HEREDOC};
-	int					i;
+	t_token	*new;
 
-	i = 0;
-	while (ops[i])
+	new = malloc(sizeof(t_token));
+	if (!new)
 	{
-		if (!ft_strcmp(str, ops[i]))
-			return (types[i]);
-		i++;
+		free(val);
+		return ;
 	}
-	return (TOKEN_WORD);
+	new->value = val;
+	new->type = get_token_type(val);
+	new->next = NULL;
+	new->prev = *tail;
+	if (!*head)
+	{
+		*head = new;
+		*tail = new;
+	}
+	else
+	{
+		(*tail)->next = new;
+		*tail = new;
+	}
 }
 
 t_token	*tokenize(char *input)
 {
 	t_token	*head;
 	t_token	*tail;
-	t_token	*new;
 	char	*val;
-	int		scc;
-	int		dcc;
+	t_quote	quotes;
 
 	head = NULL;
 	tail = NULL;
-	scc = 0;
-	dcc = 0;
+	quotes = (t_quote){0, 0};
 	while (*input)
 	{
 		while (iswhitespace(*input))
 			input++;
 		if (!*input)
 			break ;
-		val = extract_token(&input, &scc, &dcc);
+		val = extract_token(&input, &quotes.scc, &quotes.dcc);
 		if (!val)
 			break ;
-		new = malloc(sizeof(t_token));
-		if (!new)
-		{
-			free(val);
-			break ;
-		}
-		new->value = val;
-		new->type = get_token_type(val);
-		new->next = NULL;
-		new->prev = tail;
-		if (!head)
-			head = tail = new;
-		else
-		{
-			tail->next = new;
-			tail = new;
-		}
+		add_token_to_list(&head, &tail, val);
 	}
 	return (head);
 }

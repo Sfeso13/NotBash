@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:51:19 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 18:59:17 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:07:29 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,4 @@ int	isquote(char c)
 int	iss_pecial(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
-}
-
-int	nonvalidtoken(char *token)
-{
-
-	return (/*ft_strncmp(token, ";", 1) == 0 || */ft_strncmp(token, "&", 1) == 0 || ft_strncmp(token, "*", 1) == 0);
 }

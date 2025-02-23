@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 01:46:53 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:53:47 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,36 @@
 # include <readline/history.h>
 
 //parsing
-size_t	ft_strlen(const char *s);
-t_token	*tokenize(char *input);
-int		quoting_check(const char *input);
-void	expantions(t_token *cmd);
-char	*expand_it(char *token);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strdup(const char *s1);
-void	freewords(char **res, int i);
-int		isbuiltincomm(char *com);
-int		displaymeagn(char **input);
-int		advsyncatcher(char *input);
-int		redir_check(const char *token);
-int		itsmisplaced(const char *token);
-int		notsupported(const char *token);
-void	free_tokens(t_token *tokens);
-void	quotes_remove(t_token *token);
-size_t	get_var_length(const char **str);
-size_t	calculate_buf_size(const char *token);
-t_shell	*fill_cmd(t_token *token);
-t_shell	*crt_node(void);
-t_token	*copy_token(t_token *src);
-void	free_shell(t_shell *head);
-void	analyze_in_expand(t_token *tokens, t_env *env);
-char	*expand_token(char *value, t_env *env);
-void	expand_var(t_expander *exp);
-void	handle_quote(t_expander *exp, char quote);
-void	handle_backslash(t_expander *exp);
-void	append_str(t_expander *exp, char *str);
-void	append_char(t_expander *exp, char c);
-void	init_expander(t_expander *exp, char *value, t_env *env);
+size_t			ft_strlen(const char *s);
+t_token			*tokenize(char *input);
+int				quoting_check(const char *input);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strdup(const char *s1);
+void			freewords(char **res, int i);
+int				isbuiltincomm(char *com);
+int				displaymeagn(char **input);
+int				advsyncatcher(char *input);
+int				redir_check(const char *token);
+int				itsmisplaced(const char *token);
+int				notsupported(const char *token);
+void			free_tokens(t_token *tokens);
+void			quotes_remove(t_token *token);
+t_shell			*fill_cmd(t_token *token);
+t_shell			*crt_node(void);
+t_token			*copy_token(t_token *src);
+void			free_shell(t_shell *head);
+void			analyze_in_expand(t_token *tokens, t_env *env);
+char			*expand_token(char *value, t_env *env);
+void			expand_var(t_expander *exp);
+void			handle_quote(t_expander *exp, char quote);
+void			handle_backslash(t_expander *exp);
+void			append_str(t_expander *exp, char *str);
+void			append_char(t_expander *exp, char c);
+void			init_expander(t_expander *exp, char *value, t_env *env);
+t_token			*cpy_till_pipe(t_token **curr);
+t_token_type	get_token_type(const char *str);
+char			*handle_operator(char **input);
+void			process_quote_update(t_quote_context *ctx);
+void			process_char(char **input, int *len, t_quote_context *ctx);
 
 #endif

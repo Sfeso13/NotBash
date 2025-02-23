@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 01:45:30 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:56:01 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	expand_tilde(t_expander *exp)
 	exp->i++;
 }
 
-static void	process_char(t_expander *exp)
+static void	char_process(t_expander *exp)
 {
 	char	c;
 
@@ -62,7 +62,7 @@ char	*expand_token(char *value, t_env *env)
 
 	init_expander(&exp, value, env);
 	while (exp.value[exp.i])
-		process_char(&exp);
+		char_process(&exp);
 	return (exp.buffer);
 }
 

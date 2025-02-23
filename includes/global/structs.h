@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 01:14:56 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:41:23 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@
 //past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
 // fuck the old struct thats all we need :
 
+typedef struct	s_quote
+{
+	int		scc;
+	int		dcc;
+} t_quote;
+
+typedef struct	s_quote_state
+{
+	int		in_quotes;
+	char	quchar;
+} t_quote_state;
+
+typedef struct s_quote_context
+{
+	t_quote_state	state;
+	int				*scc;
+	int				*dcc;
+}	t_quote_context;
 
 typedef enum e_token_type
 {

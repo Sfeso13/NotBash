@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 18:04:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:26:33 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	expand_var(t_expander *exp)
 	exp->i++;
 	start = exp->i;
 	while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
-		   exp->value[exp->i] == '?')
+			exp->value[exp->i] == '?')
 		exp->i++;
 	if (start == exp->i)
 		return (append_char(exp, '$'));

@@ -6,11 +6,19 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 01:18:27 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/18 03:14:45 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 00:10:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
+
+static void	update_quote_counts(char c, int *scc, int *dcc)
+{
+	if (c == '\'')
+		(*scc)++;
+	else if (c == '\"')
+		(*dcc)++;
+}
 
 int	itsmisplaced(const char *token)
 {
@@ -25,10 +33,7 @@ int	itsmisplaced(const char *token)
 		return (1);
 	while (*token)
 	{
-		if (*token == '\'')
-			scc++;
-		else if (*token == '"')
-			dcc++;
+		update_quote_counts(*token, &scc, &dcc);
 		if ((*token == '|' || *token == '&') && (!(scc % 2) && !(dcc % 2)))
 		{
 			if (flag)

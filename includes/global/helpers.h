@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 01:48:10 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:07:15 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_itoa(int n);
 t_shell	*ft_lstlast(t_shell *lst);
 void	*ft_memcpy(void *dest, const void *src, size_t num);
 char	**ft_split(char const *s);
-int		nonvalidtoken(char *token);
 int		iss_pecial(char c);
 int		isquote(char c);
 int		iswhitespace(int c);
