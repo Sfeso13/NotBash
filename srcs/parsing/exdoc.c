@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:36:00 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 20:20:14 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 22:53:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,20 @@ static char	*extract_value(char *str, int *i, t_env *env)
 	return (get_env_value(key, env));
 }
 
+static void	init_as(int i[3])
+{
+	i[0] = -1;
+	i[1] = 0;
+	i[2] = 0;
+}
+
 char	*expanddoc(char *str, t_env *env)
 {
 	char	*result;
 	char	*value;
 	int		i[3];
 
-	i[0] = -1;
-	i[1] = 0;
-	i[2] = 0;
+	init_as(i);
 	result = malloc(ft_strlen(str) * 2 + 1);
 	if (!result)
 		return (NULL);
@@ -58,7 +63,6 @@ char	*expanddoc(char *str, t_env *env)
 			{
 				ft_strlcpy(&result[i[1]], value, ft_strlen(value) + 1);
 				i[1] += ft_strlen(value);
-				free(value);
 			}
 		}
 		else

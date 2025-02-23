@@ -6,13 +6,13 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/23 20:55:20 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/23 22:46:33 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g #-fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
 
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparing_iofiles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 21:09:11 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 22:51:26 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	get_doc(char *delim, t_env *env)
 	char	*buff;
 	int		fd;
 	int		expandable;
-	// char	*tmp;
+	char	*tmp;
 
 	expandable = 1;
 	if (ft_strchr(delim, '\"') || ft_strchr(delim, '\''))
 		expandable = 0;
 	//remove quotes frome delim
-	//tmp = remove quotes
+	tmp = remove_doc_qts(delim);
 	fd = open("/tmp/thd10101010doc", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (fd == -1)
 	{
@@ -31,10 +31,11 @@ int	get_doc(char *delim, t_env *env)
 		exit (1);
 	}
 	buff = readline("> ");
-	while (buff && improved_cmp(buff, delim) != 0)
+	while (buff && improved_cmp(buff, tmp) != 0)
 	{
 		if (expandable)
 			buff = expanddoc(buff, env);
+		//use after free when free buff in expanddoc and strlen down tries to acess it
 		write(fd, buff, ft_strlen(buff));
 		write(fd, "\n", 1);
 		free(buff);
