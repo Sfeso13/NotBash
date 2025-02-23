@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:22 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 11:03:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 11:22:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	env_size(t_env *lst)
 	count = 0;
 	while (lst)
 	{
-		if (lst->key[0] != '.')
+		if (lst->key[0] != '.' && lst->key[0] != '?')
 			count++;
 		lst = lst->next;
 	}

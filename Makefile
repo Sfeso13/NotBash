@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/22 19:17:42 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/23 13:10:35 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c expo
 
 DIRSRCS := pwd.c cd.c echo.c
 
+EXTERNSRCS := preparing_iofiles.c prepare_args.c args_split.c prepare_args_utils.c
+
 EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
@@ -31,13 +33,14 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_strcmp.c free_tab.c ft_strtrim.c ft_atoi.c ft_strchr.c ft_split.c \
 			ft_strndup.c ft_isalnum.c ft_strcpy.c delone_env.c delone_shell.c \
 			clear_env.c clear_shell.c delone_token.c clear_tokens.c get_env_value.c \
-			ft_realloc.c
+			ft_realloc.c ft_itoa.c
 
 MAIN = main.c
 
 OBJS	:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
 			$(addprefix objs/, $(HELPERS:.c=.o)) $(addprefix objs/, $(EXECSRCS:.c=.o)) \
-			$(addprefix objs/, $(ENVSRCS:.c=.o)) $(addprefix objs/, $(DIRSRCS:.c=.o))
+			$(addprefix objs/, $(ENVSRCS:.c=.o)) $(addprefix objs/, $(DIRSRCS:.c=.o)) \
+			$(addprefix objs/, $(EXTERNSRCS:.c=.o))
 
 PARSSRCS := $(addprefix srcs/parsing/, $(PARSSRCS))
 
@@ -47,6 +50,8 @@ EXECSRCS := $(addprefix srcs/exec/, $(EXECSRCS)) \
 			$(addprefix srcs/exec/builtins/environment/, $(ENVSRCS))
 
 DIRSRCS := $(addprefix srcs/exec/builtins/directories/, $(DIRSRCS))
+
+EXTERNSRCS := $(addprefix srcs/exec/externals/, $(EXTERNSRCS))
 
 LIBS		= -lreadline -lncurses
 
@@ -64,6 +69,10 @@ objs/%.o: srcs/parsing/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+
+objs/%.o: srcs/exec/externals/%.c
 	mkdir -p objs
 	$(CC) $(CFLAGS) -c $< -o $@ -MMD
 
