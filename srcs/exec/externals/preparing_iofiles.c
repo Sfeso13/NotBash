@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparing_iofiles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 20:56:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 21:09:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@ int	get_doc(char *delim, t_env *env)
 {
 	char	*buff;
 	int		fd;
-	(void)env;
+	int		expandable;
+	// char	*tmp;
 
+	expandable = 1;
+	if (ft_strchr(delim, '\"') || ft_strchr(delim, '\''))
+		expandable = 0;
+	//remove quotes frome delim
+	//tmp = remove quotes
 	fd = open("/tmp/thd10101010doc", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (fd == -1)
 	{
@@ -27,11 +33,8 @@ int	get_doc(char *delim, t_env *env)
 	buff = readline("> ");
 	while (buff && improved_cmp(buff, delim) != 0)
 	{
-
-		buff = expanddoc(buff, env);
-		//expantion
-		//delim has quotes -> call expand
-		//not have quote -> doz
+		if (expandable)
+			buff = expanddoc(buff, env);
 		write(fd, buff, ft_strlen(buff));
 		write(fd, "\n", 1);
 		free(buff);
@@ -49,8 +52,6 @@ int	*get_io_files(t_token *args, t_env *env)
 	int		*fd;
 	int		in_count[2];
 	int		out_count[2];
-	// int		append;
-	// int		doc;
 	t_token	*tmp;
 
 	fd  = init_fds(); //to free
