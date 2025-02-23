@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 17:53:47 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 20:23:31 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_token_type	get_token_type(const char *str);
 char			*handle_operator(char **input);
 void			process_quote_update(t_quote_context *ctx);
 void			process_char(char **input, int *len, t_quote_context *ctx);
+char			*expanddoc(char *str, t_env *env);
 
 #endif

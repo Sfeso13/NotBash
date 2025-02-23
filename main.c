@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 17:47:52 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:22:40 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ int main(int ac, char *av[], char *env[])
 	char	*input;
 	t_env	*env_list;
 
-	(void)env;
 	(void)av;
 	if (ac != 1)
 		return (1);
-    env_list = create_env(env);
+	env_list = create_env(env);
 	while (1)
 	{
 		input = readline("minishell$ ");
@@ -109,7 +108,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
-		analyze_in_expand(tokens, env_list); // expantions and removing quotes
+		analyze_in_expand(tokens, env_list);
 		cmd	= fill_cmd(tokens);
 		if (!cmd)
 		{
