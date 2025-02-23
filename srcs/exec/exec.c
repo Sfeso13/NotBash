@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 18:14:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:28:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	external_cmd(t_shell *shell, t_token *cmnd, t_env *env)
 	else if (child == 0)
 	{
 		if (is_redirect(cmnd))
-			redirect(shell->tokens);
+			redirect(shell->tokens, env);
 		args = prepare_args(cmnd);
 		path = get_cmnd_path(cmnd, env);
 		if (path)

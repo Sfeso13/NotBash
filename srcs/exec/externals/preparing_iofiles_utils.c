@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 20:25:22 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 20:52:34 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,36 @@ int	fdop(int to_open, int append, char *filename, int write)
 	return (to_open);
 }
 
-int	what_in_to_open(t_token *tmp, int fd, int *inredir, int *doc)
+int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env)
 {
 	if (tmp->type == TOKEN_REDIRECT_IN)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 0, tmp->value, 0);
-		inredir--;
+		(inredir[0])--;
 	}
 	else if (tmp->type == TOKEN_HEREDOC)
 	{
 		tmp = tmp->next;
-		fd = get_doc(tmp->value);
-		doc--;
+		fd = get_doc(tmp->value, env);
+		(inredir[1])--;
 	}
 	return (fd);
 }
 
-int	what_out_to_open(t_token *tmp, int fd, int *outredir, int *append)
+int	what_out_to_open(t_token *tmp, int fd, int *outredir)
 {
 	if (tmp->type == TOKEN_REDIRECT_OUT)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 0, tmp->value, 1);
-		(*outredir)--;
+		(outredir[0])--;
 	}
 	else if (tmp->type == TOKEN_APPEND)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 1, tmp->value, 1);
-		(*append)--;
+		(outredir[1])--;
 	}
 	return (fd);
 }
