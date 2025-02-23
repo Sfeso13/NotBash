@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 01:48:10 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:13:22 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "structs.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -50,6 +54,9 @@ int		ft_isalpha(int c);
 char	*ft_strcpy(char *dest, char *src);
 char	*get_env_value(char *key, t_env *env);
 void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
+
+//gnl
+char	*get_next_line(int fd);
 
 //list clearing
 void	clear_env(t_env **lst, void (*del)(void*));
