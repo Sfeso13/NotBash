@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:00:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 12:17:56 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 11:26:21 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_env	*get_smallest_k(t_env *env)
 	return (min);
 }
 
-void	copy_kv(char *str, t_env *min, size_t len)
+void	copy_kv_export(char *str, t_env *min, size_t len)
 {
 	size_t	klen;
 

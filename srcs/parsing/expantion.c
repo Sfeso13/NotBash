@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 17:56:01 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:22:53 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	analyze_in_expand(t_token *tokens, t_env *env)
 	current = tokens;
 	while (current)
 	{
-		if (current->type == TOKEN_WORD)
+		if (current->prev && current->prev->type != TOKEN_HEREDOC && current->type == TOKEN_WORD)
 		{
 			or_val = current->value;
 			current->value = expand_token(or_val, env);

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:08:31 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 11:25:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../exec/exec.h"
 
 //general utils
-int		how_many_args(t_token *cmnd);
+int	how_many_args(t_token *cmnd, t_token_type type);
 int		isbuiltin(char *com);
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env);
 void	update_status(t_env **env, char *status);
@@ -29,7 +29,7 @@ int		find_oldpwd_nodes(t_env *env, t_env **actual, t_env **hidden);
 
 //env utils
 void	envadd_back(t_env **lst, t_env *new);
-char	**env_to_arr(t_env *env);
+char	**env_to_arr_export(t_env *env);
 t_env	*newenv(char *key, char *value);
 t_env	*dup_env(t_env *env);
 void	reset_env(t_env **env);
@@ -46,7 +46,7 @@ int		allowed(char *c);
 int		handle_keys(t_env **env, char **kv, char *equal);
 int		handle_append(t_env **env, char **kv);
 char	**export_kv_extract(char *var);
-void	copy_kv(char *str, t_env *min, size_t len);
+void	copy_kv_export(char *str, t_env *min, size_t len);
 t_env	*search_key(char *key, t_env *env);
 size_t	kv_len(t_env *env);
 t_env	*get_smallest_k(t_env *env);

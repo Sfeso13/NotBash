@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 15:04:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 12:17:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 		kv[0] = validate_key(kv[0]);
 		if (kv[0] == NULL || !kv[0][0])
 		{
-			printf("minishell: export : %s: not a valid identifier\n", cmnd->value);
+			printf("minishell: export : %s: not a valid identifier\n", \
+			cmnd->value);
 			status = 1;
 		}
 		else
@@ -53,12 +54,12 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 	return (update_status(env, "1"));
 }
 
-int	how_many_args(t_token *cmnd)
+int	how_many_args(t_token *cmnd, t_token_type type)
 {
 	int	count;
 
 	count = 0;
-	while (cmnd && cmnd->type == TOKEN_WORD)
+	while (cmnd && cmnd->type == type)
 	{
 		count++;
 		cmnd = cmnd->next;
@@ -70,9 +71,9 @@ void	export_env(t_token *cmnd, t_env *env)
 {
 	int	len;
 
-	len = how_many_args(cmnd);
+	len = how_many_args(cmnd, TOKEN_WORD);
 	if (!cmnd->next || cmnd->next->type != TOKEN_WORD)
-		print_full_env(dup_env(env));
+		print_full_env(env);
 	else
 		export_var(cmnd->next, &env, len);
 }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 10:57:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:10:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,29 @@
 
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
-// void	export_env(t_token *cmnd, t_env *env);
-// t_env	*get_smallest_k(t_env *env);
-// void	unset_var(t_token *cmnd, t_env *env);
-// void	print_current_dir(t_env *env);
-// void	changedir(t_token *cmnd, t_env *env);
-// void	print_args(t_token	*cmnd);
-// void    exit_shell(t_shell **shell, t_token **cmnd, t_env **env);
+
+//io preparing
+int	how_many_redir(t_token *cmnd, t_token_type type);
+int	*init_fds();
+int	*get_io_files(t_token *args);
+
+//args preparing
+char	*get_cmnd_path(t_token *cmnd, t_env *env);
+char	**prepare_args(t_token *cmnd);
+void	redirect(t_token *cmnd);
+
+//args helper
+void	copy_kv(char *str, t_env *env, size_t len);
+char	**env_to_arr(t_env *env);
+char	*join(char const *s1, char const *s2);
+char	**args_split(char const *s, char c);
+
+//io helpers
+int	how_many_redir(t_token *cmnd, t_token_type type);
+int	*init_fds();
+int	fdop(int to_open, int append, char *filename, int write);
+int	what_in_to_open(t_token *tmp, int fd, int *inredir, int *doc);
+int	what_out_to_open(t_token *tmp, int fd, int *outredir, int *append);
+int	get_doc(char *delim);
 
 #endif

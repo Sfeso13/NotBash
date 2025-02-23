@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:46:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/23 09:59:19 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_args(t_token	*cmnd, t_env *env)
 {
 	int	size;
 
-	size = how_many_args(cmnd);
+	size = how_many_args(cmnd, TOKEN_WORD);
 	if (size > 1 && improved_cmp(cmnd->next->value, "-n") == 0)
 		print_with_option(cmnd->next, size);
 	else
