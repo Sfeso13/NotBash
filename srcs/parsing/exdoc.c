@@ -6,68 +6,112 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:36:00 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 22:53:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:44:24 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-static char	*extract_value(char *str, int *i, t_env *env)
+int	doc_append_str(char **str, size_t *len, size_t *cap, char *value)
 {
-	char	*key;
+	size_t	i;
+	char	*new;
+	size_t	new_cap;
+
+	i = 0;
+	if (!value)
+		return (1);
+	while (value[i])
+	{
+		if (*len + 1 >= *cap)
+		{
+			new_cap = *cap * 2;
+			new = malloc(new_cap);
+			if (!new)
+				return (0);
+			ft_memcpy(new, *str, *len);
+			free(*str);
+			*str = new;
+			*cap = new_cap;
+		}
+		(*str)[(*len)++] = value[i++];
+	}
+	return (1);
+}
+
+static int	doc_append_char(char **str, size_t *len, size_t *cap, char c)
+{
+	char	*new;
+	size_t	new_cap;
+
+	if (*len + 1 >= *cap)
+	{
+		new_cap = *cap * 2;
+		new = malloc(new_cap);
+		if (!new)
+			return (0);
+		ft_memcpy(new, *str, *len);
+		free(*str);
+		*str = new;
+		*cap = new_cap;
+	}
+	(*str)[(*len)++] = c;
+	(*str)[*len] = '\0';
+	return (1);
+}
+
+static int	handle_dollar(char *buff, int *i, t_exp *exp, t_env *env)
+{
+	char	*var;
+	char	*val;
 	int		start;
-	int		len;
 
 	(*i)++;
+	if (buff[*i] == '?')
+	{
+		var = ft_strdup("?");
+		val = get_env_value(var, env);
+		if (val && !doc_append_str(&exp->res, &exp->len, &exp->cap, val))
+			return (free(var), 0);
+		free(var);
+		(*i)++;
+		return (1);
+	}
 	start = *i;
-	if (str[*i] == '{')
+	if (!ft_isalpha(buff[*i]) && buff[*i] != '_')
 	{
-		start = ++(*i);
-		while (str[*i] && str[*i] != '}')
-			(*i)++;
-		len = (*i)++ - start;
+		if (!doc_append_char(&exp->res, &exp->len, &exp->cap, '$'))
+			return (0);
+		if (buff[*i] && !doc_append_char(&exp->res, &exp->len, &exp->cap, buff[*i]))
+			return (0);
+		*i += (buff[*i] != '\0');
+		return (1);
 	}
-	else
-	{
-		while (ft_isalnum(str[*i]) || str[*i] == '_')
-			(*i)++;
-		len = *i - start;
-	}
-	key = ft_substr(str, start, len);
-	return (get_env_value(key, env));
+	while (ft_isalnum(buff[*i]) || buff[*i] == '_')
+		(*i)++;
+	var = ft_substr(buff, start, *i - start);
+	val = get_env_value(var, env);
+	if (val && !doc_append_str(&exp->res, &exp->len, &exp->cap, val))
+		return (free(var), 0);
+	free(var);
+	return (1);
 }
 
-static void	init_as(int i[3])
+char	*expanddoc(char *buff, t_env *env)
 {
-	i[0] = -1;
-	i[1] = 0;
-	i[2] = 0;
-}
+	t_exp	exp;
+	int		i;
 
-char	*expanddoc(char *str, t_env *env)
-{
-	char	*result;
-	char	*value;
-	int		i[3];
-
-	init_as(i);
-	result = malloc(ft_strlen(str) * 2 + 1);
-	if (!result)
-		return (NULL);
-	while (str[++i[0]])
+	exp = (t_exp){.cap = 16, .res = ft_calloc(16, 1)};
+	i = -1;
+	while (exp.res && buff[++i])
 	{
-		if (str[i[0]] == '$' && (i[0] == 0 || str[i[0] - 1] != '\\'))
-		{
-			value = extract_value(str, &i[0], env);
-			if (value)
-			{
-				ft_strlcpy(&result[i[1]], value, ft_strlen(value) + 1);
-				i[1] += ft_strlen(value);
-			}
-		}
-		else
-			result[i[1]++] = str[i[0]];
+		if (buff[i] == '$' && handle_dollar(buff, &i, &exp, env))
+			continue ;
+		if (!doc_append_char(&exp.res, &exp.len, &exp.cap, buff[i]))
+			break ;
 	}
-	result[i[1]] = '\0';
-	return (result);
+	if (!exp.res || !doc_append_char(&exp.res, &exp.len, &exp.cap, '\0'))
+		return (free(exp.res), NULL);
+	return (exp.res);
 }

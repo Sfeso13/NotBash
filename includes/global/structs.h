@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 17:41:23 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:34:36 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 
 //past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
 // fuck the old struct thats all we need :
+
+typedef struct	s_exp
+{
+	char	*res;
+	size_t	len;
+	size_t	cap;
+}	t_exp;
 
 typedef struct	s_quote
 {
