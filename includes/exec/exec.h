@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 20:47:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/24 11:40:27 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,17 @@
 # include "../exec/builtins.h"
 # include "../global/minishell.h"
 # include <limits.h>
+# include <sys/wait.h> //linux
 
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
+
+void	external_cmd(t_shell *shell, t_token *cmnd, t_env *env);
+int		is_redirect(t_token *cmnd);
+
+t_token	*search_token(t_token *token, t_token_type type);
+
+void	ft_dup(int from, int to);
 
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);

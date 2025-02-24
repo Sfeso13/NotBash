@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparing_iofiles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 22:51:26 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:41:46 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	get_doc(char *delim, t_env *env)
 	expandable = 1;
 	if (ft_strchr(delim, '\"') || ft_strchr(delim, '\''))
 		expandable = 0;
-	//remove quotes frome delim
 	tmp = remove_doc_qts(delim);
 	fd = open("/tmp/thd10101010doc", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (fd == -1)
@@ -43,6 +42,7 @@ int	get_doc(char *delim, t_env *env)
 	}
 	free(buff);
 	close(fd);
+	free(tmp);
 	fd = open("/tmp/thd10101010doc", O_RDONLY);
 	unlink("/tmp/thd10101010doc");
 	return (fd);
@@ -60,6 +60,11 @@ int	*get_io_files(t_token *args, t_env *env)
 	out_count[0] = how_many_redir(args, TOKEN_REDIRECT_OUT);
 	out_count[1] = how_many_redir(args, TOKEN_APPEND);
 	in_count[1] = how_many_redir(args, TOKEN_HEREDOC);
+	if (in_count[1] > 16)
+	{
+		printf("maximum here-document count exceeded\n");// handle error better
+		exit(2);
+	}
 	tmp = args;
 	while (tmp)
 	{
