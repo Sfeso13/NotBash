@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/24 11:41:46 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:52:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	get_doc(char *delim, t_env *env)
 	{
 		if (expandable)
 			buff = expanddoc(buff, env);
-		//use after free when free buff in expanddoc and strlen down tries to acess it
 		write(fd, buff, ft_strlen(buff));
 		write(fd, "\n", 1);
 		free(buff);
