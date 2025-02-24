@@ -6,7 +6,7 @@
 #    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/24 23:26:28 by adechaji         ###   ########.fr        #
+#    Updated: 2025/02/24 23:27:22 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ DIRSRCS := pwd.c cd.c echo.c
 
 EXTERNSRCS := preparing_iofiles.c preparing_iofiles_utils.c prepare_args.c args_split.c prepare_args_utils.c
 
-EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c
+EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c externals.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c \

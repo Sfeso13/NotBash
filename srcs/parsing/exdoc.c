@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exdoc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:36:00 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/24 16:44:24 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:56:51 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ char	*expanddoc(char *buff, t_env *env)
 	int		i;
 
 	exp = (t_exp){.cap = 16, .res = ft_calloc(16, 1)};
-	i = -1;
-	while (exp.res && buff[++i])
+	i = 0;
+	while (exp.res && buff[i])
 	{
 		if (buff[i] == '$' && handle_dollar(buff, &i, &exp, env))
 			continue ;
 		if (!doc_append_char(&exp.res, &exp.len, &exp.cap, buff[i]))
 			break ;
+		i++;
 	}
 	if (!exp.res || !doc_append_char(&exp.res, &exp.len, &exp.cap, '\0'))
 		return (free(exp.res), NULL);
