@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/23 23:10:14 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:55:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	analyze_in_expand(t_token *tokens, t_env *env)
 	current = tokens;
 	while (current)
 	{
-		if (current->type == TOKEN_HEREDOC)
-			skip_exp = 1;
-		if (current->type == TOKEN_WORD && !skip_exp)
+		// if (current->type == TOKEN_HEREDOC)
+		// 	skip_exp = 1;
+		if (current->type == TOKEN_WORD && (!current->prev || current->prev->type != TOKEN_HEREDOC))
 		{
 			or_val = current->value;
 			current->value = expand_token(or_val, env);
