@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 15:35:40 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 17:09:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ void	multi_externals(t_token *cmnd, int in, int out, t_env *env)
 	char	*path;
 	char	**args;
 
-	args = prepare_args(cmnd);
 	path = get_cmnd_path(cmnd, env);
+	if (!path)
+		exit(127);
+	args = prepare_args(cmnd);
 	if (in != -1)
 		ft_dup(in, 0);
 	if (out != -1)
 		ft_dup(out, 1);
-	if (path)
-		run_command(path, args, env);
-	else
-		printf("%s: command not found\n", cmnd->value);
+	run_command(path, args, env);
 }
 
 void	piped_exec(t_shell *cmnds, int in, int out, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 15:59:40 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:16:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
 
-void	external_cmd(t_shell *shell, t_token *cmnd, t_env *env);
+void	external_cmd(t_token *cmnd, t_env *env);
 int		is_redirect(t_token *cmnd);
-
-t_token	*search_token(t_token *token, t_token_type type);
 
 void	ft_dup(int from, int to);
 
@@ -40,6 +38,8 @@ void	change_fd(int *tochange, int toset, int toclose);
 t_fd	init_fd_struct();
 void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 
+
+void	restore_stds(int saved_in, int saved_out);
 
 //heredoc
 char	*join_name(char *name, int i);

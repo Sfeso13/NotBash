@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 12:31:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:31:07 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	run_command(char *path, char **args, t_env *env)
 	char	**env_arr;
 
 	env_arr = env_to_arr(env);
+	if (env_arr)
+		exit(-1);//check for correct exit status
 	execve(path, args, env_arr);
 }
 
@@ -30,25 +32,17 @@ int	is_redirect(t_token *cmnd)
 	return (0);
 }
 
-void	external_cmd(t_shell *shell, t_token *cmnd, t_env *env)
+void	external_cmd(t_token *cmnd, t_env *env)
 {
-	pid_t	child;
 	char	*path;
 	char	**args;
 
-	child = fork();
-	if (child < 0)
-		printf("fork error!\n");//to handle appropriately
-	else if (child == 0)
-	{
-		if (is_redirect(shell->tokens))
-			redirect(shell->tokens, env);
-		args = prepare_args(cmnd);
-		path = get_cmnd_path(cmnd, env);
-		if (path)
-			run_command(path, args, env);
-		else
-			printf("%s: command not found\n", cmnd->value);
-		exit(0);
-	}
+	path = get_cmnd_path(cmnd, env);
+	if (!path)
+		exit(127);
+	args = prepare_args(cmnd);
+	if (!args)
+		exit(-1);//check for the correct exit status needed
+	run_command(path, args, env);
+	exit(0);
 }

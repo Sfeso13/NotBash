@@ -6,14 +6,13 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/25 16:00:18 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/25 18:13:43 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
-
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 			   expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \
@@ -35,7 +34,7 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_strcmp.c free_tab.c ft_strtrim.c ft_atoi.c ft_strchr.c ft_split.c \
 			ft_strndup.c ft_isalnum.c ft_strcpy.c delone_env.c delone_shell.c \
 			clear_env.c clear_shell.c delone_token.c clear_tokens.c get_env_value.c \
-			ft_realloc.c ft_itoa.c get_next_line.c
+			ft_realloc.c ft_itoa.c search_token.c
 
 MAIN = main.c
 

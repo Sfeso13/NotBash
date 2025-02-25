@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 13:20:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:29:21 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,29 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 	{
 		if (access(cmnd->value, X_OK) == 0)
 			return (cmnd->value);
+		printf("%s: command not found\n", cmnd->value);
 		return (NULL);
 	}
 	else
 	{
 		path_node = search_key("PATH", env);
-		if (path_node && path_node->val)
+		if (path_node && path_node->val && path_node->val[0] != '\0')
 		{
 			paths = args_split(path_node->val, ':');
 			if (!paths)
 				return (NULL); //FAILURE
 			correct_path = retrieve_path(paths, cmnd);
+			if (!correct_path)
+			{
+				printf("%s: command not found\n", cmnd->value);
+				return (NULL);
+			}
 		}
 		else if (!path_node || path_node->val[0] == '\0')
+		{
+			printf("%s: No such file or directory\n", cmnd->value);
 			return (NULL);//should be different error msg than cmd not found
+		}
 	}
 	return (correct_path);
 }

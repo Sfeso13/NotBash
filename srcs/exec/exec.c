@@ -6,22 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 15:51:47 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:33:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
-
-t_token	*search_token(t_token *token, t_token_type type)
-{
-	while (token)
-	{
-		if (token->type == type)
-			return (token);
-		token = token->next;
-	}
-	return (NULL);
-}
 
 void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 {
@@ -35,7 +24,6 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 	{
 		fd = get_io_files(cmnds->tokens, env);
 		set_fds(&fds, fd, process_count, i);
-		printf("input : %d ---------- output : %d\n", fds.infd, fds.outfd);
 		piped_exec(cmnds, fds.infd, fds.outfd, env);
 		if (fds.infd != -1)
 			close(fds.infd);
@@ -47,10 +35,37 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 	close(fds.pfd[0]);
 }
 
-void	single_process_exec(t_shell *cmnds, t_env *env)
+void	redirected_execution(t_shell *cmnds, t_env *env)
 {
 	t_token	*cmnd;
 	t_env	*dash;
+	pid_t	child;
+
+	child = fork();
+	if (child < 0)
+		perror("fork");
+	else if (child == 0)
+	{
+		redirect(cmnds->tokens, env);
+		cmnd = extract_cmd(cmnds->tokens);
+		if (!cmnd)
+		{
+			dash = search_key("_", env);
+			return (set_env_value(&dash, NULL));
+		}
+		update_dash(cmnd, &env);
+		if (isbuiltin(cmnd->value))
+			which_builtin(cmnds, cmnd, env);
+		else
+			external_cmd(cmnd, env);
+	}
+}
+
+void	normal_execution(t_shell *cmnds, t_env *env)
+{
+	t_token *cmnd;
+	t_env	*dash;
+	pid_t	child;
 
 	cmnd = extract_cmd(cmnds->tokens);
 	if (!cmnd)
@@ -62,7 +77,32 @@ void	single_process_exec(t_shell *cmnds, t_env *env)
 	if (isbuiltin(cmnd->value))
 		which_builtin(cmnds, cmnd, env);
 	else
-		external_cmd(cmnds, cmnd, env);
+	{
+		child = fork();
+		if (child < 0)
+		{
+			perror("fork");
+			exit(1);
+		}
+		else if (child == 0)
+			external_cmd(cmnd, env);
+	}
+}
+
+void	single_process_exec(t_shell *cmnds, t_env *env)
+{
+	int		saved_in;
+	int		saved_out;
+
+	if(is_redirect(cmnds->tokens))
+	{
+		saved_in = dup(STDIN_FILENO);
+		saved_out = dup(STDOUT_FILENO);
+		redirected_execution(cmnds, env);
+		restore_stds(saved_in, saved_out);
+	}
+	else
+		normal_execution(cmnds, env);
 }
 
 void	execute(t_shell *cmnds, t_env *env)
