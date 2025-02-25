@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rmquotes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/24 10:38:53 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:05:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*remove_doc_qts(char *input)
 
 	if (!input)
 		return (NULL);
-	result = ft_calloc(ft_strlen(input) + 1, 1);//optimize the size allocation
+	result = ft_calloc(ft_strlen(input) + 1, 1);
 	if (!result)
 		return (NULL);
 	i = 0;

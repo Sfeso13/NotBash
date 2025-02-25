@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 11:44:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 21:54:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,16 @@ int main(int ac, char *av[], char *env[])
 	(void)av;
 	if (ac != 1)
 		return (1);
-	//handlesignals
+	catch_signals();
 	env_list = create_env(env);
 	while (1)
 	{
 		input = readline("minishell$ ");
 		if (!input)
-			break ;
+		{
+			clear_env(&env_list, free);
+			exit(0);
+		}
 		if (*input)
 			add_history(input);
 		if (displaymeagn(&input))
@@ -118,7 +121,7 @@ int main(int ac, char *av[], char *env[])
 			exit(1);
 		}
 		//quotes_remove(tokens);
-		print_shell(cmd);
+		// print_shell(cmd);
 		execute(cmd, env_list);
 		free(input);
 		free_tokens(tokens);

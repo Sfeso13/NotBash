@@ -1,0 +1,44 @@
+					ill document ga3 tests li l9it fhom mochkil hna :
+
+
+test : -> echo bonjour > test 100
+ -> bash outputs file test init : bnjr 100 ours has only bnjr
+reason : ay 7aja wra redirected file name tahya khas tktb fl file test f bash
+$ echo salam > file.txt ktbni hta ana
+
+
+test : > cat /dev/random | head -n 1 | cat -e
+	-> hanging
+
+
+test : -> unset ""
+	-> mashi prblm but ntb3o shi msg f7al export ""
+
+
+test : -> not_cmd bonjour > salut
+	-> tmjnina testiha fbash
+
+
+test : ->cat Makefile | grep pr | head -n 5 | cd test
+/usr/bin/cd: line 4: cd: test: No such file or directory
+minishell$ $?
+256: command not found
+minishell$
+-> wrong exit code ?
+here too -> cat Makefile | grep pr | head -n 5 | hello
+
+
+test : -> echo bonjour > $test
+	->minishell hrbat
+
+test : -> cat | cat | caaat | ls
+	-> wrong command order execution
+
+test : -> sleep 5 | exit
+	-> alo ? elach exit cmd not found
+
+test : -> exit #
+	- return last exit code but i dont think we should handle it
+
+100 test done all i found is these
+✅✅✅✅✅✅✅✅

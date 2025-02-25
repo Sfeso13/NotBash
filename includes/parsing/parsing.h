@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/24 15:36:08 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:03:45 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,12 @@ void			process_quote_update(t_quote_context *ctx);
 void			process_char(char **input, int *len, t_quote_context *ctx);
 char			*expanddoc(char *buff, t_env *env);
 char			*remove_doc_qts(char *input);
+void			catch_signals(void);
+int				doc_handle_valids(char *buff, int *i, t_exp *exp, t_env *env);
+int				doc_handle_invalids(char *buff, int *i, t_exp *exp);
+int				handle_qst_mark(int *i, t_exp *exp, t_env *env);
+int				doc_append_str(char **str, size_t *len, size_t *cap, char *value);
+int				doc_append_char(char **str, size_t *len, size_t *cap, char c);
+
 
 #endif
