@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 12:32:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:57:07 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ int	how_many_redir(t_token *cmnd, t_token_type type)
 
 int	*init_fds(void)
 {
-	int	*fd;
+	static int	fd[2];
 
-	fd = (int *)malloc(2 * sizeof(int));
-	if (!fd)
-		return (NULL);
 	fd[0] = -1;//to change
 	fd[1] = -1;
 	return (fd);
