@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 18:29:21 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 21:02:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	**prepare_args(t_token *cmnd)
 		cmnd = cmnd->next;
 	}
 	arr = args_split(args, ' ');
+	free(args);
 	return (arr);
 }
 

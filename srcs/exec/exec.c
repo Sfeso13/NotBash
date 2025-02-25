@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 18:33:31 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 21:03:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	execute(t_shell *cmnds, t_env *env)
 				exit(-1);
 			}
 		}
+		printf("child exited with : %d\n", status);
 		stat = ft_itoa(status);
 		update_status(&env, stat);
 		free(stat);
