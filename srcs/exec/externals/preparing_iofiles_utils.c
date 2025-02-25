@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparing_iofiles_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 20:52:34 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:32:42 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	how_many_redir(t_token *cmnd, t_token_type type)
 	return (count);
 }
 
-int	*init_fds()
+int	*init_fds(void)
 {
 	int	*fd;
 

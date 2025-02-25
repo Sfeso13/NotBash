@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/24 18:29:36 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:52:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ t_token	*search_token(t_token *token, t_token_type type);
 void	ft_dup(int from, int to);
 
 void	run_command(char *path, char **args, t_env *env);
+
+void	piped_exec(t_shell *cmnds, int in, int out, t_env *env);
+void	change_fd(int *tochange, int toset, int toclose);
+t_fd	init_fd_struct();
+void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);

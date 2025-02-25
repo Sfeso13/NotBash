@@ -20,7 +20,8 @@
     "chrono": "c",
     "unordered_map": "c",
     "structs.h": "c",
-    "functional": "c"
+    "functional": "c",
+    "cstdint": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

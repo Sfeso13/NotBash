@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/24 15:34:36 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:38:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@
 
 //past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
 // fuck the old struct thats all we need :
+
+typedef struct s_redir{
+    int	in_count[2];
+    int	out_count[2];
+} t_redir;
+
+typedef struct s_fd{
+    int infd;
+    int outfd;
+	int	pfd[2];
+} t_fd;
 
 typedef struct	s_exp
 {

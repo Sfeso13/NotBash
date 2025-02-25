@@ -6,24 +6,14 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/24 11:41:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:03:27 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-// void	builtin_redir()
-// {
-
-// }
-
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env)
 {
-	int	stout;
-	int	stin;
-
-	stout = dup(STDOUT_FILENO);
-	stin = dup(STDIN_FILENO);
 	if (is_redirect(shell->tokens))
 		redirect(shell->tokens, env);
 	if (improved_cmp(cmnd->value, "env") == 0)
@@ -40,8 +30,6 @@ void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env)
 		print_args(cmnd, env);
 	else if (improved_cmp(cmnd->value, "exit") == 0)
 		exit_shell(&shell, &cmnd, &env);
-	ft_dup(stout, STDOUT_FILENO);
-	ft_dup(stin, STDIN_FILENO);
 }
 
 int	isbuiltin(char *com)
