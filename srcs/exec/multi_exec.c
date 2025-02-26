@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 16:52:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:03:53 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 		printf("fork error!\n");//to handle appropriately
 	else if (child == 0)
 	{
+		if (!cmnd)
+			exit(1);
 		if (isbuiltin(cmnd->value))
 			which_builtin(cmnds, cmnd, env);
 		else
