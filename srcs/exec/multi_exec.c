@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 19:03:53 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:16:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 			multi_externals(cmnd, fd, fds, env);
 		exit(0);
 	}
+	if (fds.infd != -1)
+		close(fds.infd);
 }
 
 void	change_fd(int *tochange, int toset, int toclose)
