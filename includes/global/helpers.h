@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 18:22:36 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:46:45 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_isalpha(int c);
 char	*ft_strcpy(char *dest, char *src);
 char	*get_env_value(char *key, t_env *env);
 void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
-
+void	ft_putstr_fd(char *s, int fd);
 //gnl
 char	*get_next_line(int fd);
 

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:18:29 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/21 19:39:54 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:44:58 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,22 @@ int	checkmy_syn(const char *input)
 {
 	if (quoting_check(input))
 	{
-		// ft_putstr_fd("Error unclosed quotes\n", 2);
-		printf("Error unclosed quotes\n");
+		ft_putstr_fd("Error unclosed quotes\n", 2);
 		return (1);
 	}
 	if (redir_check(input))
 	{
-		// ft_putstr_fd("Error invalid redirections\n", 2);
-		printf("Error invalid redirections\n");
+		ft_putstr_fd("Error invalid redirections\n", 2);
 		return (1);
 	}
 	if (itsmisplaced(input))
 	{
-		// ft_putstr_fd("Error misplaced OP\n", 2);
-		printf("Error misplaced OP\n");
+		ft_putstr_fd("Error misplaced OP\n", 2);
 		return (1);
 	}
 	if (notsupported(input))
 	{
-		// ft_putstr_fd("Error theres a non supported OP\n", 2);
-		printf("Error a non supported OP\n");
+		ft_putstr_fd("Error theres a non supported OP\n", 2);
 		return (1);
 	}
 	return (0);
