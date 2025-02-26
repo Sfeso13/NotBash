@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/26 15:46:45 by adechaji         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/25 18:15:39 by yhossni          ###   ########.fr       */
->>>>>>> origin/exec
+/*   Updated: 2025/02/26 18:31:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +54,7 @@ char	*ft_strcpy(char *dest, char *src);
 char	*get_env_value(char *key, t_env *env);
 void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
 t_token	*search_token(t_token *token, t_token_type type);
+void	ft_putstr_fd(char *s, int fd);
 
 
 //list clearing
