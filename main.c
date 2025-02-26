@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 12:31:38 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:54:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int main(int ac, char *av[], char *env[])
 	{
 		input = readline("minishell$ ");
 		if (!input)
-			break ;
+		{
+			clear_env(&env_list, free);
+			exit(0);
+		}
 		if (*input)
 			add_history(input);
 		if (displaymeagn(&input))
@@ -118,7 +121,7 @@ int main(int ac, char *av[], char *env[])
 			exit(1);
 		}
 		//quotes_remove(tokens);
-		//print_shell(cmd);
+		// print_shell(cmd);
 		execute(cmd, env_list);
 		free(input);
 		free_tokens(tokens);

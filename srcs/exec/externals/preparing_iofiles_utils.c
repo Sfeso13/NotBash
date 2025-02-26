@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preparing_iofiles_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 20:52:34 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:58:51 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ int	how_many_redir(t_token *cmnd, t_token_type type)
 	return (count);
 }
 
-int	*init_fds()
+int	*init_fds(void)
 {
-	int	*fd;
+	static int	fd[2];
 
-	fd = (int *)malloc(2 * sizeof(int));
-	if (!fd)
-		return (NULL);
 	fd[0] = -1;//to change
 	fd[1] = -1;
 	return (fd);
@@ -53,8 +50,8 @@ int	fdop(int to_open, int append, char *filename, int write)
 		to_open = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (to_open == -1)
 	{
-		perror("input open");//should kill child here
-		exit(1);
+		printf("%s: No such file or directory\n", filename);//should kill child here
+		return (-1);
 	}
 	return (to_open);
 }
@@ -65,12 +62,18 @@ int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 0, tmp->value, 0);
+		if (fd == -1)
+			return (-1);
 		(inredir[0])--;
 	}
 	else if (tmp->type == TOKEN_HEREDOC)
 	{
 		tmp = tmp->next;
+		if (fd == -1)
+			close(fd);
 		fd = get_doc(tmp->value, env);
+		if (fd == -1)
+			return (-1);
 		(inredir[1])--;
 	}
 	return (fd);
@@ -82,12 +85,16 @@ int	what_out_to_open(t_token *tmp, int fd, int *outredir)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 0, tmp->value, 1);
+		if (fd == -1)
+			return (-1);
 		(outredir[0])--;
 	}
 	else if (tmp->type == TOKEN_APPEND)
 	{
 		tmp = tmp->next;
 		fd = fdop(fd, 1, tmp->value, 1);
+		if (fd == -1)
+			return (-1);
 		(outredir[1])--;
 	}
 	return (fd);

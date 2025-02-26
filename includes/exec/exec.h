@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/24 18:29:36 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:51:45 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,34 @@
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env *env);
 
-void	external_cmd(t_shell *shell, t_token *cmnd, t_env *env);
+void	external_cmd(t_token *cmnd, t_env *env);
 int		is_redirect(t_token *cmnd);
-
-t_token	*search_token(t_token *token, t_token_type type);
 
 void	ft_dup(int from, int to);
 
 void	run_command(char *path, char **args, t_env *env);
 
+int	redir_token(t_token *cmnd);
+void	closefds(int *fd, t_fd fds);
+
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env);
+void	change_fd(int *tochange, int toset, int toclose);
+t_fd	init_fd_struct();
+void	set_fds(t_fd *fds, int *fd, int process_count, int i);
+
+
+void	restore_stds(int saved_in, int saved_out);
+
+//heredoc
+char	*join_name(char *name, int i);
+char	*get_filename(void);
+char	*read_input(int expandable, char *delim, int fd, t_env *env);
+int	get_doc(char *delim, t_env *env);
+
+
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);
-int	*init_fds();
+// int	*init_fds();
 int	*get_io_files(t_token *args, t_env *env);
 
 //args preparing
@@ -53,7 +69,7 @@ char	**args_split(char const *s, char c);
 
 //io helpers
 int	how_many_redir(t_token *cmnd, t_token_type type);
-int	*init_fds();
+int	*init_fds(void);
 int	fdop(int to_open, int append, char *filename, int write);
 int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env);
 int	what_out_to_open(t_token *tmp, int fd, int *outredir);

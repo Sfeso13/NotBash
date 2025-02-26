@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   search_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 10:52:13 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 21:55:15 by yhossni          ###   ########.fr       */
+/*   Created: 2025/02/25 18:09:40 by yhossni           #+#    #+#             */
+/*   Updated: 2025/02/25 18:10:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-void	handle_sigint(int sig)
+t_token	*search_token(t_token *token, t_token_type type)
 {
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
-	write(1, "\nminishell$ ", 13);
-}
-
-void	catch_signals(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	while (token)
+	{
+		if (token->type == type)
+			return (token);
+		token = token->next;
+	}
+	return (NULL);
 }

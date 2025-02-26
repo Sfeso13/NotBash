@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 19:15:08 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 19:21:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:08:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ int	how_many_processes(t_shell *process)
 		process = process->next;
 	}
 	return (count);
+}
+
+void	restore_stds(int saved_in, int saved_out)
+{
+	dup2(saved_in, STDIN_FILENO);
+	dup2(saved_out, STDOUT_FILENO);
+	close(saved_in);
+	close(saved_out);
 }
