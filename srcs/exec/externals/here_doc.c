@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 15:59:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 09:43:46 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*get_filename(void)
 		if (access(name, F_OK) != -1)
 		{
 			i++;
+			free(name);
 			continue ;
 		}
 		fd = open(name, O_CREAT | O_TRUNC | O_WRONLY, 0600);

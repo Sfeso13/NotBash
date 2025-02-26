@@ -1,6 +1,8 @@
 					ill document ga3 tests li l9it fhom mochkil hna :
 
 
+< Makefile cat | ls > "" | ls : 
+
 test : -> echo bonjour > test 100
  -> bash outputs file test init : bnjr 100 ours has only bnjr
 reason : ay 7aja wra redirected file name tahya khas tktb fl file test f bash

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 17:09:11 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:42:57 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	set_fds(t_fd *fds, int *fd, int process_count, int i)
 		perror("pipe");
 		exit(-1);
 	}
+	if (!fd)
+		return ;
 	if (fd[1] == -1 && i < process_count - 1)
 		change_fd(&fds->outfd, fds->pfd[1], -1);
 	else if (fd[1] == -1 && i == process_count -1)

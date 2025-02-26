@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 16:02:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:21:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,17 @@ int	*get_io_files(t_token *args, t_env *env)
 	while (tmp)
 	{
 		if (tmp->type == TOKEN_REDIRECT_IN || tmp->type == TOKEN_HEREDOC)
+		{
 			fd[0] = what_in_to_open(tmp, fd[0], redir.in_count, env);
+			if (fd[0] == -1)
+				return (NULL);
+		}
 		else if (tmp->type == TOKEN_REDIRECT_OUT || tmp->type == TOKEN_APPEND)
+		{
 			fd[1] = what_out_to_open(tmp, fd[1], redir.out_count);
+			if (fd[1] == -1)
+				return (NULL);
+		}
 		if (redir.in_count[0] == 0 && redir.out_count[1] == 0 && \
 			redir.out_count[0] == 0 && redir.in_count[1] == 0)
 			break ;
@@ -70,6 +78,8 @@ void	redirect(t_token *cmnd, t_env *env)
 	int		*fd;
 
 	fd = get_io_files(cmnd, env);
+	if (!fd)
+		exit(1);
 	if (fd[0] != -1)
 	{
 		ft_dup(fd[0], 0);

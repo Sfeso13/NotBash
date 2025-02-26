@@ -6,11 +6,19 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 21:02:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:13:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/exec/exec.h"
+
+int	redir_token(t_token *cmnd)
+{
+	if (cmnd->type == TOKEN_REDIRECT_IN || cmnd->type == TOKEN_REDIRECT_OUT || \
+		cmnd->type == TOKEN_APPEND || cmnd->type == TOKEN_HEREDOC)
+		return (1);
+	return (0);
+}
 
 char	**prepare_args(t_token *cmnd)
 {
@@ -19,13 +27,16 @@ char	**prepare_args(t_token *cmnd)
 	char	**arr;
 
 	args = NULL;
-	while (cmnd && cmnd->type == TOKEN_WORD)
+	while (cmnd)
 	{
-		tmp = args;
-		args = join(tmp, cmnd->value);
-		free(tmp);
-		if (!args)
-			return (NULL);
+		if (cmnd->type == TOKEN_WORD && (!cmnd->prev || !redir_token(cmnd->prev)))
+		{
+			tmp = args;
+			args = join(tmp, cmnd->value);
+			free(tmp);
+			if (!args)
+				return (NULL);
+		}
 		cmnd = cmnd->next;
 	}
 	arr = args_split(args, ' ');

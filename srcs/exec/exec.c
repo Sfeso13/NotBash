@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 21:42:49 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:12:45 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,19 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 
 	i = 0;
 	fds = init_fd_struct();
+	fd = init_fds();
 	while (i < process_count)
 	{
 		fd = get_io_files(cmnds->tokens, env);
 		set_fds(&fds, fd, process_count, i);
+		if (!fd)
+		{
+			close(fds.pfd[1]);
+			fds.infd = fds.pfd[0];
+			cmnds = cmnds->next;
+			i++;
+			continue ;
+		}
 		piped_exec(cmnds, fds.infd, fds.outfd, env);
 		if (fds.infd != -1)
 			close(fds.infd);
@@ -58,6 +67,7 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 			which_builtin(cmnds, cmnd, env);
 		else
 			external_cmd(cmnd, env);
+		exit(0);
 	}
 }
 
