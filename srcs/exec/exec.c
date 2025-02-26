@@ -6,27 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 16:51:24 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:19:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
-
-void	closefds(int *fd, t_fd fds)
-{
-	if (fd[0] != -1)
-		close(fd[0]);
-	if (fd[1] != -1)
-		close(fd[1]);
-	if (fds.pfd[1] != -1)
-		close(fds.pfd[1]);
-	if (fds.pfd[0] != -1)
-		close(fds.pfd[0]);
-	if (fds.infd != -1)
-		close(fds.infd);
-	if (fds.outfd != -1)
-		close(fds.outfd);
-}
 
 void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 {
@@ -50,8 +34,6 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 			continue ;
 		}
 		piped_exec(cmnds, fd, fds, env);
-		if (fds.infd != -1)
-			close(fds.infd);
 		fds.infd = fds.pfd[0];
 		i++;
 		cmnds = cmnds->next;
@@ -88,7 +70,7 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 
 void	normal_execution(t_shell *cmnds, t_env *env)
 {
-	t_token *cmnd;
+	t_token	*cmnd;
 	t_env	*dash;
 	pid_t	child;
 
@@ -119,7 +101,7 @@ void	single_process_exec(t_shell *cmnds, t_env *env)
 	int		saved_in;
 	int		saved_out;
 
-	if(is_redirect(cmnds->tokens))
+	if (is_redirect(cmnds->tokens))
 	{
 		saved_in = dup(STDIN_FILENO);
 		saved_out = dup(STDOUT_FILENO);

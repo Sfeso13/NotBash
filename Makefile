@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/26 17:00:20 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/26 20:33:03 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c expo
 DIRSRCS := pwd.c cd.c echo.c
 
 EXTERNSRCS := preparing_iofiles.c preparing_iofiles_utils.c prepare_args.c \
-			  args_split.c prepare_args_utils.c here_doc.c
+			  args_split.c prepare_args_utils.c here_doc.c multi_utils.c
 
 EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c externals.c multi_exec.c
 
