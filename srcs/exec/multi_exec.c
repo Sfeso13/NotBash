@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   multi_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 19:16:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 21:04:04 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
+
+void	redir_exec(t_fd fds)
+{
+	if (fds.infd != -1)
+		ft_dup(fds.infd, 0);
+	if (fds.outfd != -1)
+		ft_dup(fds.outfd, 1);
+	close(fds.pfd[0]);
+}
 
 void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 {
@@ -21,11 +30,7 @@ void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 	if (!path)
 		exit(127);
 	args = prepare_args(cmnd);
-	if (fds.infd != -1)
-		ft_dup(fds.infd, 0);
-	if (fds.outfd != -1)
-		ft_dup(fds.outfd, 1);
-	close(fds.pfd[0]);
+	redir_exec(fds);
 	(void)fd;
 	run_command(path, args, env);
 }
@@ -44,7 +49,10 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 		if (!cmnd)
 			exit(1);
 		if (isbuiltin(cmnd->value))
+		{
+			redir_exec(fds);
 			which_builtin(cmnds, cmnd, env);
+		}
 		else
 			multi_externals(cmnd, fd, fds, env);
 		exit(0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 19:19:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 21:23:19 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,21 @@ void	print_with_option(t_token *cmnd, int size)
 	else if (size > 3)
 	{
 		cmnd = cmnd->next;
+		while (cmnd && improved_cmp(cmnd->value, "-n") == 0)
+		{
+			i++;
+			cmnd = cmnd->next;
+		}
 		while (cmnd)
 		{
-			if (cmnd->type == TOKEN_WORD && (!cmnd->prev || \
-				!redir_token(cmnd->prev)))
+			if (cmnd->type == TOKEN_WORD && \
+				(!cmnd->prev ||	!redir_token(cmnd->prev)))
 			{
 				printf("%s", cmnd->value);
 				if (i < size - 1)
 					printf(" ");
-				i++;
 			}
+			i++;
 			cmnd = cmnd->next;
 		}
 	}
