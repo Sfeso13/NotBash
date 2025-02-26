@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 12:42:57 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:52:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void	multi_externals(t_token *cmnd, int in, int out, t_env *env)
+void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 {
 	char	*path;
 	char	**args;
@@ -21,14 +21,16 @@ void	multi_externals(t_token *cmnd, int in, int out, t_env *env)
 	if (!path)
 		exit(127);
 	args = prepare_args(cmnd);
-	if (in != -1)
-		ft_dup(in, 0);
-	if (out != -1)
-		ft_dup(out, 1);
+	if (fds.infd != -1)
+		ft_dup(fds.infd, 0);
+	if (fds.outfd != -1)
+		ft_dup(fds.outfd, 1);
+	close(fds.pfd[0]);
+	(void)fd;
 	run_command(path, args, env);
 }
 
-void	piped_exec(t_shell *cmnds, int in, int out, t_env *env)
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 {
 	pid_t	child;
 	t_token	*cmnd;
@@ -42,7 +44,7 @@ void	piped_exec(t_shell *cmnds, int in, int out, t_env *env)
 		if (isbuiltin(cmnd->value))
 			which_builtin(cmnds, cmnd, env);
 		else
-			multi_externals(cmnd, in, out, env);
+			multi_externals(cmnd, fd, fds, env);
 		exit(0);
 	}
 }

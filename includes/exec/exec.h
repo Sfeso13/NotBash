@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 18:16:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:51:45 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	ft_dup(int from, int to);
 
 void	run_command(char *path, char **args, t_env *env);
 
-void	piped_exec(t_shell *cmnds, int in, int out, t_env *env);
+int	redir_token(t_token *cmnd);
+void	closefds(int *fd, t_fd fds);
+
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env);
 void	change_fd(int *tochange, int toset, int toclose);
 t_fd	init_fd_struct();
 void	set_fds(t_fd *fds, int *fd, int process_count, int i);

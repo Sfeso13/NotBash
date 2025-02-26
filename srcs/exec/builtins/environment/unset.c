@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:20:42 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	unset_var(t_token *cmnd, t_env *env)
 	t_env	*to_remove;
 
 	status = 0;
-	if (how_many_args(cmnd, TOKEN_WORD) > 1)
+	if (how_many_args(cmnd) > 1)
 	{
 		cmnd = cmnd->next;
 		while (cmnd && cmnd->type == TOKEN_WORD)

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:21:07 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	changedir(t_token *cmnd, t_env *env)
 {
 	t_env	*homedir;
 
-	if (how_many_args(cmnd, TOKEN_WORD) == 1)
+	if (how_many_args(cmnd) == 1)
 	{
 		homedir = search_key("HOME", env);
 		if (!homedir)

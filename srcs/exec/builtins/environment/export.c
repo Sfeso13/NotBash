@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:22:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 	return (update_status(env, "1"));
 }
 
-int	how_many_args(t_token *cmnd, t_token_type type)
+int	how_many_args(t_token *cmnd)
 {
 	int	count;
 
 	count = 0;
-	while (cmnd && cmnd->type == type)
+	while (cmnd)
 	{
-		count++;
+		if (cmnd->type == TOKEN_WORD && (!cmnd->prev || !redir_token(cmnd->prev)))
+			count++;
 		cmnd = cmnd->next;
 	}
 	return (count);
@@ -71,7 +72,7 @@ void	export_env(t_token *cmnd, t_env *env)
 {
 	int	len;
 
-	len = how_many_args(cmnd, TOKEN_WORD);
+	len = how_many_args(cmnd);
 	if (!cmnd->next || cmnd->next->type != TOKEN_WORD)
 		print_full_env(env);
 	else

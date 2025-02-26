@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:36:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 13:19:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:36:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*unset_validate_key(char *key)
 	if (!unset_allowed(key))
 		return (NULL);
 	len = ft_strlen(key);
-	if ((key[0] >= '0' && key[0] <= '9'))
+	if ((key[0] >= '0' && key[0] <= '9') || key[0] == '\0')
 		return (NULL);
 	return (key);
 }

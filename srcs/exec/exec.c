@@ -6,11 +6,27 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 15:12:45 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:51:24 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
+
+void	closefds(int *fd, t_fd fds)
+{
+	if (fd[0] != -1)
+		close(fd[0]);
+	if (fd[1] != -1)
+		close(fd[1]);
+	if (fds.pfd[1] != -1)
+		close(fds.pfd[1]);
+	if (fds.pfd[0] != -1)
+		close(fds.pfd[0]);
+	if (fds.infd != -1)
+		close(fds.infd);
+	if (fds.outfd != -1)
+		close(fds.outfd);
+}
 
 void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 {
@@ -33,15 +49,14 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 			i++;
 			continue ;
 		}
-		piped_exec(cmnds, fds.infd, fds.outfd, env);
+		piped_exec(cmnds, fd, fds, env);
 		if (fds.infd != -1)
 			close(fds.infd);
 		fds.infd = fds.pfd[0];
 		i++;
 		cmnds = cmnds->next;
 	}
-	close(fds.infd);
-	close(fds.pfd[0]);
+	closefds(fd, fds);
 }
 
 void	redirected_execution(t_shell *cmnds, t_env *env)
@@ -138,7 +153,6 @@ void	execute(t_shell *cmnds, t_env *env)
 				exit(-1);
 			}
 		}
-		// printf("child exited with : %d\n", status);
 		stat = ft_itoa(status);
 		update_status(&env, stat);
 		free(stat);

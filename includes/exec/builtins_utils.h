@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:16 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:21:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../exec/exec.h"
 
 //general utils
-int	how_many_args(t_token *cmnd, t_token_type type);
+int	how_many_args(t_token *cmnd);
 int		isbuiltin(char *com);
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env);
 void	update_status(t_env **env, char *status);

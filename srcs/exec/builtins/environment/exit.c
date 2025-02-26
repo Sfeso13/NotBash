@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:20:53 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	clear_structs(t_shell **shell, t_env **env)
 
 void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 {
-	if (how_many_args(*cmnd, TOKEN_WORD) > 2)
+	if (how_many_args(*cmnd) > 2)
 	{
 		printf("exit\n");
 		printf("exit : too many arguments\n");
 	}
-	else if (how_many_args(*cmnd, TOKEN_WORD) == 1)
+	else if (how_many_args(*cmnd) == 1)
 	{
 		printf("exit\n");
 		clear_structs(shell, env);
