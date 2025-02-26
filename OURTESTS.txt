@@ -1,9 +1,6 @@
 					ill document ga3 tests li l9it fhom mochkil hna :
 
 
-ls | > filenotfound | wc -l
-	-> SEGV
-
 test : -> not_cmd bonjour > salut
     -> tmjnina testiha fbash ------------- ez fix ig its just becuz of the way we print the errors
 
@@ -16,7 +13,7 @@ minishell$
 here too -> cat Makefile | grep pr | head -n 5 | hello
 
 ++++++++terminal attribuites
-
+./
 test :unset  SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _ ✅
 Mini$hell$: export✅
 	export

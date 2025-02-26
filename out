@@ -1,0 +1,15 @@
+total 576
+drwxr-xr-x   14 adechaji  2024_khouribga     476 Feb 26 20:40 .
+drwxr-xr-x   24 adechaji  2024_khouribga     816 Feb 24 16:25 ..
+-rw-r--r--    1 adechaji  2024_khouribga    6148 Feb 20 00:10 .DS_Store
+drwxr-xr-x   14 adechaji  2024_khouribga     476 Feb 26 20:35 .git
+-rw-r--r--    1 adechaji  2024_khouribga     333 Feb 21 17:28 .gitignore
+drwxr-xr-x    5 adechaji  2024_khouribga     170 Feb 26 17:08 .vscode
+-rw-r--r--    1 adechaji  2024_khouribga    3590 Feb 26 20:35 Makefile
+-rw-r--r--    1 adechaji  2024_khouribga    1003 Feb 26 20:35 OURTESTS.txt
+drwxr-xr-x    5 adechaji  2024_khouribga     170 Feb 16 17:55 includes
+-rw-r--r--    1 adechaji  2024_khouribga    3226 Feb 26 17:08 main.c
+-rwxr-xr-x    1 adechaji  2024_khouribga  267448 Feb 26 20:36 minishell
+drwxr-xr-x  166 adechaji  2024_khouribga    5644 Feb 26 20:36 objs
+-rw-r--r--    1 adechaji  2024_khouribga       0 Feb 26 20:40 out
+drwxr-xr-x    5 adechaji  2024_khouribga     170 Feb 25 17:07 srcs

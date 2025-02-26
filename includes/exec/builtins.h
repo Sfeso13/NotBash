@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:46:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:49:32 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	export_var(t_token *cmnd, t_env **env, int args_size);
 void	print_full_env(t_env *env);
 
 //unset
-void	unset_var(t_token *cmnd, t_env *env);
+void	unset_var(t_token *cmnd, t_env **env);
 
 //exit
 void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env);

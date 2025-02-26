@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 12:03:27 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:49:27 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env)
 	else if (improved_cmp(cmnd->value, "export") == 0)
 		export_env(cmnd, env);
 	else if (improved_cmp(cmnd->value, "unset") == 0)
-		unset_var(cmnd, env);
+		unset_var(cmnd, &env);
 	else if (improved_cmp(cmnd->value, "pwd") == 0)
 		print_current_dir(env);
 	else if (improved_cmp(cmnd->value, "cd") == 0)

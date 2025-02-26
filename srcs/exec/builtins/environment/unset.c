@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 15:20:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:49:56 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
 
-void	unset_var(t_token *cmnd, t_env *env)
+void	unset_var(t_token *cmnd, t_env **env)
 {
 	int		status;
 	t_env	*to_remove;
@@ -30,13 +30,13 @@ void	unset_var(t_token *cmnd, t_env *env)
 				cmnd = cmnd->next;
 				continue ;
 			}
-			to_remove = search_key(cmnd->value, env);
+			to_remove = search_key(cmnd->value, *env);
 			if (to_remove)
-				delone_env(&env, to_remove, free);
+				delone_env(env, to_remove, free);
 			cmnd = cmnd->next;
 		}
 	}
 	if (status == 0)
-		return (update_status(&env, "0"));
-	return (update_status(&env, "1"));
+		return (update_status(env, "0"));
+	return (update_status(env, "1"));
 }
