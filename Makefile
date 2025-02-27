@@ -3,20 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
+#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/27 13:50:31 by yhossni          ###   ########.fr        #
+#    Updated: 2025/02/27 19:39:20 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g -fsanitize=address
+
+R			= $(shell brew --prefix readline)
+
+CFLAGS		:= -Wall -Wextra -Werror  -g -fsanitize=address #-I /usr/local/opt/readline
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \
-				exdoc.c signals.c exdochelp.c
+				exdoc.c signals.c exdochelp.c expa_helptw.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c export_var.c \
 		   export_print.c unset.c validate_id_unset.c exit.c reset_env.c status.c
@@ -35,7 +38,7 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_strcmp.c free_tab.c ft_strtrim.c ft_atoi.c ft_strchr.c ft_split.c \
 			ft_strndup.c ft_isalnum.c ft_strcpy.c delone_env.c delone_shell.c \
 			clear_env.c clear_shell.c delone_token.c clear_tokens.c get_env_value.c \
-			ft_realloc.c ft_itoa.c search_token.c ft_putstr_fd.c
+			ft_realloc.c ft_itoa.c search_token.c ft_putstr_fd.c ft_old_split.c
 
 MAIN = main.c
 
@@ -60,35 +63,35 @@ LIBS		= -lreadline -lncurses
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS)  $(R)/lib/libreadline.a -lncurses $(OBJS) -o $(NAME)
 
 objs/%.o: srcs/helpers/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/parsing/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/externals/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/environment/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/directories/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: %.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 clean:
 	rm -rf objs

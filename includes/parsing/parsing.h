@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 14:03:45 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:58:41 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int				doc_handle_invalids(char *buff, int *i, t_exp *exp);
 int				handle_qst_mark(int *i, t_exp *exp, t_env *env);
 int				doc_append_str(char **str, size_t *len, size_t *cap, char *value);
 int				doc_append_char(char **str, size_t *len, size_t *cap, char c);
-
+void			handle_sigint(int sig);
+void			split_and_insert(t_token *curr);
 
 #endif

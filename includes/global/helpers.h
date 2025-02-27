@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 18:31:44 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:39:06 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*get_env_value(char *key, t_env *env);
 void	*ft_realloc(void *old_ptr, size_t old_size, size_t new_size);
 t_token	*search_token(t_token *token, t_token_type type);
 void	ft_putstr_fd(char *s, int fd);
+char	**ft_old_split(char const *s, char c);
 
 
 //list clearing

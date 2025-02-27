@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/27 15:31:49 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 19:00:47 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/global/minishell.h"
 
 //====================================================TESTS=====================================================//
-#include <stdio.h>
-
-#include <stdio.h>
 
 const char	*get_token_name(t_token_type type)
 {
@@ -73,6 +70,23 @@ void	print_shell(t_shell *shell)
 
 //====================================================TESTS=====================================================//
 
+volatile sig_atomic_t g_signal_received = 0;
+
+void	handle_sigint(int sig)
+{
+	(void)sig;
+	g_signal_received = 1;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	catch_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 int main(int ac, char *av[], char *env[])
 {
@@ -94,6 +108,8 @@ int main(int ac, char *av[], char *env[])
 			clear_env(&env_list, free);
 			exit(0);
 		}
+		if (g_signal_received)
+			g_signal_received = 0;
 		if (*input)
 			add_history(input);
 		if (displaymeagn(&input))

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 14:05:21 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:36:40 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	analyze_in_expand(t_token *tokens, t_env *env)
 			or_val = current->value;
 			current->value = expand_token(or_val, env);
 			free(or_val);
+			if (ft_strchr(current->value, '\x01'))
+				split_and_insert(current);
 		}
 		current = current->next;
 	}

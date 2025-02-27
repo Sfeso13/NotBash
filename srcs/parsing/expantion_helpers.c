@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/22 19:26:33 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:01:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	expand_var(t_expander *exp)
 	size_t	start;
 	char	*var_name;
 	char	*var_val;
+	int		i;
+	char	**words;
 
 	exp->i++;
 	start = exp->i;
@@ -80,6 +82,22 @@ void	expand_var(t_expander *exp)
 	var_name = ft_substr(exp->value, start, exp->i - start);
 	var_val = get_env_value(var_name, exp->env);
 	if (var_val)
-		append_str(exp, var_val);
+	{
+		if (!exp->in_single && !exp->in_double)
+		{
+			words = ft_split(var_val);
+			i = 0;
+			while (words[i])
+			{
+				append_str(exp, words[i]);
+				if (words[i + 1])
+					append_char(exp, '\x01');
+				i++;
+			}
+			free(words);
+		}
+		else
+			append_str(exp, var_val);
+	}
 	free(var_name);
 }
