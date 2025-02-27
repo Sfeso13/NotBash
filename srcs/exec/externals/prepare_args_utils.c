@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:52:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 12:53:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:53:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,12 @@ char	**env_to_arr(t_env *env)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+int	redir_token(t_token *cmnd)
+{
+	if (cmnd->type == TOKEN_REDIRECT_IN || cmnd->type == TOKEN_REDIRECT_OUT || \
+		cmnd->type == TOKEN_APPEND || cmnd->type == TOKEN_HEREDOC)
+		return (1);
+	return (0);
 }

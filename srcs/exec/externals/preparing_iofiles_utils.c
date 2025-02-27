@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 10:58:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:59:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	fdop(int to_open, int append, char *filename, int write)
 		to_open = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (to_open == -1)
 	{
-		printf("%s: No such file or directory\n", filename);//should kill child here
+		printf("%s: No such file or directory\n", filename);
 		return (-1);
 	}
 	return (to_open);

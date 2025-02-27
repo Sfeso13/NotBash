@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   multi_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 21:04:04 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:05:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
-
-void	redir_exec(t_fd fds)
-{
-	if (fds.infd != -1)
-		ft_dup(fds.infd, 0);
-	if (fds.outfd != -1)
-		ft_dup(fds.outfd, 1);
-	close(fds.pfd[0]);
-}
 
 void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 {

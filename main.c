@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 21:54:39 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:31:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int main(int ac, char *av[], char *env[])
 			exit(1);
 		}
 		//quotes_remove(tokens);
-		// print_shell(cmd);
+		print_shell(cmd);
 		execute(cmd, env_list);
 		free(input);
 		free_tokens(tokens);

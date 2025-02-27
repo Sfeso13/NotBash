@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 21:23:19 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:07:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
+
+int	is_option(char *s)
+{
+	size_t	i;
+	size_t	len;
+
+	i = 1;
+	if (improved_cmp(s, "-n") == 0)
+		return (1);
+	len = ft_strlen(s);
+	if (s[0] == '-' && len > 1)
+	{
+		while (s[i] && s[i] == 'n')
+			i++;
+		if (i == len)
+			return (1);
+	}
+	return (0);
+}
 
 void	print_no_option(t_token *cmnd, int size)
 {
@@ -20,10 +39,9 @@ void	print_no_option(t_token *cmnd, int size)
 	if (size == 1)
 		printf("\n");
 	else if (size == 2)
-		printf("%s\n", cmnd->next->value);
+		printf("%s\n", cmnd->value);
 	else if (size > 2)
 	{
-		cmnd = cmnd->next;
 		while (cmnd)
 		{
 			if (cmnd->type == TOKEN_WORD && (!cmnd->prev || \
@@ -40,27 +58,18 @@ void	print_no_option(t_token *cmnd, int size)
 	}
 }
 
-void	print_with_option(t_token *cmnd, int size)
+void	print_with_option(t_token *cmnd, int size, int i)
 {
-	int	i;
-
-	i = 2;
 	if (size == 2)
 		printf("");
 	else if (size == 3)
 		printf("%s", cmnd->next->value);
 	else if (size > 3)
 	{
-		cmnd = cmnd->next;
-		while (cmnd && improved_cmp(cmnd->value, "-n") == 0)
-		{
-			i++;
-			cmnd = cmnd->next;
-		}
 		while (cmnd)
 		{
 			if (cmnd->type == TOKEN_WORD && \
-				(!cmnd->prev ||	!redir_token(cmnd->prev)))
+				(!cmnd->prev || !redir_token(cmnd->prev)))
 			{
 				printf("%s", cmnd->value);
 				if (i < size - 1)
@@ -72,13 +81,37 @@ void	print_with_option(t_token *cmnd, int size)
 	}
 }
 
+int	check_option(t_token **cmnd, int *i)
+{
+	int	flag;
+
+	flag = 0;
+	*cmnd = (*cmnd)->next;
+	while (*cmnd)
+	{
+		if (redir_token(*cmnd) || redir_token((*cmnd)->prev))
+		{
+			*cmnd = (*cmnd)->next;
+			continue ;
+		}
+		if (!is_option((*cmnd)->value))
+			break ;
+		flag = 1;
+		(*i)++;
+		*cmnd = (*cmnd)->next;
+	}
+	return (flag);
+}
+
 void	print_args(t_token	*cmnd, t_env *env)
 {
 	int	size;
+	int	i;
 
+	i = 1;
 	size = how_many_args(cmnd);
-	if (size > 1 && improved_cmp(cmnd->next->value, "-n") == 0)
-		print_with_option(cmnd->next, size);
+	if (size > 1 && check_option(&cmnd, &i))
+		print_with_option(cmnd, size, i);
 	else
 		print_no_option(cmnd, size);
 	update_status(&env, "0");

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 19:19:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:00:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 		}
 		update_dash(cmnd, &env);
 		if (isbuiltin(cmnd->value))
-			which_builtin(cmnds, cmnd, env);
+			exec_builtins(cmnds, cmnd, env);
 		else
 			external_cmd(cmnd, env);
 		exit(0);
@@ -125,7 +125,7 @@ void	execute(t_shell *cmnds, t_env *env)
 		multiple_process_exec(cmnds, process_count, env);
 	while (1)
 	{
-		if (wait(&status) == -1)
+		if (waitpid(-1, &status, 0) == -1)
 		{
 			if (errno == ECHILD)
 				break ;
@@ -135,7 +135,7 @@ void	execute(t_shell *cmnds, t_env *env)
 				exit(-1);
 			}
 		}
-		stat = ft_itoa(status);
+		stat = ft_itoa(WEXITSTATUS(status));
 		update_status(&env, stat);
 		free(stat);
 	}
