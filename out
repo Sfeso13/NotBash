@@ -1,2 +1,8 @@
-value to print: -x
--x -x -n ggggg 
+Makefile
+OURTESTS.txt
+includes
+main.c
+minishell
+objs
+out
+srcs

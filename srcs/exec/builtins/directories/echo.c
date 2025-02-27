@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 11:40:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 11:54:47 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_no_option(t_token *cmnd, int size)
 	if (size == 1)
 		printf("\n");
 	else if (size == 2)
-		printf("%s\n", cmnd->next->value);
+		printf("%s\n", cmnd->value);
 	else if (size > 2)
 	{
 		while (cmnd)
