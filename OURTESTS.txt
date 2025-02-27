@@ -1,76 +1,28 @@
                     ill document ga3 tests li l9it fhom mochkil hna :
 
-tets :
-minishell$ export tt="ls -la"
-minishell$ $tt
-ls -la: command not found
-minishell$
-    -> bruh check chi commit 9dima i think kant khdama
-	l7el -> nsina wahd key step f expansion hya splitting words, hadi at7el lmshkil
+test :  not_cmd bonjour > salut
+    -> MAAAAN fik this shit already hhhhhhh
 
 
-test : -> unset var1
-    -> the fuck si invalid id ? hhh
-	->hh??? khdama
+test : cat Makefile | grep pr | head -n 5 | cd test
+    -> wrong exit status BTW i tested shi l3ibat okhrin exit status dyalhom mzyan just this case !
 
-tets :
-minishell$ export tt="ls -la"
-minishell$ $tt
-ls -la: command not found
-minishell$
-	-> bruh check chi commit 9dima i think kant khdama
+us : 127: command not found
+bash: 258: command not found
 
+tets : echo -n simple
+    -> SEGVVVVVVVVVV hhhhahahahhahahahahhahahahahhahahahhahahhahahahahah
 
-test : -> unset var1
-	-> the fuck si invalid id ? hhh
+test : unset  SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _
+    -> export
+still a use after free in update dash
 
-
-test : -> not_cmd bonjour > salut
-    -> tmjnina testiha fbash ------------- ez fix ig its just becuz of the way we print the errors
+tets : unset SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _
+    -> env
+use after free fuck the dash_uopdate function
 
 
-test : ->cat Makefile | grep pr | head -n 5 | cd test
-/usr/bin/cd: line 4: cd: test: No such file or directory
-minishell$ $?
-256: command not found
-minishell$
--> wrong exit code ?
-here too -> cat Makefile | grep pr | head -n 5 | hello
+congrats i tested all tests dyal saad and thats all i found
+so we gotta fix the exit status dik echo -n chi loop machi hya adik hhh
+w dik unset l l3ibat use after free rah u already know how to fix it
 
-
-++++++++terminal attribuites
-
-./
-test :unset  SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _ ✅
-Mini$hell$: export✅
-<<<<<<< HEAD
-	export
-	->use after free
-
-					LETS NOT MIND IT
-
-the annoying -n shit i think ghir defence w sf fuck it
-=======
-    export
-    ->use after free ------ FIXED
-
-                    LETS NOT MIND IT
-
-the annoying -n shit i think ghir defence w sf fuck it -> FIXED
->>>>>>> origin/exec
-
-Mini$hell$: touch ggg ✅
-Mini$hell$: ./ggg ✅
-access: Permission denied ✅
-Mini$hell$: chmod +x ggg ✅
-Mini$hell$: ggg ✅
-command not found: Bad address ✅
-Mini$hell$: ./ggg ✅
-command not found: Exec format error  ✅
-
-exit code should be right anyway
-
-exit "q"
-did not exit should so?
-
-246 tested ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅

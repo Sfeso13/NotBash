@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/27 19:00:47 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 22:50:11 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ int main(int ac, char *av[], char *env[])
 	env_list = create_env(env);
 	while (1)
 	{
-		input = readline("minishell$ ");
+		if (isatty(STDIN_FILENO))
+			input = readline("minishell$ "); //basicaly only show promt in interactive mode
+		else
+			input = NULL; //temp solution for ./minishell < /dev/urandom wlat ktmshy infinitly cause of readline (we are on the right path)
 		if (!input)
 		{
 			clear_env(&env_list, free);
@@ -137,11 +140,10 @@ int main(int ac, char *av[], char *env[])
 			exit(1);
 		}
 		//quotes_remove(tokens);
-		print_shell(cmd);
+		//print_shell(cmd);
 		execute(cmd, env_list);
 		free(input);
 		free_tokens(tokens);
 		free_shell(cmd);
 	}
-	return 0;
-}
+	return 0;}
