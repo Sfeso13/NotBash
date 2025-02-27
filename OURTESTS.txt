@@ -1,8 +1,22 @@
-					ill document ga3 tests li l9it fhom mochkil hna :
+                    ill document ga3 tests li l9it fhom mochkil hna :
+
+tets :
+minishell$ export tt="ls -la"
+minishell$ $tt
+ls -la: command not found
+minishell$
+    -> bruh check chi commit 9dima i think kant khdama
+	l7el -> nsina wahd key step f expansion hya splitting words, hadi at7el lmshkil
+
+
+test : -> unset var1
+    -> the fuck si invalid id ? hhh
+	->hh??? khdama
 
 
 test : -> not_cmd bonjour > salut
     -> tmjnina testiha fbash ------------- ez fix ig its just becuz of the way we print the errors
+
 
 test : ->cat Makefile | grep pr | head -n 5 | cd test
 /usr/bin/cd: line 4: cd: test: No such file or directory
@@ -12,9 +26,31 @@ minishell$
 -> wrong exit code ?
 here too -> cat Makefile | grep pr | head -n 5 | hello
 
+
 ++++++++terminal attribuites
+
 ./
 test :unset  SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _ ✅
 Mini$hell$: export✅
-	export
-	->use after free
+    export
+    ->use after free ------ FIXED
+
+                    LETS NOT MIND IT
+
+the annoying -n shit i think ghir defence w sf fuck it -> FIXED
+
+Mini$hell$: touch ggg ✅
+Mini$hell$: ./ggg ✅
+access: Permission denied ✅
+Mini$hell$: chmod +x ggg ✅
+Mini$hell$: ggg ✅
+command not found: Bad address ✅
+Mini$hell$: ./ggg ✅
+command not found: Exec format error  ✅
+
+exit code should be right anyway
+
+exit "q"
+did not exit should so?
+
+246 tested ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅

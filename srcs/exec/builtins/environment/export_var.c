@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:53:36 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 09:52:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 09:57:36 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	handle_keys(t_env **env, char **kv, char *equal)
 			value = kv[1];
 		envadd_back(env, newenv(key, value));
 	}
+	key_found = search_key(kv[0], *env);
+	printf("updated key : %s ------ value : %s\n", key_found->key, key_found->val);
 	return (0);
 }
 

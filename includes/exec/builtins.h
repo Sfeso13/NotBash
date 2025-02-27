@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 20:49:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:36:46 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	changedir(t_token *cmnd, t_env *env);
 
 //echo
 void	print_args(t_token	*cmnd, t_env *env);
-void	print_with_option(t_token *cmnd, int size);
+void	print_with_option(t_token *cmnd, int size, int i);
 void	print_no_option(t_token *cmnd, int size);
 
 //pwd
