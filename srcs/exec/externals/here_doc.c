@@ -6,19 +6,19 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 10:01:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:13:36 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/exec/exec.h"
 
-char	*join_name(char *name, int i)
+char	*join_name(char *name, int *i)
 {
 	char	*tmp;
 	char	*num;
 
 	tmp = name;
-	num = ft_itoa(i);
+	num = ft_itoa(*i);
 	if (!num)
 		return (NULL);
 	name = ft_strjoin(tmp, num);
@@ -29,6 +29,7 @@ char	*join_name(char *name, int i)
 	}
 	free(tmp);
 	free(num);
+	(*i)++;
 	return (name);
 }
 
@@ -41,12 +42,11 @@ char	*get_filename(void)
 	name = ft_strdup("/tmp/thd10101010doc");
 	while (1)
 	{
-		name = join_name(name, i);
+		name = join_name(name, &i);
 		if (!name)
 			return (NULL);
 		if (access(name, F_OK) != -1)
 		{
-			i++;
 			free(name);
 			continue ;
 		}
@@ -58,7 +58,6 @@ char	*get_filename(void)
 			return (name);
 		}
 		free(name);
-		i++;
 	}
 }
 

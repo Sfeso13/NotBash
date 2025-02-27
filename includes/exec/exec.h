@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 16:51:45 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:53:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 void	restore_stds(int saved_in, int saved_out);
 
 //heredoc
-char	*join_name(char *name, int i);
+char	*join_name(char *name, int *i);
 char	*get_filename(void);
 char	*read_input(int expandable, char *delim, int fd, t_env *env);
 int	get_doc(char *delim, t_env *env);
@@ -55,6 +55,13 @@ int	get_doc(char *delim, t_env *env);
 int	how_many_redir(t_token *cmnd, t_token_type type);
 // int	*init_fds();
 int	*get_io_files(t_token *args, t_env *env);
+//utils
+int	check_doc_limit(int count);
+int	handleinput(t_token *tmp, int *fd, t_redir redir, t_env *env);
+int	handleoutput(t_token *tmp, int *fd, t_redir redir);
+t_redir	init_redir_struct(t_token *args);
+void	exec_builtins(t_shell *shell, t_token *cmnd, t_env *env);
+void	redir_exec(t_fd fds);
 
 //args preparing
 char	*get_cmnd_path(t_token *cmnd, t_env *env);

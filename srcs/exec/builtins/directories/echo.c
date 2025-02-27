@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 11:54:47 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 14:07:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	print_with_option(t_token *cmnd, int size, int i)
 		while (cmnd)
 		{
 			if (cmnd->type == TOKEN_WORD && \
-				(!cmnd->prev ||	!redir_token(cmnd->prev)))
+				(!cmnd->prev || !redir_token(cmnd->prev)))
 			{
 				printf("%s", cmnd->value);
 				if (i < size - 1)
@@ -80,7 +80,6 @@ void	print_with_option(t_token *cmnd, int size, int i)
 		}
 	}
 }
-
 
 int	check_option(t_token **cmnd, int *i)
 {
