@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:59:07 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/27 15:35:45 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ char	*path(t_env *path_node, t_token *cmnd)
 	if (!correct_path)
 	{
 		printf("%s: command not found\n", cmnd->value);
-		free_tab(paths);
 		return (NULL);
 	}
 	return (correct_path);
