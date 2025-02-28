@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:05:58 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:10:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,29 @@ void	closefds(int *fd, t_fd fds)
 		close(fds.outfd);
 }
 
-void	exec_builtins(t_shell *shell, t_token *cmnd, t_env *env)
+void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env)
 {
+	t_env	*status_node;
+
+	status_node = search_key("?", *env);
 	if (is_redirect(shell->tokens))
-		redirect(shell->tokens, env);
+		redirect(shell->tokens, *env);
 	if (improved_cmp(cmnd->value, "env") == 0)
-		print_env(env);
+		print_env(*env);
 	else if (improved_cmp(cmnd->value, "export") == 0)
-		export_env(cmnd, env);
+		export_env(cmnd, *env);
 	else if (improved_cmp(cmnd->value, "unset") == 0)
-		unset_var(cmnd, &env);
+		unset_var(cmnd, env);
 	else if (improved_cmp(cmnd->value, "pwd") == 0)
-		print_current_dir(env);
+		print_current_dir(*env);
 	else if (improved_cmp(cmnd->value, "cd") == 0)
-		changedir(cmnd, env);
+		changedir(cmnd, *env);
 	else if (improved_cmp(cmnd->value, "echo") == 0)
-		print_args(cmnd, env);
+		print_args(cmnd, *env);
 	else if (improved_cmp(cmnd->value, "exit") == 0)
-		exit_shell(&shell, &cmnd, &env);
-	if (improved_cmp(search_key("?", env)->val, "1") == 0)
+		exit_shell(&shell, &cmnd, env);
+	if (status_node && status_node->val && \
+		improved_cmp(status_node->val, "1") == 0)
 		exit (1);
 	exit (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 17:05:43 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 19:34:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	expand_var(t_expander *exp)
 					append_char(exp, '\x01');
 				i++;
 			}
-			free(words);
+			free_tab(words);
 		}
 		else
 			append_str(exp, var_val);

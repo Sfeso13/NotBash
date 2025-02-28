@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 18:12:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:07:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
+void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 {
 	int		i;
 	int		*fd;
@@ -23,7 +23,7 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 	fd = init_fds();
 	while (i < process_count)
 	{
-		fd = get_io_files(cmnds->tokens, env);
+		fd = get_io_files(cmnds->tokens, *env);
 		set_fds(&fds, fd, process_count, i);
 		if (!fd)
 		{
@@ -41,7 +41,7 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env *env)
 	closefds(fd, fds);
 }
 
-void	redirected_execution(t_shell *cmnds, t_env *env)
+void	redirected_execution(t_shell *cmnds, t_env **env)
 {
 	t_token	*cmnd;
 	t_env	*dash;
@@ -52,24 +52,24 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 		perror("fork");
 	else if (child == 0)
 	{
-		redirect(cmnds->tokens, env);
+		redirect(cmnds->tokens, *env);
 		cmnd = extract_cmd(cmnds->tokens);
 		if (!cmnd)
 		{
-			dash = search_key("_", env);
+			dash = search_key("_", *env);
 			return (set_env_value(&dash, NULL));
 		}
-		update_dash(cmnd, &env);
+		update_dash(cmnd, env);
 		if (isbuiltin(cmnd->value))
 			exec_builtins(cmnds, cmnd, env);
 		else
-			external_cmd(cmnd, env);
+			external_cmd(cmnd, *env);
 		exit(0);
 	}
 	child_pid(child, 1);
 }
 
-void	normal_execution(t_shell *cmnds, t_env *env)
+void	normal_execution(t_shell *cmnds, t_env **env)
 {
 	t_token	*cmnd;
 	t_env	*dash;
@@ -78,10 +78,10 @@ void	normal_execution(t_shell *cmnds, t_env *env)
 	cmnd = extract_cmd(cmnds->tokens);
 	if (!cmnd)
 	{
-		dash = search_key("_", env);
+		dash = search_key("_", *env);
 		return (set_env_value(&dash, NULL));
 	}
-	update_dash(cmnd, &env);
+	update_dash(cmnd, env);
 	if (isbuiltin(cmnd->value))
 		which_builtin(cmnds, cmnd, env);
 	else
@@ -93,12 +93,12 @@ void	normal_execution(t_shell *cmnds, t_env *env)
 			exit(1);
 		}
 		else if (child == 0)
-			external_cmd(cmnd, env);
+			external_cmd(cmnd, *env);
 		child_pid(child, 1);
 	}
 }
 
-void	single_process_exec(t_shell *cmnds, t_env *env)
+void	single_process_exec(t_shell *cmnds, t_env **env)
 {
 	int		saved_in;
 	int		saved_out;
@@ -130,7 +130,7 @@ void	set_status(t_env **env, int status, pid_t cpid)
 	}
 }
 
-void	execute(t_shell *cmnds, t_env *env)
+void	execute(t_shell *cmnds, t_env **env)
 {
 	int		process_count;
 	int		status;
@@ -154,6 +154,6 @@ void	execute(t_shell *cmnds, t_env *env)
 				exit(-1);
 			}
 		}
-		set_status(&env, status, cpid);
+		set_status(env, status, cpid);
 	}
 }

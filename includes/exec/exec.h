@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 17:49:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:07:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <errno.h>
 
 int		improved_cmp(const char *s1, const char *s2);
-void	execute(t_shell *cmnds, t_env *env);
+void	execute(t_shell *cmnds, t_env **env);
 
 void	external_cmd(t_token *cmnd, t_env *env);
 int		is_redirect(t_token *cmnd);
@@ -36,7 +36,7 @@ void	run_command(char *path, char **args, t_env *env);
 int	redir_token(t_token *cmnd);
 void	closefds(int *fd, t_fd fds);
 
-void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env);
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env);
 void	change_fd(int *tochange, int toset, int toclose);
 t_fd	init_fd_struct();
 void	set_fds(t_fd *fds, int *fd, int process_count, int i);
@@ -52,6 +52,8 @@ int	get_doc(char *delim, t_env *env);
 
 pid_t	child_pid(int value, int setorget);
 
+void	save_last_cmd(t_token *cmnd , t_env **env);
+
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);
 // int	*init_fds();
@@ -61,7 +63,7 @@ int	check_doc_limit(int count);
 int	handleinput(t_token *tmp, int *fd, t_redir redir, t_env *env);
 int	handleoutput(t_token *tmp, int *fd, t_redir redir);
 t_redir	init_redir_struct(t_token *args);
-void	exec_builtins(t_shell *shell, t_token *cmnd, t_env *env);
+void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env);
 void	redir_exec(t_fd fds);
 
 //args preparing

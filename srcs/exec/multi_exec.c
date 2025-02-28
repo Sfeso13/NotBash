@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 18:04:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 19:46:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 	run_command(path, args, env);
 }
 
-void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 {
 	pid_t	child;
 	t_token	*cmnd;
@@ -43,11 +43,11 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 		{
 			redir_exec(fds);
 			which_builtin(cmnds, cmnd, env);
-			if (improved_cmp(search_key("?", env)->val, "1") == 0)
+			if (improved_cmp(search_key("?", *env)->val, "1") == 0)
 				exit (1);
 		}
 		else
-			multi_externals(cmnd, fd, fds, env);
+			multi_externals(cmnd, fd, fds, *env);
 		exit(0);
 	}
 	child_pid(child, 1);
