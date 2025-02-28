@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:52:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 17:15:45 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 17:33:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	copy_kv(char *str, t_env *env, size_t len)
 	if (len > klen)
 	{
 		ft_strlcat(str + klen, "=", len + 1);
-		ft_strlcat(str + klen + 1, env->val, len + 1);
+		if (env->val)
+			ft_strlcat(str + klen + 1, env->val, len + 1);
 	}
 }
 
