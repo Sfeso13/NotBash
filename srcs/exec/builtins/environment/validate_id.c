@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:36:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/20 09:57:15 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:48:19 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ char	*key_error(char *key)
 
 char	*validate_key(char *key)
 {
-	int		i;
 	int		plus;
 	size_t	len;
 	char	*res;
 
-	i = 0;
 	if (!allowed(key))
 		return (key_error(key));
 	len = ft_strlen(key);

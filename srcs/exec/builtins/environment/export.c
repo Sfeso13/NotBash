@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 13:53:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:48:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void	set_export(t_token *cmnd, t_env **env, char **kv)
 
 void	export_var(t_token *cmnd, t_env **env, int args_size)
 {
-	int		i;
 	char	**kv;
 	int		status;
 
-	i = 1;
 	status = 0;
 	while (args_size - 1 > 0)
 	{

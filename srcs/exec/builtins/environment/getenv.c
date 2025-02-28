@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 11:16:19 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 15:47:37 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ char	**alloc_arr(char **arr, size_t wlen1, size_t wlen2)
 static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
 {
 	size_t	i;
-	char	*tmp;
 
 	i = 0;
-	tmp = s;
 	if (!alloc_arr(arr, wlen1, wlen2))
 		return (NULL); //malloc failure
 	while (i < wlen1)
