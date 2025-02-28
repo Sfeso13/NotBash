@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/27 20:01:38 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:05:43 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	expand_var(t_expander *exp)
 	var_val = get_env_value(var_name, exp->env);
 	if (var_val)
 	{
-		if (!exp->in_single && !exp->in_double)
+		if (!exp->in_single && !exp->in_double && exp->expme == 0)
 		{
 			words = ft_split(var_val);
 			i = 0;

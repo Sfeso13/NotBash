@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/27 19:58:41 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:50:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_shell			*crt_node(void);
 t_token			*copy_token(t_token *src);
 void			free_shell(t_shell *head);
 void			analyze_in_expand(t_token *tokens, t_env *env);
-char			*expand_token(char *value, t_env *env);
+char			*expand_token(char *value, t_env *env, int inexp);
 void			expand_var(t_expander *exp);
 void			handle_quote(t_expander *exp, char quote);
 void			handle_backslash(t_expander *exp);
 void			append_str(t_expander *exp, char *str);
 void			append_char(t_expander *exp, char c);
-void			init_expander(t_expander *exp, char *value, t_env *env);
+void			init_expander(t_expander *exp, char *value, t_env *env, int inexp);
 t_token			*cpy_till_pipe(t_token **curr);
 t_token_type	get_token_type(const char *str);
 char			*handle_operator(char **input);

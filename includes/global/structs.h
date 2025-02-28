@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 21:11:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 16:43:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_expander
 	int			in_single;
 	int			in_double;
 	int			escape_next;
+	int			expme;
 }	t_expander;
 
 #endif

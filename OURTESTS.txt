@@ -26,3 +26,26 @@ congrats i tested all tests dyal saad and thats all i found
 so we gotta fix the exit status dik echo -n chi loop machi hya adik hhh
 w dik unset l l3ibat use after free rah u already know how to fix it
 
+
+
+
+
+
+minishell$ export a="a >> ^C
+minishell$ bash
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==40131==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x00010dd0b689 bp 0x7ffee1f272e0 sp 0x7ffee1f272c0 T0)
+==40131==The signal is caused by a READ memory access.
+==40131==Hint: address points to the zero page.
+    #0 0x10dd0b689 in ft_strlen ft_strlen.c:20
+    #1 0x10dd0cb37 in ft_strlcat ft_strlcat.c:22
+    #2 0x10dd1f224 in copy_kv prepare_args_utils.c:49
+    #3 0x10dd1f471 in env_to_arr prepare_args_utils.c:69
+    #4 0x10dd13bdc in run_command externals.c:19
+    #5 0x10dd13d22 in external_cmd externals.c:46
+    #6 0x10dd1203c in normal_execution exec.c:95
+    #7 0x10dd12175 in single_process_exec exec.c:112
+    #8 0x10dd12308 in execute exec.c:123
+    #9 0x10dd0b595 in main main.c:145
+    #10 0x7fff725c2cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)

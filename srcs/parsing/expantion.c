@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 15:46:52 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 17:04:51 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void	char_process(t_expander *exp)
 		append_char(exp, exp->value[exp->i++]);
 }
 
-char	*expand_token(char *value, t_env *env)
+char	*expand_token(char *value, t_env *env, int inexp)
 {
 	t_expander	exp;
 
-	init_expander(&exp, value, env);
+	init_expander(&exp, value, env, inexp);
 	while (exp.value[exp.i])
 		char_process(&exp);
 	return (exp.buffer);
@@ -70,17 +70,21 @@ void	analyze_in_expand(t_token *tokens, t_env *env)
 {
 	t_token	*current;
 	char	*or_val;
+	int		inexp;
 
+	inexp = 0;
 	current = tokens;
 	while (current)
 	{
+		if (improved_cmp(current->value, "export") == 0)
+				inexp = 1;
 		if (current->type == TOKEN_WORD
 			&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
 		{
 			or_val = current->value;
-			current->value = expand_token(or_val, env);
+			current->value = expand_token(or_val, env, inexp);
 			free(or_val);
-			if (ft_strchr(current->value, '\x01'))
+			if (ft_strchr(current->value, '\x01') && inexp == 0)
 				split_and_insert(current);
 		}
 		current = current->next;

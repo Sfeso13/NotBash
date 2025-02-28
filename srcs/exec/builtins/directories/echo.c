@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:07:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 16:08:35 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_with_option(t_token *cmnd, int size, int i)
 	if (size == 2)
 		printf("");
 	else if (size == 3)
-		printf("%s", cmnd->next->value);
+		printf("%s", cmnd->value);
 	else if (size > 3)
 	{
 		while (cmnd)
