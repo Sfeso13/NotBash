@@ -14,3 +14,12 @@ bash: 258: command not found
 congrats i tested all tests dyal saad and thats all i found
 so we gotta fix the exit status dik echo -n chi loop machi hya adik hhh
 w dik unset l l3ibat use after free rah u already know how to fix it
+
+
+
+minishell$ export a= ds=fsd fds=fdsf=ds =s=sdf =s f=ds
+minishell$ env
+minishell$ unset a ds fds f
+minishell$ env
+
+and then quit with ctrl d ---> LEAKS prob should create a garbage collector
