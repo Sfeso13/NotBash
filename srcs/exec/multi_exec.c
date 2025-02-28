@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:05:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:04:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
 		{
 			redir_exec(fds);
 			which_builtin(cmnds, cmnd, env);
+			if (improved_cmp(search_key("?", env)->val, "1") == 0)
+				exit (1);
 		}
 		else
 			multi_externals(cmnd, fd, fds, env);
 		exit(0);
 	}
+	child_pid(child, 1);
 	if (fds.infd != -1)
 		close(fds.infd);
 }

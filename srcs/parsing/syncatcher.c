@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syncatcher.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:18:29 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/26 15:44:58 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:46:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	checkmy_syn(const char *input)
 	if (quoting_check(input))
 	{
 		ft_putstr_fd("Error unclosed quotes\n", 2);
+		//update_status(env, "1")
 		return (1);
 	}
 	if (redir_check(input))

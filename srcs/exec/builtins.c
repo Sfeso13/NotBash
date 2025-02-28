@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 20:49:27 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:07:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env *env)
 {
-	if (is_redirect(shell->tokens))
-		redirect(shell->tokens, env);
 	if (improved_cmp(cmnd->value, "env") == 0)
 		print_env(env);
 	else if (improved_cmp(cmnd->value, "export") == 0)

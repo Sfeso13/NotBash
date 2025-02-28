@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 15:00:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:12:20 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 			external_cmd(cmnd, env);
 		exit(0);
 	}
+	child_pid(child, 1);
 }
 
 void	normal_execution(t_shell *cmnds, t_env *env)
@@ -93,6 +94,7 @@ void	normal_execution(t_shell *cmnds, t_env *env)
 		}
 		else if (child == 0)
 			external_cmd(cmnd, env);
+		child_pid(child, 1);
 	}
 }
 
@@ -112,11 +114,27 @@ void	single_process_exec(t_shell *cmnds, t_env *env)
 		normal_execution(cmnds, env);
 }
 
+void	set_status(t_env **env, int status, pid_t cpid)
+{
+	char	*stat;
+
+	stat = NULL;
+	if (cpid == child_pid(0, 0))
+	{
+		if (WIFSIGNALED(status))
+			stat = ft_itoa(WTERMSIG(status) + 128);
+		else if (WIFEXITED(status))
+			stat = ft_itoa(WEXITSTATUS(status));
+		update_status(env, stat);
+		free(stat);
+	}
+}
+
 void	execute(t_shell *cmnds, t_env *env)
 {
 	int		process_count;
-	char	*stat;
 	int		status;
+	pid_t	cpid;
 
 	process_count = how_many_processes(cmnds);
 	if (process_count == 1)
@@ -125,7 +143,8 @@ void	execute(t_shell *cmnds, t_env *env)
 		multiple_process_exec(cmnds, process_count, env);
 	while (1)
 	{
-		if (waitpid(-1, &status, 0) == -1)
+		cpid = waitpid(-1, &status, 0);
+		if (cpid == -1)
 		{
 			if (errno == ECHILD)
 				break ;
@@ -135,8 +154,6 @@ void	execute(t_shell *cmnds, t_env *env)
 				exit(-1);
 			}
 		}
-		stat = ft_itoa(WEXITSTATUS(status));
-		update_status(&env, stat);
-		free(stat);
+		set_status(&env, status, cpid);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 16:26:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 17:49:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ void	print_shell(t_shell *shell)
 
 volatile sig_atomic_t g_signal_received = 0;
 
+pid_t	child_pid(int value, int setorget)
+{
+	static pid_t	pid;
+
+	if (setorget == 1)
+		pid = value;
+	else
+		return (pid);
+	return (0);
+}
+
 void	handle_sigint(int sig)
 {
 	(void)sig;
@@ -98,10 +109,10 @@ int main(int ac, char *av[], char *env[])
 	(void)av;
 	if (ac != 1)
 		return (1);
-	catch_signals();
 	env_list = create_env(env);
 	while (1)
 	{
+		catch_signals();
 		if (isatty(STDIN_FILENO))
 			input = readline("minishell$ "); //basicaly only show promt in interactive mode
 		else

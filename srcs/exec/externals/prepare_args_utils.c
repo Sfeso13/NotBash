@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:52:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 17:33:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 17:36:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	copy_kv(char *str, t_env *env, size_t len)
 {
 	size_t	klen;
 
-	printf("key : %s\n", env->key);
 	klen = ft_strlen(env->key);
 	ft_strlcpy(str, env->key, len + 1);
 	if (len > klen)

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:53:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 17:49:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*get_filename(void);
 char	*read_input(int expandable, char *delim, int fd, t_env *env);
 int	get_doc(char *delim, t_env *env);
 
+pid_t	child_pid(int value, int setorget);
 
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);
