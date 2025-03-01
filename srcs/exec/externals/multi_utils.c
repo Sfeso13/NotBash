@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 11:25:24 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 12:08:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,6 @@ void	closefds(int *fd, t_fd fds)
 		close(fds.outfd);
 }
 
-void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env)
-{
-	t_env	*status_node;
-
-	status_node = search_key("?", *env);
-	if (improved_cmp(cmnd->value, "env") == 0)
-		print_env(*env);
-	else if (improved_cmp(cmnd->value, "export") == 0)
-		export_env(cmnd, *env);
-	else if (improved_cmp(cmnd->value, "unset") == 0)
-		unset_var(cmnd, env);
-	else if (improved_cmp(cmnd->value, "pwd") == 0)
-		print_current_dir(*env);
-	else if (improved_cmp(cmnd->value, "cd") == 0)
-		changedir(cmnd, *env);
-	else if (improved_cmp(cmnd->value, "echo") == 0)
-		print_args(cmnd, *env);
-	else if (improved_cmp(cmnd->value, "exit") == 0)
-		exit_shell(&shell, &cmnd, env);
-	if (status_node && status_node->val && \
-		improved_cmp(status_node->val, "1") == 0)
-		exit (1);
-	exit (0);
-}
-
 void	redir_exec(t_fd fds)
 {
 	if (fds.infd != -1)
@@ -60,4 +35,24 @@ void	redir_exec(t_fd fds)
 	if (fds.outfd != -1)
 		ft_dup(fds.outfd, 1);
 	close(fds.pfd[0]);
+}
+
+void	change_fd(int *tochange, int toset, int toclose)
+{
+	if (*tochange != -1)
+		close(*tochange);
+	*tochange = toset;
+	if (toclose != -1)
+		close(toclose);
+}
+
+t_fd	init_fd_struct(void)
+{
+	t_fd	fds;
+
+	fds.infd = -1;
+	fds.outfd = -1;
+	fds.pfd[0] = -1;
+	fds.pfd[1] = -1;
+	return (fds);
 }

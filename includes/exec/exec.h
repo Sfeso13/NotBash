@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 21:07:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 12:10:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@
 # include <sys/wait.h> //linux
 # include <errno.h>
 
+
+//single process
+int	*single_redirect(t_token *cmnd, t_env *env);
+void	single_process_exec(t_shell *cmnds, t_env **env);
+void	redirected_execution(t_shell *cmnds, t_env **env);
+void	normal_execution(t_shell *cmnds, t_env **env);
+
+//multi process
+void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env);
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env);
+void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env);
+
+//multi utils
+void	set_fds(t_fd *fds, int *fd, int process_count, int i);
+void	change_fd(int *tochange, int toset, int toclose);
+t_fd	init_fd_struct(void);
+
+
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env **env);
 
@@ -36,10 +54,6 @@ void	run_command(char *path, char **args, t_env *env);
 int	redir_token(t_token *cmnd);
 void	closefds(int *fd, t_fd fds);
 
-void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env);
-void	change_fd(int *tochange, int toset, int toclose);
-t_fd	init_fd_struct();
-void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 
 
 void	restore_stds(int saved_in, int saved_out);

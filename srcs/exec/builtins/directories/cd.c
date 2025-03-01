@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 11:28:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:56:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	go_to(t_token *cmnd)
 		cmnd = cmnd->next;
 	}
 	path = cmnd->value;
-	printf("path : %s\n", path);
 	return (chdir(path));
 }
 

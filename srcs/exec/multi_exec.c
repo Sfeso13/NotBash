@@ -6,11 +6,30 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 19:46:58 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 12:08:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
+
+void	set_fds(t_fd *fds, int *fd, int process_count, int i)
+{
+	if (pipe(fds->pfd) == -1)
+	{
+		perror("pipe");
+		exit(-1);
+	}
+	if (!fd)
+		return ;
+	if (fd[1] == -1 && i < process_count - 1)
+		change_fd(&fds->outfd, fds->pfd[1], -1);
+	else if (fd[1] == -1 && i == process_count -1)
+		change_fd(&fds->outfd, -1, fds->pfd[1]);
+	else if (fd[1] != -1)
+		change_fd(&fds->outfd, fd[1], fds->pfd[1]);
+	if (fd[0] != -1)
+		change_fd(&fds->infd, fd[0], -1);
+}
 
 void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 {
@@ -55,41 +74,32 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 		close(fds.infd);
 }
 
-void	change_fd(int *tochange, int toset, int toclose)
-{
-	if (*tochange != -1)
-		close(*tochange);
-	*tochange = toset;
-	if (toclose != -1)
-		close(toclose);
-}
 
-t_fd	init_fd_struct(void)
+void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 {
+	int		i;
+	int		*fd;
 	t_fd	fds;
 
-	fds.infd = -1;
-	fds.outfd = -1;
-	fds.pfd[0] = -1;
-	fds.pfd[1] = -1;
-	return (fds);
-}
-
-void	set_fds(t_fd *fds, int *fd, int process_count, int i)
-{
-	if (pipe(fds->pfd) == -1)
+	i = 0;
+	fds = init_fd_struct();
+	fd = init_fds();
+	while (i < process_count)
 	{
-		perror("pipe");
-		exit(-1);
+		fd = get_io_files(cmnds->tokens, *env);
+		set_fds(&fds, fd, process_count, i);
+		if (!fd)
+		{
+			close(fds.pfd[1]);
+			fds.infd = fds.pfd[0];
+			cmnds = cmnds->next;
+			i++;
+			continue ;
+		}
+		piped_exec(cmnds, fd, fds, env);
+		fds.infd = fds.pfd[0];
+		i++;
+		cmnds = cmnds->next;
 	}
-	if (!fd)
-		return ;
-	if (fd[1] == -1 && i < process_count - 1)
-		change_fd(&fds->outfd, fds->pfd[1], -1);
-	else if (fd[1] == -1 && i == process_count -1)
-		change_fd(&fds->outfd, -1, fds->pfd[1]);
-	else if (fd[1] != -1)
-		change_fd(&fds->outfd, fd[1], fds->pfd[1]);
-	if (fd[0] != -1)
-		change_fd(&fds->infd, fd[0], -1);
+	closefds(fd, fds);
 }

@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/02/28 19:14:29 by yhossni          ###   ########.fr        #
+#    Updated: 2025/03/01 12:05:26 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ EXTERNSRCS := preparing_iofiles.c preparing_iofiles_utils.c prepare_args.c \
 			  args_split.c prepare_args_utils.c here_doc.c multi_utils.c \
 			  get_io_files.c
 
-EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c externals.c multi_exec.c
+EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c externals.c multi_exec.c \
+			single_process.c
 
 HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_memcpy.c ft_strncmp.c ft_strjoin.c ft_calloc.c ft_bzero.c \
