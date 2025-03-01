@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 21:06:56 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 14:45:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ void	external_cmd(t_token *cmnd, t_env *env)
 	if (!args)
 		exit(-1);//check for the correct exit status needed
 	run_command(path, args, env);
-	exit(0);
+	exit(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 12:04:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 18:13:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	redirected_execution(t_shell *cmnds, t_env **env)
 			external_cmd(cmnd, *env);
 		child_pid(child, 1);
 	}
-	// update_dash(cmnd, env);
 }
 
 void	normal_execution(t_shell *cmnds, t_env **env)
@@ -86,7 +85,6 @@ void	normal_execution(t_shell *cmnds, t_env **env)
 		dash = search_key("_", *env);
 		return (set_env_value(&dash, NULL));
 	}
-	// update_dash(cmnd, env);
 	if (isbuiltin(cmnd->value))
 		which_builtin(cmnds, cmnd, env);
 	else

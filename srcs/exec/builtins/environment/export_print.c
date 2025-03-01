@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 12:17:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 15:14:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,21 @@ char	**env_to_arr_export(t_env *env)
 	return (copy);
 }
 
-void	print_full_env(t_env *env)
+void	print_full_env(t_token *cmnd, t_env **env)
 {
 	char	**arr;
 	int		i;
 
 	i = 0;
-	arr = env_to_arr_export(dup_env(env));
+	arr = env_to_arr_export(dup_env(*env));
 	if (!arr)
-		return (update_status(&env, "1"));
+		return (update_status(env, "1"));
 	while (arr[i])
 	{
 		printf("declare -x %s\n", arr[i]);
 		i++;
 	}
 	free_tab(arr);
-	update_status(&env, "0");
+	update_dash(cmnd, env);
+	update_status(env, "0");
 }

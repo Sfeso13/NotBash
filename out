@@ -1,0 +1,15 @@
+total 1580
+drwxr-xr-x 7 yhossni 2024_khouribga     186 Mar  1 17:57 .
+drwxr-xr-x 7 yhossni 2024_khouribga     121 Mar  1 11:18 ..
+-rw-r--r-- 1 yhossni 2024_khouribga    6148 Feb 22 15:24 .DS_Store
+drwxr-xr-x 8 yhossni 2024_khouribga    4096 Mar  1 12:11 .git
+-rw-r--r-- 1 yhossni 2024_khouribga     333 Feb 20 16:04 .gitignore
+drwxr-xr-x 5 yhossni 2024_khouribga      47 Feb 16 21:34 includes
+-rw-r--r-- 1 yhossni 2024_khouribga    3954 Feb 28 19:50 main.c
+-rw-r--r-- 1 yhossni 2024_khouribga    3699 Mar  1 12:05 Makefile
+-rwxr-xr-x 1 yhossni 2024_khouribga 1576832 Mar  1 17:57 minishell
+drwxr-xr-x 2 yhossni 2024_khouribga    8192 Mar  1 17:57 objs
+-rw-r--r-- 1 yhossni 2024_khouribga     226 Mar  1 14:32 OURTESTS.txt
+-rwxr-xr-x 1 yhossni 2024_khouribga       0 Mar  1 17:57 out
+drwxr-xr-x 5 yhossni 2024_khouribga      48 Mar  1 11:45 srcs
+drwxr-xr-x 2 yhossni 2024_khouribga      75 Feb 27 21:05 .vscode
