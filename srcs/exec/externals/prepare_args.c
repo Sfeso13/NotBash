@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 15:35:45 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:10:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	is_absolute(t_token *cmnd)
 	{
 		if (access(cmnd->value, X_OK) == 0)
 			return (1);
-		printf("%s: command not found\n", cmnd->value);
+		ft_putstr_fd(cmnd->value, 2);
+		ft_putstr_fd(": command not found\n", 2);
 		return (-1);
 	}
 	return (0);
@@ -87,7 +88,8 @@ char	*path(t_env *path_node, t_token *cmnd)
 	correct_path = retrieve_path(paths, cmnd);
 	if (!correct_path)
 	{
-		printf("%s: command not found\n", cmnd->value);
+		ft_putstr_fd(cmnd->value, 2);
+		ft_putstr_fd(": command not found\n", 2);
 		return (NULL);
 	}
 	return (correct_path);
@@ -110,7 +112,8 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 		correct_path = path(path_node, cmnd);
 	else if (!path_node || !path_node->val || path_node->val[0] == '\0')
 	{
-		printf("%s: No such file or directory\n", cmnd->value);
+		ft_putstr_fd(cmnd->value, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (NULL);
 	}
 	return (correct_path);

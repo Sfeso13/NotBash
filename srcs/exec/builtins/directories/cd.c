@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/26 15:21:07 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:28:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,21 @@ void	update_pwd(t_env **env)
 		set_env_value(&hidden, getcwd(NULL, PATH_MAX));
 }
 
+int	go_to(t_token *cmnd)
+{
+	char	*path;
+
+	while (cmnd)
+	{
+		if (cmnd->type == TOKEN_WORD && cmnd->prev && !redir_token(cmnd->prev))
+			break ;
+		cmnd = cmnd->next;
+	}
+	path = cmnd->value;
+	printf("path : %s\n", path);
+	return (chdir(path));
+}
+
 void	changedir(t_token *cmnd, t_env *env)
 {
 	t_env	*homedir;
@@ -60,15 +75,17 @@ void	changedir(t_token *cmnd, t_env *env)
 		homedir = search_key("HOME", env);
 		if (!homedir)
 		{
-			printf("cd: HOME not set\n");
+			ft_putstr_fd("cd: HOME not set\n", 2);
 			return (update_status(&env, "1"));
 		}
 		else
 			chdir(homedir->val);
 	}
-	else if (chdir(cmnd->next->value) == -1)
+	else if (go_to(cmnd->next) == -1)
 	{
-		printf("cd: %s: no such file or directory\n", cmnd->next->value);
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(cmnd->next->value, 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
 		return (update_status(&env, "1"));
 	}
 	update_status(&env, "0");

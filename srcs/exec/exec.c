@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 21:15:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:49:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,50 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 	closefds(fd, fds);
 }
 
+int	*single_redirect(t_token *cmnd, t_env *env)
+{
+	int		*fd;
+
+	fd = get_io_files(cmnd, env);
+	if (!fd)
+		return (NULL);
+	if (fd[0] != -1)
+	{
+		ft_dup(fd[0], 0);
+	}
+	if (fd[1] != -1)
+	{
+		ft_dup(fd[1], 1);
+	}
+	return (fd);
+}
+
 void	redirected_execution(t_shell *cmnds, t_env **env)
 {
 	t_token	*cmnd;
 	t_env	*dash;
 	pid_t	child;
 
-	child = fork();
-	if (child < 0)
-		perror("fork");
-	else if (child == 0)
+	if(single_redirect(cmnds->tokens, *env) == NULL)
+		return ;
+	cmnd = extract_cmd(cmnds->tokens);
+	if (!cmnd)
 	{
-		redirect(cmnds->tokens, *env);
-		cmnd = extract_cmd(cmnds->tokens);
-		if (!cmnd)
-		{
-			dash = search_key("_", *env);
-			return (set_env_value(&dash, NULL));
-		}
-		if (isbuiltin(cmnd->value))
-			exec_builtins(cmnds, cmnd, env);
-		else
-			external_cmd(cmnd, *env);
-		update_dash(cmnd, env);
-		exit(0);
+		dash = search_key("_", *env);
+		return (set_env_value(&dash, NULL));
 	}
-	child_pid(child, 1);
+	if (isbuiltin(cmnd->value))
+		which_builtin(cmnds, cmnd, env);
+	else
+	{
+		child = fork();
+		if (child < 0)
+			perror("fork");
+		else if (child == 0)
+			external_cmd(cmnd, *env);
+		child_pid(child, 1);
+	}
+	// update_dash(cmnd, env);
 }
 
 void	normal_execution(t_shell *cmnds, t_env **env)
@@ -81,7 +99,7 @@ void	normal_execution(t_shell *cmnds, t_env **env)
 		dash = search_key("_", *env);
 		return (set_env_value(&dash, NULL));
 	}
-	update_dash(cmnd, env);
+	// update_dash(cmnd, env);
 	if (isbuiltin(cmnd->value))
 		which_builtin(cmnds, cmnd, env);
 	else

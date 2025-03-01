@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 15:48:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:10:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 		kv[0] = validate_key(kv[0]);
 		if (kv[0] == NULL || !kv[0][0])
 		{
-			printf("minishell: export : %s: not a valid identifier\n", \
-			cmnd->value);
+			ft_putstr_fd("minishell: export : ", 2);
+			ft_putstr_fd(cmnd->value, 2);
+			ft_putstr_fd(": not a valid identifier\n", 2);
+			free_tab(kv);
 			status = 1;
 		}
 		else

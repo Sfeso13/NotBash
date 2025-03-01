@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 19:15:08 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/25 18:08:49 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:43:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	set_env_value(t_env **env, char *value)
 void	update_dash(t_token *cmnd, t_env **env)
 {
 	t_env	*tmp;
+	t_env	*stat_node;
 
+	stat_node = search_key("?", *env);
+	if (stat_node->val && improved_cmp(stat_node->val, "1") == 0)
+		return ;
 	tmp = *env;
 	while (tmp)
 	{

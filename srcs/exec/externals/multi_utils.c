@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 21:10:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 11:25:24 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env)
 	t_env	*status_node;
 
 	status_node = search_key("?", *env);
-	if (is_redirect(shell->tokens))
-		redirect(shell->tokens, *env);
 	if (improved_cmp(cmnd->value, "env") == 0)
 		print_env(*env);
 	else if (improved_cmp(cmnd->value, "export") == 0)
