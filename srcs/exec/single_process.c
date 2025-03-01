@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 18:13:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:14:59 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	redirected_execution(t_shell *cmnds, t_env **env)
 	pid_t	child;
 
 	if(single_redirect(cmnds->tokens, *env) == NULL)
-		return ;
+		return (update_status(env, "1"));
 	cmnd = extract_cmd(cmnds->tokens);
 	if (!cmnd)
 	{

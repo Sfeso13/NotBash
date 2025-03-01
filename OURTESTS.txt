@@ -1,5 +1,31 @@
                     ill document ga3 tests li l9it fhom mochkil hna :
 
--------------------- qwada jdida ----------------------
 
-cat <<- hh : khass heredoc iwli iskippi tabs 7it kayna dk - o had '-' khassehash tsplita mn << hh
+
+    -> ./minishell < /dev/urandom
+        ->idk should it work like this or not
+
+=================================================================
+==63848==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x0001080754dd bp 0x7ffee7bd23f0 sp 0x7ffee7bd2240 T0)
+==63848==The signal is caused by a READ memory access.
+==63848==Hint: address points to the zero page.
+���H�a�z+Ciu�W�0�.���Xv�N�Ѕe��6�: command not found
+    #0 0x1080754dd in closefds multi_utils.c:17
+    #1 0x108069fd5 in multiple_process_exec multi_exec.c:104
+    #2 0x108066a54 in execute exec.c:47
+    #3 0x108060f1b in main main.c:156
+    #4 0x7fff7036ecc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+==63848==Register values:
+rax = 0x0000000000000000  rbx = 0x00007ffee7bd2280  rcx = 0x0000000600000005  rdx = 0x0000000000000000
+rdi = 0x0000100000000000  rsi = 0x0000000000000000  rbp = 0x00007ffee7bd23f0  rsp = 0x00007ffee7bd2240
+ r8 = 0x0000100000000000   r9 = 0x00001fffdcf7a400  r10 = 0x00001fffdcf7a400  r11 = 0x0000000000000246
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
+==63848==ABORTING
+[1]    63848 abort      ./minishell < /dev/urandom
+
+
+
+    -> manage the signal updating status to 1 when needed (do not overlap the status setting of the cmnds)

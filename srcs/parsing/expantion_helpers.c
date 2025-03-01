@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 19:34:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 21:47:14 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,32 @@ void	expand_var(t_expander *exp)
 	char	*var_val;
 	int		i;
 	char	**words;
+	char	quote;
+	char	*content;
 
 	exp->i++;
 	start = exp->i;
+	if (exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
+	{
+		quote = exp->value[exp->i];
+		start = exp->i;
+		while (exp->value[exp->i] && exp->value[exp->i] != quote)
+			exp->i++;
+		content = ft_substr(exp->value, start, exp->i - start);
+		append_str(exp, content);
+		free(content);
+	}
+	else if (ft_isdigit(exp->value[exp->i]))
+	{
+		while (ft_isdigit(exp->value[exp->i]))
+			exp->i++;
+		content = ft_substr(exp->value, start, exp->i - start);
+		if (content && content[0] != '\0')
+			append_str(exp, content + 1);
+		free(content);
+	}
+	else
+	{
 	while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
 			exp->value[exp->i] == '?')
 		exp->i++;
@@ -100,4 +123,5 @@ void	expand_var(t_expander *exp)
 			append_str(exp, var_val);
 	}
 	free(var_name);
+	}
 }
