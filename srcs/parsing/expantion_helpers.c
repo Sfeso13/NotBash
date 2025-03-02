@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/02 16:00:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:01:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	expand_var(t_expander *exp)
 			while (words[i])
 			{
 				append_str(exp, words[i]);
-				if (words[i])
+				if (words[i + 1])
 					append_char(exp, '\x01');
 				i++;
 			}

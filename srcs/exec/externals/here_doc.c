@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 15:34:14 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 22:21:00 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ int	get_doc(char *delim, t_env *env)
 	if (ft_strchr(delim, '\"') || ft_strchr(delim, '\''))
 		expandable = 0;
 	tmp = remove_doc_qts(delim);
+	printf("%s\n", tmp);
 	fd = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
-	
 	if (fd == -1)
 	{
 		perror("heredoc fd");
