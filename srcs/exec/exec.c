@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 13:39:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 14:07:48 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_status(t_shell *cmnds, t_env **env, int status, pid_t cpid)
 			stat = ft_itoa(WTERMSIG(status) + 128);
 		else if (WIFEXITED(status))
 			stat = ft_itoa(WEXITSTATUS(status));
-		if (improved_cmp(stat, "0") == 0)
+		if (improved_cmp(stat, "0") == 0 || improved_cmp(stat, "130") == 0)
 		{
 			while (cmnds->next)
 				cmnds = cmnds->next;
