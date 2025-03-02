@@ -6,74 +6,11 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 18:04:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 12:08:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
-
-void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
-{
-	char	*path;
-	char	**args;
-
-	path = get_cmnd_path(cmnd, env);
-	if (!path)
-		exit(127);
-	args = prepare_args(cmnd);
-	redir_exec(fds);
-	(void)fd;
-	run_command(path, args, env);
-}
-
-void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env *env)
-{
-	pid_t	child;
-	t_token	*cmnd;
-
-	cmnd = extract_cmd(cmnds->tokens);
-	child = fork();
-	if (child < 0)
-		printf("fork error!\n");//to handle appropriately
-	else if (child == 0)
-	{
-		if (!cmnd)
-			exit(1);
-		if (isbuiltin(cmnd->value))
-		{
-			redir_exec(fds);
-			which_builtin(cmnds, cmnd, env);
-			if (improved_cmp(search_key("?", env)->val, "1") == 0)
-				exit (1);
-		}
-		else
-			multi_externals(cmnd, fd, fds, env);
-		exit(0);
-	}
-	child_pid(child, 1);
-	if (fds.infd != -1)
-		close(fds.infd);
-}
-
-void	change_fd(int *tochange, int toset, int toclose)
-{
-	if (*tochange != -1)
-		close(*tochange);
-	*tochange = toset;
-	if (toclose != -1)
-		close(toclose);
-}
-
-t_fd	init_fd_struct(void)
-{
-	t_fd	fds;
-
-	fds.infd = -1;
-	fds.outfd = -1;
-	fds.pfd[0] = -1;
-	fds.pfd[1] = -1;
-	return (fds);
-}
 
 void	set_fds(t_fd *fds, int *fd, int process_count, int i)
 {
@@ -92,4 +29,77 @@ void	set_fds(t_fd *fds, int *fd, int process_count, int i)
 		change_fd(&fds->outfd, fd[1], fds->pfd[1]);
 	if (fd[0] != -1)
 		change_fd(&fds->infd, fd[0], -1);
+}
+
+void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
+{
+	char	*path;
+	char	**args;
+
+	path = get_cmnd_path(cmnd, env);
+	if (!path)
+		exit(127);
+	args = prepare_args(cmnd);
+	redir_exec(fds);
+	(void)fd;
+	run_command(path, args, env);
+}
+
+void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
+{
+	pid_t	child;
+	t_token	*cmnd;
+
+	cmnd = extract_cmd(cmnds->tokens);
+	child = fork();
+	if (child < 0)
+		printf("fork error!\n");//to handle appropriately
+	else if (child == 0)
+	{
+		if (!cmnd)
+			exit(1);
+		if (isbuiltin(cmnd->value))
+		{
+			redir_exec(fds);
+			which_builtin(cmnds, cmnd, env);
+			if (improved_cmp(search_key("?", *env)->val, "1") == 0)
+				exit (1);
+		}
+		else
+			multi_externals(cmnd, fd, fds, *env);
+		exit(0);
+	}
+	child_pid(child, 1);
+	if (fds.infd != -1)
+		close(fds.infd);
+}
+
+
+void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
+{
+	int		i;
+	int		*fd;
+	t_fd	fds;
+
+	i = 0;
+	fds = init_fd_struct();
+	fd = init_fds();
+	while (i < process_count)
+	{
+		fd = get_io_files(cmnds->tokens, *env);
+		set_fds(&fds, fd, process_count, i);
+		if (!fd)
+		{
+			close(fds.pfd[1]);
+			fds.infd = fds.pfd[0];
+			cmnds = cmnds->next;
+			i++;
+			continue ;
+		}
+		piped_exec(cmnds, fd, fds, env);
+		fds.infd = fds.pfd[0];
+		i++;
+		cmnds = cmnds->next;
+	}
+	closefds(fd, fds);
 }

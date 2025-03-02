@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 18:33:39 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:39:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_shell(t_shell *shell)
 
 //====================================================TESTS=====================================================//
 
-volatile sig_atomic_t g_signal_received = 0;
+// volatile sig_atomic_t g_signal_received = 0;
 
 pid_t	child_pid(int value, int setorget)
 {
@@ -83,21 +83,21 @@ pid_t	child_pid(int value, int setorget)
 	return (0);
 }
 
-void	handle_sigint(int sig)
-{
-	(void)sig;
-	g_signal_received = 1;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+// void	handle_sigint(int sig)
+// {
+// 	(void)sig;
+// 	g_signal_received = 1;
+// 	write(1, "\n", 1);
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// }
 
-void	catch_signals(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-}
+// void	catch_signals(void)
+// {
+// 	signal(SIGINT, handle_sigint);
+// 	signal(SIGQUIT, SIG_IGN);
+// }
 
 int main(int ac, char *av[], char *env[])
 {
@@ -112,7 +112,7 @@ int main(int ac, char *av[], char *env[])
 	env_list = create_env(env);
 	while (1)
 	{
-		catch_signals();
+		// catch_signals();
 		if (isatty(STDIN_FILENO))
 			input = readline("minishell$ "); //basicaly only show promt in interactive mode
 		else
@@ -122,8 +122,8 @@ int main(int ac, char *av[], char *env[])
 			clear_env(&env_list, free);
 			exit(0);
 		}
-		if (g_signal_received)
-			g_signal_received = 0;
+		// if (g_signal_received)
+		// 	g_signal_received = 0;
 		if (*input)
 			add_history(input);
 		if (displaymeagn(&input))
@@ -153,7 +153,7 @@ int main(int ac, char *av[], char *env[])
 		//quotes_remove(tokens);
 		// print_shell(cmd);
 		// signal(SIGINT, SIG_DFL);
-		execute(cmd, env_list);
+		execute(cmd, &env_list);
 		free(input);
 		free_tokens(tokens);
 		free_shell(cmd);

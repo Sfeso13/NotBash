@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 11:36:46 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 15:15:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include "../exec/builtins_utils.h"
 
 //env
-void	print_env(t_env *env);
+void	print_env(t_token *cmnd, t_env **env);
 
 //export
-void	export_env(t_token *cmnd, t_env *env);
+void	export_env(t_token *cmnd, t_env **env);
 void	export_var(t_token *cmnd, t_env **env, int args_size);
-void	print_full_env(t_env *env);
+void	print_full_env(t_token *cmnd, t_env **env);
 
 //unset
 void	unset_var(t_token *cmnd, t_env **env);

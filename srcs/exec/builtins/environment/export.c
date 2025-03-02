@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 15:48:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/01 17:54:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,30 @@ void	set_export(t_token *cmnd, t_env **env, char **kv)
 	free_tab(kv);
 }
 
+void	print_error(char *s)
+{
+	ft_putstr_fd("minishell: export : ", 2);
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+}
+
 void	export_var(t_token *cmnd, t_env **env, int args_size)
 {
 	char	**kv;
 	int		status;
+	t_token	*cmd_exec;
 
 	status = 0;
+	cmd_exec = cmnd;
 	while (args_size - 1 > 0)
 	{
 		kv = export_kv_extract(cmnd->value);
 		kv[0] = validate_key(kv[0]);
 		if (kv[0] == NULL || !kv[0][0])
 		{
-			printf("minishell: export : %s: not a valid identifier\n", \
-			cmnd->value);
+			print_error(cmnd->value);
+			free(kv[1]);
+			free(kv);
 			status = 1;
 		}
 		else
@@ -48,7 +58,7 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 		args_size--;
 	}
 	if (status == 0)
-		return (update_status(env, "0"));
+		return (update_dash(cmd_exec, env), update_status(env, "0"));
 	return (update_status(env, "1"));
 }
 
@@ -67,13 +77,13 @@ int	how_many_args(t_token *cmnd)
 	return (count);
 }
 
-void	export_env(t_token *cmnd, t_env *env)
+void	export_env(t_token *cmnd, t_env **env)
 {
 	int	len;
 
 	len = how_many_args(cmnd);
 	if (!cmnd->next || cmnd->next->type != TOKEN_WORD)
-		print_full_env(env);
+		print_full_env(cmnd, env);
 	else
-		export_var(cmnd->next, &env, len);
+		export_var(cmnd->next, env, len);
 }
