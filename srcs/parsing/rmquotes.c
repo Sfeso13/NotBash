@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/25 14:05:38 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/02 22:23:16 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*remove_doc_qts(char *input)
 
 	if (!input)
 		return (NULL);
+	if (improved_cmp(input, "$\"\"") == 0 || improved_cmp(input, "$\'\'") == 0)
+		return (ft_strdup(""));
 	result = ft_calloc(ft_strlen(input) + 1, 1);
 	if (!result)
 		return (NULL);
@@ -69,6 +71,5 @@ char	*remove_doc_qts(char *input)
 		else
 			result[j++] = input[i++];
 	}
-	result[j] = '\0';
-	return (result);
+	return (result[j] = '\0', result);
 }

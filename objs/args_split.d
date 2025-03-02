@@ -8,11 +8,11 @@ objs/args_split.o: srcs/exec/externals/args_split.c \
   srcs/exec/externals/../../../includes/exec/../global/../exec/exec.h \
   srcs/exec/externals/../../../includes/exec/../global/../exec/exec_utils.h \
   srcs/exec/externals/../../../includes/exec/../global/../parsing/parsing.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/readline.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/rlstdc.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/rltypedefs.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/keymaps.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/chardefs.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/tilde.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/history.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/readline.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/rlstdc.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/rltypedefs.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/keymaps.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/chardefs.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/tilde.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/history.h \
   srcs/exec/externals/../../../includes/exec/../global/helpers.h

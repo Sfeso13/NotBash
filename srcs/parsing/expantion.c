@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 17:04:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:32:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,17 @@ void	analyze_in_expand(t_token *tokens, t_env *env)
 	{
 		if (improved_cmp(current->value, "export") == 0)
 				inexp = 1;
-		if (current->type == TOKEN_WORD
-			&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
+		if (current->type == TOKEN_WORD && (!current->prev || current->prev->type != TOKEN_HEREDOC))
 		{
-			or_val = current->value;
-			current->value = expand_token(or_val, env, inexp);
-			free(or_val);
-			if (ft_strchr(current->value, '\x01') && inexp == 0)
-				split_and_insert(current);
+			if (current->expanded == 0)
+			{
+				or_val = current->value;
+				current->value = expand_token(or_val, env, inexp);
+				free(or_val);
+				if (ft_strchr(current->value, '\x01') && inexp == 0)
+					split_and_insert(current);
+				current->expanded = 1;
+			}
 		}
 		current = current->next;
 	}

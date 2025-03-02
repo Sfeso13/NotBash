@@ -8,11 +8,11 @@ objs/exit.o: srcs/exec/builtins/environment/exit.c \
   srcs/exec/builtins/environment/../../../../includes/exec/../global/../exec/exec.h \
   srcs/exec/builtins/environment/../../../../includes/exec/../global/../exec/exec_utils.h \
   srcs/exec/builtins/environment/../../../../includes/exec/../global/../parsing/parsing.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/readline.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/rlstdc.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/rltypedefs.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/keymaps.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/chardefs.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/tilde.h \
-  /mnt/homes/yhossni/.brew/opt/readline/include/readline/history.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/readline.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/rlstdc.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/rltypedefs.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/keymaps.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/chardefs.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/tilde.h \
+  /mnt/homes/adechaji/brew/opt/readline/include/readline/history.h \
   srcs/exec/builtins/environment/../../../../includes/exec/../global/helpers.h
