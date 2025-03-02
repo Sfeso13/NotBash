@@ -6,28 +6,28 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 18:12:58 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:21:53 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void	save_last_cmd(t_token *cmnd , t_env **env)
-{
-	t_env	*status;
+// void	save_last_cmd(t_token *cmnd , t_env **env)
+// {
+// 	t_env	*status;
 
-	status = search_key("?", *env);
-	if (status && status->val)
-	{
-		if (improved_cmp(status->val, "0") == 0)
-			update_dash(cmnd, env);
-	}
-}
+// 	status = search_key("?", *env);
+// 	if (status && status->val)
+// 	{
+// 		if (improved_cmp(status->val, "0") == 0)
+// 			update_dash(cmnd, env);
+// 	}
+// }
 
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env **env)
 {
 	if (improved_cmp(cmnd->value, "env") == 0)
-		print_env(cmnd, env);
+		print_env(env);
 	else if (improved_cmp(cmnd->value, "export") == 0)
 		export_env(cmnd, env);
 	else if (improved_cmp(cmnd->value, "unset") == 0)

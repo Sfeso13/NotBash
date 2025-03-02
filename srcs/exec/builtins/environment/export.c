@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 17:54:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:23:43 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 		args_size--;
 	}
 	if (status == 0)
-		return (update_dash(cmd_exec, env), update_status(env, "0"));
+		return (update_status(env, "0"));
 	return (update_status(env, "1"));
 }
 
@@ -83,7 +83,7 @@ void	export_env(t_token *cmnd, t_env **env)
 
 	len = how_many_args(cmnd);
 	if (!cmnd->next || cmnd->next->type != TOKEN_WORD)
-		print_full_env(cmnd, env);
+		print_full_env(env);
 	else
 		export_var(cmnd->next, env, len);
 }

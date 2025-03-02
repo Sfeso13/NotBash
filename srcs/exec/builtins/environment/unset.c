@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 16:39:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:19:27 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	unset_var(t_token *cmnd, t_env **env)
 				cmnd = cmnd->next;
 				continue ;
 			}
-			update_dash(cmnd, env);
 			to_remove = search_key(cmnd->value, *env);
 			if (to_remove)
 				delone_env(env, to_remove, free);

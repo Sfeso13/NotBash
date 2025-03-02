@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:58:38 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 15:14:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:23:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**env_to_arr_export(t_env *env)
 	return (copy);
 }
 
-void	print_full_env(t_token *cmnd, t_env **env)
+void	print_full_env(t_env **env)
 {
 	char	**arr;
 	int		i;
@@ -54,6 +54,5 @@ void	print_full_env(t_token *cmnd, t_env **env)
 		i++;
 	}
 	free_tab(arr);
-	update_dash(cmnd, env);
 	update_status(env, "0");
 }
