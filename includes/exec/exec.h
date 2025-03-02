@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 13:40:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:42:15 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include "../global/structs.h"
 # include "../exec/builtins.h"
 # include "../global/minishell.h"
-# include <limits.h>
+# include <sys/syslimits.h>
+// # include <linux/limits.h>
 # include <sys/wait.h> //linux
 # include <errno.h>
 

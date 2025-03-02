@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
+#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/03/01 12:05:26 by yhossni          ###   ########.fr        #
+#    Updated: 2025/03/01 18:57:58 by adechaji         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= minishell
 CC			:= cc
 
-# R			= $(shell brew --prefix readline)
+R			= $(shell brew --prefix readline)
 
 CFLAGS		:= -Wall -Wextra -Werror  -g -fsanitize=address #-I/usr/local/opt/readline
 
@@ -64,35 +64,35 @@ LIBS		= -lreadline -lncurses
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS)  $(LIBS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS)  $(R)/lib/libreadline.a -lncurses $(OBJS) -o $(NAME)
 
 objs/%.o: srcs/helpers/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS)-c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/parsing/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/externals/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/environment/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/directories/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 objs/%.o: %.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -c $< -o $@ -MMD
+	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
 
 clean:
 	rm -rf objs
