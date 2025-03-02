@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 18:12:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:33:14 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,28 @@ void	redirected_execution(t_shell *cmnds, t_env *env)
 	t_env	*dash;
 	pid_t	child;
 
+	cmnd = extract_cmd(cmnds->tokens);
 	child = fork();
 	if (child < 0)
+	{
 		perror("fork");
+		exit (1);
+	}
 	else if (child == 0)
 	{
 		redirect(cmnds->tokens, env);
-		cmnd = extract_cmd(cmnds->tokens);
 		if (!cmnd)
 		{
 			dash = search_key("_", env);
 			return (set_env_value(&dash, NULL));
 		}
-		update_dash(cmnd, &env);
 		if (isbuiltin(cmnd->value))
 			exec_builtins(cmnds, cmnd, env);
 		else
 			external_cmd(cmnd, env);
 		exit(0);
 	}
+	update_dash(cmnd, &env);
 	child_pid(child, 1);
 }
 

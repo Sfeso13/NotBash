@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 13:48:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:16:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_doc_limit(int count)
 {
 	if (count > 16)
 	{
-		printf("maximum here-document count exceeded\n");
+		ft_putstr_fd("maximum here-document count exceeded\n", 2);
 		return (0);
 	}
 	return (1);
