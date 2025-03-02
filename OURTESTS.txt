@@ -31,9 +31,6 @@ SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
     -> manage the signal updating status to 1 when needed (do not overlap the status setting of the cmnds)
 
 
-    -> cat << $""
-
-
     -> hidden path
 
     -> $_ always

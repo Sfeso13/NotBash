@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 17:28:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/02 21:54:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	set_status(t_env **env, int status, pid_t cpid)
 			stat = ft_itoa(WTERMSIG(status) + 128);
 		else if (WIFEXITED(status))
 			stat = ft_itoa(WEXITSTATUS(status));
-		// if (improved_cmp(stat, "0") == 0 || improved_cmp(stat, "130") == 0)
-		// {
-		// 	while (cmnds->next)
-		// 		cmnds = cmnds->next;
-		// 	update_dash(cmnds->tokens, env);
-		// }
 		update_status(env, stat);
 		free(stat);
 	}
@@ -46,7 +40,7 @@ void	execute(t_shell *cmnds, t_env **env)
 		single_process_exec(cmnds, env);
 	else
 	{
-		dash = search_key("?", *env);//fix this
+		dash = search_key("_", *env);//fix this
 		set_env_value(&dash, NULL);
 		multiple_process_exec(cmnds, process_count, env);
 	}
