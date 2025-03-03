@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 15:03:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:11:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	redirect(t_token *cmnd, t_env *env)
 	int		*fd;
 
 	fd = get_io_files(cmnd, env);
-	if (!fd && g_signal_received)
+	if (!fd)
 		exit(1);
 	if (fd[0] != -1)
 	{

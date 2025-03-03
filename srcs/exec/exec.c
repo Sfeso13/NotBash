@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 21:54:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:37:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ void	execute(t_shell *cmnds, t_env **env)
 	int		status;
 	pid_t	cpid;
 	t_env	*dash;
+	int		saved_in;
+	int		saved_out;
 
 	process_count = how_many_processes(cmnds);
 	if (process_count == 1)
 		single_process_exec(cmnds, env);
 	else
 	{
-		dash = search_key("_", *env);//fix this
+		dash = search_key("_", *env);
 		set_env_value(&dash, NULL);
+		saved_in = dup(STDIN_FILENO);
+		saved_out = dup(STDOUT_FILENO);
 		multiple_process_exec(cmnds, process_count, env);
+		restore_stds(saved_in, saved_out);
 	}
 	while (1)
 	{

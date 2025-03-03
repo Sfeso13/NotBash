@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 14:45:31 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:40:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	external_cmd(t_token *cmnd, t_env *env)
 	char	*path;
 	char	**args;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	path = get_cmnd_path(cmnd, env);
 	if (!path)
 		exit(127);

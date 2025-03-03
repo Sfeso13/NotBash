@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 22:21:00 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/03 02:10:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ void	doc_sigint(int sig)
 	(void)sig;
 	g_signal_received = 1;
 	write(1, "\n", 1);
-	// rl_on_new_line();
-	// rl_replace_line("", 0);
-	// rl_redisplay();
+	close(0);
 }
 
 char	*read_input(int expandable, char *delim, int fd, t_env *env)
@@ -80,12 +78,6 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 	buff = readline("> ");
 	while (buff && improved_cmp(buff, delim) != 0)
 	{
-		if (g_signal_received)
-		{
-			free(buff);
-			buff = NULL;
-			break ;
-		}
 		if (expandable)
 			buff = expanddoc(buff, env);
 		write(fd, buff, ft_strlen(buff));
@@ -93,6 +85,8 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 		free(buff);
 		buff = readline("> ");
 	}
+	if (!buff && g_signal_received == 0)
+		g_signal_received = 2;
 	return (buff);
 }
 
@@ -121,7 +115,6 @@ int	get_doc(char *delim, t_env *env)
 	if (ft_strchr(delim, '\"') || ft_strchr(delim, '\''))
 		expandable = 0;
 	tmp = remove_doc_qts(delim);
-	printf("%s\n", tmp);
 	fd = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
 	if (fd == -1)
 	{
@@ -131,9 +124,8 @@ int	get_doc(char *delim, t_env *env)
 	buff = read_input(expandable, tmp, fd, env);
 	if (!buff && g_signal_received)
 	{
-		g_signal_received = 0;
 		close(fd);
-		free(buff);
+		unlink(filename);
 		free(tmp);
 		return (-1);
 	}

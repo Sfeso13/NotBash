@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 17:21:37 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:09:17 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,20 @@ void	redirected_execution(t_shell *cmnds, t_env **env)
 	t_token	*cmnd;
 	t_env	*dash;
 	pid_t	child;
+	int		*fd;
 
-	if(single_redirect(cmnds->tokens, *env) == NULL)
+	fd = single_redirect(cmnds->tokens, *env);
+	if (!fd && g_signal_received == 1)
+	{
+		g_signal_received = 0;
+		return (update_status(env, "1"));
+	}
+	else if(!fd && g_signal_received == 2)
+	{
+		g_signal_received = 0;
+		return (update_status(env, "0"));
+	}
+	else if (!fd)
 		return (update_status(env, "1"));
 	cmnd = extract_cmd(cmnds->tokens);
 	if (!cmnd)

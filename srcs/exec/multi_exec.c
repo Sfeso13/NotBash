@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 12:08:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:41:24 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 	char	*path;
 	char	**args;
 
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	path = get_cmnd_path(cmnd, env);
 	if (!path)
 		exit(127);
@@ -87,8 +89,14 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 	while (i < process_count)
 	{
 		fd = get_io_files(cmnds->tokens, *env);
+		if (!fd && g_signal_received == 1)
+		{
+			g_signal_received = 0;
+			update_status(env, "1");
+			return ;
+		}
 		set_fds(&fds, fd, process_count, i);
-		if (!fd)
+		if (!fd && g_signal_received == 0)
 		{
 			close(fds.pfd[1]);
 			fds.infd = fds.pfd[0];
