@@ -43,4 +43,4 @@ SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
     minishell$ echo $?
     255
 
-
+    -> ls > $a not sure if its fully done but the variable ambi is done
