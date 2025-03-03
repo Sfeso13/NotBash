@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 00:42:47 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/03 04:24:18 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	t_token	*current;
 	char	*or_val;
 	int		inexp;
+	int		dol;
 
 	inexp = 0;
 	current = tokens;
@@ -78,6 +79,10 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	{
 		if (improved_cmp(current->value, "export") == 0)
 				inexp = 1;
+		if (ft_strchr(current->value, '$'))
+			dol = 1;
+		else
+			dol = 0;
 		if (current->type == TOKEN_WORD
 			&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
 		{
@@ -88,14 +93,10 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 				free(or_val);
 				if (ft_strchr(current->value, '\x01') && inexp == 0)
 					split_and_insert(current);
-				if ((current->prev) && current->prev->type == TOKEN_REDIRECT_OUT)
+				if ((current->prev) && current->prev->type == TOKEN_REDIRECT_OUT && dol != 0)
 				{
 					if (current->value && current->next && current->next->value)
-					{
-						ft_putstr_fd("minishell: ambiguous redirect\n", 2);
-						update_status(&env, "1");
-						return (1);
-					}
+						tokens->ambiguous = 1;
 				}
 				current->expanded = 1;
 			}

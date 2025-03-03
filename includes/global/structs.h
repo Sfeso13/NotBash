@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 21:08:16 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/03 04:16:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_token
 	char			*value;
 	//if we wanna add something in futur
 	int				expanded;
+	int				ambiguous;
 	t_token_type	type;
 	struct s_token	*next;
 	struct s_token	*prev;
