@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 13:59:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 01:01:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env)
 	path = get_cmnd_path(cmnd, env);
 	if (!path)
 		exit(127);
+	if (improved_cmp(path, "permission") == 0)
+		exit (126);
 	args = prepare_args(cmnd);
 	redir_exec(fds);
 	(void)fd;

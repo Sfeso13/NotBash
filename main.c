@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 14:40:09 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 02:34:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
-		if (analyze_in_expand(tokens, env_list) == 1)
+		if (analyze_in_expand(&tokens, env_list) == 1)
 		{
 			free_tokens(tokens);
 			free(input);
@@ -158,8 +158,17 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			exit(1);
 		}
-		//quotes_remove(tokens);
-		// print_shell(cmd);
+		// int i = 0;
+		// t_token *tmp = tokens;
+		// while (tmp)
+		// {
+		// 	printf("=======token %d=====\n", i);
+		// 	printf("%s\n", tmp->value);
+		// 	printf("%d\n", tmp->ambiguous);
+		// 	tmp = tmp->next;
+		// 	i++;
+		// }//quotes_remove(tokens);
+		print_shell(cmd);
 		// signal(SIGINT, SIG_DFL);
 		execute(cmd, &env_list);
 		free(input);

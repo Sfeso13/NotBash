@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 04:24:18 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:28:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*expand_token(char *value, t_env *env, int inexp)
 	return (exp.buffer);
 }
 
-int	analyze_in_expand(t_token *tokens, t_env *env)
+int	analyze_in_expand(t_token **tokens, t_env *env)
 {
 	t_token	*current;
 	char	*or_val;
@@ -74,7 +74,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	int		dol;
 
 	inexp = 0;
-	current = tokens;
+	current = *tokens;
 	while (current)
 	{
 		if (improved_cmp(current->value, "export") == 0)
@@ -96,7 +96,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 				if ((current->prev) && current->prev->type == TOKEN_REDIRECT_OUT && dol != 0)
 				{
 					if (current->value && current->next && current->next->value)
-						tokens->ambiguous = 1;
+						current->ambiguous = 1;
 				}
 				current->expanded = 1;
 			}
