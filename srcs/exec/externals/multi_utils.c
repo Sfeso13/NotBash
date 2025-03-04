@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 12:08:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 03:39:43 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	closefds(int *fd, t_fd fds)
 {
-	if (fd[0] != -1)
+	if (fd && fd[0] != -1)
 		close(fd[0]);
-	if (fd[1] != -1)
+	if (fd && fd[1] != -1)
 		close(fd[1]);
 	if (fds.pfd[1] != -1)
 		close(fds.pfd[1]);

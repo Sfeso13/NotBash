@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 02:51:42 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 03:35:11 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	print_shell(t_shell *shell)
 			else
 				snprintf(prev_info, sizeof(prev_info), "%-10s", "(None)");
 
-			printf("  %-15s %-12s ← Prev: %s\n",
+			printf("  %-15s %-12s Expanded: %-3d ← Prev: %s\n",
 				token->value,
 				get_token_name(token->type),
+				token->expanded,
 				prev_info);
 			token = token->next;
 		}
@@ -145,7 +146,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
-		if (analyze_in_expand(&tokens, env_list) == 1)
+		if (analyze_in_expand(tokens, env_list) == 1)
 		{
 			free_tokens(tokens);
 			free(input);
@@ -158,8 +159,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			exit(1);
 		}
-		//quotes_remove(tokens);
-		print_shell(cmd);
+		//print_shell(cmd);
 		// signal(SIGINT, SIG_DFL);
 		execute(cmd, &env_list);
 		free(input);
