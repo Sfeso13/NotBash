@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 02:49:39 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:51:53 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 	return (1);
 }
 
+int	is_ambi(t_token *args)
+{
+	if (args->ambiguous == 1)
+	{
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int	*get_io_files(t_token *args, t_env *env)
 {
 	int		*fd;
@@ -46,9 +56,11 @@ int	*get_io_files(t_token *args, t_env *env)
 	fd = init_fds();
 	redir = init_redir_struct(args);
 	if (!check_doc_limit(redir.in_count[1]))
-		return (NULL);
+		return (update_status(&env, "1"), NULL);
 	while (args)
 	{
+		if (is_ambi(args))
+			return (NULL);
 		if (args->type == TOKEN_REDIRECT_IN || args->type == TOKEN_HEREDOC)
 		{
 			if (!handleinput(args, fd, redir, env))
