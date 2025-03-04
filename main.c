@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 02:36:40 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:48:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,16 +158,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			exit(1);
 		}
-		// int i = 0;
-		// t_token *tmp = tokens;
-		// while (tmp)
-		// {
-		// 	printf("=======token %d=====\n", i);
-		// 	printf("%s\n", tmp->value);
-		// 	printf("%d\n", tmp->ambiguous);
-		// 	tmp = tmp->next;
-		// 	i++;
-		// }//quotes_remove(tokens);
+		//quotes_remove(tokens);
 		print_shell(cmd);
 		// signal(SIGINT, SIG_DFL);
 		execute(cmd, &env_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expa_helptw.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:50:18 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 16:41:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 02:48:03 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_token	*create_new_token(char *value, t_token *prev)
 		return (NULL);
 	new_token->type = TOKEN_WORD;
 	new_token->value = ft_strdup(value);
+	new_token->ambiguous = 0;
 	new_token->prev = prev;
 	new_token->next = prev->next;
 	if (prev->next)
