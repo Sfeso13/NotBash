@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 01:58:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:45:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,31 @@ void	set_status(t_env **env, int status, pid_t cpid)
 	}
 }
 
+void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
+{
+	t_env	*dash;
+	int		saved_in;
+	int		saved_out;
+
+	dash = search_key("_", *env);
+	set_env_value(&dash, NULL);
+	saved_in = dup(STDIN_FILENO);
+	saved_out = dup(STDOUT_FILENO);
+	multiple_process_exec(cmnds, process_count, env);
+	restore_stds(saved_in, saved_out);
+}
+
 void	execute(t_shell *cmnds, t_env **env)
 {
 	int		process_count;
 	int		status;
 	pid_t	cpid;
-	t_env	*dash;
-	int		saved_in;
-	int		saved_out;
 
 	process_count = how_many_processes(cmnds);
 	if (process_count == 1)
 		single_process_exec(cmnds, env);
 	else
-	{
-		dash = search_key("_", *env);
-		set_env_value(&dash, NULL);
-		saved_in = dup(STDIN_FILENO);
-		saved_out = dup(STDOUT_FILENO);
-		multiple_process_exec(cmnds, process_count, env);
-		restore_stds(saved_in, saved_out);
-	}
+		multi_execution(env, process_count, env);
 	while (1)
 	{
 		cpid = waitpid(-1, &status, 0);

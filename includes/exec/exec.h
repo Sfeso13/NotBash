@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 17:20:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 15:08:23 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <sys/wait.h> //linux
 # include <errno.h>
 
+
+pid_t	frk();
 
 //single process
 int	*single_redirect(t_token *cmnd, t_env *env);

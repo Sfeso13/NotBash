@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 02:02:25 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:45:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	run_command(char *path, char **args, t_env *env)
 
 	env_arr = env_to_arr(env);
 	if (!env_arr)
-		exit(-1);//check for correct exit status
+		exit(-1);
 	execve(path, args, env_arr);
 }
 
@@ -46,7 +46,7 @@ void	external_cmd(t_token *cmnd, t_env *env)
 		exit (126);
 	args = prepare_args(cmnd);
 	if (!args)
-		exit(-1);//check for the correct exit status needed
+		exit(-1);
 	run_command(path, args, env);
 	exit(0);
 }

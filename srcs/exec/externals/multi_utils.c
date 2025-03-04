@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 03:39:43 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:08:14 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ void	closefds(int *fd, t_fd fds)
 		close(fds.infd);
 	if (fds.outfd != -1)
 		close(fds.outfd);
+}
+
+pid_t	frk()
+{
+	pid_t	child;
+
+	if (child < 0)
+	{
+		perror("fork");
+		exit (1);
+	}
+	return (child);
 }
 
 void	redir_exec(t_fd fds)

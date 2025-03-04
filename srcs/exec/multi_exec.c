@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 01:01:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 15:17:52 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 	t_token	*cmnd;
 
 	cmnd = extract_cmd(cmnds->tokens);
-	child = fork();
-	if (child < 0)
-		printf("fork error!\n");//to handle appropriately
+	child = frk();
 	else if (child == 0)
 	{
 		if (!cmnd)
@@ -78,6 +76,21 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 		close(fds.infd);
 }
 
+// void	fd_err(t_fd fds, t_shell *cmnds, int *i)
+// {
+// 	g_signal_received = 0;
+// 	close(fds.pfd[1]);
+// 	fds.infd = fds.pfd[0];
+// 	cmnds = cmnds->next;
+// 	(*i)++;
+// }
+
+// void	execute_p(t_fd fds, int *fd, t_shell **cmnds, t_env **env)
+// {
+// 	piped_exec(cmnds, fd, fds, env);
+// 	fds.infd = fds.pfd[0];
+// 	*cmnds = (*cmnds)->next;
+// }
 
 void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 {
@@ -94,23 +107,16 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 		if (!fd && g_signal_received == 1)
 		{
 			g_signal_received = 0;
-			update_status(env, "1");
-			return ;
+			return (update_status(env, "1"));
 		}
 		set_fds(&fds, fd, process_count, i);
 		if (!fd && g_signal_received != 1)
 		{
-			g_signal_received = 0;
-			close(fds.pfd[1]);
-			fds.infd = fds.pfd[0];
-			cmnds = cmnds->next;
-			i++;
+			fd_err(fds, cmnds, &i);
 			continue ;
 		}
-		piped_exec(cmnds, fd, fds, env);
-		fds.infd = fds.pfd[0];
+		execute_p(fds, fd, &cmnds, env);
 		i++;
-		cmnds = cmnds->next;
 	}
 	closefds(fd, fds);
 }
