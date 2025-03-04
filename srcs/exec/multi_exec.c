@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 02:41:24 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 13:59:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 			return ;
 		}
 		set_fds(&fds, fd, process_count, i);
-		if (!fd && g_signal_received == 0)
+		if (!fd && g_signal_received != 1)
 		{
+			g_signal_received = 0;
 			close(fds.pfd[1]);
 			fds.infd = fds.pfd[0];
 			cmnds = cmnds->next;

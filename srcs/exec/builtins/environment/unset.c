@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/02 17:19:27 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 22:59:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,47 @@ void	err(char *value, int *status)
 	*status = 1;
 }
 
+int	internal_vars(t_env *env)
+{
+	if (improved_cmp("PWD", env->key) == 0 || \
+		improved_cmp("OLDPWD", env->key) == 0)
+		return (1);
+	return (0);
+}
+
+void	save_vars(t_env **env)
+{
+	t_env	*pwd;
+	t_env	*oldpwd;
+
+	if (!search_key(".pwd", *env))
+		envadd_back(env, newenv(".pwd", NULL, 0));
+	if (!search_key(".oldpwd", *env))
+		envadd_back(env, newenv(".oldpwd", NULL, 0));
+	pwd = search_key(".pwd", *env);
+	oldpwd = search_key(".oldpwd", *env);
+	pwd->val = ft_strdup(search_key("PWD", *env)->val);
+	oldpwd->val = ft_strdup(search_key("OLDPWD", *env)->val);
+}
+
+void	check_isset(t_token *cmnd, t_env **env)
+{
+	t_env	*to_remove;
+
+	to_remove = search_key(cmnd->value, *env);
+	if (to_remove && to_remove->is_set && internal_vars(to_remove))
+	{
+		save_vars(env);
+		set_env_value(&to_remove, NULL);
+		to_remove->is_set = 0;
+	}
+	else if (to_remove && to_remove->is_set)
+		delone_env(env, to_remove, free);
+}
+
 void	unset_var(t_token *cmnd, t_env **env)
 {
 	int		status;
-	t_env	*to_remove;
 
 	status = 0;
 	if (how_many_args(cmnd) > 1)
@@ -37,9 +74,7 @@ void	unset_var(t_token *cmnd, t_env **env)
 				cmnd = cmnd->next;
 				continue ;
 			}
-			to_remove = search_key(cmnd->value, *env);
-			if (to_remove)
-				delone_env(env, to_remove, free);
+			check_isset(cmnd, env);
 			cmnd = cmnd->next;
 		}
 	}

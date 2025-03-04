@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 02:37:41 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 14:05:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	set_status(t_env **env, int status, pid_t cpid)
 	stat = NULL;
 	if (cpid == child_pid(0, 0))
 	{
+		if (g_signal_received == 1)
+			g_signal_received = 0;
 		if (WIFSIGNALED(status))
 			stat = ft_itoa(WTERMSIG(status) + 128);
 		else if (WIFEXITED(status))

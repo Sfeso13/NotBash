@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:29:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 17:08:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:33:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,62 @@ char	*get_wd()
 	return (buff);
 }
 
-void	create_clean_env(t_env **env)
+// void	create_clean_env(t_env **env)
+// {
+// 	char	*buff;
+
+// 	buff = get_wd();
+// 	if (!search_key("PWD", *env))
+// 	{
+// 		envadd_back(env, newenv("PWD", buff));
+// 		search_key("PWD", *env)->is_set = 0;
+// 	}
+// 	if (!search_key("OLDPWD", *env))
+// 	{
+// 		envadd_back(env, newenv("OLDPWD", NULL));
+// 		search_key("OLDPWD", *env)->is_set = 0;
+// 	}
+// 	if (!search_key("SHLVL", *env))
+// 		envadd_back(env, newenv("SHLVL", "1"));
+// 	if (!search_key("_", *env))
+// 		envadd_back(env, newenv("_", "minishell"));
+// 	if (!search_key("?", *env))
+// 	{
+// 		envadd_back(env, newenv("?", NULL));
+// 		search_key("?", *env)->is_set = 0;
+// 	}
+// 	if (!search_key("PATH", *env))
+// 	{
+// 		envadd_back(env, newenv("PATH", \
+// 		ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.")));
+// 		search_key("PATH", *env)->is_set = 0;
+// 	}
+// 	free(buff);
+// }
+
+void	hide_vars(char *key, char *value, t_env **env)
+{
+	if (!search_key(key, *env))
+		envadd_back(env, newenv(key, value, 0));
+}
+
+void	reset_env(t_env **env)
 {
 	char	*buff;
 
 	buff = get_wd();
 	if (!search_key("PWD", *env))
-		envadd_back(env, newenv("PWD", buff));
-	if (!search_key(".pwd", *env))
-		envadd_back(env, newenv(".pwd", buff));
+		envadd_back(env, newenv("PWD", buff, 1));
 	if (!search_key("OLDPWD", *env))
-		envadd_back(env, newenv("OLDPWD", NULL));
-	if (!search_key(".oldpwd", *env))
-		envadd_back(env, newenv(".oldpwd", NULL));
-	if (!search_key("SHLVL", *env))
-		envadd_back(env, newenv("SHLVL", "1"));
-	if (!search_key("_", *env))
-		envadd_back(env, newenv("_", "minishell"));
+		envadd_back(env, newenv("OLDPWD", NULL, 1));
 	if (!search_key("?", *env))
-		envadd_back(env, newenv("?", NULL));
+		envadd_back(env, newenv("?", NULL, 0));
+	if (!search_key("SHLVL", *env))
+		envadd_back(env, newenv("SHLVL", "1", 1));
+	if (!search_key("_", *env))
+		envadd_back(env, newenv("_", "minishell", 1));
+	if (!search_key("PATH", *env))
+		envadd_back(env, newenv("PATH", \
+		ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."), 0));
 	free(buff);
-}
-
-void	reset_env(t_env **env)
-{
-	t_env	*tmp;
-
-	tmp = *env;
-	while (tmp)
-	{
-		if ((improved_cmp(tmp->key, "OLDPWD") == 0) && tmp->val)
-		{
-			free(tmp->val);
-			tmp->val = NULL;
-			envadd_back(env, newenv(".oldpwd", NULL));
-		}
-		else if (improved_cmp(tmp->key, "PWD") == 0)
-			envadd_back(env, newenv(".pwd", tmp->val));
-		tmp = tmp->next;
-	}
-	create_clean_env(env);
 }

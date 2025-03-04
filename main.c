@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 02:36:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 14:40:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int main(int ac, char *av[], char *env[])
 	{
 		catch_signals();
 		if (isatty(STDIN_FILENO))
-			input = readline("minishell$ "); //basicaly only show promt in interactive mode
+			input = readline("minishell$ ");
 		else
-			input = NULL; //temp solution for ./minishell < /dev/urandom wlat ktmshy infinitly cause of readline (we are on the right path)
+			input = NULL;
 		if (!input)
 		{
 			clear_env(&env_list, free);
@@ -145,7 +145,12 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue;
 		}
-		analyze_in_expand(tokens, env_list);
+		if (analyze_in_expand(tokens, env_list) == 1)
+		{
+			free_tokens(tokens);
+			free(input);
+			continue ;
+		}
 		cmd	= fill_cmd(tokens);
 		if (!cmd)
 		{
@@ -161,4 +166,5 @@ int main(int ac, char *av[], char *env[])
 		free_tokens(tokens);
 		free_shell(cmd);
 	}
-	return 0;}
+	return 0;
+}

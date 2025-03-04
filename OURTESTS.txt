@@ -28,8 +28,6 @@ SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
 
 
 
-    -> manage the signal updating status to 1 when needed (do not overlap the status setting of the cmnds)
-
     -> hidden path
 
     -> permession denied
@@ -43,4 +41,4 @@ SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
     minishell$ echo $?
     255
 
-
+    -> ls > $a not sure if its fully done but the variable ambi is done
