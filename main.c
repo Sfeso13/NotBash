@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 04:29:02 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:06:12 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			continue ;
 		}
-		if (advsyncatcher(input) == 1)
+		if (advsyncatcher(input, &env_list) == 1)
 		{
 			free(input);
 			continue ;
