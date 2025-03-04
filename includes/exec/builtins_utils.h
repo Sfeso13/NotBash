@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 19:52:25 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:29:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		find_oldpwd_nodes(t_env *env, t_env **actual, t_env **hidden);
 //env utils
 void	envadd_back(t_env **lst, t_env *new);
 char	**env_to_arr_export(t_env *env);
-t_env	*newenv(char *key, char *value);
+t_env	*newenv(char *key, char *value, int is_set);
 t_env	*dup_env(t_env *env);
 void	reset_env(t_env **env);
 t_env	*create_env(char *env[]);

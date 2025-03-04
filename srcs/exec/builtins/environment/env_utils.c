@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 10:51:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/22 12:09:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:29:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_env	*findlast_env(t_env *lst)
 	return (NULL);
 }
 
-t_env	*newenv(char *key, char *value)
+t_env	*newenv(char *key, char *value, int is_set)
 {
 	t_env	*node;
 
@@ -49,6 +49,7 @@ t_env	*newenv(char *key, char *value)
 		return (NULL);
 	node->key = ft_strdup(key);
 	node->val = ft_strdup(value);
+	node->is_set = is_set;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
@@ -62,7 +63,7 @@ t_env	*dup_env(t_env *env)
 	while (env)
 	{
 		if (improved_cmp(env->key, "_") != 0)
-			envadd_back(&dup, newenv(env->key, env->val));
+			envadd_back(&dup, newenv(env->key, env->val, env->is_set));
 		env = env->next;
 	}
 	return (dup);

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 15:47:37 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:30:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_env	*create_env(char *env[])
 	while (env[i])
 	{
 		kv_pair = kv_extract(env[i]); //TODO: check for failure
-		envadd_back(&env_list, newenv(kv_pair[0], kv_pair[1]));
+		envadd_back(&env_list, newenv(kv_pair[0], kv_pair[1], 1));
 		free_tab(kv_pair);
 		i++;
 	}

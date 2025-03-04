@@ -6,28 +6,24 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 11:56:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 00:44:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/exec/exec.h"
+#include <sys/stat.h>
 
 void	update_oldpwd(t_env **env)
 {
 	t_env	*actual;
-	t_env	*hidden_olpwd;
 	t_env	*pwd;
 
-	pwd = search_key(".pwd", *env);
-	hidden_olpwd = search_key(".oldpwd", *env);
+	pwd = search_key("PWD", *env);
+	if (!pwd->val)
+		pwd = search_key(".pwd", *env);
 	actual = search_key("OLDPWD", *env);
 	if (actual)
-	{
 		set_env_value(&actual, ft_strdup(pwd->val));
-		set_env_value(&hidden_olpwd, ft_strdup(pwd->val));
-	}
-	else
-		set_env_value(&hidden_olpwd, ft_strdup(pwd->val));
 }
 
 void	update_pwd(t_env **env)
@@ -43,11 +39,8 @@ void	update_pwd(t_env **env)
 		return ;
 	free(cwd);
 	if (actual)
-	{
 		set_env_value(&actual, getcwd(NULL, PATH_MAX));
-		set_env_value(&hidden, getcwd(NULL, PATH_MAX));
-	}
-	else
+	if (hidden)
 		set_env_value(&hidden, getcwd(NULL, PATH_MAX));
 }
 
@@ -68,6 +61,7 @@ int	go_to(t_token *cmnd)
 void	changedir(t_token *cmnd, t_env *env)
 {
 	t_env	*homedir;
+	char	cwd[1024];
 
 	if (how_many_args(cmnd) == 1)
 	{
@@ -82,11 +76,11 @@ void	changedir(t_token *cmnd, t_env *env)
 	}
 	else if (go_to(cmnd->next) == -1)
 	{
-		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(cmnd->next->value, 2);
-		ft_putstr_fd(": no such file or directory\n", 2);
+		perror("cd");
 		return (update_status(&env, "1"));
 	}
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+		perror("getcwd");
 	update_status(&env, "0");
 	update_oldpwd(&env);
 	update_pwd(&env);

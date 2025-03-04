@@ -26,19 +26,6 @@ SUMMARY: AddressSanitizer: SEGV multi_utils.c:17 in closefds
 ==63848==ABORTING
 [1]    63848 abort      ./minishell < /dev/urandom
 
-    ->hidden path
-
-    -> permession denied
-
-    -> .
-
-    -> ""
-
-
-    -> minishell$ ./ls
-    minishell$ echo $?
-    255
-
     -> ls > $a not sure if its fully done but the variable ambi is done
 
 

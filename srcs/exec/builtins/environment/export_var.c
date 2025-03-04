@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:53:36 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/27 14:07:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:30:30 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	handle_keys(t_env **env, char **kv, char *equal)
 			value = "";
 		else
 			value = kv[1];
-		envadd_back(env, newenv(key, value));
+		envadd_back(env, newenv(key, value, 1));
 	}
 	key_found = search_key(kv[0], *env);
 	return (0);
@@ -63,7 +63,7 @@ int	handle_append(t_env **env, char **kv)
 			value = "";
 		else
 			value = kv[1];
-		envadd_back(env, newenv(key, value));
+		envadd_back(env, newenv(key, value, 1));
 	}
 	return (0);
 }

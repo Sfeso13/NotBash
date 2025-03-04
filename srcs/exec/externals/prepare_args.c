@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 11:10:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 01:59:42 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,14 @@ int	is_absolute(t_token *cmnd)
 {
 	if (ft_strchr(cmnd->value, '/'))
 	{
-		if (access(cmnd->value, X_OK) == 0)
-			return (1);
+		if (access(cmnd->value, F_OK) == 0)
+		{
+			if (access(cmnd->value, X_OK) == 0)
+				return (1);
+			ft_putstr_fd(cmnd->value, 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			return (2);
+		}
 		ft_putstr_fd(cmnd->value, 2);
 		ft_putstr_fd(": command not found\n", 2);
 		return (-1);
@@ -102,9 +108,17 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 	int		absolute;
 
 	correct_path = NULL;
+	if (cmnd->value[0] == '\0')
+	{
+		ft_putstr_fd(cmnd->value, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		return (NULL);
+	}
 	absolute = is_absolute(cmnd);
 	if (absolute == 1)
 		return (cmnd->value);
+	if (absolute == 2)
+		return ("permission");
 	if (absolute == -1)
 		return (NULL);
 	path_node = search_key("PATH", env);
