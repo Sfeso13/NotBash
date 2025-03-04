@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 02:34:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 02:42:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	single_process_exec(t_shell *cmnds, t_env **env)
 	int		saved_out;
 
 	update_dash(cmnds->tokens, env);
-	if (check_ambi(cmnds->tokens) == 1)
-		return (update_status(env, "1"));
 	if (is_redirect(cmnds->tokens))
 	{
 		saved_in = dup(STDIN_FILENO);
