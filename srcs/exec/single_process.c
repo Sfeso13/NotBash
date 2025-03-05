@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 02:42:08 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:25:39 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ int	*single_redirect(t_token *cmnd, t_env *env)
 	return (fd);
 }
 
-int	check_ambi(t_token *cmnd)
-{
-	while (cmnd)
-	{
-		if (cmnd->ambiguous == 1)
-		{
-			ft_putstr_fd("minishell: ambiguous redirect\n", 2);
-			return (1);
-		}
-		cmnd = cmnd->next;
-	}
-	return (0);
-}
-
 void	single_process_exec(t_shell *cmnds, t_env **env)
 {
 	int		saved_in;
@@ -61,6 +47,28 @@ void	single_process_exec(t_shell *cmnds, t_env **env)
 		normal_execution(cmnds, env);
 }
 
+int	check_err(int *fd, t_env **env)
+{
+	if (!fd && g_signal_received == 1)
+	{
+		g_signal_received = 0;
+		update_status(env, "1");
+		return (1);
+	}
+	else if(!fd && g_signal_received == 2)
+	{
+		g_signal_received = 0;
+		update_status(env, "0");
+		return (1);
+	}
+	else if (!fd)
+	{
+		update_status(env, "1");
+		return (1);
+	}
+	return (0);
+}
+
 void	redirected_execution(t_shell *cmnds, t_env **env)
 {
 	t_token	*cmnd;
@@ -69,18 +77,8 @@ void	redirected_execution(t_shell *cmnds, t_env **env)
 	int		*fd;
 
 	fd = single_redirect(cmnds->tokens, *env);
-	if (!fd && g_signal_received == 1)
-	{
-		g_signal_received = 0;
-		return (update_status(env, "1"));
-	}
-	else if(!fd && g_signal_received == 2)
-	{
-		g_signal_received = 0;
-		return (update_status(env, "0"));
-	}
-	else if (!fd)
-		return (update_status(env, "1"));
+	if (check_err(fd, env) == 1)
+		return ;
 	cmnd = extract_cmd(cmnds->tokens);
 	if (!cmnd)
 	{

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:52:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 17:36:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:35:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ char	*join(char const *s1, char const *s2)
 	ft_memcpy(str + lens1, " ", 1);
 	ft_memcpy(str + lens1 + 1, s2, lens2);
 	return (str);
+}
+
+char	*print_err(char *value, char *msg)
+{
+	ft_putstr_fd(value, 2);
+	ft_putstr_fd(msg, 2);
+	return (NULL);
 }
 
 void	copy_kv(char *str, t_env *env, size_t len)

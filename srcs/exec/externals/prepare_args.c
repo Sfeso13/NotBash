@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 01:59:42 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:35:40 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,7 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 
 	correct_path = NULL;
 	if (cmnd->value[0] == '\0')
-	{
-		ft_putstr_fd(cmnd->value, 2);
-		ft_putstr_fd(": command not found\n", 2);
-		return (NULL);
-	}
+		return (print_err(cmnd->value, ": command not found\n"));
 	absolute = is_absolute(cmnd);
 	if (absolute == 1)
 		return (cmnd->value);
@@ -125,10 +121,6 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 	if (path_node && path_node->val && path_node->val[0] != '\0')
 		correct_path = path(path_node, cmnd);
 	else if (!path_node || !path_node->val || path_node->val[0] == '\0')
-	{
-		ft_putstr_fd(cmnd->value, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return (NULL);
-	}
+		return (print_err(cmnd->value, ": No such file or directory\n"));
 	return (correct_path);
 }

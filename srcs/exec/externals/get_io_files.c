@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 23:44:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:24:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,8 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 	return (1);
 }
 
-int	is_ambi(t_token *args)
+int	*opening(t_token *args, int *fd, t_redir redir, t_env *env)
 {
-	if (args->ambiguous == 1)
-	{
-		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
-		return (1);
-	}
-	return (0);
-}
-
-int	*get_io_files(t_token *args, t_env *env)
-{
-	int		*fd;
-	t_redir	redir;
-
-	fd = init_fds();
-	redir = init_redir_struct(args);
-	if (!check_doc_limit(redir.in_count[1]))
-		return (update_status(&env, "1"), NULL);
 	while (args)
 	{
 		if (args->next && is_ambi(args->next))
@@ -76,5 +59,18 @@ int	*get_io_files(t_token *args, t_env *env)
 			break ;
 		args = args->next;
 	}
+	return (fd);
+}
+
+int	*get_io_files(t_token *args, t_env *env)
+{
+	int		*fd;
+	t_redir	redir;
+
+	fd = init_fds();
+	redir = init_redir_struct(args);
+	if (!check_doc_limit(redir.in_count[1]))
+		return (update_status(&env, "1"), NULL);
+	fd = opening(args, fd, redir, env);
 	return (fd);
 }

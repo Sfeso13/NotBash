@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:04:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:47:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@
 # include <sys/wait.h> //linux
 # include <errno.h>
 
+// 'l'' ''s'
 
 pid_t	frk();
+char	*print_err(char *value, char *msg);
+
+void	doc_err(void);
+int	prepare_doc(char *buff, char *tmp, int fd, char *filename);
 
 //single process
 int	*single_redirect(t_token *cmnd, t_env *env);
@@ -43,6 +48,7 @@ void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 void	change_fd(int *tochange, int toset, int toclose);
 t_fd	init_fd_struct(void);
 
+int	is_ambi(t_token *args);
 
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env **env);

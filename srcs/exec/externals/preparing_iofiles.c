@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 00:11:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:25:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,30 @@ void	ft_dup(int from, int to)
 		perror("close");
 		exit(1);
 	}
+}
+
+int	is_ambi(t_token *args)
+{
+	if (args->ambiguous == 1)
+	{
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
+int	check_ambi(t_token *cmnd)
+{
+	while (cmnd)
+	{
+		if (cmnd->ambiguous == 1)
+		{
+			ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+			return (1);
+		}
+		cmnd = cmnd->next;
+	}
+	return (0);
 }
 
 void	redirect(t_token *cmnd, t_env *env)
