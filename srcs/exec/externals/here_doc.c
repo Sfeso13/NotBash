@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 02:01:55 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:19:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ int	get_doc(char *delim, t_env *env)
 		free(tmp);
 		return (-1);
 	}
-	return (prepare_doc(buff, tmp , fd, filename));
+	return (prepare_doc(buff, tmp, fd, filename));
 }

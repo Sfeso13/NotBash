@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:04:13 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 12:04:19 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:33:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static size_t	len_w(char const *s, char c)
 	return (i);
 }
 
-static void	safe_free(char **arr, size_t i)
+char	**safe_free(char **arr, size_t i)
 {
 	size_t	n;
 
@@ -59,6 +59,7 @@ static void	safe_free(char **arr, size_t i)
 		n++;
 	}
 	free(arr);
+	return (NULL);
 }
 
 static char	**alluc(char **arr, char const *s, char c, size_t count)

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 23:20:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:20:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	closefds(int *fd, t_fd fds)
 		close(fds.outfd);
 }
 
-pid_t	frk()
+pid_t	frk(void)
 {
 	pid_t	child;
 

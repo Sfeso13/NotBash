@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/05 03:19:48 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:17:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int main(int ac, char *av[], char *env[])
 	if (ac != 1)
 		return (1);
 	env_list = create_env(env);
+	if (!env_list)
+		exit (1);
 	while (1)
 	{
 		catch_signals();

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:52:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 15:30:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:17:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,21 @@ char	**alloc_arr(char **arr, size_t wlen1, size_t wlen2)
 {
 	arr[0] = (char *)malloc((wlen1 + 1) * sizeof(char));
 	if (!arr[0])
-		return (NULL); //malloc failure
+	{
+		free(arr);
+		return (NULL);
+	}
 	if (wlen2 == 0)
 		arr[1] = NULL;
 	else
 	{
 		arr[1] = (char *)malloc((wlen2 + 1) * sizeof(char));
 		if (!arr[1])
-			return (NULL); //malloc failure
+		{
+			free(arr[0]);
+			free(arr);
+			return (NULL);
+		}
 	}
 	return (arr);
 }
@@ -60,7 +67,7 @@ static char	**alluc(char **arr, char *s, size_t wlen1, size_t wlen2)
 
 	i = 0;
 	if (!alloc_arr(arr, wlen1, wlen2))
-		return (NULL); //malloc failure
+		return (NULL);
 	while (i < wlen1)
 		arr[0][i++] = *(s++);
 	arr[0][i] = '\0';
@@ -98,13 +105,18 @@ t_env	*create_env(char *env[])
 {
 	t_env	*env_list;
 	int		i;
-	char	**kv_pair; //key value pair
+	char	**kv_pair;
 
 	i = 0;
 	env_list = NULL;
 	while (env[i])
 	{
-		kv_pair = kv_extract(env[i]); //TODO: check for failure
+		kv_pair = kv_extract(env[i]);
+		if (!kv_pair)
+		{
+			ft_putstr_fd("cannot create your environment\n", 2);
+			return (NULL);
+		}
 		envadd_back(&env_list, newenv(kv_pair[0], kv_pair[1], 1));
 		free_tab(kv_pair);
 		i++;

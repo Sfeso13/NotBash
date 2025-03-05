@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 01:14:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:33:35 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env);
 void	set_fds(t_fd *fds, int *fd, int process_count, int i);
 void	change_fd(int *tochange, int toset, int toclose);
 t_fd	init_fd_struct(void);
+
+char	**safe_free(char **arr, size_t i);
 
 int	is_ambi(t_token *args);
 

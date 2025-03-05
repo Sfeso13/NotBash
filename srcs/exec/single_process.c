@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 03:03:20 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:08:16 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_err(int *fd, t_env **env)
 		update_status(env, "1");
 		return (1);
 	}
-	else if(!fd && g_signal_received == 2)
+	else if (!fd && g_signal_received == 2)
 	{
 		g_signal_received = 0;
 		update_status(env, "0");

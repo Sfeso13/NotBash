@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 12:52:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:35:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:24:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,15 @@ char	**env_to_arr(t_env *env)
 	i = 0;
 	copy = (char **)malloc((env_size(env) + 1) * sizeof(char *));
 	if (!copy)
-		return (NULL); //FAILURE
+		return (NULL);
 	while (env)
 	{
 		if (env->key[0] != '.' && env->key[0] != '?')
 		{
 			len = kv_len(env) - 2;
-			copy[i] = (char *)malloc(len + 1); //add safe free
+			copy[i] = (char *)malloc(len + 1);
+			if (!copy[i])
+				return (safe_free(copy, i));
 			copy_kv(copy[i], env, len);
 			i++;
 		}
