@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/05 15:17:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:52:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ pid_t	child_pid(int value, int setorget)
 void	handle_sigint(int sig)
 {
 	(void)sig;
-
 	if (!(waitpid(-1, NULL, WNOHANG))) // need to know about hanging child processes
 	{
 		write(1, "\n", 1);
@@ -112,11 +111,77 @@ void	catch_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-int main(int ac, char *av[], char *env[])
+int	parser(char *input, t_env **env_list, t_shell **cmd, t_token **tokens)
+{
+	if (advsyncatcher(input, env_list) == 1)
+	{
+		free(input);
+		return (1);
+	}
+	*tokens = tokenize(input);
+	if (!(*tokens))
+	{
+		free(input);
+		return (1);
+	}
+	analyze_in_expand(*tokens, *env_list);
+	*cmd = fill_cmd(*tokens);
+	if (!(*cmd))
+	{
+		free_tokens(*tokens);
+		free(input);
+		exit(1);
+	}
+	return (0);
+}
+
+char	*get_input(t_env **env_list)
+{
+	char	*input;
+
+	input = readline("minishell$ ");
+	if (!input)
+	{
+		clear_env(env_list, free);
+		exit(0);
+	}
+	if (g_signal_received)
+	{
+		update_status(env_list, "1");
+		g_signal_received = 0;
+	}
+	if (*input)
+		add_history(input);
+	return (input);
+}
+
+void	start_prompt(t_env *env_list)
 {
 	t_token	*tokens;
 	t_shell	*cmd;
 	char	*input;
+
+	while (1)
+	{
+		catch_signals();
+		input = get_input(&env_list);
+		if (displaymeagn(&input))
+		{
+			free(input);
+			continue ;
+		}
+		if (parser(input, &env_list, &cmd, &tokens))
+			continue ;
+		// print_shell(cmd);
+		execute(cmd, &env_list);
+		free(input);
+		free_tokens(tokens);
+		free_shell(cmd);
+	}
+}
+
+int	main(int ac, char *av[], char *env[])
+{
 	t_env	*env_list;
 
 	(void)av;
@@ -125,60 +190,6 @@ int main(int ac, char *av[], char *env[])
 	env_list = create_env(env);
 	if (!env_list)
 		exit (1);
-	while (1)
-	{
-		catch_signals();
-		// if (isatty(STDIN_FILENO))
-			input = readline("minishell$ ");
-		// else
-		// 	input = NULL;
-		if (!input)
-		{
-			clear_env(&env_list, free);
-			exit(0);
-		}
-		if (g_signal_received)
-		{
-			update_status(&env_list, "1");
-			g_signal_received = 0;
-		}
-		if (*input)
-			add_history(input);
-		if (displaymeagn(&input))
-		{
-			free(input);
-			continue ;
-		}
-		if (advsyncatcher(input, &env_list) == 1)
-		{
-			free(input);
-			continue ;
-		}
-		tokens = tokenize(input);
-		if (!tokens)
-		{
-			free(input);
-			continue;
-		}
-		if (analyze_in_expand(tokens, env_list) == 1)
-		{
-			free_tokens(tokens);
-			free(input);
-			continue ;
-		}
-		cmd	= fill_cmd(tokens);
-		if (!cmd)
-		{
-			free_tokens(tokens);
-			free(input);
-			exit(1);
-		}
-		// print_shell(cmd);
-		// signal(SIGINT, SIG_DFL);
-		execute(cmd, &env_list);
-		free(input);
-		free_tokens(tokens);
-		free_shell(cmd);
-	}
-	return 0;
+	start_prompt(env_list);
+	return (0);
 }
