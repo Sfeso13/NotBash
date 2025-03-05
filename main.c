@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/05 00:13:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 03:19:48 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ pid_t	child_pid(int value, int setorget)
 void	handle_sigint(int sig)
 {
 	(void)sig;
+
+	if (!(waitpid(-1, NULL, WNOHANG))) // need to know about hanging child processes
+	{
+		write(1, "\n", 1);
+		return ;
+	}
 	g_signal_received = 1;
 	write(1, "\n", 1);
 	rl_on_new_line();
@@ -120,10 +126,10 @@ int main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		catch_signals();
-		if (isatty(STDIN_FILENO))
+		// if (isatty(STDIN_FILENO))
 			input = readline("minishell$ ");
-		else
-			input = NULL;
+		// else
+		// 	input = NULL;
 		if (!input)
 		{
 			clear_env(&env_list, free);

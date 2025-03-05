@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:28:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 02:01:55 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,6 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 		g_signal_received = 2;
 	return (buff);
 }
-
-// int	prepare_doc(char *buff, char *tmp, int fd, char *filename)
-// {
-// 	free(buff);
-// 	close(fd);
-// 	free(tmp);
-// 	fd = open(filename, O_RDONLY, 0600);
-// 	unlink(filename);
-// 	free(filename);
-// 	return (fd);
-// }
-
-// void	doc_err(void)
-// {
-// 	perror("heredoc fd");
-// 	exit (1);
-// }
 
 int	get_doc(char *delim, t_env *env)
 {
