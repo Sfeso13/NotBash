@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_io_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 02:51:53 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:44:28 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	*get_io_files(t_token *args, t_env *env)
 		return (update_status(&env, "1"), NULL);
 	while (args)
 	{
-		if (is_ambi(args))
+		if (args->next && is_ambi(args->next))
 			return (NULL);
 		if (args->type == TOKEN_REDIRECT_IN || args->type == TOKEN_HEREDOC)
 		{

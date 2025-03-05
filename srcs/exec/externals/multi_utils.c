@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 15:08:14 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/04 23:20:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ pid_t	frk()
 {
 	pid_t	child;
 
+	child = fork();
 	if (child < 0)
 	{
 		perror("fork");

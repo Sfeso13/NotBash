@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 15:17:52 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:06:11 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 
 	cmnd = extract_cmd(cmnds->tokens);
 	child = frk();
-	else if (child == 0)
+	if (child == 0)
 	{
 		if (!cmnd)
 			exit(1);
@@ -75,22 +75,6 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 	if (fds.infd != -1)
 		close(fds.infd);
 }
-
-// void	fd_err(t_fd fds, t_shell *cmnds, int *i)
-// {
-// 	g_signal_received = 0;
-// 	close(fds.pfd[1]);
-// 	fds.infd = fds.pfd[0];
-// 	cmnds = cmnds->next;
-// 	(*i)++;
-// }
-
-// void	execute_p(t_fd fds, int *fd, t_shell **cmnds, t_env **env)
-// {
-// 	piped_exec(cmnds, fd, fds, env);
-// 	fds.infd = fds.pfd[0];
-// 	*cmnds = (*cmnds)->next;
-// }
 
 void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 {
@@ -112,10 +96,10 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 		set_fds(&fds, fd, process_count, i);
 		if (!fd && g_signal_received != 1)
 		{
-			fd_err(fds, cmnds, &i);
+			fd_err(fds, &cmnds, &i);
 			continue ;
 		}
-		execute_p(fds, fd, &cmnds, env);
+		execute_p(&fds, fd, &cmnds, env);
 		i++;
 	}
 	closefds(fd, fds);

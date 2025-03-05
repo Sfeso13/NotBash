@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 15:08:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 00:04:48 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	run_command(char *path, char **args, t_env *env);
 int	redir_token(t_token *cmnd);
 void	closefds(int *fd, t_fd fds);
 
+void	fd_err(t_fd fds, t_shell **cmnds, int *i);
+void	execute_p(t_fd *fds, int *fd, t_shell **cmnds, t_env **env);
 
 
 void	restore_stds(int saved_in, int saved_out);

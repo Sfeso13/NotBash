@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 03:35:11 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/05 00:10:12 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ void	print_shell(t_shell *shell)
 				get_token_name(token->type),
 				token->expanded,
 				prev_info);
+			if (token->ambiguous == 0)
+				printf("not ambi\n");
+			else if (token->ambiguous == 1)
+				printf("is ambi\n");
+			else
+				printf("smtg is wrong %d\n", token->ambiguous);
 			token = token->next;
 		}
 		printf("=====================\n");
@@ -114,10 +120,10 @@ int main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		catch_signals();
-		if (isatty(STDIN_FILENO))
+		// if (isatty(STDIN_FILENO))
 			input = readline("minishell$ ");
-		else
-			input = NULL;
+		// else
+		// 	input = NULL;
 		if (!input)
 		{
 			clear_env(&env_list, free);
@@ -159,7 +165,7 @@ int main(int ac, char *av[], char *env[])
 			free(input);
 			exit(1);
 		}
-		//print_shell(cmd);
+		// print_shell(cmd);
 		// signal(SIGINT, SIG_DFL);
 		execute(cmd, &env_list);
 		free(input);
