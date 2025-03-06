@@ -6,3 +6,66 @@ while true; do leaks minishell; sleep 1; clear; done
 while true; do lsof -c  minishell; sleep 1; clear; done
 
         minishell$ ls > a > b > c < d > h -> c not closed prop
+
+
+minishell$ unset PWD OLDPWD PWD PWD PWD QWEW QWEWDQW WE .QW E
+attempting to remove : PWD
+attempting to remove : OLDPWD
+attempting to remove : PWD
+attempting to remove : PWD
+attempting to remove : PWD
+[1]    35282 segmentation fault  ./minishell
+
+unset PWD OLDPWD expected leacks
+
+HOMEBREW_TEMP=/tmp/yhossni/Homebrew/Temp
+a=a
+_=ENV
+uyq
+uyq
+tyuq
+uyqewuytqw
+minishell$ ENV
+-------------------------- Check The capital Letter's ENV
+
+
+minishell$ env
+_=env
+minishell$ unset _
+attempting to remove : _
+deleting
+minishell$ unset qwe
+[1]    42258 segmentation fault  env -i ./minishell
+
+echo $test'' ''q'$valid'q
+
+<< a << a << a --> Ctrl D <--->
+
+minishell$ << l << l << l << l << l << l << l << l << l << l
+>
+> l
+> l
+>
+>
+>
+>
+>
+> l
+> l
+>
+>
+>
+> l
+>
+> l
+>
+> l
+> l
+> l
+> l
+
+unset  SECURITYSESSIONID USER MallocNanoZone COMMAND_MODE PATH HOME SHELL LaunchInstanceID __CF_USER_TEXT_ENCODING XPC_SERVICE_NAME SSH_AUTH_SOCK XPC_FLAGS LOGNAME TMPDIR ORIGINAL_XDG_CURRENT_DESKTOP SHLVL PWD OLDPWD ZSH PAGER LESS LSCOLORS LS_COLORS HOMEBREW_CACHE HOMEBREW_TEMP TERM_PROGRAM TERM_PROGRAM_VERSION LANG COLORTERM GIT_ASKPASS VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_EXTRA_ARGS VSCODE_GIT_ASKPASS_MAIN VSCODE_GIT_IPC_HANDLE VSCODE_INJECTION ZDOTDIR USER_ZDOTDIR TERM _
+
+export this="'a'""""""''""''a"a ""
+expected behavior == $ export this="'a'""""""''""''a"a ""
+bash: export: `': not a valid identifier
