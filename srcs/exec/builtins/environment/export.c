@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 23:50:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:22:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	how_many_args(t_token *cmnd)
 	while (cmnd)
 	{
 		if (cmnd->type == TOKEN_WORD && (!cmnd->prev || \
-			!redir_token(cmnd->prev)) && cmnd->value[0] != '\0')
+			!redir_token(cmnd->prev)))
 			count++;
 		cmnd = cmnd->next;
 	}

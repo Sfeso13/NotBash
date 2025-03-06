@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:41:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:12:23 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	what_in_to_open(t_token *tmp, int fd, t_redir *redir)
 	else if (tmp->type == TOKEN_HEREDOC)
 	{
 		tmp = tmp->next;
-		if (fd == -1)
+		if (fd != -1)
 			close(fd);
 		fd = redir->docs[redir->doc_pos];
 		redir->doc_pos++;
