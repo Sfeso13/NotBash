@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 14:48:57 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 00:06:32 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 // fuck the old struct thats all we need :
 
 typedef struct s_redir{
-    int	in_count[2];
-    int	out_count[2];
+	int	in_count[2];
+	int	out_count[2];
 } t_redir;
 
 typedef struct s_fd{
-    int infd;
-    int outfd;
+	int infd;
+	int outfd;
 	int	pfd[2];
 } t_fd;
 
@@ -74,6 +74,7 @@ typedef struct s_token
 	//if we wanna add something in futur
 	int				expanded;
 	int				ambiguous;
+	int				ignore;
 	t_token_type	type;
 	struct s_token	*next;
 	struct s_token	*prev;

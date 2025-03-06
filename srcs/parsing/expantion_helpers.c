@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/02 21:01:44 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 01:13:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	expand_var(t_expander *exp)
 	start = exp->i;
 	if (exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
 	{
+		write(1, "kkk\n", 5);
 		quote = exp->value[exp->i];
 		start = exp->i;
 		while (exp->value[exp->i] && exp->value[exp->i] != quote)
@@ -122,6 +123,8 @@ void	expand_var(t_expander *exp)
 		else
 			append_str(exp, var_val);
 	}
+	else
+		printf("var -> %s so -> khawii\n", var_val);
 	free(var_name);
 	}
 }

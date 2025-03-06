@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_words.c                                      :+:      :+:    :+:   */
+/*   count_custom_words.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 00:05:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/06 00:37:11 by adechaji         ###   ########.fr       */
+/*   Created: 2025/03/06 00:37:26 by adechaji          #+#    #+#             */
+/*   Updated: 2025/03/06 00:37:43 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-int	count_words(char const *str)
+int	count_custom_words(char const *str)
 {
 	int	i;
 	int	cword;
@@ -23,7 +23,7 @@ int	count_words(char const *str)
 	count = 0;
 	while (str[i])
 	{
-		if (iswhitespace(str[i]))
+		if (iswhitespace(str[i]) || str[i] == '\x01')
 			cword = 0;
 		else if (cword == 0)
 		{

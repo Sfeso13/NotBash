@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 02:52:20 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 01:04:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	char	*or_val;
 	int		inexp;
 	int		dol;
+	int		wrds;
 
 	inexp = 0;
 	current = tokens;
@@ -91,11 +92,15 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 				or_val = current->value;
 				current->value = expand_token(or_val, env, inexp);
 				free(or_val);
+				if (dol == 1)
+					wrds = count_custom_words(current->value);
 				if (ft_strchr(current->value, '\x01') && inexp == 0)
 					split_and_insert(current);
-				if ((current->prev) && current->prev->type == TOKEN_REDIRECT_OUT && dol != 0)
+				if ((current->prev) && (current->prev->type == TOKEN_REDIRECT_OUT
+					|| current->prev->type == TOKEN_REDIRECT_IN
+					|| current->prev->type == TOKEN_APPEND) && dol != 0)
 				{
-					if (current->value && current->next && current->next->value)
+					if (wrds != 1)
 						current->ambiguous = 1;
 				}
 				current->expanded = 1;
