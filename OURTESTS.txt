@@ -1,3 +1,8 @@
                     ill document ga3 tests li l9it fhom mochkil hna :
 
-launch with env -i and unser path --> should unset path(you do not)
+
+while true; do leaks minishell; sleep 1; clear; done
+
+while true; do lsof -c  minishell; sleep 1; clear; done
+
+        minishell$ ls > a > b > c < d > h -> c not closed prop

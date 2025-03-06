@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:24:28 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/05 23:27:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	handleinput(t_token *tmp, int *fd, t_redir redir, t_env *env)
 {
 	fd[0] = what_in_to_open(tmp, fd[0], redir.in_count, env);
 	if (fd[0] == -1)
+	{
+		if (fd[1])
+			close(fd[1]);
 		return (0);
+	}
 	return (1);
 }
 
@@ -34,7 +38,11 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 {
 	fd[1] = what_out_to_open(tmp, fd[1], redir.out_count);
 	if (fd[1] == -1)
+	{
+		if (fd[0])
+			close(fd[0]);
 		return (0);
+	}
 	return (1);
 }
 
