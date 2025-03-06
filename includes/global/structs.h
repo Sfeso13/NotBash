@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 14:48:57 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:32:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 typedef struct s_redir{
     int	in_count[2];
     int	out_count[2];
+	int	docs[16];
+	int	doc_pos;
 } t_redir;
 
 typedef struct s_fd{

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:33:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:50:40 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	get_doc(char *delim, t_env *env);
 pid_t	child_pid(int value, int setorget);
 
 // void	save_last_cmd(t_token *cmnd , t_env **env);
+void	process_docs(t_token *args, t_redir *redir, t_env *env);
+void	clear_docs(t_redir *redir);
 
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);
@@ -86,7 +88,7 @@ int	how_many_redir(t_token *cmnd, t_token_type type);
 int	*get_io_files(t_token *args, t_env *env);
 //utils
 int	check_doc_limit(int count);
-int	handleinput(t_token *tmp, int *fd, t_redir redir, t_env *env);
+int	handleinput(t_token *tmp, int *fd, t_redir *redir);
 int	handleoutput(t_token *tmp, int *fd, t_redir redir);
 t_redir	init_redir_struct(t_token *args);
 // void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env);
@@ -107,7 +109,7 @@ char	**args_split(char const *s, char c);
 int	how_many_redir(t_token *cmnd, t_token_type type);
 int	*init_fds(void);
 int	fdop(int to_open, int append, char *filename, int write);
-int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env);
+int	what_in_to_open(t_token *tmp, int fd, t_redir *redir);
 int	what_out_to_open(t_token *tmp, int fd, int *outredir);
 int	get_doc(char *delim, t_env *env);
 

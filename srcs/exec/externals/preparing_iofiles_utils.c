@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:24:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:41:26 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	fdop(int to_open, int append, char *filename, int write)
 	return (to_open);
 }
 
-int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env)
+int	what_in_to_open(t_token *tmp, int fd, t_redir *redir)
 {
 	if (tmp->type == TOKEN_REDIRECT_IN)
 	{
@@ -65,17 +65,18 @@ int	what_in_to_open(t_token *tmp, int fd, int *inredir, t_env *env)
 		fd = fdop(fd, 0, tmp->value, 0);
 		if (fd == -1)
 			return (-1);
-		(inredir[0])--;
+		redir->in_count[0]--;
 	}
 	else if (tmp->type == TOKEN_HEREDOC)
 	{
 		tmp = tmp->next;
 		if (fd == -1)
 			close(fd);
-		fd = get_doc(tmp->value, env);
+		fd = redir->docs[redir->doc_pos];
+		redir->doc_pos++;
 		if (fd == -1)
 			return (-1);
-		(inredir[1])--;
+		redir->in_count[1]--;
 	}
 	return (fd);
 }
