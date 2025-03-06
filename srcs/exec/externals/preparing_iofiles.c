@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:25:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:32:43 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_redir	init_redir_struct(t_token *args)
 	redir.in_count[1] = how_many_redir(args, TOKEN_HEREDOC);
 	redir.out_count[0] = how_many_redir(args, TOKEN_REDIRECT_OUT);
 	redir.out_count[1] = how_many_redir(args, TOKEN_APPEND);
+	redir.doc_pos = 0;
 	return (redir);
 }
 

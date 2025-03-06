@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 00:06:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:33:25 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 // fuck the old struct thats all we need :
 
 typedef struct s_redir{
-	int	in_count[2];
-	int	out_count[2];
+    int	in_count[2];
+    int	out_count[2];
+	int	docs[16];
+	int	doc_pos;
 } t_redir;
 
 typedef struct s_fd{

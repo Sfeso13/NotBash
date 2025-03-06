@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 00:07:53 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:33:31 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	check_doc_limit(int count)
 	return (1);
 }
 
-int	handleinput(t_token *tmp, int *fd, t_redir redir, t_env *env)
+int	handleinput(t_token *tmp, int *fd, t_redir *redir)
 {
-	fd[0] = what_in_to_open(tmp, fd[0], redir.in_count, env);
+	fd[0] = what_in_to_open(tmp, fd[0], redir);
 	if (fd[0] == -1)
 	{
+		clear_docs(redir);
 		if (fd[1])
 			close(fd[1]);
 		return (0);
@@ -48,13 +49,15 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 
 int	*opening(t_token *args, int *fd, t_redir redir, t_env *env)
 {
+	if (search_token(args, TOKEN_HEREDOC))
+		process_docs(args, &redir, env);
 	while (args)
 	{
 		if (args->next && is_ambi(args->next))
 			return (NULL);
 		if (args->type == TOKEN_REDIRECT_IN || args->type == TOKEN_HEREDOC)
 		{
-			if (!handleinput(args, fd, redir, env))
+			if (!handleinput(args, fd, &redir))
 				return (NULL);
 		}
 		else if (args->type == TOKEN_REDIRECT_OUT || args->type == TOKEN_APPEND)

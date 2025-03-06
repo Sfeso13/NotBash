@@ -5,4 +5,4 @@ while true; do leaks minishell; sleep 1; clear; done
 
 while true; do lsof -c  minishell; sleep 1; clear; done
 
-        minishell$ ls > a > b > c < d > h -> c not closed prop
+unset PWD OLDPWD expected leacks

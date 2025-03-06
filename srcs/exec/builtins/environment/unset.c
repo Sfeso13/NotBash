@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:19:07 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:02:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	check_isset(t_token *cmnd, t_env **env)
 	t_env	*to_remove;
 
 	to_remove = search_key(cmnd->value, *env);
-	printf("attempting to remove : %s\n", to_remove->key);
 	if (to_remove && to_remove->is_set && internal_vars(to_remove))
 	{
 		save_vars(env);
@@ -57,10 +56,7 @@ void	check_isset(t_token *cmnd, t_env **env)
 	}
 	else if (to_remove && (improved_cmp(to_remove->key, "PATH") == 0 \
 			|| to_remove->is_set))
-	{
-		printf("deleting\n");
 		delone_env(env, to_remove, free);
-	}
 }
 
 void	unset_var(t_token *cmnd, t_env **env)
