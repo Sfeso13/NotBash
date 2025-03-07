@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:53:36 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 15:30:30 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:45:17 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	handle_keys(t_env **env, char **kv, char *equal)
 {
 	t_env	*key_found;
-	char	*key;
 	char	*value;
 
 	key_found = search_key(kv[0], *env);
@@ -26,18 +25,18 @@ int	handle_keys(t_env **env, char **kv, char *equal)
 		else
 			change_value_of_key(&key_found, kv[1]);
 	}
+	else if (key_found && key_found->is_set == 0)
+		key_found->is_set = 1;
 	else if (key_found)
 		return (1);
 	else
 	{
-		key = kv[0];
 		if (!kv[1] && equal)
 			value = "";
 		else
 			value = kv[1];
-		envadd_back(env, newenv(key, value, 1));
+		envadd_back(env, newenv(kv[0], value, 1));
 	}
-	key_found = search_key(kv[0], *env);
 	return (0);
 }
 
@@ -49,6 +48,8 @@ int	handle_append(t_env **env, char **kv)
 	char	*tmp;
 
 	key_found = search_key(kv[0], *env);
+	if (key_found && key_found->is_set == 0)
+		key_found->is_set = 1;
 	if (key_found)
 	{
 		tmp = key_found->val;

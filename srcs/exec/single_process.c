@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:03:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:08:16 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 01:58:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 int	*single_redirect(t_token *cmnd, t_env *env)
 {
 	int		*fd;
+	t_redir	redir;
 
-	fd = get_io_files(cmnd, env);
+	redir = init_redir_struct(cmnd);
+	if (!check_doc_limit(redir.in_count[1]))
+		return (update_status(&env, "1"), NULL);
+	if (search_token(cmnd, TOKEN_HEREDOC))
+		process_docs(cmnd, &redir, env);
+	fd = get_io_files(cmnd, &redir);
 	if (!fd)
 		return (NULL);
 	if (fd[0] != -1)

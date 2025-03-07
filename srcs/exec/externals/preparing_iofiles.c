@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:32:43 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 01:12:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ int	check_ambi(t_token *cmnd)
 	return (0);
 }
 
-void	redirect(t_token *cmnd, t_env *env)
-{
-	int		*fd;
+// void	redirect(t_token *cmnd, t_env *env)
+// {
+// 	int		*fd;
 
-	fd = get_io_files(cmnd, env);
-	if (!fd)
-		exit(1);
-	if (fd[0] != -1)
-	{
-		ft_dup(fd[0], 0);
-	}
-	if (fd[1] != -1)
-	{
-		ft_dup(fd[1], 1);
-	}
-}
+// 	fd = get_io_files(cmnd, env);
+// 	if (!fd)
+// 		exit(1);
+// 	if (fd[0] != -1)
+// 	{
+// 		ft_dup(fd[0], 0);
+// 	}
+// 	if (fd[1] != -1)
+// 	{
+// 		ft_dup(fd[1], 1);
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:50:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 01:59:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,41 +47,41 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 	return (1);
 }
 
-int	*opening(t_token *args, int *fd, t_redir redir, t_env *env)
+int	*opening(t_token *args, int *fd, t_redir *redir)
 {
-	if (search_token(args, TOKEN_HEREDOC))
-		process_docs(args, &redir, env);
+	// if (search_token(args, TOKEN_HEREDOC))
+	// 	process_docs(args, &redir, env);
 	while (args)
 	{
 		if (args->next && is_ambi(args->next))
 			return (NULL);
 		if (args->type == TOKEN_REDIRECT_IN || args->type == TOKEN_HEREDOC)
 		{
-			if (!handleinput(args, fd, &redir))
+			if (!handleinput(args, fd, redir))
 				return (NULL);
 		}
 		else if (args->type == TOKEN_REDIRECT_OUT || args->type == TOKEN_APPEND)
 		{
-			if (!handleoutput(args, fd, redir))
+			if (!handleoutput(args, fd, *redir))
 				return (NULL);
 		}
-		if (redir.in_count[0] == 0 && redir.out_count[1] == 0 && \
-			redir.out_count[0] == 0 && redir.in_count[1] == 0)
+		if (redir->in_count[0] == 0 && redir->out_count[1] == 0 && \
+			redir->out_count[0] == 0 && redir->in_count[1] == 0)
 			break ;
 		args = args->next;
 	}
 	return (fd);
 }
 
-int	*get_io_files(t_token *args, t_env *env)
+int	*get_io_files(t_token *args, t_redir *redir)
 {
 	int		*fd;
-	t_redir	redir;
+	// t_redir	redir;
 
 	fd = init_fds();
-	redir = init_redir_struct(args);
-	if (!check_doc_limit(redir.in_count[1]))
-		return (update_status(&env, "1"), NULL);
-	fd = opening(args, fd, redir, env);
+	// redir = init_redir_struct(args);
+	// if (!check_doc_limit(redir.in_count[1]))
+	// 	return (update_status(&env, "1"), NULL);
+	fd = opening(args, fd, redir);
 	return (fd);
 }

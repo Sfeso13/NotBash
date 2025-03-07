@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:50:40 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 01:58:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	clear_docs(t_redir *redir);
 //io preparing
 int	how_many_redir(t_token *cmnd, t_token_type type);
 // int	*init_fds();
-int	*get_io_files(t_token *args, t_env *env);
+int	*get_io_files(t_token *args, t_redir *redir);
 //utils
 int	check_doc_limit(int count);
 int	handleinput(t_token *tmp, int *fd, t_redir *redir);
