@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/03 00:06:32 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 00:38:00 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_token	*search_token(t_token *token, t_token_type type);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_old_split(char const *s, char c);
 int		count_words(char const *str);
+int		count_custom_words(char const *str);
 
 //list clearing
 void	clear_env(t_env **lst, void (*del)(void*));

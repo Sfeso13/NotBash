@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/02 21:01:44 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 01:16:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,31 +97,36 @@ void	expand_var(t_expander *exp)
 	}
 	else
 	{
-	while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
-			exp->value[exp->i] == '?')
-		exp->i++;
-	if (start == exp->i)
-		return (append_char(exp, '$'));
-	var_name = ft_substr(exp->value, start, exp->i - start);
-	var_val = get_env_value(var_name, exp->env);
-	if (var_val)
-	{
-		if (!exp->in_single && !exp->in_double && exp->expme == 0)
+		while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
+				exp->value[exp->i] == '?')
+			exp->i++;
+		if (start == exp->i)
+			return (append_char(exp, '$'));
+		var_name = ft_substr(exp->value, start, exp->i - start);
+		var_val = get_env_value(var_name, exp->env);
+		if (var_val)
 		{
-			words = ft_split(var_val);
-			i = 0;
-			while (words[i])
+			if (!exp->in_single && !exp->in_double && exp->expme == 0)
 			{
-				append_str(exp, words[i]);
-				if (words[i + 1])
-					append_char(exp, '\x01');
-				i++;
+				words = ft_split(var_val);
+				i = 0;
+				while (words[i])
+				{
+					append_str(exp, words[i]);
+					if (words[i + 1])
+						append_char(exp, '\x01');
+					i++;
+				}
+				free_tab(words);
 			}
-			free_tab(words);
+			else
+				append_str(exp, var_val);
 		}
 		else
-			append_str(exp, var_val);
-	}
-	free(var_name);
+		{
+			if (checkvalidation(exp->value) == 1)
+				exp->ignoreme = 1;
+		}
+		free(var_name);
 	}
 }

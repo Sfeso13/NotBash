@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 00:48:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 02:27:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_redir{
 } t_redir;
 
 typedef struct s_fd{
-    int infd;
-    int outfd;
+	int infd;
+	int outfd;
 	int	pfd[2];
 } t_fd;
 
@@ -76,6 +76,7 @@ typedef struct s_token
 	//if we wanna add something in futur
 	int				expanded;
 	int				ambiguous;
+	int				ignore;
 	t_token_type	type;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -110,6 +111,7 @@ typedef struct s_expander
 	int			in_double;
 	int			escape_next;
 	int			expme;
+	int			ignoreme;
 }	t_expander;
 
 #endif

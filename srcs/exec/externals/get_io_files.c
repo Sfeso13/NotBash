@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 01:59:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 02:38:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ int	*opening(t_token *args, int *fd, t_redir *redir)
 int	*get_io_files(t_token *args, t_redir *redir)
 {
 	int		*fd;
-	// t_redir	redir;
 
 	fd = init_fds();
-	// redir = init_redir_struct(args);
-	// if (!check_doc_limit(redir.in_count[1]))
-	// 	return (update_status(&env, "1"), NULL);
 	fd = opening(args, fd, redir);
 	return (fd);
 }
