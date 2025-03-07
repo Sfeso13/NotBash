@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 01:16:38 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 05:00:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	expand_var(t_expander *exp)
 
 	exp->i++;
 	start = exp->i;
-	if (exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
+	if ((exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
+		&& !exp->in_single && !exp->in_double)
 	{
 		quote = exp->value[exp->i];
 		start = exp->i;

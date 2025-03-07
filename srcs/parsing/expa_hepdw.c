@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 01:11:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 05:01:06 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,6 @@ int	checkvalidation(const char *str)
 		i++;
 	}
 	return (1);
-}
-
-void	handle_dollar_sign(t_expander *exp)
-{
-	if (improved_cmp("\"$\"", exp->value) == 0)
-	{
-		append_char(exp, '$');
-		exp->i++;
-	}
-	else
-		expand_var(exp);
 }
 
 void	chinexpdola(t_token *current, int *inexp, int *dol)

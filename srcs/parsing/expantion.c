@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 01:11:45 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 05:01:35 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	char_process(t_expander *exp)
 	else if (c == '\'' || c == '"')
 		handle_quote(exp, c);
 	else if (c == '$' && !exp->in_single)
-		handle_dollar_sign(exp);
+		expand_var(exp);
 	else if (c == '~' && can_tilde(exp))
 		expand_tilde(exp);
 	else
