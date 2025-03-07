@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/06 15:24:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 00:18:28 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,6 @@ int	parser(char *input, t_env **env_list, t_shell **cmd, t_token **tokens)
 	}
 	analyze_in_expand(*tokens, *env_list);
 	*cmd = fill_cmd(*tokens);
-	if (!(*cmd))
-	{
-		free_tokens(*tokens);
-		free(input);
-		exit(1);
-	}
 	return (0);
 }
 
@@ -172,7 +166,7 @@ void	start_prompt(t_env *env_list)
 		}
 		if (parser(input, &env_list, &cmd, &tokens))
 			continue ;
-		// print_shell(cmd);
+		print_shell(cmd);
 		execute(cmd, &env_list);
 		free(input);
 		free_tokens(tokens);

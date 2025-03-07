@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/06 01:04:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 00:12:48 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,29 @@ static void	char_process(t_expander *exp)
 	else if (c == '\'' || c == '"')
 		handle_quote(exp, c);
 	else if (c == '$' && !exp->in_single)
-		expand_var(exp);
+	{
+		if (improved_cmp("\"$\"", exp->value) == 0)
+		{
+			append_char(exp, '$');
+			exp->i++;
+		}
+		else
+			expand_var(exp);
+	}
 	else if (c == '~' && can_tilde(exp))
 		expand_tilde(exp);
 	else
 		append_char(exp, exp->value[exp->i++]);
 }
 
-char	*expand_token(char *value, t_env *env, int inexp)
+t_expander	expand_token(char *value, t_env *env, int inexp)
 {
 	t_expander	exp;
 
 	init_expander(&exp, value, env, inexp);
 	while (exp.value[exp.i])
 		char_process(&exp);
-	return (exp.buffer);
+	return (exp);
 }
 
 int	analyze_in_expand(t_token *tokens, t_env *env)
@@ -73,6 +81,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	int		inexp;
 	int		dol;
 	int		wrds;
+	t_expander exp;
 
 	inexp = 0;
 	current = tokens;
@@ -90,7 +99,8 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 			if (current->expanded == 0)
 			{
 				or_val = current->value;
-				current->value = expand_token(or_val, env, inexp);
+				exp = expand_token(or_val, env, inexp);
+				current->value = exp.buffer;
 				free(or_val);
 				if (dol == 1)
 					wrds = count_custom_words(current->value);
@@ -106,6 +116,8 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 				current->expanded = 1;
 			}
 		}
+		if (exp.ignoreme == 1)
+			current->ignore = 1;
 		current = current->next;
 	}
 	return (0);

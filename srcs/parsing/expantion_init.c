@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 01:47:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/28 16:47:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/06 23:45:40 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	init_expander(t_expander *exp, char *value, t_env *env, int inexp)
 	exp->in_single = 0;
 	exp->in_double = 0;
 	exp->escape_next = 0;
+	exp->ignoreme = 0;
 	exp->expme = inexp;
 }

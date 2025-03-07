@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 02:52:29 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:44:15 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_shell			*crt_node(void);
 t_token			*copy_token(t_token *src);
 void			free_shell(t_shell *head);
 int				analyze_in_expand(t_token *tokens, t_env *env);
-char			*expand_token(char *value, t_env *env, int inexp);
+t_expander		expand_token(char *value, t_env *env, int inexp);
 void			expand_var(t_expander *exp);
 void			handle_quote(t_expander *exp, char quote);
 void			handle_backslash(t_expander *exp);

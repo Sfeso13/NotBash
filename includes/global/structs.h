@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 17:33:25 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:45:29 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_expander
 	int			in_double;
 	int			escape_next;
 	int			expme;
+	int			ignoreme;
 }	t_expander;
 
 #endif

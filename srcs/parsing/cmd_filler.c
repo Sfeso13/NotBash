@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:36:59 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/04 02:55:47 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 00:11:34 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_shell	*fill_cmd(t_token *tokens)
 	curr = tokens;
 	while (curr)
 	{
-		if (curr->type == TOKEN_PIPE)
+		if (curr->type == TOKEN_PIPE || curr->ignore == 1)
 		{
 			curr = curr->next;
 			continue ;
