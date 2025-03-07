@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 00:24:54 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:31:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	set_status(t_env **env, int status, pid_t cpid)
 		update_status(env, stat);
 		free(stat);
 	}
+	else
+		update_status(env, "0");
 }
 
 void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
@@ -35,12 +37,21 @@ void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
 	t_env	*dash;
 	int		saved_in;
 	int		saved_out;
+	t_redir	redir;
 
 	dash = search_key("_", *env);
 	set_env_value(&dash, NULL);
 	saved_in = dup(STDIN_FILENO);
 	saved_out = dup(STDOUT_FILENO);
-	multiple_process_exec(cmnds, process_count, env);
+	redir = multi_init_redir(cmnds);
+	if (!check_doc_limit(redir.in_count[1]))
+	{
+		restore_stds(saved_in, saved_out);
+		return (update_status(env, "1"));
+	}
+	if (search_multi(cmnds, TOKEN_HEREDOC))
+		multi_doc_process(&redir, cmnds, *env);
+	multiple_process_exec(cmnds, process_count, env, redir);
 	restore_stds(saved_in, saved_out);
 }
 
@@ -53,7 +64,7 @@ void	execute(t_shell *cmnds, t_env **env)
 	process_count = how_many_processes(cmnds);
 	if (process_count == 1)
 		single_process_exec(cmnds, env);
-	else
+	else if (process_count > 1)
 		multi_execution(env, process_count, cmnds);
 	while (1)
 	{

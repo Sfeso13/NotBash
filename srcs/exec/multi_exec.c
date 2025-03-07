@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 02:02:53 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:34:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,82 +76,16 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 		close(fds.infd);
 }
 
-t_redir multi_init_redir(t_shell *cmnds)
-{
-	t_redir	redir;
-	t_token	*args;
-	int		i;
-
-	i = 0;
-	redir.in_count[0] = 0;
-	redir.in_count[1] = 0;
-	redir.out_count[0] = 0;
-	redir.out_count[1] = 0;
-	while (cmnds)
-	{
-		args = cmnds->tokens;
-		redir.in_count[0] += how_many_redir(args, TOKEN_REDIRECT_IN);
-		redir.in_count[1] += how_many_redir(args, TOKEN_HEREDOC);
-		redir.out_count[0] += how_many_redir(args, TOKEN_REDIRECT_OUT);
-		redir.out_count[1] += how_many_redir(args, TOKEN_APPEND);
-		i++;
-		cmnds = cmnds->next;
-	}
-	redir.doc_pos = 0;
-	return (redir);
-}
-
-int	search_multi(t_shell *cmnds, t_token_type type)
-{
-	int	i;
-
-	i = 0;
-	while (cmnds)
-	{
-		if (search_token(cmnds->tokens, type))
-			i++;
-		cmnds = cmnds->next;
-	}
-	return (i);
-}
-
-void	multi_doc_process(t_redir *redir, t_shell *cmnds,t_env *env)
-{
-	int		i;
-	t_token	*args;
-
-	i = 0;
-	while (cmnds && i < redir->in_count[1])
-	{
-		args = cmnds->tokens;
-		while (args)
-		{
-			if (args->type == TOKEN_HEREDOC)
-			{
-				redir->docs[i] = get_doc(args->next->value, env);
-				i++;
-			}
-			args = args->next;
-		}
-		cmnds = cmnds->next;
-	}
-}
-
-void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
+void	multiple_process_exec(t_shell *cmnds, int count, \
+							t_env **env, t_redir redir)
 {
 	int		i;
 	int		*fd;
 	t_fd	fds;
-	t_redir	redir;
 
 	i = 0;
 	fds = init_fd_struct();
-	redir = multi_init_redir(cmnds);
-	if (!check_doc_limit(redir.in_count[1]))
-		return (update_status(env, "1"));// to check later
-	if (search_multi(cmnds, TOKEN_HEREDOC))
-		multi_doc_process(&redir, cmnds, *env);
-	while (i < process_count)
+	while (i < count)
 	{
 		fd = get_io_files(cmnds->tokens, &redir);
 		if (!fd && g_signal_received == 1)
@@ -159,7 +93,7 @@ void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env)
 			g_signal_received = 0;
 			return (update_status(env, "1"));
 		}
-		set_fds(&fds, fd, process_count, i);
+		set_fds(&fds, fd, count, i);
 		if (!fd && g_signal_received != 1)
 		{
 			fd_err(fds, &cmnds, &i);

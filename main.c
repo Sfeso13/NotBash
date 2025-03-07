@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 00:18:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:25:21 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	start_prompt(t_env *env_list)
 		}
 		if (parser(input, &env_list, &cmd, &tokens))
 			continue ;
-		print_shell(cmd);
+		// print_shell(cmd);
 		execute(cmd, &env_list);
 		free(input);
 		free_tokens(tokens);

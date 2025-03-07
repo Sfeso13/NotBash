@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:47:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 02:38:08 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:35:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	handleoutput(t_token *tmp, int *fd, t_redir redir)
 
 int	*opening(t_token *args, int *fd, t_redir *redir)
 {
-	// if (search_token(args, TOKEN_HEREDOC))
-	// 	process_docs(args, &redir, env);
 	while (args)
 	{
 		if (args->next && is_ambi(args->next))
