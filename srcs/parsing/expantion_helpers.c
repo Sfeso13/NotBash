@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 00:19:10 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 01:16:38 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,6 @@ void	handle_quote(t_expander *exp, char quote)
 	exp->i++;
 }
 
-int test(const char *str)
-{
-	int i = 0;
-
-	while (str[i])
-	{
-		if ((str[i] == '"' && str[i + 1] == '"') || (str[i] == '\'' && str[i + 1] == '\''))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 void	expand_var(t_expander *exp)
 {
 	size_t	start;
@@ -90,7 +78,6 @@ void	expand_var(t_expander *exp)
 	start = exp->i;
 	if (exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
 	{
-		write(1, "kkk\n", 5);
 		quote = exp->value[exp->i];
 		start = exp->i;
 		while (exp->value[exp->i] && exp->value[exp->i] != quote)
@@ -137,7 +124,7 @@ void	expand_var(t_expander *exp)
 		}
 		else
 		{
-			if (test(exp->value) == 1)
+			if (checkvalidation(exp->value) == 1)
 				exp->ignoreme = 1;
 		}
 		free(var_name);

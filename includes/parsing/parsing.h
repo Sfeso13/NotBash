@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/06 23:44:15 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/07 01:06:52 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ int				doc_append_str(char **str, size_t *len, size_t *cap, char *value);
 int				doc_append_char(char **str, size_t *len, size_t *cap, char c);
 void			handle_sigint(int sig);
 void			split_and_insert(t_token *curr);
+int				checkvalidation(const char *str);
+void			handle_dollar_sign(t_expander *exp);
+void			expprocetoken(t_token *current, t_env *env, int inexp, int dol);
+void			chinexpdola(t_token *current, int *inexp, int *dol);
 
 #endif
