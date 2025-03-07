@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 01:58:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:39:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "../exec/builtins.h"
 # include "../global/minishell.h"
 # include <sys/syslimits.h>
-// # include <linux/limits.h>
 # include <sys/wait.h> //linux
 # include <errno.h>
 
@@ -29,16 +28,16 @@ pid_t	frk();
 char	*print_err(char *value, char *msg);
 
 void	doc_err(void);
-int	prepare_doc(char *buff, char *tmp, int fd, char *filename);
+int		prepare_doc(char *buff, char *tmp, int fd, char *filename);
 
 //single process
-int	*single_redirect(t_token *cmnd, t_env *env);
+int		*single_redirect(t_token *cmnd, t_env *env);
 void	single_process_exec(t_shell *cmnds, t_env **env);
 void	redirected_execution(t_shell *cmnds, t_env **env);
 void	normal_execution(t_shell *cmnds, t_env **env);
 
 //multi process
-void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env);
+void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env, t_redir redir);
 void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env);
 void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env);
 
@@ -49,7 +48,7 @@ t_fd	init_fd_struct(void);
 
 char	**safe_free(char **arr, size_t i);
 
-int	is_ambi(t_token *args);
+int		is_ambi(t_token *args);
 
 int		improved_cmp(const char *s1, const char *s2);
 void	execute(t_shell *cmnds, t_env **env);
@@ -58,6 +57,10 @@ void	external_cmd(t_token *cmnd, t_env *env);
 int		is_redirect(t_token *cmnd);
 
 void	ft_dup(int from, int to);
+
+int	search_multi(t_shell *cmnds, t_token_type type);
+void	multi_doc_process(t_redir *redir, t_shell *cmnds,t_env *env);
+t_redir multi_init_redir(t_shell *cmnds);
 
 void	run_command(char *path, char **args, t_env *env);
 
