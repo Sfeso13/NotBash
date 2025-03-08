@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/08 00:49:55 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 01:48:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ void	handle_sigint(int sig)
 {
 	(void)sig;
 	if (!(waitpid(-1, NULL, WNOHANG))) // need to know about hanging child processes
-	{
-		write(1, "\n", 1);
-		return ;
-	}
+		return ;//removed a new line printing
 	g_signal_received = 1;
 	write(1, "\n", 1);
 	rl_on_new_line();
