@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 14:31:49 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 16:44:07 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	execute(t_shell *cmnds, t_env **env)
 		single_process_exec(cmnds, env);
 	else if (process_count > 1)
 		multi_execution(env, process_count, cmnds);
+	else
+		update_status(env, "0");
 	while (1)
 	{
 		cpid = waitpid(-1, &status, 0);

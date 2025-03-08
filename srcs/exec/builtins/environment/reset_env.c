@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:29:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:18:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 17:03:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	reset_env(t_env **env)
 	if (!search_key("OLDPWD", *env))
 		envadd_back(env, newenv("OLDPWD", NULL, 1));
 	if (!search_key("?", *env))
-		envadd_back(env, newenv("?", NULL, 0));
+		envadd_back(env, newenv("?", "0", 0));
 	if (!search_key("SHLVL", *env))
 		envadd_back(env, newenv("SHLVL", "1", 1));
 	if (!search_key("_", *env))

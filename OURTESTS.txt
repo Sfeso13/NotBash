@@ -15,19 +15,6 @@ minishell$ $t						-------------> PARSING
 exit status in ctrl-c
 /dev/random  | cat
 ---------------------------------------------------------
-minishell$ adsfasjk
-adsfasjk: command not found
-minishell$ $l $P $f
-minishell$ echo $?
-127
----------------------------------------------------------
-ctrl-D
-minishell$ fkjdafjda
-fkjdafjda: command not found
-minishell$
-➜  git_shell git:(parsing) ✗ echo $?
-0
----------------------------------------------------------
 ctrl-quit
 minishell$ cat | jkfshgdk
 jkfshgdk: command not found
