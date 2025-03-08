@@ -6,24 +6,25 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 19:17:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/21 19:17:36 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 15:38:01 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-static int	of(int s)
+static long long	of(int s)
 {
+	errno = ERANGE;
 	if (s == 1)
-		return (-1);
-	return (0);
+		return (LLONG_MAX);
+	return (LLONG_MIN);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	size_t	i;
 	int		s;
-	ssize_t	num;
+	long long	num;
 
 	num = 0;
 	s = 1;
@@ -44,5 +45,5 @@ int	ft_atoi(const char *str)
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}
-	return ((int)num * s);
+	return (num * s);
 }

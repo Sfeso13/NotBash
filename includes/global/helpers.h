@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 00:38:00 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:40:17 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	free_tab(char **arr);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
-int		ft_atoi(const char *str);
+long long	ft_atoi(const char *str);
 char	*ft_strndup(const char *s, int n);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);

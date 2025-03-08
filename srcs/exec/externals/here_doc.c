@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 01:05:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:56:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 	buff = readline("> ");
 	while (buff && improved_cmp(buff, delim) != 0)
 	{
-		if (expandable)
+		if (expandable && ft_strchr(buff, '$'))
 			buff = expanddoc(buff, env);
 		write(fd, buff, ft_strlen(buff));
 		write(fd, "\n", 1);
@@ -107,7 +107,7 @@ int	get_doc(char *delim, t_env *env)
 	if (fd == -1)
 		doc_err();
 	buff = read_input(expandable, tmp, fd, env);
-	if (!buff && g_signal_received)
+	if (!buff && g_signal_received == 1)
 	{
 		close(fd);
 		unlink(filename);

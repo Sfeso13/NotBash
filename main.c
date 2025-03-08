@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/08 01:48:57 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:01:07 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ void	start_prompt(t_env *env_list)
 	while (1)
 	{
 		fd = STDIN_FILENO;
-		catch_signals();
 		tcgetattr(fd, &settings);
+		catch_signals();
 		input = get_input(&env_list);
 		if (displaymeagn(&input))
 		{
