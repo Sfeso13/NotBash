@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 14:39:25 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:30:40 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	redir_exec(t_fd fds);
 //args preparing
 char	*get_cmnd_path(t_token *cmnd, t_env *env);
 char	**prepare_args(t_token *cmnd);
-void	redirect(t_token *cmnd, t_env *env);
 
 //args helper
 void	copy_kv(char *str, t_env *env, size_t len);
