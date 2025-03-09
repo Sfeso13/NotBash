@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 01:43:27 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:47:59 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_redir
-{
+//past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
+// fuck the old struct thats all we need :
+
+typedef struct s_redir{
 	int	in_count[2];
 	int	out_count[2];
 	int	docs[16];

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 05:01:06 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 00:11:04 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,27 @@ int	checkvalidation(const char *str)
 	return (1);
 }
 
+int	bfrafters(char *str)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		if (str[i] == '=')
+			return (0);
+		i++;
+	}
+	return (0);
+}
 void	chinexpdola(t_token *current, int *inexp, int *dol)
 {
-	if (improved_cmp(current->value, "export") == 0)
+	if (improved_cmp(current->value, "export") == 0
+		&& ((current->next) && bfrafters(current->next->value) == 0))
 		*inexp = 1;
 	if (ft_strchr(current->value, '$'))
 		*dol = 1;

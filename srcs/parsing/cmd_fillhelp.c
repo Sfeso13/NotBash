@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 00:13:50 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 00:30:27 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ t_token	*cpy_till_pipe(t_token **curr)
 	prev_cpy = NULL;
 	while (*curr && (*curr)->type != TOKEN_PIPE)
 	{
+		if ((*curr)->ignore == 1)
+		{
+			*curr = (*curr)->next;
+			continue ;
+		}
 		new_token = copy_token(*curr);
 		if (!new_token)
 		{

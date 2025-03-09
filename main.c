@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 00:06:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:47:08 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,10 @@ char	*get_input(t_env **env_list)
 	char	*input;
 	t_env	*status;
 
-	input = readline("minishell$ ");
+	if (isatty(STDIN_FILENO))
+		input = readline("minishell$ ");
+	else
+		input = NULL;
 	if (!input)
 	{
 		status = search_key("?", *env_list);
@@ -171,7 +174,7 @@ void	start_prompt(t_env *env_list)
 		}
 		if (parser(input, &env_list, &cmd, &tokens))
 			continue ;
-		// print_shell(cmd);
+		print_shell(cmd);
 		execute(cmd, &env_list);
 		tcsetattr(fd, TCSADRAIN, &settings);
 		free(input);
