@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 03:07:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:48:01 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ pid_t	child_pid(int value, int setorget)
 		return (pid);
 	return (0);
 }
- 
+
 void	handle_sigint(int sig)
 {
 	(void)sig;
@@ -138,9 +138,9 @@ char	*get_input(t_env **env_list)
 	if (!input)
 	{
 		status = search_key("?", *env_list);
-		clear_env(env_list, free);
 		if (status)
 			exit(ft_atoi(status->val));
+		clear_env(env_list, free);
 		exit (0);
 	}
 	if (g_signal_received)

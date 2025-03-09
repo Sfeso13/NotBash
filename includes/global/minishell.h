@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:57:16 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/08 15:37:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:04:03 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@
 # include <termios.h>
 # include <limits.h>
 
-volatile sig_atomic_t g_signal_received;
+volatile sig_atomic_t	g_signal_received;
 
 #endif

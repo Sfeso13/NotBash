@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 02:00:58 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:04:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_shell			*crt_node(void);
 t_token			*copy_token(t_token *src);
 void			free_shell(t_shell *head);
 int				analyze_in_expand(t_token *tokens, t_env *env);
-t_expander		expand_token(char *value, t_env *env, int inexp, int after_pipe);
+t_expander		expand_token(char *value, t_env *env, \
+int inexp, int after_pipe);
 void			expand_var(t_expander *exp);
 void			handle_quote(t_expander *exp, char quote);
 void			handle_backslash(t_expander *exp);
