@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syncatcher.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:18:29 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/03 17:04:59 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 15:27:24 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ int	checkmy_syn(const char *input, t_env *env)
 	if (quoting_check(input))
 	{
 		ft_putstr_fd("Error unclosed quotes\n", 2);
-		update_status(&env, "2");
+		update_status(&env, "258");
 		return (1);
 	}
 	if (redir_check(input))
 	{
 		ft_putstr_fd("Error invalid redirections\n", 2);
-		update_status(&env, "2");
+		update_status(&env, "258");
 		return (1);
 	}
 	if (itsmisplaced(input))
 	{
 		ft_putstr_fd("Error misplaced OP\n", 2);
-		update_status(&env, "2");
+		update_status(&env, "258");
 		return (1);
 	}
 	if (notsupported(input))
 	{
 		ft_putstr_fd("Error theres a non supported OP\n", 2);
-		update_status(&env, "2");
+		update_status(&env, "258");
 		return (1);
 	}
 	return (0);

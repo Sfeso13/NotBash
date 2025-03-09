@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 14:47:33 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:47:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	append_char(t_expander *exp, char c)
 	}
 	exp->buffer[exp->buf_pos++] = c;
 	exp->buffer[exp->buf_pos] = '\0';
+	// printf("%s\n", exp->buffer);
 }
 
 void	append_str(t_expander *exp, char *str)
 {
+	printf("str: %s\n", str);
 	while (str && *str)
 		append_char(exp, *str++);
 }
@@ -90,7 +92,9 @@ void	expand_var(t_expander *exp)
 	char	**words;
 	char	quote;
 	char	*content;
+	int		flag;
 
+	flag = 0;
 	exp->i++;
 	start = exp->i;
 	if ((exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
@@ -127,6 +131,7 @@ void	expand_var(t_expander *exp)
 			var_val = get_env_value(var_name, exp->env);
 		if (var_val)
 		{
+			flag = 1;
 			if (whitesonly(var_val) == 1)
 				exp->ignoreme = 1;
 			if (!exp->in_single && !exp->in_double && exp->expme == 0)
@@ -143,11 +148,14 @@ void	expand_var(t_expander *exp)
 				free_tab(words);
 			}
 			else
+			{
+				printf("1\n");
 				append_str(exp, var_val);
+			}
 		}
 		else
 		{
-			if (checkvalidation(exp->value) == 1)
+			// if (!var_val && flag == 1)
 				exp->ignoreme = 1;
 		}
 		free(var_name);

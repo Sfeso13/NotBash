@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/01 11:00:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 15:56:53 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_no_option(t_token *cmnd, int size)
 	i = 1;
 	if (size == 1)
 		printf("\n");
-	else if (size == 2)
+	else if (size == 2 && cmnd)
 		printf("%s\n", cmnd->value);
 	else if (size > 2)
 	{
@@ -62,7 +62,7 @@ void	print_with_option(t_token *cmnd, int size, int i)
 {
 	if (size == 2)
 		write(1, "", 1);
-	else if (size == 3)
+	else if (size == 3 && cmnd)
 		printf("%s", cmnd->value);
 	else if (size > 3)
 	{

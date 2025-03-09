@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 00:19:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:11:55 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ int	is_absolute(t_token *cmnd)
 		if (access(cmnd->value, F_OK) == 0)
 		{
 			if (access(cmnd->value, X_OK) == 0)
+			{
 				return (1);
+			}
 			ft_putstr_fd(cmnd->value, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
 			return (2);
@@ -108,7 +110,7 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 	int		absolute;
 
 	correct_path = NULL;
-	if (cmnd->value[0] == '\0')
+	if (cmnd->value[0] == '\0' || improved_cmp(cmnd->value, "..") == 0)
 		return (print_err(cmnd->value, ": command not found\n"));
 	absolute = is_absolute(cmnd);
 	if (absolute == 1)

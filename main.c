@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 14:48:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:11:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	start_prompt(t_env *env_list)
 		}
 		if (parser(input, &env_list, &cmd, &tokens))
 			continue ;
-		// print_shell(cmd);
+		print_shell(cmd);
 		execute(cmd, &env_list);
 		tcsetattr(fd, TCSADRAIN, &settings);
 		free(input);
