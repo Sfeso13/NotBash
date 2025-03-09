@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 23:30:40 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:17:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include <sys/wait.h> //linux
 # include <errno.h>
 
-
-pid_t	frk();
+pid_t	frk(void);
 char	*print_err(char *value, char *msg);
 
 void	doc_err(void);
@@ -37,7 +36,8 @@ void	redirected_execution(t_shell *cmnds, t_env **env);
 void	normal_execution(t_shell *cmnds, t_env **env);
 
 //multi process
-void	multiple_process_exec(t_shell *cmnds, int process_count, t_env **env, t_redir redir);
+void	multiple_process_exec(t_shell *cmnds, int process_count, \
+t_env **env, t_redir redir);
 void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env);
 void	multi_externals(t_token *cmnd, int *fd, t_fd fds, t_env *env);
 
@@ -58,18 +58,17 @@ int		is_redirect(t_token *cmnd);
 
 void	ft_dup(int from, int to);
 
-int	search_multi(t_shell *cmnds, t_token_type type);
-void	multi_doc_process(t_redir *redir, t_shell *cmnds,t_env *env);
-t_redir multi_init_redir(t_shell *cmnds);
+int		search_multi(t_shell *cmnds, t_token_type type);
+void	multi_doc_process(t_redir *redir, t_shell *cmnds, t_env *env);
+t_redir	multi_init_redir(t_shell *cmnds);
 
 void	run_command(char *path, char **args, t_env *env);
 
-int	redir_token(t_token *cmnd);
+int		redir_token(t_token *cmnd);
 void	closefds(int *fd, t_fd fds);
 
 void	fd_err(t_fd fds, t_shell **cmnds, int *i);
 void	execute_p(t_fd *fds, int *fd, t_shell **cmnds, t_env **env);
-
 
 void	restore_stds(int saved_in, int saved_out);
 
@@ -77,7 +76,7 @@ void	restore_stds(int saved_in, int saved_out);
 char	*join_name(char *name, int *i);
 char	*get_filename(void);
 char	*read_input(int expandable, char *delim, int fd, t_env *env);
-int	get_doc(char *delim, t_env *env);
+int		get_doc(char *delim, t_env *env);
 
 pid_t	child_pid(int value, int setorget);
 
@@ -86,13 +85,13 @@ void	process_docs(t_token *args, t_redir *redir, t_env *env);
 void	clear_docs(t_redir *redir);
 
 //io preparing
-int	how_many_redir(t_token *cmnd, t_token_type type);
+int		how_many_redir(t_token *cmnd, t_token_type type);
 // int	*init_fds();
-int	*get_io_files(t_token *args, t_redir *redir);
+int		*get_io_files(t_token *args, t_redir *redir);
 //utils
-int	check_doc_limit(int count);
-int	handleinput(t_token *tmp, int *fd, t_redir *redir);
-int	handleoutput(t_token *tmp, int *fd, t_redir redir);
+int		check_doc_limit(int count);
+int		handleinput(t_token *tmp, int *fd, t_redir *redir);
+int		handleoutput(t_token *tmp, int *fd, t_redir redir);
 t_redir	init_redir_struct(t_token *args);
 // void	exec_builtins(t_shell *shell, t_token *cmnd, t_env **env);
 void	redir_exec(t_fd fds);
@@ -108,11 +107,11 @@ char	*join(char const *s1, char const *s2);
 char	**args_split(char const *s, char c);
 
 //io helpers
-int	how_many_redir(t_token *cmnd, t_token_type type);
-int	*init_fds(void);
-int	fdop(int to_open, int append, char *filename, int write);
-int	what_in_to_open(t_token *tmp, int fd, t_redir *redir);
-int	what_out_to_open(t_token *tmp, int fd, int *outredir);
-int	get_doc(char *delim, t_env *env);
+int		how_many_redir(t_token *cmnd, t_token_type type);
+int		*init_fds(void);
+int		fdop(int to_open, int append, char *filename, int write);
+int		what_in_to_open(t_token *tmp, int fd, t_redir *redir);
+int		what_out_to_open(t_token *tmp, int fd, int *outredir);
+int		get_doc(char *delim, t_env *env);
 
 #endif

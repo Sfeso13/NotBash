@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 15:49:56 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:14:33 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	get_last_status(t_env *env)
 
 void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 {
-
 	if ((*cmnd)->next && !validate_status((*cmnd)->next->value))
 	{
-		p_exit_err("exit\n", (*cmnd)->next->value, ": numeric argument required\n");
+		p_exit_err("exit\n", (*cmnd)->next->value, \
+		": numeric argument required\n");
 		clear_structs(shell, env);
 		exit(255);
 	}

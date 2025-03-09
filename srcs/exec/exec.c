@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 23:03:51 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:09:19 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	set_status(t_env **env, int status, pid_t cpid)
 		update_status(env, stat);
 		free(stat);
 	}
-	// else
-	// 	update_status(env, "0");
 }
 
 void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
@@ -55,19 +53,11 @@ void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
 	restore_stds(saved_in, saved_out);
 }
 
-void	execute(t_shell *cmnds, t_env **env)
+void	wait_for_cp(t_env **env)
 {
-	int		process_count;
-	int		status;
 	pid_t	cpid;
+	int		status;
 
-	process_count = how_many_processes(cmnds);
-	if (process_count == 1)
-		single_process_exec(cmnds, env);
-	else if (process_count > 1)
-		multi_execution(env, process_count, cmnds);
-	else
-		update_status(env, "0");
 	while (1)
 	{
 		cpid = waitpid(-1, &status, 0);
@@ -83,4 +73,18 @@ void	execute(t_shell *cmnds, t_env **env)
 		}
 		set_status(env, status, cpid);
 	}
+}
+
+void	execute(t_shell *cmnds, t_env **env)
+{
+	int		process_count;
+
+	process_count = how_many_processes(cmnds);
+	if (process_count == 1)
+		single_process_exec(cmnds, env);
+	else if (process_count > 1)
+		multi_execution(env, process_count, cmnds);
+	else
+		update_status(env, "0");
+	wait_for_cp(env);
 }
