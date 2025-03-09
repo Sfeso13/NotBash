@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 01:05:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:17:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,18 @@ void	doc_sigint(int sig)
 char	*read_input(int expandable, char *delim, int fd, t_env *env)
 {
 	char	*buff;
+	char	*tmp;
 
 	signal(SIGINT, doc_sigint);
 	buff = readline("> ");
 	while (buff && improved_cmp(buff, delim) != 0)
 	{
 		if (expandable)
-			buff = expanddoc(buff, env);
+		{
+			tmp = expanddoc(buff, env);
+			free(buff);
+			buff = tmp;
+		}
 		write(fd, buff, ft_strlen(buff));
 		write(fd, "\n", 1);
 		free(buff);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 02:27:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:44:17 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 // fuck the old struct thats all we need :
 
 typedef struct s_redir{
-    int	in_count[2];
-    int	out_count[2];
+	int	in_count[2];
+	int	out_count[2];
 	int	docs[16];
 	int	doc_pos;
 } t_redir;

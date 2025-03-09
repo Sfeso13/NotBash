@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 05:00:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/08 21:23:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ void	handle_quote(t_expander *exp, char quote)
 	exp->i++;
 }
 
+int	whitesonly(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i])
+	{
+		if (!iswhitespace((unsigned char)*str))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+
 void	expand_var(t_expander *exp)
 {
 	size_t	start;
@@ -107,6 +124,8 @@ void	expand_var(t_expander *exp)
 		var_val = get_env_value(var_name, exp->env);
 		if (var_val)
 		{
+			if (whitesonly(var_val) == 1)
+				exp->ignoreme = 1;
 			if (!exp->in_single && !exp->in_double && exp->expme == 0)
 			{
 				words = ft_split(var_val);

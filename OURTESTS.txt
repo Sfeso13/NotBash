@@ -4,3 +4,139 @@
 while true; do leaks minishell; sleep 1; clear; done
 
 while true; do lsof -c  minishell; sleep 1; clear; done
+
+---------------------------------------------------------
+minishell$ exit yassine 2  4  25
+exit
+exit : too many arguments
+---------------------------------------------------------
+minishell$ exit | exit 9223372036854775810
+minishell$ echo $?
+0
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ exit | exit 9223372036854775807
+bash-3.2$ echo $?
+255
+bash-3.2$ exit | exit 9223372036854775810
+bash: exit: 9223372036854775810: numeric argument required
+bash-3.2$ echo $?
+255
+---------------------------------------------------------
+ctrl-D
+minishell$ cat << l
+> s
+> s
+> s
+> s
+> ss
+> s
+> ssss
+> ss
+> s
+>
+---------------------------------------------------------
+exit status in ctrl-c
+/dev/random  | cat
+---------------------------------------------------------
+minishell$ adsfasjk
+adsfasjk: command not found
+minishell$ $l $P $f
+minishell$ echo $?
+127
+---------------------------------------------------------
+ctrl-D
+minishell$ fkjdafjda
+fkjdafjda: command not found
+minishell$
+➜  git_shell git:(parsing) ✗ echo $?
+0
+---------------------------------------------------------
+ctrl-quit
+minishell$ cat | jkfshgdk
+jkfshgdk: command not found
+^\minishell$ echo $?
+0
+---------------------------------------------------------
+crach :
+➜  git_shell git:(parsing) ✗ ./minishell
+minishell$ cat << l | cat << p | sleep 100
+> ksdajk
+> l
+> dfjks
+> p
+^C
+minishell$ %
+➜  git_shell git:(parsing) ✗
+---------------------------------------------------------
+minishell$ export x="a b"
+minishell$ echo $x
+a b
+minishell$ export $x="yassine"
+minishell: export : a b=yassine: not a valid identifier
+---------------------------------------------------------
+minishell$ export x="yassine"
+minishell$ echo $x
+yassine
+minishell$ export x="+=+=+=+=+=+="
+minishell$ echo $x
+yassine+=+=+=+=+=+=
+---------------------------------------------------------
+minishell$ pwd
+/bin
+minishell$ unset PATH
+minishell$ ls
+ls: No such file or directory
+minishell$ pwd
+/bin
+minishell$ /bin/ls
+[               dd              launchctl       pwd             tcsh
+bash            df              link            rm              test
+cat             echo            ln              rmdir           unlink
+chmod           ed              ls              sh              wait4path
+cp              expr            mkdir           sleep           zsh
+csh             hostname        mv              stty
+dash            kill            pax             sync
+date            ksh             ps              syslog.py
+minishell$ ls
+ls: No such file or directory
+---------------------------------------------------------
+minishell$ ./a.out
+./a.out: Permission denied
+minishell$ echo $?
+126
+minishell$ cat | ./a.out
+./a.out: Permission denied
+d
+minishell$ echo $?
+0
+minishell
+---------------------------------------------------------
+minishell$ exit | exit 100 | cat << l | cat | exit 1
+> jkdfjk
+> jkdsk
+> fkdjsk
+> fjksdk
+> l
+minishell$ echo $?
+0
+---------------------------------------------------------
+minishell$ fdkdskglfs
+fdkdskglfs: command not found
+minishell$ jkfdkfd | echo $?
+jkfdkfd: command not found
+127
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ jkfhsjk
+bash: jkfhsjk: command not found
+bash-3.2$ gkfks | echo $?
+0
+bash: gkfks: command not found
+---------------------------------------------------------
