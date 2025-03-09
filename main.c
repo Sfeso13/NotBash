@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 02:44:52 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 03:07:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ pid_t	child_pid(int value, int setorget)
 		return (pid);
 	return (0);
 }
-
+ 
 void	handle_sigint(int sig)
 {
 	(void)sig;
