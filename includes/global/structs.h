@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 01:47:59 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 03:20:22 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_token
 	int				expanded;
 	int				ambiguous;
 	int				ignore;
+	int				after_pipe;
 	t_token_type	type;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -111,6 +112,8 @@ typedef struct s_expander
 	int			escape_next;
 	int			expme;
 	int			ignoreme;
+	int			aft_pipe;
+	int			expanding_var;
 }	t_expander;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/08 21:23:57 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 03:29:15 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ void	expand_var(t_expander *exp)
 		if (start == exp->i)
 			return (append_char(exp, '$'));
 		var_name = ft_substr(exp->value, start, exp->i - start);
-		var_val = get_env_value(var_name, exp->env);
+		if (ft_strcmp(var_name, "?") == 0 && exp->aft_pipe)
+			var_val = "0";
+		else
+			var_val = get_env_value(var_name, exp->env);
 		if (var_val)
 		{
 			if (whitesonly(var_val) == 1)

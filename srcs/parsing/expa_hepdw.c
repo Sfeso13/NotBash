@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 00:11:04 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 03:29:26 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 	int			wrds;
 
 	or_val = current->value;
-	exp = expand_token(or_val, env, inexp);
+	exp = expand_token(or_val, env, inexp, current->after_pipe);
 	current->value = exp.buffer;
 	free(or_val);
 	if (dol == 1)
