@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 00:28:52 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:50:17 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 02:09:19 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	process_docs(t_token *args, t_redir *redir, t_env *env)
 		if (args->type == TOKEN_HEREDOC)
 		{
 			redir->docs[i] = get_doc(args->next->value, env);
+			if (redir->docs[i] == -1)
+				return ;
 			i++;
 		}
 		args = args->next;
