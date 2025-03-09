@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 00:23:51 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 00:13:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:54:18 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	add_token_to_list(t_token **head, t_token **tail, char *val)
 	new->type = get_token_type(val);
 	new->expanded = 0;
 	new->ambiguous = 0;
+	new->after_pipe = 0;
 	new->ignore = 0;
 	new->next = NULL;
 	new->prev = *tail;

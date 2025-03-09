@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 01:44:07 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 03:30:39 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ static void	char_process(t_expander *exp)
 		append_char(exp, exp->value[exp->i++]);
 }
 
-t_expander	expand_token(char *value, t_env *env, int inexp)
+t_expander	expand_token(char *value, t_env *env, int inexp, int after_pipe)
 {
 	t_expander	exp;
 
 	init_expander(&exp, value, env, inexp);
+	exp.aft_pipe = after_pipe;
 	while (exp.value[exp.i])
 		char_process(&exp);
 	return (exp);
@@ -71,8 +72,19 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	t_token	*current;
 	int		inexp;
 	int		dol;
+	int		after_pipe;
 
+	after_pipe = 0;
 	inexp = 0;
+	current = tokens;
+	while (current)
+	{
+		if (current->type == TOKEN_PIPE)
+			after_pipe = 1;
+		else
+			current->after_pipe = after_pipe;
+		current = current->next;
+	}
 	current = tokens;
 	while (current)
 	{

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 00:30:27 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:53:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_token	*copy_token(t_token *src)
 	new->expanded = src->expanded;
 	new->ambiguous = src->ambiguous;
 	new->ignore = src->ignore;
+	new->after_pipe = src->after_pipe;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
