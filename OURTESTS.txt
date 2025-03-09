@@ -6,6 +6,20 @@ $> / or $> // or $> /. or $> /./
 "bash: /: Is a directory
 $>"
 ------------------------------------------------------------
-should we handle it? idk
 
-echo $UID -----> prints user id e.g: 1001
+minishell$ echo "$HO"ME
+
+=== Command 1 ===
+  echo            WORD         Expanded: 1   ← Prev: (None)
+not ambi
+=====================
+Prev cmd: 0x0            Next cmd: 0x0
+----> expected
+bash-3.2$ echo "$HO"ME
+ME
+------------------------------------------------------------
+bash-3.2$ echo "$DONTEXIST""Makefile"
+Makefile
+------------------------------------------------------------
+bash-3.2$ echo "$DONTEXIST"Makefile
+Makefile

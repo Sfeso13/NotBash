@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 16:47:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:14:33 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	append_char(t_expander *exp, char c)
 
 void	append_str(t_expander *exp, char *str)
 {
-	printf("str: %s\n", str);
 	while (str && *str)
 		append_char(exp, *str++);
 }
@@ -131,9 +130,6 @@ void	expand_var(t_expander *exp)
 			var_val = get_env_value(var_name, exp->env);
 		if (var_val)
 		{
-			flag = 1;
-			if (whitesonly(var_val) == 1)
-				exp->ignoreme = 1;
 			if (!exp->in_single && !exp->in_double && exp->expme == 0)
 			{
 				words = ft_split(var_val);
@@ -153,11 +149,8 @@ void	expand_var(t_expander *exp)
 				append_str(exp, var_val);
 			}
 		}
-		else
-		{
-			// if (!var_val && flag == 1)
+		if (whitesonly(exp->buffer) == 1)
 				exp->ignoreme = 1;
-		}
 		free(var_name);
 	}
 }
