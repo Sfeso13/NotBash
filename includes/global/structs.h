@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:29:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 02:27:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:43:27 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,39 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-//past me f google https://knowyourmeme.com/memes/jaking-it-jakeing-it
-// fuck the old struct thats all we need :
-
-typedef struct s_redir{
-    int	in_count[2];
-    int	out_count[2];
+typedef struct s_redir
+{
+	int	in_count[2];
+	int	out_count[2];
 	int	docs[16];
 	int	doc_pos;
-} t_redir;
+}	t_redir;
 
-typedef struct s_fd{
-	int infd;
-	int outfd;
+typedef struct s_fd
+{
+	int	infd;
+	int	outfd;
 	int	pfd[2];
-} t_fd;
+}	t_fd;
 
-typedef struct	s_exp
+typedef struct s_exp
 {
 	char	*res;
 	size_t	len;
 	size_t	cap;
 }	t_exp;
 
-typedef struct	s_quote
+typedef struct s_quote
 {
 	int		scc;
 	int		dcc;
-} t_quote;
+}	t_quote;
 
-typedef struct	s_quote_state
+typedef struct s_quote_state
 {
 	int		in_quotes;
 	char	quchar;
-} t_quote_state;
+}	t_quote_state;
 
 typedef struct s_quote_context
 {
@@ -73,7 +72,6 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char			*value;
-	//if we wanna add something in futur
 	int				expanded;
 	int				ambiguous;
 	int				ignore;
@@ -94,9 +92,8 @@ typedef struct s_env
 typedef struct s_shell
 {
 	t_token			*tokens;
-	// char			**args;			// array of commands + args || (["ls", "-l", NULL])
-	struct s_shell	*next;			// ptr to the next command in the pipeline
-	struct s_shell	*prev;			// ptr to the previous command in the pipeline
+	struct s_shell	*next;
+	struct s_shell	*prev;
 }	t_shell;
 
 typedef struct s_expander

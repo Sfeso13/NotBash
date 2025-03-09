@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/07 01:06:52 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:43:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void			handle_quote(t_expander *exp, char quote);
 void			handle_backslash(t_expander *exp);
 void			append_str(t_expander *exp, char *str);
 void			append_char(t_expander *exp, char c);
-void			init_expander(t_expander *exp, char *value, t_env *env, int inexp);
+void			init_expander(t_expander *exp, char *value, \
+t_env *env, int inexp);
 t_token			*cpy_till_pipe(t_token **curr);
 t_token_type	get_token_type(const char *str);
 char			*handle_operator(char **input);
@@ -58,7 +59,8 @@ void			catch_signals(void);
 int				doc_handle_valids(char *buff, int *i, t_exp *exp, t_env *env);
 int				doc_handle_invalids(char *buff, int *i, t_exp *exp);
 int				handle_qst_mark(int *i, t_exp *exp, t_env *env);
-int				doc_append_str(char **str, size_t *len, size_t *cap, char *value);
+int				doc_append_str(char **str, size_t *len, \
+size_t *cap, char *value);
 int				doc_append_char(char **str, size_t *len, size_t *cap, char c);
 void			handle_sigint(int sig);
 void			split_and_insert(t_token *curr);

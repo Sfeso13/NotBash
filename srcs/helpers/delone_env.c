@@ -12,24 +12,34 @@
 
 #include "../../includes/global/minishell.h"
 
+void	mid_del_env(t_env *prev, t_env *next, t_env *lst)
+{
+	prev = lst->prev;
+	next = lst->next;
+	prev->next = next;
+	next->prev = prev;
+}
+
+void	clear_values(t_env *lst, void (*del)(void*))
+{
+	if (lst->key)
+		del(lst->key);
+	if (lst->val)
+		del(lst->val);
+}
+
 void	delone_env(t_env **head, t_env *lst, void (*del)(void*))
 {
 	t_env	*prev;
 	t_env	*next;
 
+	prev = NULL;
+	next = NULL;
 	if (lst && del)
 	{
-		if (lst->key)
-			del(lst->key);
-		if (lst->val)
-			del(lst->val);
+		clear_values(lst, del);
 		if (lst->next && lst->prev)
-		{
-			prev = lst->prev;
-			next = lst->next;
-			prev->next = next;
-			next->prev = prev;
-		}
+			mid_del_env(prev, next, lst);
 		else if (!lst->prev)
 		{
 			next = lst->next;

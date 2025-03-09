@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 19:17:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 15:38:01 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:26:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static long long	of(int s)
 
 long long	ft_atoi(const char *str)
 {
-	size_t	i;
-	int		s;
+	size_t		i;
+	int			s;
 	long long	num;
 
 	num = 0;
