@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:58:51 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 14:37:24 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 00:13:49 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_env_value(t_env **env, char *value);
 
 //export utils
 void	change_value_of_key(t_env **tochange, char *value);
-char	*validate_key(char *key);
+int		validate_key(char *key);
 int		is_plus(char *s);
 int		allowed(char *c);
 int		handle_keys(t_env **env, char **kv, char *equal);

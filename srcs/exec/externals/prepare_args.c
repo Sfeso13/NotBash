@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 00:35:40 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 00:19:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 		return ("permission");
 	if (absolute == -1)
 		return (NULL);
+	if (access(cmnd->value, X_OK) == 0)
+		return (cmnd->value);
 	path_node = search_key("PATH", env);
 	if (path_node && path_node->val && path_node->val[0] != '\0')
 		correct_path = path(path_node, cmnd);

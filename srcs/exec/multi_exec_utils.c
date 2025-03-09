@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:17:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 14:35:18 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 23:14:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void	multi_doc_process(t_redir *redir, t_shell *cmnds, t_env *env)
 		}
 		cmnds = cmnds->next;
 	}
+	signal(SIGINT, handle_sigint);
 }

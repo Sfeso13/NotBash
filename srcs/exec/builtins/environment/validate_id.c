@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:36:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/28 21:32:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 00:15:23 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	is_plus(char *s)
 	i = 0;
 	count = 0;
 	plus = NULL;
+	printf("key : %s\n", s);
 	while (s[i])
 	{
 		if (s[i] == '+')
@@ -59,22 +60,19 @@ char	*key_error(char *key)
 	return (NULL);
 }
 
-char	*validate_key(char *key)
+int	validate_key(char *key)
 {
 	int		plus;
 	size_t	len;
-	char	*res;
 
 	if (!allowed(key))
-		return (key_error(key));
+		return (0);
 	len = ft_strlen(key);
 	plus = is_plus(key);
 	if (plus > 1 || plus == -1)
-		return (key_error(key));
+		return (0);
 	else if ((plus && (key[len - 2] != '+')) || \
 		(key[0] >= '0' && key[0] <= '9'))
-		return (key_error(key));
-	res = ft_strtrim(key, "+=");
-	free(key);
-	return (res);
+		return (0);
+	return (1);
 }

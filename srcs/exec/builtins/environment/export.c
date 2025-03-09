@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 17:33:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 00:14:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,24 @@ void	set_export(t_token *cmnd, t_env **env, char **kv)
 {
 	char	*equal;
 	char	*plus;
+	char	*key;
 
 	equal = ft_strchr(cmnd->value, '=');
-	plus = ft_strchr(cmnd->value, '+');
+	plus = ft_strchr(kv[0], '+');
 	if (plus)
+	{
+		key = kv[0];
+		kv[0] = ft_strtrim(kv[0], "+=");
+		free(key);
 		handle_append(env, kv);
+	}
 	else
+	{
+		key = kv[0];
+		kv[0] = ft_strtrim(kv[0], "=");
+		free(key);
 		handle_keys(env, kv, equal);
+	}
 	free_tab(kv);
 }
 
@@ -44,12 +55,10 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 	while (args_size - 1 > 0)
 	{
 		kv = export_kv_extract(cmnd->value);
-		kv[0] = validate_key(kv[0]);
-		if (kv[0] == NULL || !kv[0][0])
+		if (!validate_key(kv[0]))
 		{
 			print_error(cmnd->value);
-			free(kv[1]);
-			free(kv);
+			free_tab(kv);
 			status = 1;
 		}
 		else

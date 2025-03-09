@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 13:14:06 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 16:44:07 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/08 23:03:51 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	set_status(t_env **env, int status, pid_t cpid)
 		update_status(env, stat);
 		free(stat);
 	}
-	else
-		update_status(env, "0");
+	// else
+	// 	update_status(env, "0");
 }
 
 void	multi_execution(t_env **env, int process_count, t_shell *cmnds)
