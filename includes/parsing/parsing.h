@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 14:04:29 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 20:32:18 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int				checkvalidation(const char *str);
 void			handle_dollar_sign(t_expander *exp);
 void			expprocetoken(t_token *current, t_env *env, int inexp, int dol);
 void			chinexpdola(t_token *current, int *inexp, int *dol);
+int				whitesonly(char *str);
 
 #endif

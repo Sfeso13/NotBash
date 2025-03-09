@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 17:10:21 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:31:57 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,6 @@ void	handle_quote(t_expander *exp, char quote)
 		append_char(exp, quote);
 	exp->i++;
 }
-
-int	whitesonly(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
-	{
-		if (!iswhitespace((unsigned char)str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 
 void	expand_var(t_expander *exp)
 {
@@ -143,8 +126,6 @@ void	expand_var(t_expander *exp)
 			else
 				append_str(exp, var_val);
 		}
-		if (whitesonly(exp->buffer) == 1)
-				exp->ignoreme = 1;
 		free(var_name);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 03:29:26 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:31:39 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 	exp = expand_token(or_val, env, inexp, current->after_pipe);
 	current->value = exp.buffer;
 	free(or_val);
+	if (whitesonly(current->value) == 1)
+		current->ignore = 1;
+	else
+		current->ignore = 0;
 	if (dol == 1)
 		wrds = count_custom_words(current->value);
 	if (ft_strchr(current->value, '\x01') && inexp == 0)
@@ -77,6 +81,4 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 			current->ambiguous = 1;
 	}
 	current->expanded = 1;
-	if (exp.ignoreme == 1)
-		current->ignore = 1;
 }
