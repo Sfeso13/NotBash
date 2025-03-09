@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 03:29:15 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:47:33 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	whitesonly(char *str)
 		return (1);
 	while (str[i])
 	{
-		if (!iswhitespace((unsigned char)*str))
+		if (!iswhitespace((unsigned char)str[i]))
 			return (0);
 		i++;
 	}

@@ -152,3 +152,29 @@ bash-3.2$ gkfks | echo $?
 0
 bash: gkfks: command not found
 ---------------------------------------------------------
+=================================================================
+==32143==ERROR: AddressSanitizer: heap-use-after-free on address 0x604000000d98 at pc 0x000109e57d5c bp 0x7ffee5ddb620 sp 0x7ffee5ddb618
+READ of size 8 at 0x604000000d98 thread T0
+    #0 0x109e57d5b in get_input main.c:143
+    #1 0x109e57fb2 in start_prompt main.c:169
+    #2 0x109e581e6 in main main.c:196
+    #3 0x7fff69708cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x604000000d98 is located 8 bytes inside of 40-byte region [0x604000000d90,0x604000000db8)
+freed by thread T0 here:
+    #0 0x10abb72c6 in wrap_free+0xa6 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x492c6)
+    #1 0x109e5b9bc in delone_env delone_env.c:56
+    #2 0x109e5bf99 in clear_env clear_env.c:24
+    #3 0x109e57d1c in get_input main.c:141
+    #4 0x109e57fb2 in start_prompt main.c:169
+    #5 0x109e581e6 in main main.c:196
+    #6 0x7fff69708cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+previously allocated by thread T0 here:
+    #0 0x10abb717d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x109e6518f in newenv env_utils.c:47
+    #2 0x109e6a373 in reset_env reset_env.c:41
+    #3 0x109e64e49 in create_env getenv.c:124
+    #4 0x109e581bf in main main.c:193
+    #5 0x7fff69708cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+----------------------------------------------------------------

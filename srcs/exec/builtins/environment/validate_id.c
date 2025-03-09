@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:36:31 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 00:15:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/03/09 14:50:34 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	is_plus(char *s)
 	i = 0;
 	count = 0;
 	plus = NULL;
-	printf("key : %s\n", s);
 	while (s[i])
 	{
 		if (s[i] == '+')
