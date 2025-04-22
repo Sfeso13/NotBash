@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:02:16 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/22 15:03:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:31:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	handle_sigint(int sig)
 
 void	catch_signals(void)
 {
+	rl_catch_signals = 0;
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }

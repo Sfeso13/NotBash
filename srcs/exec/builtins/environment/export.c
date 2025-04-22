@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:10 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 00:14:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:46:16 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 	while (args_size - 1 > 0)
 	{
 		kv = export_kv_extract(cmnd->value);
+		if (!kv)
+			return ;
 		if (!validate_key(kv[0]))
 		{
 			print_error(cmnd->value);

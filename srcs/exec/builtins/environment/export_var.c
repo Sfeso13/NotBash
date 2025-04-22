@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:53:36 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 00:04:46 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:06:04 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,44 @@ int	handle_append(t_env **env, char **kv)
 	return (0);
 }
 
+char	**handle_not_equal(char *var, char **arr)
+{
+	size_t	len;
+
+	len = ft_strlen(var);
+	arr[0] = (char *)malloc(len + 1);
+	if (!arr[0])
+		return (NULL);
+	ft_strlcpy(arr[0], var, len + 1);
+	arr[1] = NULL;
+	arr[2] = NULL;
+	return (arr);
+}
+
 char	**export_kv_extract(char *var)
 {
 	char	*equal;
 	char	**arr;
-	size_t	len;
 	int		equal_id;
 
 	if (var == NULL)
 		return (NULL);
 	arr = (char **)malloc((3) * sizeof(char *));
+	if (!arr)
+		return (NULL);
 	equal = ft_strchr(var, '=');
 	if (!equal)
-	{
-		len = ft_strlen(var);
-		arr[0] = (char *)malloc(len + 1);
-		ft_strlcpy(arr[0], var, len + 1);
-		arr[1] = NULL;
-	}
+		return (handle_not_equal(var, arr));
 	else
 	{
 		equal_id = equal - var;
 		arr[0] = ft_substr(var, 0, equal_id + 1);
+		if (!arr[0])
+			return (NULL);
 		arr[1] = ft_substr(var, equal_id + 1, ft_strlen(var) - equal_id);
+		if (!arr[1])
+			return (free(arr[0]), NULL);
+		arr[2] = NULL;
 	}
-	arr[2] = NULL;
 	return (arr);
 }

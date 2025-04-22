@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 14:22:04 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:33:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*get_filename(void)
 
 void	doc_sigint(int sig)
 {
+	rl_catch_signals = 0;
 	(void)sig;
 	g_signal_received = 1;
 	write(1, "\n", 1);
