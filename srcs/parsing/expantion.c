@@ -6,13 +6,13 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 17:02:25 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:18:37 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-static int	can_tilde(t_expander *exp)
+int	can_tilde(t_expander *exp)
 {
 	const char	next_char = exp->value[exp->i + 1];
 
@@ -21,7 +21,7 @@ static int	can_tilde(t_expander *exp)
 		&& (next_char == '/' || next_char == '\0'));
 }
 
-static void	expand_tilde(t_expander *exp)
+void	expand_tilde(t_expander *exp)
 {
 	char	*home;
 
@@ -31,29 +31,6 @@ static void	expand_tilde(t_expander *exp)
 	else
 		append_char(exp, '~');
 	exp->i++;
-}
-
-static void	char_process(t_expander *exp)
-{
-	char	c;
-
-	c = exp->value[exp->i];
-	if (exp->escape_next)
-	{
-		append_char(exp, c);
-		exp->escape_next = 0;
-		exp->i++;
-	}
-	else if (c == '\\')
-		handle_backslash(exp);
-	else if (c == '\'' || c == '"')
-		handle_quote(exp, c);
-	else if (c == '$' && !exp->in_single)
-		expand_var(exp);
-	else if (c == '~' && can_tilde(exp))
-		expand_tilde(exp);
-	else
-		append_char(exp, exp->value[exp->i++]);
 }
 
 t_expander	expand_token(char *value, t_env *env, int inexp, int after_pipe)
@@ -67,16 +44,29 @@ t_expander	expand_token(char *value, t_env *env, int inexp, int after_pipe)
 	return (exp);
 }
 
+static void	proc_token_exp(t_token *current, t_env *env)
+{
+	static int	inexp;
+	static int	dol;
+
+	dol = 0;
+	inexp = 0;
+	chinexpdola(current, &inexp, &dol);
+	if (current->type == TOKEN_WORD
+		&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
+	{
+		if (current->expanded == 0)
+			expprocetoken(current, env, inexp, dol);
+	}
+}
+
 int	analyze_in_expand(t_token *tokens, t_env *env)
 {
 	t_token	*current;
-	int		inexp;
-	int		dol;
 	int		after_pipe;
 
-	after_pipe = 0;
-	inexp = 0;
 	current = tokens;
+	after_pipe = 0;
 	while (current)
 	{
 		if (current->type == TOKEN_PIPE)
@@ -88,64 +78,8 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	current = tokens;
 	while (current)
 	{
-		chinexpdola(current, &inexp, &dol);
-		if (current->type == TOKEN_WORD
-			&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
-		{
-			if (current->expanded == 0)
-				expprocetoken(current, env, inexp, dol);
-		}
+		proc_token_exp(current, env);
 		current = current->next;
 	}
 	return (0);
 }
-
-// int	analyze_in_expand(t_token *tokens, t_env *env)
-// {
-// 	t_token	*current;
-// 	char	*or_val;
-// 	int		inexp;
-// 	int		dol;
-// 	int		wrds;
-// 	t_expander exp;
-
-// 	inexp = 0;
-// 	current = tokens;
-// 	while (current)
-// 	{
-// 		if (improved_cmp(current->value, "export") == 0)
-// 				inexp = 1;
-// 		if (ft_strchr(current->value, '$'))
-// 			dol = 1;
-// 		else
-// 			dol = 0;
-// 		if (current->type == TOKEN_WORD
-// 			&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
-// 		{
-// 			if (current->expanded == 0)
-// 			{
-// 				or_val = current->value;
-// 				exp = expand_token(or_val, env, inexp);
-// 				current->value = exp.buffer;
-// 				free(or_val);
-// 				if (dol == 1)
-// 					wrds = count_custom_words(current->value);
-// 				if (ft_strchr(current->value, '\x01') && inexp == 0)
-// 					split_and_insert(current);
-// 				if ((current->prev) &&
-			// (current->prev->type == TOKEN_REDIRECT_OUT
-// 					|| current->prev->type == TOKEN_REDIRECT_IN
-// 					|| current->prev->type == TOKEN_APPEND) && dol != 0)
-// 				{
-// 					if (wrds != 1)
-// 						current->ambiguous = 1;
-// 				}
-// 				current->expanded = 1;
-// 			}
-// 		}
-// 		if (exp.ignoreme == 1)
-// 			current->ignore = 1;
-// 		current = current->next;
-// 	}
-// 	return (0);
-// }

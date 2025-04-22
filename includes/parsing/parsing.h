@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 20:32:18 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:39:05 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,15 @@ void			handle_sigint(int sig);
 void			split_and_insert(t_token *curr);
 int				checkvalidation(const char *str);
 void			handle_dollar_sign(t_expander *exp);
+void			char_process(t_expander *exp);
+void			expand_tilde(t_expander *exp);
+int				can_tilde(t_expander *exp);
 void			expprocetoken(t_token *current, t_env *env, int inexp, int dol);
 void			chinexpdola(t_token *current, int *inexp, int *dol);
 int				whitesonly(char *str);
+void			expand_norexp_var_else(t_expander *exp, size_t start);
+void			append_norexp_words(t_expander *exp, char *var_val);
+void			handle_norexp_digits(t_expander *exp, size_t start);
+void			handle_norexp_quotes(t_expander *exp, size_t start);
 
 #endif
