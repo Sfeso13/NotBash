@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 14:22:13 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:23:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,70 +68,80 @@ void	handle_quote(t_expander *exp, char quote)
 void	expand_var(t_expander *exp)
 {
 	size_t	start;
-	char	*var_name;
-	char	*var_val;
-	int		i;
-	char	**words;
-	char	quote;
-	char	*content;
-	int		flag;
 
-	flag = 0;
 	exp->i++;
 	start = exp->i;
 	if ((exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
 		&& !exp->in_single && !exp->in_double)
-	{
-		quote = exp->value[exp->i];
-		start = exp->i;
-		while (exp->value[exp->i] && exp->value[exp->i] != quote)
-			exp->i++;
-		content = ft_substr(exp->value, start, exp->i - start);
-		append_str(exp, content);
-		free(content);
-	}
+		handle_norexp_quotes(exp, start);
 	else if (ft_isdigit(exp->value[exp->i]))
-	{
-		while (ft_isdigit(exp->value[exp->i]))
-			exp->i++;
-		content = ft_substr(exp->value, start, exp->i - start);
-		if (content && content[0] != '\0')
-			append_str(exp, content + 1);
-		free(content);
-	}
+		handle_norexp_digits(exp, start);
 	else
-	{
-		while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
-				exp->value[exp->i] == '?')
-			exp->i++;
-		if (start == exp->i)
-			return (append_char(exp, '$'));
-		var_name = ft_substr(exp->value, start, exp->i - start);
-		if (ft_strcmp(var_name, "?") == 0 && exp->aft_pipe)
-			var_val = "0";
-		else
-			var_val = get_env_value(var_name, exp->env);
-		if (var_val)
-		{
-			if (!exp->in_single && !exp->in_double && exp->expme == 0)
-			{
-				words = ft_split(var_val);
-				i = 0;
-				while (words[i])
-				{
-					append_str(exp, words[i]);
-					if (words[i + 1])
-						append_char(exp, '\x01');
-					i++;
-				}
-				free_tab(words);
-			}
-			else
-			{
-				printf("1\n");
-				append_str(exp, var_val);
-			}
-		}
-		free(var_name);
-	}
+		expand_norexp_var_else(exp, start);
 }
+
+// void	expand_var(t_expander *exp)
+// {
+// 	size_t	start;
+// 	char	*var_name;
+// 	char	*var_val;
+// 	int		i;
+// 	char	**words;
+// 	char	quote;
+// 	char	*content;
+
+// 	exp->i++;
+// 	start = exp->i;
+// 	if ((exp->value[exp->i] == '\'' || exp->value[exp->i] == '"')
+// 		&& !exp->in_single && !exp->in_double)
+// 	{
+// 		quote = exp->value[exp->i];
+// 		start = exp->i;
+// 		while (exp->value[exp->i] && exp->value[exp->i] != quote)
+// 			exp->i++;
+// 		content = ft_substr(exp->value, start, exp->i - start);
+// 		append_str(exp, content);
+// 		free(content);
+// 	}
+// 	else if (ft_isdigit(exp->value[exp->i]))
+// 	{
+// 		while (ft_isdigit(exp->value[exp->i]))
+// 			exp->i++;
+// 		content = ft_substr(exp->value, start, exp->i - start);
+// 		if (content && content[0] != '\0')
+// 			append_str(exp, content + 1);
+// 		free(content);
+// 	}
+// 	else
+// 	{
+// 		while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_' || \
+// 				exp->value[exp->i] == '?')
+// 			exp->i++;
+// 		if (start == exp->i)
+// 			return (append_char(exp, '$'));
+// 		var_name = ft_substr(exp->value, start, exp->i - start);
+// 		if (ft_strcmp(var_name, "?") == 0 && exp->aft_pipe)
+// 			var_val = "0";
+// 		else
+// 			var_val = get_env_value(var_name, exp->env);
+// 		if (var_val)
+// 		{
+// 			if (!exp->in_single && !exp->in_double && exp->expme == 0)
+// 			{
+// 				words = ft_split(var_val);
+// 				i = 0;
+// 				while (words[i])
+// 				{
+// 					append_str(exp, words[i]);
+// 					if (words[i + 1])
+// 						append_char(exp, '\x01');
+// 					i++;
+// 				}
+// 				free_tab(words);
+// 			}
+// 			else
+// 				append_str(exp, var_val);
+// 		}
+// 		free(var_name);
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 01:53:44 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/22 14:50:50 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,29 @@ t_token	*copy_token(t_token *src)
 	return (new);
 }
 
+static int	copy_and_append(t_token **curr, t_token **head,
+		t_token **prev_cpy, t_token ***dst)
+{
+	t_token	*new_token;
+
+	new_token = copy_token(*curr);
+	if (!new_token)
+	{
+		free_tokens(*head);
+		return (0);
+	}
+	new_token->prev = *prev_cpy;
+	**dst = new_token;
+	*prev_cpy = new_token;
+	*dst = &(**dst)->next;
+	*curr = (*curr)->next;
+	return (1);
+}
+
 t_token	*cpy_till_pipe(t_token **curr)
 {
 	t_token	*head;
 	t_token	**dst;
-	t_token	*new_token;
 	t_token	*prev_cpy;
 
 	head = NULL;
@@ -62,22 +80,13 @@ t_token	*cpy_till_pipe(t_token **curr)
 	prev_cpy = NULL;
 	while (*curr && (*curr)->type != TOKEN_PIPE)
 	{
-		if ((*curr)->ignore == 1)
+		if ((*curr)->ignore)
 		{
 			*curr = (*curr)->next;
 			continue ;
 		}
-		new_token = copy_token(*curr);
-		if (!new_token)
-		{
-			free_tokens(head);
+		if (!copy_and_append(curr, &head, &prev_cpy, &dst))
 			return (NULL);
-		}
-		new_token->prev = prev_cpy;
-		*dst = new_token;
-		prev_cpy = new_token;
-		dst = &(*dst)->next;
-		*curr = (*curr)->next;
 	}
 	return (head);
 }

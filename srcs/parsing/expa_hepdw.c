@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 14:21:58 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:12:30 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	bfrafters(char *str)
 	}
 	return (0);
 }
+
 void	chinexpdola(t_token *current, int *inexp, int *dol)
 {
 	if (improved_cmp(current->value, "export") == 0
