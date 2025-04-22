@@ -6,11 +6,27 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:50:18 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/06 23:50:58 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:32:07 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
+
+int	whitesonly(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i])
+	{
+		if (!iswhitespace((unsigned char)str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static void	free_split_values(char **split_values)
 {

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:57:16 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 14:04:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/22 14:57:36 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <readline/history.h>
 # include <termios.h>
 # include <limits.h>
+
+void	print_shell(t_shell *shell);
 
 volatile sig_atomic_t	g_signal_received;
 

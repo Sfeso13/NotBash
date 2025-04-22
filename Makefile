@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+         #
+#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/03/09 15:06:27 by adechaji         ###   ########.fr        #
+#    Updated: 2025/04/22 15:04:30 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC			:= cc
 
 R			= $(shell brew --prefix readline)
 
-CFLAGS		:= -Wall -Wextra -Werror #-g -fsanitize=address #-I/usr/local/opt/readline
+CFLAGS		:= -Wall -Wextra -Werror -g -fsanitize=address #-I/usr/local/opt/readline
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \
@@ -42,7 +42,7 @@ HELPERS := ft_strlen.c ft_strdup.c ft_strncpy.c ft_lstlast.c ft_splithelpers.c \
 			ft_realloc.c ft_itoa.c search_token.c ft_putstr_fd.c ft_old_split.c count_words.c \
 			count_custom_words.c
 
-MAIN = main.c
+MAIN = main.c sig.c debug_print.c
 
 OBJS	:= $(addprefix objs/, $(PARSSRCS:.c=.o)) $(addprefix objs/, $(MAIN:.c=.o)) \
 			$(addprefix objs/, $(HELPERS:.c=.o)) $(addprefix objs/, $(EXECSRCS:.c=.o)) \
