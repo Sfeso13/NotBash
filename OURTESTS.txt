@@ -1,25 +1,64 @@
 while true; do leaks minishell; sleep 1; clear; done
 
 while true; do lsof -c  minishell; sleep 1; clear; done
-------------------------------------------------------------
-$> / or $> // or $> /. or $> /./
-"bash: /: Is a directory
-$>"
-------------------------------------------------------------
 
-minishell$ echo "$HO"ME
 
-=== Command 1 ===
-  echo            WORD         Expanded: 1   ← Prev: (None)
-not ambi
-=====================
-Prev cmd: 0x0            Next cmd: 0x0
-----> expected
-bash-3.2$ echo "$HO"ME
-ME
 ------------------------------------------------------------
-bash-3.2$ echo "$DONTEXIST""Makefile"
-Makefile
+echo "         " | cat -e
+>$
+expected: >         $
+
+
 ------------------------------------------------------------
-bash-3.2$ echo "$DONTEXIST"Makefile
-Makefile
+export hh="hello world lorem ipsum"
+echo $USER$hh"helloworld"
+>yhossnihello
+expected: > yhossnihello world lorem ipsumhelloworld
+
+------------------------------------------------------------
+echo "" $HOME
+>/mnt/homes/yhossni
+expected: > /mnt/homes/yhossni (space before the expantion and same thing for '')
+
+------------------------------------------------------------
+"$HOMEdskjhfkdshfsd"
+>
+expected: > bash: : command not found
+
+------------------------------------------------------------
+export ""
+> (it ignores the "" and just prints export)
+expected: > export: `': not a valid identifier
+
+------------------------------------------------------------
+export =
+> (it does nothing)
+expected: > export: `=': not a valid identifier
+
+------------------------------------------------------------
+export HO!LA=bonjour
+just check wtf is the "event not found"
+
+------------------------------------------------------------
+export HO$?LA=bonjour
+env
+> HO="bonjour"
+expected: > HO1LA="bonjour"
+
+------------------------------------------------------------
+exportHOLA=bonjour
+env
+>command not found
+expected: > it runs successfully for some reason?
+
+------------------------------------------------------------
+export HOLA =bonjour
+>runs successfully
+expected: >  export: `=bonjour': not a valid identifier
+
+------------------------------------------------------------
+export HOLA = bonjour
+>runs successfully
+expected: >  export: `=': not a valid identifier
+
+283
