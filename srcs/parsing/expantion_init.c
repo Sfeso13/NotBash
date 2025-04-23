@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 01:47:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 03:29:41 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:25:25 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,20 @@ void	init_expander(t_expander *exp, char *value, t_env *env, int inexp)
 	exp->ignoreme = 0;
 	exp->expme = inexp;
 	exp->aft_pipe = 0;
+}
+
+int	has_a_dollar(char	*str)
+{
+	int	i;
+
+	if (!str)
+		return 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
 }

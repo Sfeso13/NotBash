@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expa_hepdw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 16:12:30 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:26:43 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,35 @@ void	chinexpdola(t_token *current, int *inexp, int *dol)
 		*dol = 0;
 }
 
+static void	handle_ambiguous_redirect(t_token *current, int dol, int wrds)
+{
+	if ((current->prev)
+		&& (current->prev->type == TOKEN_REDIRECT_OUT
+			|| current->prev->type == TOKEN_REDIRECT_IN
+			|| current->prev->type == TOKEN_APPEND)
+		&& dol != 0)
+	{
+		if (wrds != 1)
+			current->ambiguous = 1;
+	}
+}
+
 void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 {
 	t_expander	exp;
 	char		*or_val;
 	int			wrds;
+	int			flgme;
 
+	flgme = 0;
+	wrds = 0;
 	or_val = current->value;
+	if (has_a_dollar(or_val) == 1)
+		flgme = 1;
 	exp = expand_token(or_val, env, inexp, current->after_pipe);
 	current->value = exp.buffer;
 	free(or_val);
-	if (whitesonly(current->value) == 1)
+	if (flgme == 1 && whitesonly(current->value) == 1)
 		current->ignore = 1;
 	else
 		current->ignore = 0;
@@ -74,12 +92,34 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 		wrds = count_custom_words(current->value);
 	if (ft_strchr(current->value, '\x01') && inexp == 0)
 		split_and_insert(current);
-	if ((current->prev) && (current->prev->type == TOKEN_REDIRECT_OUT
-			|| current->prev->type == TOKEN_REDIRECT_IN
-			|| current->prev->type == TOKEN_APPEND) && dol != 0)
-	{
-		if (wrds != 1)
-			current->ambiguous = 1;
-	}
+	handle_ambiguous_redirect(current, dol, wrds);
 	current->expanded = 1;
 }
+
+// void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
+// {
+// 	t_expander	exp;
+// 	char		*or_val;
+// 	int			wrds;
+
+// 	or_val = current->value;
+// 	exp = expand_token(or_val, env, inexp, current->after_pipe);
+// 	current->value = exp.buffer;
+// 	free(or_val);
+// 	if (whitesonly(current->value) == 1)
+// 		current->ignore = 1;
+// 	else
+// 		current->ignore = 0;
+// 	if (dol == 1)
+// 		wrds = count_custom_words(current->value);
+// 	if (ft_strchr(current->value, '\x01') && inexp == 0)
+// 		split_and_insert(current);
+// 	if ((current->prev) && (current->prev->type == TOKEN_REDIRECT_OUT
+// 			|| current->prev->type == TOKEN_REDIRECT_IN
+// 			|| current->prev->type == TOKEN_APPEND) && dol != 0)
+// 	{
+// 		if (wrds != 1)
+// 			current->ambiguous = 1;
+// 	}
+// 	current->expanded = 1;
+// }
