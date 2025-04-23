@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 16:23:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:12:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	append_char(t_expander *exp, char c)
 	}
 	exp->buffer[exp->buf_pos++] = c;
 	exp->buffer[exp->buf_pos] = '\0';
-	// printf("%s\n", exp->buffer);
 }
 
 void	append_str(t_expander *exp, char *str)
