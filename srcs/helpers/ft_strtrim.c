@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:26:43 by adechaji          #+#    #+#             */
-/*   Updated: 2025/02/19 12:12:26 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:49:22 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (last >= first && checkerr(set, s1[last]))
 		last--;
 	len = last - first + 1;
+	if (len == 0)
+		return (NULL);
 	newstr = ft_calloc(len + 1, sizeof(char));
 	if (!newstr)
 		return (NULL);

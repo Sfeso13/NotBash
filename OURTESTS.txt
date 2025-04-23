@@ -31,11 +31,6 @@ export ""
 expected: > export: `': not a valid identifier
 
 ------------------------------------------------------------
-export =
-> (it does nothing)
-expected: > export: `=': not a valid identifier
-
-------------------------------------------------------------
 export HO!LA=bonjour
 just check wtf is the "event not found"
 
@@ -44,21 +39,5 @@ export HO$?LA=bonjour
 env
 > HO="bonjour"
 expected: > HO1LA="bonjour"
-
-------------------------------------------------------------
-exportHOLA=bonjour
-env
->command not found
-expected: > it runs successfully for some reason?
-
-------------------------------------------------------------
-export HOLA =bonjour
->runs successfully
-expected: >  export: `=bonjour': not a valid identifier
-
-------------------------------------------------------------
-export HOLA = bonjour
->runs successfully
-expected: >  export: `=': not a valid identifier
 
 283
