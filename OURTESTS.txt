@@ -15,16 +15,9 @@ potential fix >>>>> expansion should stop at special characters
 (anything other than alpha-numerical characters and _)
 ------------------------------------------------------------
 export HOLA="  bonjour  hey  "
-echo $HOLA | cat -e
->bonjour hey $
-expected: >bonjour hey$ (no trailing spacebut only when not
-						inside quotes otherwise it will be
-						interpreted as a single arg as usual)
-------------------------------------------------------------
-export HOLA="  bonjour  hey  "
 echo wesh""$HOLA.
 >weshbonjour hey.
-expected: >wesh bonjour hey .
+expected: >wesh bonjour hey . (shouldn't ignore the "")
 
 ------------------------------------------------------------
 exportHOLA=bonjour

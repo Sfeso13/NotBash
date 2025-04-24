@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:46:24 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 15:56:53 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:02 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	print_no_option(t_token *cmnd, int size)
 				!redir_token(cmnd->prev)))
 			{
 				printf("%s", cmnd->value);
+				i++;
 				if (i < size)
 					printf(" ");
-				i++;
 			}
 			cmnd = cmnd->next;
 		}
