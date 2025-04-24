@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 15:02:05 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:30:12 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	err(char *value, int *status)
 {
-	ft_putstr_fd("invalid id :", 2);
+	ft_putstr_fd("minishell: unset : ", 2);
 	ft_putstr_fd(value, 2);
-	ft_putstr_fd("\n", 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
 	*status = 1;
 }
 
@@ -48,7 +48,7 @@ void	check_isset(t_token *cmnd, t_env **env)
 	t_env	*to_remove;
 
 	to_remove = search_key(cmnd->value, *env);
-	if (to_remove && to_remove->is_set && internal_vars(to_remove))
+	if (to_remove && internal_vars(to_remove))
 	{
 		save_vars(env);
 		set_env_value(&to_remove, NULL);
