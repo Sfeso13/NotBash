@@ -20,11 +20,6 @@ echo wesh""$HOLA.
 expected: >wesh bonjour hey . (shouldn't ignore the "")
 
 ------------------------------------------------------------
-exportHOLA=bonjour
->exportHOLA=bonjour: command not found
-expected: >(bash create the hola variable and assign it the value bonjour)
-
-------------------------------------------------------------
 export HOLA=bonjour
 export HOLA=' hola et $HOLA'
 echo $HOLA

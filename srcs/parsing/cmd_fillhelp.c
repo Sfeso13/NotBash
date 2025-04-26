@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_fillhelp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 17:44:45 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 14:50:50 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/26 18:24:46 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token	*copy_token(t_token *src)
 	new->type = src->type;
 	new->expanded = src->expanded;
 	new->ambiguous = src->ambiguous;
-	new->ignore = src->ignore;
+	new->ignore = (*src).ignore;
 	new->after_pipe = src->after_pipe;
 	new->next = NULL;
 	new->prev = NULL;

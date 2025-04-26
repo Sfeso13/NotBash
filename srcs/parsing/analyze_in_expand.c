@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/26 17:29:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/26 18:04:22 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	test(t_token **token, t_env *env)
 	int	wrdcount;
 
 	wrdcount = count_p_cmnds(*token);
-	printf("words counted : %d\n", wrdcount);
 	while (wrdcount > 0)
 	{
 		proc_token_exp(*token, env);

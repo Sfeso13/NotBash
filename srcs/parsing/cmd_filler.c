@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_filler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:36:59 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 00:28:22 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/26 18:56:38 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_token	*handle_token_copy(t_token **curr, t_shell *new_shell
 								, t_shell *head)
 {
 	t_token	*cpy_token;
+
 
 	cpy_token = cpy_till_pipe(curr);
 	if (!cpy_token)
@@ -53,6 +54,13 @@ static int	process_cmd(t_token **curr, t_shell **head, t_shell	**prev_shell)
 	t_shell	*new_shell;
 	t_token	*cpy_token;
 
+
+	t_token *tmp = *curr;
+	while (tmp)
+	{
+		printf("curr : %s ---- ignore : %d\n", tmp->value, tmp->ignore);
+		tmp = tmp->next;
+	}
 	new_shell = create_shells(head);
 	if (!new_shell)
 		return (0);
@@ -82,6 +90,7 @@ t_shell	*fill_cmd(t_token *tokens)
 			curr = curr->next;
 			continue ;
 		}
+		//mohskil here ignore gets changed for some reason
 		if (!process_cmd(&curr, &head, &prev_shell))
 			return (NULL);
 	}
