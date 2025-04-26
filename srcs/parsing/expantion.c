@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 00:29:02 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 15:18:37 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:32:40 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	analyze_in_expand(t_token *tokens, t_env *env)
 	current = tokens;
 	while (current)
 	{
+		// printf("current : %s\n", current->value);
 		proc_token_exp(current, env);
 		current = current->next;
 	}

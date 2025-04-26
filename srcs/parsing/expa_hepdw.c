@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/23 17:26:43 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:12:20 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 		wrds = count_custom_words(current->value);
 	if (ft_strchr(current->value, '\x01') && inexp == 0)
 		split_and_insert(current);
+	// t_token *tmp = current;
+	// printf("try\n");
+	// while (tmp)
+	// {
+	// 	printf("current : %s\n", tmp->value);
+	// 	tmp = tmp->next;
+	// }
 	handle_ambiguous_redirect(current, dol, wrds);
 	current->expanded = 1;
 }
