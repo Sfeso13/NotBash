@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:24 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/22 15:41:38 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:55:59 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,13 @@ void	expand_norexp_var_else(t_expander *exp, size_t start)
 	char	*var_name;
 	char	*var_val;
 
-	while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_'
-		|| exp->value[exp->i] == '?')
+	if (exp->value[exp->i] == '?')
 		exp->i++;
+	else
+	{
+		while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_')
+			exp->i++;
+	}
 	if (start == exp->i)
 		return (append_char(exp, '$'));
 	var_name = ft_substr(exp->value, start, exp->i - start);
