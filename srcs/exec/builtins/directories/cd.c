@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/04 00:44:50 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:18:33 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	update_pwd(t_env **env)
 int	go_to(t_token *cmnd)
 {
 	char	*path;
+	char	cwd[1024];
 
 	while (cmnd)
 	{
@@ -55,13 +56,14 @@ int	go_to(t_token *cmnd)
 		cmnd = cmnd->next;
 	}
 	path = cmnd->value;
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+		perror("getcwd");
 	return (chdir(path));
 }
 
 void	changedir(t_token *cmnd, t_env *env)
 {
 	t_env	*homedir;
-	char	cwd[1024];
 
 	if (how_many_args(cmnd) == 1)
 	{
@@ -79,8 +81,6 @@ void	changedir(t_token *cmnd, t_env *env)
 		perror("cd");
 		return (update_status(&env, "1"));
 	}
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		perror("getcwd");
 	update_status(&env, "0");
 	update_oldpwd(&env);
 	update_pwd(&env);

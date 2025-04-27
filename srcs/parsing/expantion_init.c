@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 01:47:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/23 17:25:25 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:20:42 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	has_a_dollar(char	*str)
 	int	i;
 
 	if (!str)
-		return 0;
+		return (0);
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/04/23 16:35:11 by yhossni          ###   ########.fr        #
+#    Updated: 2025/04/26 17:28:11 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS		:= -Wall -Wextra -Werror -g #-fsanitize=address #-I/usr/local/opt/readli
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \
-				exdoc.c signals.c exdochelp.c expa_helptw.c expa_hepdw.c expa_nhelp.c
+				exdoc.c signals.c exdochelp.c expa_helptw.c expa_hepdw.c expa_nhelp.c analyze_in_expand.c
 
 ENVSRCS	:= getenv.c env_utils.c env.c export.c export_utils.c validate_id.c export_var.c \
 		   export_print.c unset.c validate_id_unset.c exit.c reset_env.c status.c
