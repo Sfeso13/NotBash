@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:54:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/24 17:54:23 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:18:48 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	save_vars(t_env **env)
 	oldpwd = search_key(".oldpwd", *env);
 	set_env_value(&pwd, ft_strdup(search_key("PWD", *env)->val));
 	set_env_value(&oldpwd, ft_strdup(search_key("PWD", *env)->val));
-	// pwd->val = ft_strdup(search_key("PWD", *env)->val);
-	// oldpwd->val = ft_strdup(search_key("OLDPWD", *env)->val);
 }
 
 void	check_isset(t_token *cmnd, t_env **env)

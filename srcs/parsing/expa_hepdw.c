@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 14:52:07 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:21:29 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,3 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 	handle_ambiguous_redirect(current, dol, wrds);
 	current->expanded = 1;
 }
-
-// void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
-// {
-// 	t_expander	exp;
-// 	char		*or_val;
-// 	int			wrds;
-
-// 	or_val = current->value;
-// 	exp = expand_token(or_val, env, inexp, current->after_pipe);
-// 	current->value = exp.buffer;
-// 	free(or_val);
-// 	if (whitesonly(current->value) == 1)
-// 		current->ignore = 1;
-// 	else
-// 		current->ignore = 0;
-// 	if (dol == 1)
-// 		wrds = count_custom_words(current->value);
-// 	if (ft_strchr(current->value, '\x01') && inexp == 0)
-// 		split_and_insert(current);
-// 	if ((current->prev) && (current->prev->type == TOKEN_REDIRECT_OUT
-// 			|| current->prev->type == TOKEN_REDIRECT_IN
-// 			|| current->prev->type == TOKEN_APPEND) && dol != 0)
-// 	{
-// 		if (wrds != 1)
-// 			current->ambiguous = 1;
-// 	}
-// 	current->expanded = 1;
-// }
