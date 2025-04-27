@@ -6,25 +6,11 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:24 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 15:55:59 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:02:58 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
-
-void	handle_norexp_quotes(t_expander *exp, size_t start)
-{
-	char	quote;
-	char	*content;
-
-	quote = exp->value[exp->i];
-	start = exp->i;
-	while (exp->value[exp->i] && exp->value[exp->i] != quote)
-		exp->i++;
-	content = ft_substr(exp->value, start, exp->i - start);
-	append_str(exp, content);
-	free(content);
-}
 
 void	handle_norexp_digits(t_expander *exp, size_t start)
 {
@@ -55,11 +41,8 @@ void	append_norexp_words(t_expander *exp, char *var_val)
 	free_tab(words);
 }
 
-void	expand_norexp_var_else(t_expander *exp, size_t start)
+static void	expno_help(t_expander *exp)
 {
-	char	*var_name;
-	char	*var_val;
-
 	if (exp->value[exp->i] == '?')
 		exp->i++;
 	else
@@ -67,9 +50,19 @@ void	expand_norexp_var_else(t_expander *exp, size_t start)
 		while (ft_isalnum(exp->value[exp->i]) || exp->value[exp->i] == '_')
 			exp->i++;
 	}
+}
+
+void	expand_norexp_var_else(t_expander *exp, size_t start)
+{
+	char	*var_name;
+	char	*var_val;
+
+	expno_help(exp);
 	if (start == exp->i)
 		return (append_char(exp, '$'));
 	var_name = ft_substr(exp->value, start, exp->i - start);
+	if (!var_name)
+		exp->emptynot = 1;
 	if (ft_strcmp(var_name, "?") == 0 && exp->aft_pipe)
 		var_val = "0";
 	else

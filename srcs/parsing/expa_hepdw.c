@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 15:23:46 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/27 16:57:35 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 	exp = expand_token(or_val, env, inexp, current->after_pipe);
 	current->value = exp.buffer;
 	free(or_val);
-	if (flgme == 1 && whitesonly(current->value) == 1)
+	if (flgme == 1 && whitesonly(current->value) == 1 && exp.emptynot == 0)
 		current->ignore = 1;
 	else
 		current->ignore = 0;
