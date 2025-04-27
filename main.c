@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/26 18:07:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 14:47:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	parser(char *input, t_env **env_list, t_shell **cmd, t_token **tokens)
 		return (1);
 	}
 	analyze_in_expand(*tokens, *env_list);
+
 	*cmd = fill_cmd(*tokens);
 	return (0);
 }

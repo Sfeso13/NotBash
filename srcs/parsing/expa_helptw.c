@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expa_helptw.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:50:18 by adechaji          #+#    #+#             */
-/*   Updated: 2025/03/09 20:32:07 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:55:36 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static t_token	*create_new_token(char *value, t_token *prev)
 	new_token->ambiguous = 0;
 	new_token->prev = prev;
 	new_token->next = prev->next;
+	new_token->ignore = 0;
 	if (prev->next)
 		prev->next->prev = new_token;
 	prev->next = new_token;

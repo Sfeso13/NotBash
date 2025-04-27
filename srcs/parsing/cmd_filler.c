@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:36:59 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/26 18:56:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 14:45:43 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_shell	*fill_cmd(t_token *tokens)
 			curr = curr->next;
 			continue ;
 		}
+
 		//mohskil here ignore gets changed for some reason
 		if (!process_cmd(&curr, &head, &prev_shell))
 			return (NULL);

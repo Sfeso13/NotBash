@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/26 18:04:22 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/27 14:50:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	proc_token_exp(t_token *current, t_env *env)
 
 	dol = 0;
 	inexp = 0;
+
 	chinexpdola(current, &inexp, &dol);
 	if (current->type == TOKEN_WORD
 		&& (!current->prev || current->prev->type != TOKEN_HEREDOC))
