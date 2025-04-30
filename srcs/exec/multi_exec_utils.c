@@ -6,17 +6,18 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:17:42 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 15:05:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:47:23 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec/exec.h"
 
-void	fd_err(t_fd fds, t_shell **cmnds, int *i)
+void	fd_err(t_fd *fds, t_shell **cmnds, int *i)
 {
 	g_signal_received = 0;
-	close(fds.pfd[1]);
-	fds.infd = fds.pfd[0];
+	if (close(fds->pfd[1]) == -1)
+		perror("close");
+	fds->infd = fds->pfd[0];
 	*cmnds = (*cmnds)->next;
 	(*i)++;
 }

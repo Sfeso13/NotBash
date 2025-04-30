@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 01:17:02 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/30 12:01:55 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/syslimits.h>
 # include <sys/wait.h> //linux
 # include <errno.h>
+#include <sys/stat.h>
 
 pid_t	frk(void);
 char	*print_err(char *value, char *msg);
@@ -65,9 +66,9 @@ t_redir	multi_init_redir(t_shell *cmnds);
 void	run_command(char *path, char **args, t_env *env);
 
 int		redir_token(t_token *cmnd);
-void	closefds(int *fd, t_fd fds);
+void	closefds(int *fd, t_fd fds, t_redir redir, t_env **env);
 
-void	fd_err(t_fd fds, t_shell **cmnds, int *i);
+void	fd_err(t_fd *fds, t_shell **cmnds, int *i);
 void	execute_p(t_fd *fds, int *fd, t_shell **cmnds, t_env **env);
 
 void	restore_stds(int saved_in, int saved_out);

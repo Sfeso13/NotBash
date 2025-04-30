@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/07 00:48:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/30 11:49:44 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,31 @@ int	*init_fds(void)
 	return (fd);
 }
 
+int check_file(char *filename, int write)
+{
+	if (write)
+	{
+		if (access(filename, F_OK) == 0)
+		{
+			if (access(filename, W_OK) != 0)
+				return (1);
+		}
+		return (0);
+	}
+	else
+	{
+		if (access(filename, F_OK) == 0)
+		{
+			if (access(filename, R_OK) == 0)
+				return (0);
+			return (1);
+		}
+		ft_putstr_fd(filename, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (-1);
+	}
+}
+
 int	fdop(int to_open, int append, char *filename, int write)
 {
 	if (close(to_open) == -1 && to_open != -1)
@@ -42,18 +67,20 @@ int	fdop(int to_open, int append, char *filename, int write)
 		perror("close");
 		exit(1);
 	}
+	if (check_file(filename, write) == 1)
+	{
+		ft_putstr_fd(filename, 2);
+	 	ft_putstr_fd(": Permission denied\n", 2);
+	 	return (-1);
+	}
+	if (check_file(filename, write) == -1)
+		return (-1);
 	if (!write)
 		to_open = open(filename, O_RDONLY, 0777);
 	else if (write && !append)
 		to_open = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else if (write && append)
 		to_open = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (to_open == -1)
-	{
-		ft_putstr_fd(filename, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return (-1);
-	}
 	return (to_open);
 }
 

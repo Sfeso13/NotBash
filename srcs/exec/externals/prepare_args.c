@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 11:59:17 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 16:11:55 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/30 12:26:50 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,39 @@ char	*retrieve_path(char **paths, t_token *cmnd)
 	return (correct_path);
 }
 
+int	checkdir(char *s)
+{
+	struct stat path;
+
+	stat(s, &path);
+	if (S_ISDIR(path.st_mode))
+	{
+		ft_putstr_fd(s, 2);
+		ft_putstr_fd(": is a directory\n", 2);
+		return (-2);
+	}
+	return (0);
+}
+
 int	is_absolute(t_token *cmnd)
 {
+	int	check;
+
+	check = checkdir(cmnd->value);
+	if (check == -2)
+		return (-2);
 	if (ft_strchr(cmnd->value, '/'))
 	{
 		if (access(cmnd->value, F_OK) == 0)
 		{
 			if (access(cmnd->value, X_OK) == 0)
-			{
 				return (1);
-			}
 			ft_putstr_fd(cmnd->value, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
 			return (2);
 		}
 		ft_putstr_fd(cmnd->value, 2);
-		ft_putstr_fd(": command not found\n", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (-1);
 	}
 	return (0);
@@ -117,6 +134,8 @@ char	*get_cmnd_path(t_token *cmnd, t_env *env)
 		return (cmnd->value);
 	if (absolute == 2)
 		return ("permission");
+	if (absolute == -2)
+		return ("directory");
 	if (absolute == -1)
 		return (NULL);
 	if (access(cmnd->value, X_OK) == 0)

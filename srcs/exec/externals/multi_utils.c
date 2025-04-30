@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:17:28 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/05 15:20:11 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/30 11:05:36 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/exec/exec.h"
 
-void	closefds(int *fd, t_fd fds)
+void	closefds(int *fd, t_fd fds, t_redir redir, t_env **env)
 {
 	if (fd && fd[0] != -1)
 		close(fd[0]);
@@ -26,6 +26,12 @@ void	closefds(int *fd, t_fd fds)
 		close(fds.infd);
 	if (fds.outfd != -1)
 		close(fds.outfd);
+	if ((redir.in_count[0] > 0 || redir.in_count[1] > 0 || \
+	redir.out_count[0] > 0 || redir.out_count[1] > 0) && !fd)
+	{
+		child_pid(0, 1);
+		update_status(env, "1");
+	}
 }
 
 pid_t	frk(void)
@@ -53,10 +59,14 @@ void	redir_exec(t_fd fds)
 void	change_fd(int *tochange, int toset, int toclose)
 {
 	if (*tochange != -1)
+	{
 		close(*tochange);
+	}
 	*tochange = toset;
 	if (toclose != -1)
+	{
 		close(toclose);
+	}
 }
 
 t_fd	init_fd_struct(void)

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 01:14:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/29 16:21:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,13 @@ void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 	}
 	else if (how_many_args(*cmnd) == 1)
 	{
+		ft_putstr_fd("exit\n", 1);
 		clear_structs(shell, env);
 		exit (get_last_status(*env));
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit\n", 1);
 		exit(ft_atoi((*cmnd)->next->value));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 15:45:56 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/30 12:08:09 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	external_cmd(t_token *cmnd, t_env *env)
 	path = get_cmnd_path(cmnd, env);
 	if (!path)
 		exit(127);
-	if (improved_cmp(path, "permission") == 0)
+	if (improved_cmp(path, "permission") == 0 || improved_cmp(path, "directory") == 0)
 		exit (126);
 	args = prepare_args(cmnd);
 	if (!args)

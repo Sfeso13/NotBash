@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 17:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/27 15:19:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:29:01 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	count_p_cmnds(t_token *token)
 	{
 		if (token->type == TOKEN_PIPE)
 			break ;
-		if (token->type == TOKEN_WORD)
-			wrdcount++;
+		wrdcount++;
 		token = token->next;
 	}
 	return (wrdcount);
