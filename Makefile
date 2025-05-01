@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/05/01 09:55:17 by yhossni          ###   ########.fr        #
+#    Updated: 2025/05/01 11:08:43 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC			:= cc
 
 R			= $(shell brew --prefix readline)
 
-CFLAGS		:= -Wall -Wextra -Werror -g -fsanitize=address #-I/usr/local/opt/readline
+CFLAGS		:= -Wall -Wextra -Werror -g #-fsanitize=address #-I/usr/local/opt/readline
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \

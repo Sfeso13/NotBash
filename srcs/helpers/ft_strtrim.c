@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:26:43 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/23 15:49:22 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 11:05:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/global/minishell.h"
 
-static int	checkerr(const char *set, char c)
+int	checkerr(const char *set, char c)
 {
 	int	i;
 

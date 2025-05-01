@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:21:29 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/09 01:37:32 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 11:06:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		ft_putstr_fd(char *s, int fd);
 char		**ft_old_split(char const *s, char c);
 int			count_words(char const *str);
 int			count_custom_words(char const *str);
+int			checkerr(const char *set, char c);
 
 //list clearing
 void		clear_env(t_env **lst, void (*del)(void*));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 01:47:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 16:57:13 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:39:25 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_expander(t_expander *exp, char *value, t_env *env, int inexp)
 	exp->expme = inexp;
 	exp->aft_pipe = 0;
 	exp->emptynot = 0;
+	exp->surr_after = 0;
+	exp->surr_before = 0;
 }
 
 int	has_a_dollar(char	*str)

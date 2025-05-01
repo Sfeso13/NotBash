@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expantion_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:24:12 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 17:03:43 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:28:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,20 @@ void	append_char(t_expander *exp, char c)
 
 void	append_str(t_expander *exp, char *str)
 {
+	char	*tmp;
+
+	if (!exp->surr_before)
+	{
+		while (str && iswhitespace(*str))
+			str++;
+	}
+	if (!exp->surr_after)
+		str = trim_end(str, " 	");
+	tmp = str;
 	while (str && *str)
 		append_char(exp, *str++);
+	if (!exp->surr_after)
+		free(tmp);
 }
 
 void	handle_backslash(t_expander *exp)

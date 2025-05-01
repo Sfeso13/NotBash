@@ -6,26 +6,3 @@ while true; do lsof -c  minishell; sleep 1; clear; done
 export HO!LA=bonjour
 just check wtf is the "event not found"
 
-------------------------------------------------------------
-export HO$?LA=bonjour
-env
-> HO="bonjour"
-expected: > HO1LA="bonjour"
-potential fix >>>>> expansion should stop at special characters
-(anything other than alpha-numerical characters and _)
-------------------------------------------------------------
-export HOLA="  bonjour  hey  "
-echo wesh""$HOLA.
->weshbonjour hey.
-expected: >wesh bonjour hey . (shouldn't ignore the "")
-
-------------------------------------------------------------
-export HOLA=bonjour
-export HOLA=' hola et $HOLA'
-echo $HOLA
->(the program hangs and it infinitely allocates new memory for some reason --- possibly in the parsing part
-since it doesnt reach the printing line)
-expected: >hola et $HOLA
-------------------------------------------------------------
-echo hi | echo bye >minishell_tester/test_files/invalid_permission (exit status)
-

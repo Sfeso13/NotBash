@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/23 17:25:34 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:28:42 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void			append_norexp_words(t_expander *exp, char *var_val);
 void			handle_norexp_digits(t_expander *exp, size_t start);
 void			handle_norexp_quotes(t_expander *exp, size_t start);
 int				has_a_dollar(char	*str);
+void			exp_check_sides(t_expander *exp);
+char			*trim_end(char *s1, char const *set);
 
 #endif

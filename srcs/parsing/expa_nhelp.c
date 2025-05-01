@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expa_nhelp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:55:24 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 17:02:58 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:27:56 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	expand_norexp_var_else(t_expander *exp, size_t start)
 	if (start == exp->i)
 		return (append_char(exp, '$'));
 	var_name = ft_substr(exp->value, start, exp->i - start);
+	exp_check_sides(exp);
 	if (!var_name)
 		exp->emptynot = 1;
 	if (ft_strcmp(var_name, "?") == 0 && exp->aft_pipe)
@@ -69,7 +70,8 @@ void	expand_norexp_var_else(t_expander *exp, size_t start)
 		var_val = get_env_value(var_name, exp->env);
 	if (var_val)
 	{
-		if (!exp->in_single && !exp->in_double && exp->expme == 0)
+		if (!exp->in_single && !exp->in_double && exp->expme == 0 && \
+			!exp->surr_before && !exp->surr_after)
 			append_norexp_words(exp, var_val);
 		else
 			append_str(exp, var_val);
