@@ -6,7 +6,7 @@
 #    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/04/29 15:17:42 by yhossni          ###   ########.fr        #
+#    Updated: 2025/05/01 09:55:17 by yhossni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ DIRSRCS := pwd.c cd.c echo.c
 
 EXTERNSRCS := preparing_iofiles.c preparing_iofiles_utils.c prepare_args.c \
 			  args_split.c prepare_args_utils.c here_doc.c multi_utils.c \
-			  get_io_files.c here_doc_utils.c
+			  get_io_files.c here_doc_utils.c check_args.c
 
 EXECSRCS := improved_cmp.c exec.c builtins.c exec_utils.c externals.c multi_exec.c \
 			single_process.c multi_exec_utils.c

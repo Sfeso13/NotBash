@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:58:48 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/30 11:49:44 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 09:58:21 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,7 @@ int	how_many_redir(t_token *cmnd, t_token_type type)
 	return (count);
 }
 
-int	*init_fds(void)
-{
-	static int	fd[2];
-
-	fd[0] = -1;
-	fd[1] = -1;
-	return (fd);
-}
-
-int check_file(char *filename, int write)
+int	check_file(char *filename, int write)
 {
 	if (write)
 	{
@@ -62,18 +53,21 @@ int check_file(char *filename, int write)
 
 int	fdop(int to_open, int append, char *filename, int write)
 {
+	int	check;
+
 	if (close(to_open) == -1 && to_open != -1)
 	{
 		perror("close");
 		exit(1);
 	}
-	if (check_file(filename, write) == 1)
+	check = check_file(filename, write);
+	if (check == 1)
 	{
 		ft_putstr_fd(filename, 2);
-	 	ft_putstr_fd(": Permission denied\n", 2);
-	 	return (-1);
+		ft_putstr_fd(": Permission denied\n", 2);
+		return (-1);
 	}
-	if (check_file(filename, write) == -1)
+	if (check == -1)
 		return (-1);
 	if (!write)
 		to_open = open(filename, O_RDONLY, 0777);

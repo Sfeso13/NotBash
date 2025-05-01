@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/30 12:01:55 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 09:56:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	copy_kv(char *str, t_env *env, size_t len);
 char	**env_to_arr(t_env *env);
 char	*join(char const *s1, char const *s2);
 char	**args_split(char const *s, char c);
+int		is_absolute(t_token *cmnd);
+int		checkdir(char *s);
 
 //io helpers
 int		how_many_redir(t_token *cmnd, t_token_type type);

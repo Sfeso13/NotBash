@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 10:46:03 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/30 10:50:06 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 09:58:32 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,11 @@ int	check_ambi(t_token *cmnd)
 	return (0);
 }
 
-// void	redirect(t_token *cmnd, t_env *env)
-// {
-// 	int		*fd;
+int	*init_fds(void)
+{
+	static int	fd[2];
 
-// 	fd = get_io_files(cmnd, env);
-// 	if (!fd)
-// 		exit(1);
-// 	if (fd[0] != -1)
-// 	{
-// 		ft_dup(fd[0], 0);
-// 	}
-// 	if (fd[1] != -1)
-// 	{
-// 		ft_dup(fd[1], 1);
-// 	}
-// }
+	fd[0] = -1;
+	fd[1] = -1;
+	return (fd);
+}

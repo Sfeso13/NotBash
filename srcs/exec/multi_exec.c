@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:32:46 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/30 11:02:34 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 09:52:24 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	set_fds(t_fd *fds, int *fd, int process_count, int i)
 		exit(-1);
 	}
 	if (!fd)
-	{
-		// fds->outfd = fds->pfd[1];
 		return ;
-	}
 	if (fd[1] == -1 && i < process_count - 1)
 		change_fd(&fds->outfd, fds->pfd[1], -1);
 	else if (fd[1] == -1 && i == process_count -1)
@@ -71,7 +68,7 @@ void	piped_exec(t_shell *cmnds, int *fd, t_fd fds, t_env **env)
 		else
 			multi_externals(cmnd, fd, fds, *env);
 		if (improved_cmp(search_key("?", *env)->val, "1") == 0)
-				exit (1);
+			exit (1);
 		exit(0);
 	}
 	child_pid(child, 1);
