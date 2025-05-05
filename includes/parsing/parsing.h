@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:39:52 by adechaji          #+#    #+#             */
-/*   Updated: 2025/05/05 19:02:28 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:07:58 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void			handle_norexp_quotes(t_expander *exp, size_t start);
 int				has_a_dollar(char	*str);
 void			exp_check_sides(t_expander *exp);
 char			*trim_end(char *s1, char const *set);
-int				doublequoted(char *str)
+int				doublequoted(char *str);
 
 #endif

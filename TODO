@@ -1,0 +1,100 @@
+minishell$ $L $P | ls
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ $L $P | ls
+Makefile		debug_print.c		minishell		sig.c
+OURTESTS.txt		includes		minishell_tester	srcs
+TODO			main.c			objs
+bash-3.2$
+-------------------------------------------------------------------------------------
+minishell$ >> folder/
+minishell$ echo $?
+1
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ >> folder/
+bash: folder/: Is a directory
+-------------------------------------------------------------------------------------
+minishell$ >> $X
+[1]    44003 segmentation fault  ./minishell
+-------------------------------------------------------------------------------------
+memory leak when sending ctrl - c
+
+minishell$ cat << l | cat << d
+>
+-------------------------------------------------------------------------------------
+ctrl - c with ctrl -D
+
+minishell$
+minishell$
+minishell$
+minishell$
+minishell$
+minishell$
+exit
+➜  git_shell git:(parsing) ✗ echo $?
+0
+➜  git_shell git:(parsing) ✗
+
+-------------------------------------------------------------------------------------
+
+minishell$ export $w=$a
+minishell: export : =a b c: not a valid identifier
+minishell$ export
+-------------------------------------------------------------------------------------
+minishell$ $L $P | ls
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ $L $P | ls
+Makefile		debug_print.c		minishell		sig.c
+OURTESTS.txt		includes		minishell_tester	srcs
+TODO			main.c			objs
+bash-3.2$
+-------------------------------------------------------------------------------------
+minishell$ >> folder/
+minishell$ echo $?
+1
+minishell$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ >> folder/
+bash: folder/: Is a directory
+-------------------------------------------------------------------------------------
+minishell$ >> $X
+[1]    44003 segmentation fault  ./minishell
+-------------------------------------------------------------------------------------
+memory leak when sending ctrl - c
+
+minishell$ cat << l | cat << d
+>
+-------------------------------------------------------------------------------------
+ctrl - c with ctrl -D
+
+minishell$
+minishell$
+minishell$
+minishell$
+minishell$
+minishell$
+exit
+➜  git_shell git:(parsing) ✗ echo $?
+0
+➜  git_shell git:(parsing) ✗
+
+-------------------------------------------------------------------------------------
+
+minishell$ export $w=$a
+minishell: export : =a b c: not a valid identifier
+minishell$ export
+-------------------------------------------------------------------------------------

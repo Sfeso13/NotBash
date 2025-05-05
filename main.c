@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/05/05 18:24:58 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:17:48 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	start_prompt(t_env *env_list, int fd)
 		}
 		if (parser(input, &env_list, &cmd, &tokens))
 			continue ;
-		print_shell(cmd);
+		//print_shell(cmd);
 		execute(cmd, &env_list);
 		tcsetattr(fd, TCSADRAIN, &settings);
 		free(input);
