@@ -6,3 +6,81 @@ while true; do lsof -c  minishell; sleep 1; clear; done
 export HO!LA=bonjour
 just check wtf is the "event not found"
 
+minishell 54086 adechaji    5r   REG    1,7        0            34225543 /private/tmp/thd10101010doc5
+<< a << b << c cat
+> a
+> Ctrl-C
+
+minishell$ << a << b ^C
+minishell$ > a < a cat
+> a < a cat
+minishell$ > a < a cat
+minishell$ > a < a cat
+minishell$ << a << b
+> a
+> b
+minishell$ > a < a cat
+minishell$ << a << b
+>
+
+minishell$ > a < a cat
+> a < a cat
+minishell$
+
+
+
+bash-3.2$ "$a"
+bash:   : No such file or directory
+minishell$ export a="   "
+minishell$ $a
+minishell$ "$a"
+
+
+env -i ./minishell
+1 (48 bytes) ROOT LEAK: 0x7ffd94c05610 [48]  length: 43  "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+
+
+declare -x OLDP
+
+minishell$ export
+declare -x OLDP
+declare -x OLDPWD
+declare -x PATH="/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+declare -x PWD="/mnt/homes/adechaji/Desktop/git_shell"
+declare -x SHLVL="32323232"
+minishell$ export OLDPWD
+minishell$ export OLDPWD=
+minishell$ export
+declare -x OLDP
+declare -x OLDPWD=""
+declare -x PATH="/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+declare -x PWD="/mnt/homes/adechaji/Desktop/git_shell"
+declare -x SHLVL="32323232"
+minishell$ ./minishell
+minishell$ export
+declare -x OL
+declare -x OLDPWD
+declare -x PATH="/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+declare -x PWD="/mnt/homes/adechaji/Desktop/git_shell"
+declare -x SHLVL="32323232"
+minishell$ ./minishell
+minishell$ export
+declare -x OLDP
+declare -x OLDPWD
+declare -x PATH="/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+declare -x PWD="/mnt/homes/adechaji/Desktop/git_shell"
+declare -x
+declare -x SHLVL="32323232"
+
+unset OLDPWD
+minishell$ export OLDPWD="/mnt/homes/adechaji/Desktop/git_shell"
+minishell$ export
+
+minishell$ ls | pwd | < test
+test: No such file or directory
+minishell$ ls | pwd | <
+minishell 71826 adechaji    7   PIPE 0x24a4e1b341e873c0    16384
+
+
+minishell$ cat << "a"
+cat << "a"
