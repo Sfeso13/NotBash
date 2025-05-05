@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:46:53 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/27 15:18:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 19:02:18 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ void	changedir(t_token *cmnd, t_env *env)
 			ft_putstr_fd("cd: HOME not set\n", 2);
 			return (update_status(&env, "1"));
 		}
-		else
-			chdir(homedir->val);
+		else if (chdir(homedir->val) == -1)
+		{
+			perror("cd");
+			return (update_status(&env, "1"));
+		}
 	}
 	else if (go_to(cmnd->next) == -1)
 	{
