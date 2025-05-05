@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/05/05 17:09:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 18:33:06 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ void	p_exit_err(char *exit, char *val, char *msg)
 		ft_putstr_fd(msg, 2);
 }
 
-int	get_last_status(t_env *env)
+int	get_last_status(t_shell *shell, t_env *env)
 {
 	t_env	*stat_node;
 
+	if (shell->prev)
+		return (0);
 	ft_putstr_fd("exit\n", 1);
 	stat_node = search_key("?", env);
 	if (stat_node && stat_node->val)
@@ -89,7 +91,7 @@ void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 	}
 	else if (how_many_args(*cmnd) == 1)
 	{
-		s = get_last_status(*env);
+		s = get_last_status(*shell , *env);
 		clear_structs(shell, env);
 		exit (s);
 	}

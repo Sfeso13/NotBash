@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:29:45 by yhossni           #+#    #+#             */
-/*   Updated: 2025/05/01 16:02:03 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 18:33:31 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	unset_var(t_token *cmnd, t_env **env);
 //exit
 void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env);
 int		validate_status(char *status);
-int		get_last_status(t_env *env);
+int		get_last_status(t_shell *shell, t_env *env);
 
 //cd
 void	changedir(t_token *cmnd, t_env *env);

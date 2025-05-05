@@ -6,9 +6,6 @@ while true; do lsof -c  minishell; sleep 1; clear; done
 export HOME=sdfsf
 cd ->>> it doesnt throw no error and it leaves u in the cwd
 
-------------------------------------------------------------
-exit | exit
-
 -----------------------------------------------------------
 pwd getcwd blahblah
 
