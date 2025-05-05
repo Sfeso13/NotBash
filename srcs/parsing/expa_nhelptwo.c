@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expa_nhelptwo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 17:00:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/05/01 16:12:00 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 19:04:44 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,16 @@ void	exp_check_sides(t_expander *exp)
 	if ((exp->value + exp->i) && exp->value[exp->i] && \
 					!iswhitespace(exp->value[exp->i]))
 		exp->surr_after = 1;
+}
+
+int	doublequoted(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = ft_strlen(str);
+	if (str[0] == '\"' && str[i - 1] == '\"')
+		return (1);
+	return (0);
 }

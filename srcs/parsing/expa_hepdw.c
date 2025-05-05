@@ -6,7 +6,7 @@
 /*   By: adechaji <adechaji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 00:44:01 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/27 16:57:35 by adechaji         ###   ########.fr       */
+/*   Updated: 2025/05/05 19:03:45 by adechaji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ void	expprocetoken(t_token *current, t_env *env, int inexp, int dol)
 		flgme = 1;
 	exp = expand_token(or_val, env, inexp, current->after_pipe);
 	current->value = exp.buffer;
-	free(or_val);
-	if (flgme == 1 && whitesonly(current->value) == 1 && exp.emptynot == 0)
+	if (flgme == 1 && whitesonly(current->value) == 1 && exp.emptynot == 0
+		&& doublequoted(or_val) != 1)
 		current->ignore = 1;
 	else
 		current->ignore = 0;
+	free(or_val);
 	if (dol == 1)
 		wrds = count_custom_words(current->value);
 	if (ft_strchr(current->value, '\x01') && inexp == 0)
