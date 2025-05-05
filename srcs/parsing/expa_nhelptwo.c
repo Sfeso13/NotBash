@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 17:00:32 by adechaji          #+#    #+#             */
-/*   Updated: 2025/05/01 11:28:35 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 16:12:00 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*trim_end(char *s1, char const *set)
 	return (newstr);
 }
 
-void	exp_check_sides(t_expander *exp)//checks if there are any alnum char in the surroundings of the expantion
+void	exp_check_sides(t_expander *exp)
 {
 	char	*dol;
 

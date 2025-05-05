@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/29 16:21:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 16:10:05 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	get_last_status(t_env *env)
 {
 	t_env	*stat_node;
 
+	ft_putstr_fd("exit\n", 2);
 	stat_node = search_key("?", env);
 	if (stat_node && stat_node->val)
 		return (ft_atoi(stat_node->val));
@@ -72,6 +73,8 @@ int	get_last_status(t_env *env)
 
 void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 {
+	int	s;
+
 	if ((*cmnd)->next && !validate_status((*cmnd)->next->value))
 	{
 		p_exit_err("exit\n", (*cmnd)->next->value, \
@@ -86,13 +89,13 @@ void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 	}
 	else if (how_many_args(*cmnd) == 1)
 	{
-		ft_putstr_fd("exit\n", 1);
+		s = get_last_status(*env);
 		clear_structs(shell, env);
-		exit (get_last_status(*env));
+		exit (s);
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("exit\n", 2);
 		exit(ft_atoi((*cmnd)->next->value));
 	}
 }

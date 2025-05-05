@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:50:14 by yhossni           #+#    #+#             */
-/*   Updated: 2025/05/01 09:56:10 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 16:12:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/syslimits.h>
 # include <sys/wait.h> //linux
 # include <errno.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 
 pid_t	frk(void);
 char	*print_err(char *value, char *msg);

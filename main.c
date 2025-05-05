@@ -6,13 +6,13 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:47:34 by adechaji          #+#    #+#             */
-/*   Updated: 2025/04/29 16:21:57 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/01 16:02:58 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/global/minishell.h"
 
-volatile sig_atomic_t	g_signal_received = 0;
+int	g_signal_received = 0;
 
 int	parser(char *input, t_env **env_list, t_shell **cmd, t_token **tokens)
 {
@@ -37,10 +37,10 @@ char	*get_input(t_env **env_list)
 	char	*input;
 	t_env	*status;
 
-	// if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO))
 		input = readline("minishell$ ");
-	// else
-	// 	input = NULL;
+	else
+		input = NULL;
 	if (!input)
 	{
 		status = search_key("?", *env_list);
