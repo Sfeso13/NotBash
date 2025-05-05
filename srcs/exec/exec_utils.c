@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 19:15:08 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/24 17:55:12 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:54:35 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ int	how_many_processes(t_shell *process)
 
 void	restore_stds(int saved_in, int saved_out)
 {
-	dup2(saved_in, STDIN_FILENO);
-	dup2(saved_out, STDOUT_FILENO);
+	if (dup2(saved_in, STDIN_FILENO) == -1)
+		perror("stdin restore failed");
+	if (dup2(saved_out, STDOUT_FILENO) == -1)
+		perror("stdout restore failed");
 	close(saved_in);
 	close(saved_out);
 }

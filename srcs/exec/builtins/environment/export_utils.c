@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:00:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/02/23 11:26:21 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:54:41 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ t_env	*search_key(char *key, t_env *env)
 
 void	change_value_of_key(t_env **tochange, char *value)
 {
+	if ((*tochange)->is_set == 0)
+		(*tochange)->is_set = 1;
 	free((*tochange)->val);
 	(*tochange)->val = ft_strdup(value);
 }

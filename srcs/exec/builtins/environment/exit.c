@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:34:19 by yhossni           #+#    #+#             */
-/*   Updated: 2025/05/01 16:10:05 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:09:54 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_last_status(t_env *env)
 {
 	t_env	*stat_node;
 
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	stat_node = search_key("?", env);
 	if (stat_node && stat_node->val)
 		return (ft_atoi(stat_node->val));
@@ -95,7 +95,7 @@ void	exit_shell(t_shell **shell, t_token **cmnd, t_env **env)
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit\n", 1);
 		exit(ft_atoi((*cmnd)->next->value));
 	}
 }

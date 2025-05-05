@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:58:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/04/22 15:33:54 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:21:57 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,17 @@ char	*get_filename(void)
 	}
 }
 
+#include <sys/ioctl.h>
+
 void	doc_sigint(int sig)
 {
-	rl_catch_signals = 0;
+	// int fd;
+	// rl_catch_signals = 0;
 	(void)sig;
 	g_signal_received = 1;
-	write(1, "\n", 1);
-	close(0);
+	// write(1, "\n", 1);
+	// close(0);
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
 char	*read_input(int expandable, char *delim, int fd, t_env *env)
@@ -78,6 +82,8 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 
 	signal(SIGINT, doc_sigint);
 	buff = readline("> ");
+	if (g_signal_received == 1)
+		buff = NULL;
 	while (buff && improved_cmp(buff, delim) != 0)
 	{
 		if (expandable && ft_strchr(buff, '$'))
@@ -90,6 +96,8 @@ char	*read_input(int expandable, char *delim, int fd, t_env *env)
 		write(fd, "\n", 1);
 		free(buff);
 		buff = readline("> ");
+		if (g_signal_received == 1)
+			buff = NULL;
 	}
 	if (!buff && g_signal_received == 0)
 		g_signal_received = 2;

@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:52:18 by yhossni           #+#    #+#             */
-/*   Updated: 2025/05/01 09:51:45 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:04:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 void	run_command(char *path, char **args, t_env *env)
 {
 	char	**env_arr;
-
+	// int	i = 0;
 	env_arr = env_to_arr(env);
+	// while (env_arr[i])
+	// {
+	// 	printf("env : %s\n", env_arr[i]);
+	// 	i++;
+	// }
 	if (!env_arr)
 		exit(-1);
 	execve(path, args, env_arr);

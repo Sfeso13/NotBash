@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 11:29:33 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/08 17:03:38 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:05:13 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	reset_env(t_env **env)
 		envadd_back(env, newenv("_", "minishell", 1));
 	if (!search_key("PATH", *env))
 		envadd_back(env, newenv("PATH", \
-		ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."), 0));
+		"/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", 0));
 	free(buff);
 }

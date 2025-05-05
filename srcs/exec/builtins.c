@@ -6,7 +6,7 @@
 /*   By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 10:21:30 by yhossni           #+#    #+#             */
-/*   Updated: 2025/03/06 14:59:33 by yhossni          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:44:10 by yhossni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 void	which_builtin(t_shell *shell, t_token *cmnd, t_env **env)
 {
-	if (improved_cmp(cmnd->value, "env") == 0 || \
-		improved_cmp(cmnd->value, "ENV") == 0)
+	if (improved_cmp(cmnd->value, "env") == 0)
 		print_env(env);
 	else if (improved_cmp(cmnd->value, "export") == 0)
 		export_env(cmnd, env);
 	else if (improved_cmp(cmnd->value, "unset") == 0)
 		unset_var(cmnd, env);
-	else if (improved_cmp(cmnd->value, "pwd") == 0 || \
-			improved_cmp(cmnd->value, "PWD") == 0)
+	else if (improved_cmp(cmnd->value, "pwd") == 0)
 		print_current_dir(*env);
 	else if (improved_cmp(cmnd->value, "cd") == 0)
 		changedir(cmnd, *env);
-	else if (improved_cmp(cmnd->value, "echo") == 0 || \
-			improved_cmp(cmnd->value, "ECHO") == 0)
+	else if (improved_cmp(cmnd->value, "echo") == 0)
 		print_args(cmnd, *env);
 	else if (improved_cmp(cmnd->value, "exit") == 0)
 		exit_shell(&shell, &cmnd, env);
@@ -35,8 +32,8 @@ void	which_builtin(t_shell *shell, t_token *cmnd, t_env **env)
 
 int	isbuiltin(char *com)
 {
-	const char	*builtins[] = {"pwd", "PWD", "echo", "ECHO", "cd", "export",
-		"unset", "env", "ENV", "exit", NULL};
+	const char	*builtins[] = {"pwd", "echo", "cd", "export",
+		"unset", "env", "exit", NULL};
 	int			i;
 
 	i = 0;
