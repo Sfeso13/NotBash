@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/91081e98-0bad-4e39-ba6c-5c4211fdaa99)
+
+
 # 🐚 Minishell
 
 `minishell` is a Unix shell project from the 42 curriculum designed to help students understand and build their own command-line interpreter. The project focuses on process creation, pipes, redirections, and environment management.
