@@ -24,6 +24,8 @@
 - [Setup](#-setup)
 - [Usage and Controls](#-usage)
 
+---
+
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Film%20Projector.png" alt="Film Projector" width="25" height="25" /> About
 
 **NotBash** is a simplified Unix shell with the following functionality:
