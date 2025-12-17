@@ -30,10 +30,8 @@ int	checkvalidation(const char *str)
 int	bfrafters(char *str)
 {
 	int	i;
-	int	flag;
 
 	i = 0;
-	flag = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')

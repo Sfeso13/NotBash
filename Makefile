@@ -1,21 +1,24 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yhossni <yhossni@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/12 16:20:27 by adechaji          #+#    #+#              #
-#    Updated: 2025/05/05 15:02:33 by yhossni          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+UNAME := $(shell uname)
 
 NAME		:= minishell
+
 CC			:= cc
 
-R			= $(shell brew --prefix readline)
+READLINE_CFLAGS := $(shell pkg-config --cflags readline 2>/dev/null)
+READLINE_LIBS   := $(shell pkg-config --libs readline 2>/dev/null)
 
-CFLAGS		:= -Wall -Wextra -Werror -g #-fsanitize=address #-I/usr/local/opt/readline
+ifeq ($(READLINE_CFLAGS),)
+	ifeq ($(UNAME),Darwin)
+		R := $(shell brew --prefix readline)
+		READLINE_CFLAGS := -I$(R)/include
+		READLINE_LIBS   := -L$(R)/lib -lreadline -lncurses
+	endif
+endif
+
+
+#R			= $(shell brew --prefix readline)
+
+CFLAGS		:= -Wall -Wextra -Werror -g $(READLINE_CFLAGS)
 
 PARSSRCS	:= cleaners.c expantion.c isbuiltin.c displayread.c syncatcher.c syncatchhelpers.c tokenize_f.c \
 				expantion_helpers.c rmquotes.c cmd_filler.c cmd_fillhelp.c expantion_init.c misplacing.c tokenize_help.c \
@@ -65,35 +68,35 @@ LIBS		= -lreadline -lncurses
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS)  $(R)/lib/libreadline.a -lncurses $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIBS) -o $(NAME)
 
 objs/%.o: srcs/helpers/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: srcs/parsing/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/externals/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/environment/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: srcs/exec/builtins/directories/%.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 objs/%.o: %.c
 	mkdir -p objs
-	$(CC) $(CFLAGS) -I $(R)/include -c $< -o $@ -MMD
+	$(CC) $(CFLAGS)  -c $< -o $@ -MMD
 
 clean:
 	rm -rf objs

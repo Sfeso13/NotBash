@@ -17,7 +17,6 @@ int	validate_status(char *status)
 	int			i;
 	int			m_count;
 	int			p_count;
-	long long	stat;
 
 	i = 0;
 	m_count = 0;
@@ -34,7 +33,6 @@ int	validate_status(char *status)
 	}
 	if ((m_count && p_count) || (m_count > 1 || p_count > 1))
 		return (0);
-	stat = ft_atoi(status);
 	if (errno == ERANGE)
 		return (0);
 	return (1);

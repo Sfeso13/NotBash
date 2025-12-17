@@ -56,10 +56,8 @@ void	export_var(t_token *cmnd, t_env **env, int args_size)
 {
 	char	**kv;
 	int		status;
-	t_token	*cmd_exec;
 
 	status = 0;
-	cmd_exec = cmnd;
 	while (args_size - 1 > 0)
 	{
 		kv = export_kv_extract(cmnd->value);

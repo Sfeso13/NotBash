@@ -21,11 +21,9 @@ void	set_env_value(t_env **env, char *value)
 
 void	update_dash(t_token *cmnd, t_env **env)
 {
-	t_env	*tmp;
 	t_env	*dash;
 	int		len;
 
-	tmp = *env;
 	len = how_many_args(cmnd);
 	while (cmnd && len > 1)
 	{

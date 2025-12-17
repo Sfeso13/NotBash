@@ -19,7 +19,7 @@
 # include "../global/structs.h"
 # include "../exec/builtins.h"
 # include "../global/minishell.h"
-# include <sys/syslimits.h>
+# include <limits.h>
 # include <sys/wait.h> //linux
 # include <errno.h>
 # include <sys/stat.h>

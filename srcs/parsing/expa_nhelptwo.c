@@ -63,7 +63,7 @@ void	exp_check_sides(t_expander *exp)
 		if (!iswhitespace(*(dol - 1)))
 			exp->surr_before = 1;
 	}
-	if ((exp->value + exp->i) && exp->value[exp->i] && \
+	if ((exp->value ) && exp->value[exp->i] && \
 					!iswhitespace(exp->value[exp->i]))
 		exp->surr_after = 1;
 }
