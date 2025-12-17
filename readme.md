@@ -6,7 +6,7 @@
 
 ## 🏆 Credits & Contributions
 **NotBash** was a collaborative effort as part of the 42 curriculum.
- - Teammate: [Adechaji] – Hosted the repository, initial project setup, parsing logic and signal handling.
+ - Teammate: [Adil Ech](https://github.com/adil-ech) – Hosted the repository, initial project setup, parsing logic and signal handling.
  - My Contributions:
    - Implemented a custom environment for the shell (srcs/exec/builtins/environment)
    - Implemented builtin commands from scratch (srcs/exec/builtins)
